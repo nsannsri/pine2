@@ -1,0 +1,39 @@
+//@version=5
+indicator("Volume Candle Color", overlay=true)
+
+// ─────────────────────────────────────────
+// INPUTS
+// ─────────────────────────────────────────
+vol_len          = input.int(10,   "Lookback Bars",     minval=1)
+vol_mult         = input.float(1.5,"Multiplier",        minval=0.1, step=0.1)
+body_ratio_min   = input.float(0.4,"Min Body Ratio",    minval=0.0, maxval=1.0, step=0.05)
+
+// ─────────────────────────────────────────
+// VOLUME LOGIC
+// ─────────────────────────────────────────
+vol_ma      = ta.sma(volume, vol_len)
+vol_thresh  = vol_ma * vol_mult
+body_ratio  = math.abs(close - open) / (high - low + 0.000001)
+vol_ok      = volume > vol_thresh and body_ratio >= body_ratio_min
+is_bull     = close > open
+is_bear     = close < open
+
+// ─────────────────────────────────────────
+// CANDLE COLORS
+// ─────────────────────────────────────────
+// High volume bull  → bright green
+// High volume bear  → bright red
+// Normal bull       → dim green
+// Normal bear       → dim red
+
+candle_color =
+  vol_ok and is_bull ? color.new(color.lime,   0)  :
+  vol_ok and is_bear ? color.new(color.red,    0)  :
+  is_bull            ? color.new(color.green,  60) :
+  is_bear            ? color.new(color.red,    60) :
+  color.new(color.gray, 40)
+
+// ─────────────────────────────────────────
+// PAINT CANDLES
+// ─────────────────────────────────────────
+barcolor(candle_color)

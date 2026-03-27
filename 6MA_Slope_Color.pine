@@ -1,0 +1,92 @@
+//@version=5
+indicator("6 MA + OHLC + Slope Color", overlay=true, max_bars_back=500)
+
+// ─────────────────────────────────────────────
+//  OHLC Labels (optional toggle)
+// ─────────────────────────────────────────────
+showOHLC = input.bool(false, "Show OHLC Labels", group="OHLC")
+
+if showOHLC
+    label.new(bar_index, high,
+      "O:" + str.tostring(open,  "#.##") + "  H:" + str.tostring(high, "#.##") +
+      "\nL:" + str.tostring(low, "#.##") + "  C:" + str.tostring(close,"#.##"),
+      style=label.style_label_down, size=size.tiny,
+      color=color.new(color.gray,80), textcolor=color.white)
+
+// ─────────────────────────────────────────────
+//  Helper: slope colour
+// ─────────────────────────────────────────────
+slopeColor(src) =>
+    src > src[1] ? color.new(color.green, 0) : color.new(color.red, 0)
+
+// ─────────────────────────────────────────────
+//  MA 1
+// ─────────────────────────────────────────────
+ma1_on     = input.bool(true,   "MA 1 On",     group="MA 1")
+ma1_type   = input.string("EMA","MA 1 Type",   options=["EMA","SMA"], group="MA 1")
+ma1_len    = input.int(9,       "MA 1 Length", minval=1, group="MA 1")
+ma1_src    = input.source(close,"MA 1 Source", group="MA 1")
+ma1_width  = input.int(2,       "MA 1 Width",  minval=1, group="MA 1")
+
+ma1 = ma1_type == "EMA" ? ta.ema(ma1_src, ma1_len) : ta.sma(ma1_src, ma1_len)
+plot(ma1_on ? ma1 : na, "MA 1", color=slopeColor(ma1), linewidth=ma1_width)
+
+// ─────────────────────────────────────────────
+//  MA 2
+// ─────────────────────────────────────────────
+ma2_on     = input.bool(true,   "MA 2 On",     group="MA 2")
+ma2_type   = input.string("EMA","MA 2 Type",   options=["EMA","SMA"], group="MA 2")
+ma2_len    = input.int(21,      "MA 2 Length", minval=1, group="MA 2")
+ma2_src    = input.source(close,"MA 2 Source", group="MA 2")
+ma2_width  = input.int(2,       "MA 2 Width",  minval=1, group="MA 2")
+
+ma2 = ma2_type == "EMA" ? ta.ema(ma2_src, ma2_len) : ta.sma(ma2_src, ma2_len)
+plot(ma2_on ? ma2 : na, "MA 2", color=slopeColor(ma2), linewidth=ma2_width)
+
+// ─────────────────────────────────────────────
+//  MA 3
+// ─────────────────────────────────────────────
+ma3_on     = input.bool(true,   "MA 3 On",     group="MA 3")
+ma3_type   = input.string("EMA","MA 3 Type",   options=["EMA","SMA"], group="MA 3")
+ma3_len    = input.int(50,      "MA 3 Length", minval=1, group="MA 3")
+ma3_src    = input.source(close,"MA 3 Source", group="MA 3")
+ma3_width  = input.int(2,       "MA 3 Width",  minval=1, group="MA 3")
+
+ma3 = ma3_type == "EMA" ? ta.ema(ma3_src, ma3_len) : ta.sma(ma3_src, ma3_len)
+plot(ma3_on ? ma3 : na, "MA 3", color=slopeColor(ma3), linewidth=ma3_width)
+
+// ─────────────────────────────────────────────
+//  MA 4
+// ─────────────────────────────────────────────
+ma4_on     = input.bool(true,   "MA 4 On",     group="MA 4")
+ma4_type   = input.string("EMA","MA 4 Type",   options=["EMA","SMA"], group="MA 4")
+ma4_len    = input.int(100,     "MA 4 Length", minval=1, group="MA 4")
+ma4_src    = input.source(close,"MA 4 Source", group="MA 4")
+ma4_width  = input.int(2,       "MA 4 Width",  minval=1, group="MA 4")
+
+ma4 = ma4_type == "EMA" ? ta.ema(ma4_src, ma4_len) : ta.sma(ma4_src, ma4_len)
+plot(ma4_on ? ma4 : na, "MA 4", color=slopeColor(ma4), linewidth=ma4_width)
+
+// ─────────────────────────────────────────────
+//  MA 5
+// ─────────────────────────────────────────────
+ma5_on     = input.bool(true,   "MA 5 On",     group="MA 5")
+ma5_type   = input.string("SMA","MA 5 Type",   options=["EMA","SMA"], group="MA 5")
+ma5_len    = input.int(200,     "MA 5 Length", minval=1, group="MA 5")
+ma5_src    = input.source(close,"MA 5 Source", group="MA 5")
+ma5_width  = input.int(2,       "MA 5 Width",  minval=1, group="MA 5")
+
+ma5 = ma5_type == "EMA" ? ta.ema(ma5_src, ma5_len) : ta.sma(ma5_src, ma5_len)
+plot(ma5_on ? ma5 : na, "MA 5", color=slopeColor(ma5), linewidth=ma5_width)
+
+// ─────────────────────────────────────────────
+//  MA 6
+// ─────────────────────────────────────────────
+ma6_on     = input.bool(true,   "MA 6 On",     group="MA 6")
+ma6_type   = input.string("SMA","MA 6 Type",   options=["EMA","SMA"], group="MA 6")
+ma6_len    = input.int(500,     "MA 6 Length", minval=1, group="MA 6")
+ma6_src    = input.source(close,"MA 6 Source", group="MA 6")
+ma6_width  = input.int(2,       "MA 6 Width",  minval=1, group="MA 6")
+
+ma6 = ma6_type == "EMA" ? ta.ema(ma6_src, ma6_len) : ta.sma(ma6_src, ma6_len)
+plot(ma6_on ? ma6 : na, "MA 6", color=slopeColor(ma6), linewidth=ma6_width)

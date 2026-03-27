@@ -1,0 +1,177 @@
+//@version=5
+indicator("San Double MACD — B3/S3 + RSI Filter", overlay=true)
+
+// ═══════════════════════════════════════════════════════════════
+// INPUTS
+// ═══════════════════════════════════════════════════════════════
+
+tf             = input.timeframe("60", "Timeframe", group="MACD")
+fast_length1   = input.int(12, "Long Fast",       group="MACD")
+slow_length1   = input.int(26, "Long Slow",       group="MACD")
+signal_length1 = input.int(9,  "Long Smoothing",  group="MACD")
+fast_length2   = input.int(5,  "Short Fast",      group="MACD")
+slow_length2   = input.int(13, "Short Slow",      group="MACD")
+signal_length2 = input.int(8,  "Short Smoothing", group="MACD")
+
+confirm_bars   = input.int(10, "Max Bars to Wait for Confirmation", minval=1, maxval=100, group="Confirmation")
+show_trigger   = input.bool(true,  "Show B3/S3 Trigger Labels",     group="Confirmation")
+show_entry     = input.bool(true,  "Show BUY/SELL Entry Labels",     group="Confirmation")
+show_level     = input.bool(true,  "Show Trigger Level Line",        group="Confirmation")
+
+// RSI Filter
+rsi_len  = input.int(14,   "RSI Length",                  group="RSI Filter")
+rsi_bull = input.float(50, "Buy  when RSI >",             group="RSI Filter")
+rsi_bear = input.float(50, "Sell when RSI <",             group="RSI Filter")
+use_rsi  = input.bool(true, "Enable RSI Filter",          group="RSI Filter")
+
+// ═══════════════════════════════════════════════════════════════
+// DOUBLE MACD
+// ═══════════════════════════════════════════════════════════════
+
+f_get_data() =>
+    _macd1   = ta.ema(close, fast_length1) - ta.ema(close, slow_length1)
+    _signal1 = ta.ema(_macd1, signal_length1)
+    _hist1   = _macd1 - _signal1
+    _macd2   = ta.ema(close, fast_length2) - ta.ema(close, slow_length2)
+    _signal2 = ta.ema(_macd2, signal_length2)
+    _hist2   = _macd2 - _signal2
+    [_macd1, _signal1, _hist1, _macd2, _signal2, _hist2]
+
+[macd1, signal1, hist1, macd2, signal2, hist2] = request.security(
+     syminfo.tickerid, tf, f_get_data(), lookahead=barmerge.lookahead_off)
+
+// ═══════════════════════════════════════════════════════════════
+// RSI — checked at B3/S3 trigger candle
+// ═══════════════════════════════════════════════════════════════
+
+rsi         = ta.rsi(close, rsi_len)
+rsi_ok_bull = not use_rsi or rsi > rsi_bull
+rsi_ok_bear = not use_rsi or rsi < rsi_bear
+
+// ═══════════════════════════════════════════════════════════════
+// B3 / S3 TRIGGER  (RSI checked here)
+// ═══════════════════════════════════════════════════════════════
+
+long_c0  = hist1 > 0 and hist1 > hist1[1]
+long_c3  = hist1 < 0 and hist1 < hist1[1]
+short_c0 = hist2 > 0 and hist2 > hist2[1]
+short_c3 = hist2 < 0 and hist2 < hist2[1]
+
+// RSI is part of the trigger condition
+b3_raw = long_c0 and short_c0 and rsi_ok_bull
+s3_raw = long_c3 and short_c3 and rsi_ok_bear
+
+// First bar entering that state only
+b3_trigger = b3_raw and not (hist1[1] > 0 and hist1[1] > hist1[2] and hist2[1] > 0 and hist2[1] > hist2[2])
+s3_trigger = s3_raw and not (hist1[1] < 0 and hist1[1] < hist1[2] and hist2[1] < 0 and hist2[1] < hist2[2])
+
+// Alternating — no two B3s or S3s in a row
+var int last_b3s3 = 0
+b3 = b3_trigger and last_b3s3 != 1
+s3 = s3_trigger and last_b3s3 != -1
+if b3
+    last_b3s3 := 1
+if s3
+    last_b3s3 := -1
+
+// ═══════════════════════════════════════════════════════════════
+// BREAKOUT CONFIRMATION
+// B3 → wait for candle that crosses above trigger candle high AND closes above it
+// S3 → wait for candle that crosses below trigger candle low  AND closes below it
+// ═══════════════════════════════════════════════════════════════
+
+var float b3_level = na
+var int   b3_bar   = na
+var bool  await_b3 = false
+
+var float s3_level = na
+var int   s3_bar   = na
+var bool  await_s3 = false
+
+if b3
+    b3_level := high
+    b3_bar   := bar_index
+    await_b3 := true
+    await_s3 := false
+
+if s3
+    s3_level := low
+    s3_bar   := bar_index
+    await_s3 := true
+    await_b3 := false
+
+var int last_entry = 0
+
+b3_confirmed = await_b3 and bar_index > nz(b3_bar) and bar_index <= nz(b3_bar) + confirm_bars and
+               high > b3_level and close > b3_level and last_entry != 1
+
+s3_confirmed = await_s3 and bar_index > nz(s3_bar) and bar_index <= nz(s3_bar) + confirm_bars and
+               low < s3_level and close < s3_level and last_entry != -1
+
+b3_expired = await_b3 and bar_index > nz(b3_bar) + confirm_bars
+s3_expired = await_s3 and bar_index > nz(s3_bar) + confirm_bars
+
+if b3_confirmed
+    await_b3   := false
+    last_entry := 1
+
+if s3_confirmed
+    await_s3   := false
+    last_entry := -1
+
+if b3_expired
+    await_b3 := false
+
+if s3_expired
+    await_s3 := false
+
+// ═══════════════════════════════════════════════════════════════
+// TRIGGER LEVEL LINE (while waiting)
+// ═══════════════════════════════════════════════════════════════
+
+in_b3_wait = await_b3 and not na(b3_bar) and bar_index >= b3_bar and bar_index <= b3_bar + confirm_bars
+in_s3_wait = await_s3 and not na(s3_bar) and bar_index >= s3_bar and bar_index <= s3_bar + confirm_bars
+
+plot(show_level and in_b3_wait ? b3_level : na, "B3 Trigger Level",
+     color=color.new(color.purple, 20), linewidth=2, style=plot.style_circles)
+plot(show_level and in_s3_wait ? s3_level : na, "S3 Trigger Level",
+     color=color.new(color.maroon, 20), linewidth=2, style=plot.style_circles)
+
+// ═══════════════════════════════════════════════════════════════
+// PLOTS
+// ═══════════════════════════════════════════════════════════════
+
+plotshape(show_trigger and b3, "B3 Trigger", location=location.belowbar,
+          style=shape.labelup, color=color.new(color.purple, 0),
+          textcolor=color.white, text="B3", size=size.normal)
+
+plotshape(show_trigger and s3, "S3 Trigger", location=location.abovebar,
+          style=shape.labeldown, color=color.new(color.maroon, 0),
+          textcolor=color.white, text="S3", size=size.normal)
+
+plotshape(show_entry and b3_confirmed, "BUY Entry", location=location.belowbar,
+          style=shape.arrowup, color=color.new(color.lime, 0), size=size.large)
+
+plotshape(show_entry and s3_confirmed, "SELL Entry", location=location.abovebar,
+          style=shape.arrowdown, color=color.new(color.red, 0), size=size.large)
+
+if b3_confirmed and show_entry
+    label.new(bar_index, low,
+              "BUY\n@ " + str.tostring(close, format.mintick) + "\nRSI " + str.tostring(math.round(rsi, 1)),
+              color=color.new(color.lime, 0), textcolor=color.white,
+              style=label.style_label_up, size=size.normal)
+
+if s3_confirmed and show_entry
+    label.new(bar_index, high,
+              "SELL\n@ " + str.tostring(close, format.mintick) + "\nRSI " + str.tostring(math.round(rsi, 1)),
+              color=color.new(color.red, 0), textcolor=color.white,
+              style=label.style_label_down, size=size.normal)
+
+// ═══════════════════════════════════════════════════════════════
+// ALERTS
+// ═══════════════════════════════════════════════════════════════
+
+alertcondition(b3,           "B3 Triggered",  "MACD B3 triggered — watch for breakout above trigger high")
+alertcondition(s3,           "S3 Triggered",  "MACD S3 triggered — watch for breakdown below trigger low")
+alertcondition(b3_confirmed, "BUY Confirmed", "MACD B3 BUY confirmed @ {{close}}")
+alertcondition(s3_confirmed, "SELL Confirmed","MACD S3 SELL confirmed @ {{close}}")

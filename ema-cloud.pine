@@ -1,0 +1,74 @@
+//@version=5
+indicator("EMA Cloud", shorttitle="EMA Cloud", overlay=true)
+
+// Input parameters for EMA periods
+fast_length = input.int(9, title="Fast EMA Length", minval=1)
+slow_length = input.int(21, title="Slow EMA Length", minval=1)
+
+// Input parameters for cloud colors
+bullish_color = input.color(color.new(color.green, 70), title="Bullish Cloud Color")
+bearish_color = input.color(color.new(color.red, 70), title="Bearish Cloud Color")
+
+// Input parameters for EMA line colors
+fast_ema_color = input.color(color.green, title="Fast EMA Color")
+slow_ema_color = input.color(color.red, title="Slow EMA Color")
+
+// Input parameters for EMA line width
+line_width = input.int(2, title="EMA Line Width", minval=1, maxval=4)
+
+// Calculate EMAs
+fast_ema = ta.ema(close, fast_length)
+slow_ema = ta.ema(close, slow_length)
+
+// Determine if trend is bullish or bearish
+bullish = fast_ema > slow_ema
+bearish = fast_ema < slow_ema
+
+// Plot EMA lines
+plot(fast_ema, color=fast_ema_color, linewidth=line_width, title="Fast EMA")
+plot(slow_ema, color=slow_ema_color, linewidth=line_width, title="Slow EMA")
+
+// Create the cloud fill
+cloud_color = bullish ? bullish_color : bearish_color
+fast_ema_plot = plot(fast_ema, display=display.none)
+slow_ema_plot = plot(slow_ema, display=display.none)
+fill(fast_ema_plot, slow_ema_plot, color=cloud_color, title="EMA Cloud")
+
+// EMA crossover detection
+bullish_crossover = ta.crossover(fast_ema, slow_ema)
+bearish_crossover = ta.crossunder(fast_ema, slow_ema)
+
+// Track last buy/sell values using var (persists across bars)
+var float last_buy_price  = na
+var float last_sell_price = na
+
+if bullish_crossover
+    last_buy_price := close
+
+if bearish_crossover
+    last_sell_price := close
+
+// Plot crossover signals
+show_signals = input.bool(true, title="Show Crossover Signals")
+plotshape(show_signals and bullish_crossover, style=shape.triangleup, location=location.belowbar,
+          color=color.green, size=size.small, title="Bullish Crossover")
+plotshape(show_signals and bearish_crossover, style=shape.triangledown, location=location.abovebar,
+          color=color.red, size=size.small, title="Bearish Crossover")
+
+// Display buy/sell price labels on chart
+show_labels = input.bool(true, title="Show Buy/Sell Price Labels")
+if show_labels and bullish_crossover
+    label.new(bar_index, low, "BUY\n" + str.tostring(close, "#.##"),
+              style=label.style_label_up, color=color.green,
+              textcolor=color.white, size=size.normal)
+
+if show_labels and bearish_crossover
+    label.new(bar_index, high, "SELL\n" + str.tostring(close, "#.##"),
+              style=label.style_label_down, color=color.red,
+              textcolor=color.white, size=size.normal)
+
+// Alert conditions with dynamic price values
+alertcondition(bullish_crossover, title="EMA Bullish Crossover",
+               message="BUY Signal | Price: {{close}} | Fast EMA: {{plot_0}} | Slow EMA: {{plot_1}}")
+alertcondition(bearish_crossover, title="EMA Bearish Crossover",
+               message="SELL Signal | Price: {{close}} | Fast EMA: {{plot_0}} | Slow EMA: {{plot_1}}")

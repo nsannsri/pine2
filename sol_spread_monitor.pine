@@ -1,0 +1,51 @@
+//@version=5
+indicator("SOL Perp vs Spot Spread", overlay=false)
+
+// ═══════════════════════════════════════════════════════════════
+// INPUTS
+// ═══════════════════════════════════════════════════════════════
+
+spot_ticker = input.string("BINANCE:SOLUSDT",  "Spot Symbol")
+ma_len      = input.int(20, "Spread MA Length")
+show_ma     = input.bool(true, "Show Spread MA")
+
+// ═══════════════════════════════════════════════════════════════
+// DATA
+// ═══════════════════════════════════════════════════════════════
+
+spot_close  = request.security(spot_ticker, timeframe.period, close)
+perp_close  = close  // chart must be on SOLUSDT.P
+
+spread      = perp_close - spot_close
+spread_ma   = ta.sma(spread, ma_len)
+spread_pct  = (spread / spot_close) * 100
+
+// ═══════════════════════════════════════════════════════════════
+// PLOTS
+// ═══════════════════════════════════════════════════════════════
+
+// Zero line
+hline(0, "Zero", color=color.gray, linewidth=1, linestyle=hline.style_solid)
+
+// Spread histogram — green when perp > spot, red when spot > perp
+spread_col = spread >= 0 ? color.new(color.green, 30) : color.new(color.red, 30)
+plot(spread, "Spread (Perp - Spot)", style=plot.style_histogram, color=spread_col, linewidth=2)
+
+// Spread line
+plot(spread, "Spread Line", color=color.white, linewidth=1)
+
+// MA of spread
+plot(show_ma ? spread_ma : na, "Spread MA", color=color.orange, linewidth=1)
+
+// % spread as label on last bar
+if barstate.islast
+    label.new(bar_index, spread,
+              "Spread: " + str.tostring(spread, "#.####") + "\n" +
+              str.tostring(spread_pct, "#.####") + "%",
+              color=spread >= 0 ? color.new(color.green, 20) : color.new(color.red, 20),
+              textcolor=color.white,
+              style=spread >= 0 ? label.style_label_down : label.style_label_up,
+              size=size.normal)
+
+// Background color
+bgcolor(spread > 0 ? color.new(color.green, 92) : color.new(color.red, 92), title="Spread BG")

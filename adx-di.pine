@@ -1,0 +1,79 @@
+//@version=5
+indicator("San - ADX + DI [Gold Scalping]", overlay=false)
+
+// ─────────────────────────────────────────────
+//  INPUTS
+// ─────────────────────────────────────────────
+
+grp1 = "ADX / DI Settings"
+adx_len = input.int(14, title="ADX Period", group=grp1, minval=1, maxval=100)
+di_len  = input.int(14, title="DI Length",  group=grp1, minval=1, maxval=100)
+
+grp2 = "Levels"
+upper_level = input.int(25, title="Upper Level (Strong Trend)", group=grp2, minval=1, maxval=100)
+lower_level = input.int(20, title="Lower Level (Weak Trend)",   group=grp2, minval=1, maxval=100)
+
+grp3 = "Colors"
+col_adx   = input.color(color.new(color.yellow, 0), title="ADX Line",          group=grp3)
+col_dipl  = input.color(color.new(color.green,  0), title="DI+ Line",          group=grp3)
+col_dimi  = input.color(color.new(color.red,    0), title="DI- Line",          group=grp3)
+col_upper = input.color(color.new(color.orange, 0), title="Upper Level Line",  group=grp3)
+col_lower = input.color(color.new(color.gray,   0), title="Lower Level Line",  group=grp3)
+
+// ─────────────────────────────────────────────
+//  CALCULATIONS
+// ─────────────────────────────────────────────
+[di_plus, di_minus, adx_val] = ta.dmi(di_len, adx_len)
+
+// ─────────────────────────────────────────────
+//  BACKGROUND ZONES
+// ─────────────────────────────────────────────
+strong_bull = adx_val >= upper_level and di_plus > di_minus
+strong_bear = adx_val >= upper_level and di_minus > di_plus
+weak_zone   = adx_val < lower_level
+
+bgcolor(strong_bull ? color.new(color.green, 88) : na, title="Strong Bull Zone")
+bgcolor(strong_bear ? color.new(color.red,   88) : na, title="Strong Bear Zone")
+bgcolor(weak_zone   ? color.new(color.gray,  92) : na, title="Weak / No Trend Zone")
+
+// ─────────────────────────────────────────────
+//  PLOTS
+// ─────────────────────────────────────────────
+plot(adx_val,  title="ADX",  color=col_adx,  linewidth=2)
+plot(di_plus,  title="DI+",  color=col_dipl, linewidth=1)
+plot(di_minus, title="DI-",  color=col_dimi, linewidth=1)
+
+hline(upper_level, title="Upper Level (Strong Trend)", color=col_upper, linestyle=hline.style_dashed, linewidth=1)
+hline(lower_level, title="Lower Level (Weak Trend)",   color=col_lower, linestyle=hline.style_dotted, linewidth=1)
+hline(0, color=color.new(color.white, 80), linestyle=hline.style_solid, linewidth=1)
+
+// ─────────────────────────────────────────────
+//  DI CROSS SIGNALS
+// ─────────────────────────────────────────────
+di_bull_cross = ta.crossover(di_plus,  di_minus)
+di_bear_cross = ta.crossunder(di_plus, di_minus)
+
+valid_bull = di_bull_cross and adx_val >= lower_level
+valid_bear = di_bear_cross and adx_val >= lower_level
+
+plotshape(valid_bull, title="DI+ Cross (Bull)", location=location.bottom, style=shape.triangleup,   color=color.new(color.green, 0), size=size.small)
+plotshape(valid_bear, title="DI- Cross (Bear)", location=location.top,    style=shape.triangledown, color=color.new(color.red,   0), size=size.small)
+
+// ─────────────────────────────────────────────
+//  INFO LABEL
+// ─────────────────────────────────────────────
+trend_str     = adx_val >= 75 ? "EXTREME" : adx_val >= 50 ? "VERY STRONG" : adx_val >= upper_level ? "STRONG" : adx_val >= lower_level ? "WEAK" : "NO TREND"
+direction_str = di_plus > di_minus ? "BULL" : "BEAR"
+lbl_color     = adx_val >= upper_level ? (di_plus > di_minus ? color.green : color.red) : color.gray
+
+var label info_lbl = na
+label.delete(info_lbl)
+info_lbl := label.new(x=bar_index, y=95, text="ADX: " + str.tostring(math.round(adx_val, 1)) + "  |  " + trend_str + "  |  " + direction_str + "\nDI+: " + str.tostring(math.round(di_plus, 1)) + "   DI-: " + str.tostring(math.round(di_minus, 1)), style=label.style_label_left, color=color.new(color.black, 60), textcolor=lbl_color, size=size.normal)
+
+// ─────────────────────────────────────────────
+//  ALERTS
+// ─────────────────────────────────────────────
+alertcondition(valid_bull,             title="DI+ Bull Cross",    message="San Gold ADX - DI+ crossed above DI- on {{ticker}} {{interval}}")
+alertcondition(valid_bear,             title="DI- Bear Cross",    message="San Gold ADX - DI- crossed above DI+ on {{ticker}} {{interval}}")
+alertcondition(adx_val >= upper_level, title="ADX Strong Trend",  message="San Gold ADX - Strong trend confirmed on {{ticker}} {{interval}}")
+alertcondition(adx_val < lower_level,  title="ADX No Trend",      message="San Gold ADX - No trend, avoid trading on {{ticker}} {{interval}}")

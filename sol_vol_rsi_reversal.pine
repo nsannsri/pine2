@@ -1,0 +1,124 @@
+//@version=5
+indicator("SOL Spot vs Perp Volume + RSI Reversal", overlay=false)
+
+// ═══════════════════════════════════════════════════════════════
+// INPUTS
+// ═══════════════════════════════════════════════════════════════
+
+spot_ticker  = input.string("BINANCE:SOLUSDT", "Spot Symbol")
+rsi_len      = input.int(14,  "RSI Length",          group="RSI")
+rsi_ob       = input.float(70, "RSI Overbought",      group="RSI")
+rsi_os       = input.float(30, "RSI Oversold",        group="RSI")
+vol_ma_len   = input.int(20,  "Volume MA Length",     group="Volume")
+ratio_len    = input.int(20,  "Ratio MA Length",      group="Volume")
+
+// ═══════════════════════════════════════════════════════════════
+// DATA
+// ═══════════════════════════════════════════════════════════════
+
+// Spot data
+spot_vol     = request.security(spot_ticker, timeframe.period, volume)
+spot_close   = request.security(spot_ticker, timeframe.period, close)
+
+// Perp data (current chart = SOLUSDT.P)
+perp_vol     = volume
+perp_close   = close
+
+// RSI on perp close
+rsi          = ta.rsi(perp_close, rsi_len)
+
+// Volume MAs
+spot_vol_ma  = ta.sma(spot_vol,  vol_ma_len)
+perp_vol_ma  = ta.sma(perp_vol,  vol_ma_len)
+
+// Ratio: perp vol / spot vol — above 1 = perp dominated, below 1 = spot dominated
+ratio        = perp_vol / spot_vol
+ratio_ma     = ta.sma(ratio, ratio_len)
+
+// Spot vol spike — spot volume is unusually high
+spot_spike   = spot_vol > spot_vol_ma * 1.5
+
+// Perp vol spike — leverage/liquidation driven
+perp_spike   = perp_vol > perp_vol_ma * 1.5
+
+// ═══════════════════════════════════════════════════════════════
+// REVERSAL CONDITIONS
+// ═══════════════════════════════════════════════════════════════
+
+// Strong reversal signal:
+// Perp vol spike (liquidation/leverage flush) + RSI extreme + spot vol low (no real conviction)
+reversal_long  = perp_spike and not spot_spike and rsi < rsi_os   // oversold + perp flush = buy reversal
+reversal_short = perp_spike and not spot_spike and rsi > rsi_ob   // overbought + perp flush = sell reversal
+
+// Real move signal (spot confirms):
+// Both volumes spike = real directional move, not reversal
+real_bull = spot_spike and perp_spike and perp_close > perp_close[1]
+real_bear = spot_spike and perp_spike and perp_close < perp_close[1]
+
+// ═══════════════════════════════════════════════════════════════
+// PLOTS — PANEL 1: VOLUME COMPARISON
+// ═══════════════════════════════════════════════════════════════
+
+// Plot spot vol as positive, perp vol as negative (mirror chart)
+plot( spot_vol, "Spot Vol",  color=color.new(color.blue,  40), style=plot.style_histogram, linewidth=2)
+plot(-perp_vol, "Perp Vol",  color=color.new(color.orange,40), style=plot.style_histogram, linewidth=2)
+
+// MAs
+plot( spot_vol_ma, "Spot Vol MA", color=color.new(color.blue,   0), linewidth=1)
+plot(-perp_vol_ma, "Perp Vol MA", color=color.new(color.orange, 0), linewidth=1)
+
+// Zero center line
+hline(0, "Zero", color=color.gray, linewidth=1)
+
+// Ratio line (scaled down to fit)
+plot(ratio * 0, "hidden", display=display.none)  // keeps scale clean
+
+// ═══════════════════════════════════════════════════════════════
+// PLOTS — SIGNALS
+// ═══════════════════════════════════════════════════════════════
+
+// Reversal signals
+plotshape(reversal_long,  "Reversal Long",  shape.labelup,   location.bottom,
+          color.new(color.green, 0), text="REV\nBUY",  textcolor=color.white, size=size.small)
+plotshape(reversal_short, "Reversal Short", shape.labeldown, location.top,
+          color.new(color.red,   0), text="REV\nSELL", textcolor=color.white, size=size.small)
+
+// Real move signals
+plotshape(real_bull, "Real Bull", shape.triangleup,   location.bottom,
+          color.new(color.lime, 0), size=size.tiny)
+plotshape(real_bear, "Real Bear", shape.triangledown, location.top,
+          color.new(color.red,  0), size=size.tiny)
+
+// Background — RSI zones
+bgcolor(rsi > rsi_ob ? color.new(color.red,   88) : na, title="OB Zone")
+bgcolor(rsi < rsi_os ? color.new(color.green, 88) : na, title="OS Zone")
+
+// ═══════════════════════════════════════════════════════════════
+// INFO TABLE
+// ═══════════════════════════════════════════════════════════════
+
+var table t = table.new(position.top_right, 2, 6,
+     bgcolor=color.new(color.black, 70), border_color=color.gray, border_width=1)
+
+if barstate.islast
+    table.cell(t, 0, 0, "Metric",        text_color=color.gray,  text_size=size.small)
+    table.cell(t, 1, 0, "Value",         text_color=color.gray,  text_size=size.small)
+    table.cell(t, 0, 1, "Spot Vol",      text_color=color.blue,  text_size=size.small)
+    table.cell(t, 1, 1, str.tostring(spot_vol,    "#.##"), text_color=color.blue,   text_size=size.small)
+    table.cell(t, 0, 2, "Perp Vol",      text_color=color.orange,text_size=size.small)
+    table.cell(t, 1, 2, str.tostring(perp_vol,    "#.##"), text_color=color.orange, text_size=size.small)
+    table.cell(t, 0, 3, "Ratio P/S",     text_color=color.white, text_size=size.small)
+    table.cell(t, 1, 3, str.tostring(ratio, "#.##") + "x",
+               text_color=ratio > ratio_ma ? color.orange : color.blue, text_size=size.small)
+    table.cell(t, 0, 4, "RSI",           text_color=color.white, text_size=size.small)
+    table.cell(t, 1, 4, str.tostring(math.round(rsi, 1)),
+               text_color=rsi > rsi_ob ? color.red : rsi < rsi_os ? color.green : color.white,
+               text_size=size.small)
+    table.cell(t, 0, 5, "Signal",        text_color=color.white, text_size=size.small)
+    table.cell(t, 1, 5,
+               reversal_long  ? "REV BUY"  :
+               reversal_short ? "REV SELL" :
+               real_bull      ? "REAL BULL":
+               real_bear      ? "REAL BEAR": "—",
+               text_color=reversal_long or real_bull ? color.green : reversal_short or real_bear ? color.red : color.gray,
+               text_size=size.small)

@@ -1,0 +1,47 @@
+//@version=5
+indicator("Andean Oscillator - Buy/Sell/Exit", overlay=true)
+
+// === INPUTS ===
+len        = input(50)
+sig_length = input(9, 'Signal Length')
+
+// === INTERNAL CALCULATION ===
+var alpha = 2 / (len + 1)
+
+var up1 = 0., var up2 = 0.
+var dn1 = 0., var dn2 = 0.
+
+C = close
+O = open
+
+up1 := nz(math.max(C, O, up1[1] - (up1[1] - C) * alpha), C)
+up2 := nz(math.max(C * C, O * O, up2[1] - (up2[1] - C * C) * alpha), C * C)
+
+dn1 := nz(math.min(C, O, dn1[1] + (C - dn1[1]) * alpha), C)
+dn2 := nz(math.min(C * C, O * O, dn2[1] + (C * C - dn2[1]) * alpha), C * C)
+
+bull   = math.sqrt(dn2 - dn1 * dn1)
+bear   = math.sqrt(up2 - up1 * up1)
+signal = ta.ema(math.max(bull, bear), sig_length)
+
+// === ENTRY SIGNALS ===
+buySignal  = ta.crossover(bull, signal)
+sellSignal = ta.crossover(bear, signal)
+
+// === EXIT SIGNALS ===
+buyExit  = ta.crossover(signal, bull)
+sellExit = ta.crossover(signal, bear)
+
+// === PLOT ENTRY MARKERS ===
+plotshape(buySignal,  title="Buy",       location=location.belowbar, color=color.green,  style=shape.labelup,   text="BUY",       size=size.small)
+plotshape(sellSignal, title="Sell",      location=location.abovebar, color=color.red,    style=shape.labeldown, text="SELL",      size=size.small)
+
+// === PLOT EXIT MARKERS ===
+plotshape(buyExit,    title="Buy Exit",  location=location.abovebar, color=color.lime,   style=shape.labeldown, text="BUY EXIT",  size=size.small)
+plotshape(sellExit,   title="Sell Exit", location=location.belowbar, color=color.orange, style=shape.labelup,   text="SELL EXIT", size=size.small)
+
+// === ALERTS ===
+alertcondition(buySignal,  title="Buy Alert",       message="Andean Oscillator BUY signal")
+alertcondition(sellSignal, title="Sell Alert",      message="Andean Oscillator SELL signal")
+alertcondition(buyExit,    title="Buy Exit Alert",  message="Andean Oscillator BUY EXIT signal")
+alertcondition(sellExit,   title="Sell Exit Alert", message="Andean Oscillator SELL EXIT signal")

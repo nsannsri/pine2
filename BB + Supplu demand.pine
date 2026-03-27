@@ -1,0 +1,568 @@
+//@version=5
+indicator("UT Bot + BB + Supply/Demand", overlay=true, max_labels_count=500, max_boxes_count=500, max_lines_count=500, max_bars_back=1000)
+
+// ═══════════════════════════════════
+// INPUTS
+// ═══════════════════════════════════
+bb_length      = input.int(55, "BB Length", group="Bollinger Bands")
+bb_mult        = input.float(1.0, "BB Std Dev", group="Bollinger Bands")
+
+ut_sensitivity = input.float(2.0, "UT Sensitivity", group="UT Bot")
+ut_atr_period  = input.int(10, "UT ATR Period", group="UT Bot")
+
+confirm_bars   = input.int(10, "Confirmation Window (candles)", minval=1, maxval=50, group="Confirmation")
+
+smc_swing_length = input.int(10, "Swing High/Low Length", group="Supply/Demand", minval=1, maxval=50)
+smc_history      = input.int(20, "Zones History To Keep", group="Supply/Demand", minval=5, maxval=50)
+smc_box_width    = input.float(2.5, "Zone Box Width", group="Supply/Demand", minval=1, maxval=10, step=0.5)
+show_sd_zones    = input.bool(true, "Show Supply/Demand Zones", group="Supply/Demand")
+supply_color         = input.color(color.new(color.red, 70), "Supply Zone", group="Supply/Demand", inline="sd1")
+supply_outline_color = input.color(color.new(color.red, 50), "Outline", group="Supply/Demand", inline="sd1")
+demand_color         = input.color(color.new(color.green, 70), "Demand Zone", group="Supply/Demand", inline="sd2")
+demand_outline_color = input.color(color.new(color.green, 50), "Outline", group="Supply/Demand", inline="sd2")
+
+obv_tf            = input.timeframe("60", title="Timeframe", group="OBV (Trend)")
+obv_smooth_length = input.int(5, title="OBV Smoothing Length", minval=1, group="OBV (Trend)")
+obv_ma_length     = input.int(20, title="Moving Average Length", group="OBV (Trend)")
+obv_ma_smooth_len = input.int(5, title="MA Smoothing Length", minval=1, group="OBV (Trend)")
+show_obv_buy      = input.bool(true, title="Show O-Buy Signals", group="OBV (Trend)")
+show_obv_sell     = input.bool(true, title="Show O-Sell Signals", group="OBV (Trend)")
+
+show_bb           = input.bool(true, "Show BB", group="Display")
+show_utbot        = input.bool(true, "Show UT Line", group="Display")
+show_pending      = input.bool(true, "Show Pending Signals", group="Display")
+show_confirmed    = input.bool(true, "Show Confirmed Signals", group="Display")
+show_p1_buy       = input.bool(true, "Show P1-BUY Signals", group="Display")
+show_p1_sell      = input.bool(true, "Show P1-SELL Signals", group="Display")
+show_sl_lines     = input.bool(true, "Show SL Lines", group="Display")
+signal_line_bars  = input.int(5, "Signal Line Length (candles)", minval=1, maxval=50, group="Display")
+signal_line_style = input.string("Dots", "Signal Line Style", options=["Line", "Dots"], group="Display")
+
+// ═══════════════════════════════════
+// BOLLINGER BANDS
+// ═══════════════════════════════════
+bb_basis = ta.sma(close, bb_length)
+bb_dev   = bb_mult * ta.stdev(close, bb_length)
+bb_upper = bb_basis + bb_dev
+bb_lower = bb_basis - bb_dev
+
+long_breakout  = close > bb_upper
+short_breakout = close < bb_lower
+L1 = ta.barssince(long_breakout)
+S1 = ta.barssince(short_breakout)
+bb_green = L1 < S1
+bb_red   = S1 < L1
+
+// ═══════════════════════════════════
+// UT BOT
+// ═══════════════════════════════════
+ut_atr = ta.atr(ut_atr_period)
+xATRTrailingStop = 0.0
+iff_1 = close > nz(xATRTrailingStop[1], 0) ? close - (ut_atr * ut_sensitivity) : close + (ut_atr * ut_sensitivity)
+iff_2 = close < nz(xATRTrailingStop[1], 0) and close[1] < nz(xATRTrailingStop[1], 0) ? math.min(nz(xATRTrailingStop[1]), close + (ut_atr * ut_sensitivity)) : iff_1
+xATRTrailingStop := close > nz(xATRTrailingStop[1], 0) and close[1] > nz(xATRTrailingStop[1], 0) ? math.max(nz(xATRTrailingStop[1]), close - (ut_atr * ut_sensitivity)) : iff_2
+
+pos = 0
+iff_3 = close[1] > nz(xATRTrailingStop[1], 0) and close < nz(xATRTrailingStop[1], 0) ? -1 : nz(pos[1], 0)
+pos := close[1] < nz(xATRTrailingStop[1], 0) and close > nz(xATRTrailingStop[1], 0) ? 1 : iff_3
+
+ut_buy_signal  = pos == 1  and pos[1] == -1
+ut_sell_signal = pos == -1 and pos[1] == 1
+
+// ═══════════════════════════════════
+// ALTERNATING SIGNAL LOGIC (PRELIMINARY)
+// ═══════════════════════════════════
+var bool pending_buy  = false
+var bool pending_sell = false
+var int  last_signal  = 0
+
+if ut_buy_signal
+    if last_signal != 1
+        if bb_green
+            pending_buy  := false
+            pending_sell := false
+        else
+            pending_buy  := true
+            pending_sell := false
+
+if ut_sell_signal
+    if last_signal != -1
+        if bb_red
+            pending_sell := false
+            pending_buy  := false
+        else
+            pending_sell := true
+            pending_buy  := false
+
+preliminary_buy  = last_signal != 1  and ((ut_buy_signal and bb_green) or (pending_buy  and bb_green and not bb_green[1]))
+preliminary_sell = last_signal != -1 and ((ut_sell_signal and bb_red)  or (pending_sell and bb_red   and not bb_red[1]))
+
+// ═══════════════════════════════════
+// PRICE ACTION CONFIRMATION
+// ═══════════════════════════════════
+var float buy_confirm_level  = na
+var int   buy_confirm_bar    = na
+var bool  awaiting_buy       = false
+var float sell_confirm_level = na
+var int   sell_confirm_bar   = na
+var bool  awaiting_sell      = false
+
+if preliminary_buy
+    pending_buy       := false
+    buy_confirm_level := high
+    buy_confirm_bar   := bar_index
+    awaiting_buy      := true
+    awaiting_sell     := false
+
+if preliminary_sell
+    pending_sell        := false
+    sell_confirm_level  := low
+    sell_confirm_bar    := bar_index
+    awaiting_sell       := true
+    awaiting_buy        := false
+
+confirmed_buy  = awaiting_buy  and bar_index > nz(buy_confirm_bar, 0)  and bar_index <= nz(buy_confirm_bar, 0)  + confirm_bars and close > buy_confirm_level
+confirmed_sell = awaiting_sell and bar_index > nz(sell_confirm_bar, 0) and bar_index <= nz(sell_confirm_bar, 0) + confirm_bars and close < sell_confirm_level
+
+buy_expired  = awaiting_buy  and bar_index > nz(buy_confirm_bar, 0)  + confirm_bars
+sell_expired = awaiting_sell and bar_index > nz(sell_confirm_bar, 0) + confirm_bars
+
+if confirmed_buy
+    awaiting_buy := false
+    last_signal  := 1
+
+if confirmed_sell
+    awaiting_sell := false
+    last_signal   := -1
+
+if buy_expired
+    awaiting_buy := false
+
+if sell_expired
+    awaiting_sell := false
+
+// ═══════════════════════════════════
+// OBV BUY / SELL (1H TREND)
+// ═══════════════════════════════════
+get_obv_data() =>
+    obv           = ta.cum(math.sign(ta.change(close)) * volume)
+    obv_smooth    = ta.ema(obv, obv_smooth_length)
+    obv_ma        = ta.sma(obv_smooth, obv_ma_length)
+    obv_ma_smooth = ta.ema(obv_ma, obv_ma_smooth_len)
+    [obv_smooth, obv_ma_smooth]
+
+[obv_line, obv_ma_line] = request.security(
+     syminfo.tickerid, obv_tf, get_obv_data(),
+     lookahead=barmerge.lookahead_off)
+
+obv_buy_signal  = ta.crossover (obv_line, obv_ma_line)
+obv_sell_signal = ta.crossunder(obv_line, obv_ma_line)
+
+// ═══════════════════════════════════
+// OBV TREND STATE (persistent)
+// ═══════════════════════════════════
+var bool obv_is_buy  = false
+var bool obv_is_sell = false
+
+if obv_buy_signal
+    obv_is_buy  := true
+    obv_is_sell := false
+
+if obv_sell_signal
+    obv_is_sell := true
+    obv_is_buy  := false
+
+// ═══════════════════════════════════
+// CONFIRMED SIGNAL STATE (persistent)
+// ═══════════════════════════════════
+var bool sig_is_buy  = false
+var bool sig_is_sell = false
+
+if confirmed_buy
+    sig_is_buy  := true
+    sig_is_sell := false
+
+if confirmed_sell
+    sig_is_sell := true
+    sig_is_buy  := false
+
+// ═══════════════════════════════════
+// P1 SIGNAL (OBV TREND + CONFIRMED ENTRY)
+// ═══════════════════════════════════
+var int last_p1 = 0
+
+both_buy  = obv_is_buy  and sig_is_buy
+both_sell = obv_is_sell and sig_is_sell
+
+p1_buy  = both_buy  and last_p1 != 1  and (obv_buy_signal or confirmed_buy)
+p1_sell = both_sell and last_p1 != -1 and (obv_sell_signal or confirmed_sell)
+
+// ═══════════════════════════════════
+// SUPPLY / DEMAND ZONES
+// ═══════════════════════════════════
+smc_atr        = ta.atr(50)
+smc_swing_high = ta.pivothigh(high, smc_swing_length, smc_swing_length)
+smc_swing_low  = ta.pivotlow(low, smc_swing_length, smc_swing_length)
+
+var smc_sh_values = array.new_float(5, 0.0)
+var smc_sl_values = array.new_float(5, 0.0)
+var smc_sh_bns    = array.new_int(5, 0)
+var smc_sl_bns    = array.new_int(5, 0)
+var current_supply_box = array.new_box(smc_history, na)
+var current_demand_box = array.new_box(smc_history, na)
+
+f_array_add_pop(arr, val) =>
+    array.unshift(arr, val)
+    array.pop(arr)
+
+f_check_overlapping(new_poi, box_array, _atr) =>
+    threshold = _atr * 2
+    ok = true
+    for i = 0 to array.size(box_array) - 1
+        t = box.get_top(array.get(box_array, i))
+        b = box.get_bottom(array.get(box_array, i))
+        mid = (t + b) / 2
+        if new_poi >= mid - threshold and new_poi <= mid + threshold
+            ok := false
+            break
+    ok
+
+f_draw_zone(value_array, bn_array, box_array, box_type, _atr) =>
+    buf = _atr * (smc_box_width / 10)
+    left_bar = array.get(bn_array, 0)
+    var float ztop = 0.0
+    var float zbot = 0.0
+    var float zmid = 0.0
+    if box_type == 1
+        ztop := array.get(value_array, 0)
+        zbot := ztop - buf
+        zmid := (ztop + zbot) / 2
+    else
+        zbot := array.get(value_array, 0)
+        ztop := zbot + buf
+        zmid := (ztop + zbot) / 2
+    ok = f_check_overlapping(zmid, box_array, _atr)
+    if ok
+        box.delete(array.get(box_array, array.size(box_array) - 1))
+        _col    = box_type == 1 ? supply_color : demand_color
+        _border = box_type == 1 ? supply_outline_color : demand_outline_color
+        _txt    = box_type == 1 ? "SUPPLY" : "DEMAND"
+        f_array_add_pop(box_array, box.new(left=left_bar, top=ztop, right=bar_index, bottom=zbot,
+             border_color=_border, bgcolor=_col, extend=extend.right,
+             text=_txt, text_halign=text.align_center, text_valign=text.align_center,
+             text_color=color.white, text_size=size.small))
+
+f_remove_broken_zones(box_array, zone_type) =>
+    for i = 0 to array.size(box_array) - 1
+        if zone_type == 1 and close >= box.get_top(array.get(box_array, i))
+            box.delete(array.get(box_array, i))
+        if zone_type == -1 and close <= box.get_bottom(array.get(box_array, i))
+            box.delete(array.get(box_array, i))
+
+f_extend_box_endpoint(box_array) =>
+    for i = 0 to array.size(box_array) - 1
+        box.set_right(array.get(box_array, i), bar_index + 100)
+
+if show_sd_zones
+    if not na(smc_swing_high)
+        f_array_add_pop(smc_sh_values, smc_swing_high)
+        f_array_add_pop(smc_sh_bns, bar_index[smc_swing_length])
+        f_draw_zone(smc_sh_values, smc_sh_bns, current_supply_box, 1, smc_atr)
+    else if not na(smc_swing_low)
+        f_array_add_pop(smc_sl_values, smc_swing_low)
+        f_array_add_pop(smc_sl_bns, bar_index[smc_swing_length])
+        f_draw_zone(smc_sl_values, smc_sl_bns, current_demand_box, -1, smc_atr)
+    f_remove_broken_zones(current_supply_box, 1)
+    f_remove_broken_zones(current_demand_box, -1)
+    f_extend_box_endpoint(current_supply_box)
+    f_extend_box_endpoint(current_demand_box)
+
+// ═══════════════════════════════════
+// NEAREST ZONE SL FUNCTIONS
+// ═══════════════════════════════════
+f_nearest_demand_below(price, box_array) =>
+    float nearest = na
+    for i = 0 to array.size(box_array) - 1
+        bot = box.get_bottom(array.get(box_array, i))
+        if not na(bot) and bot < price
+            if na(nearest) or bot > nearest
+                nearest := bot
+    nearest
+
+f_nearest_supply_above(price, box_array) =>
+    float nearest = na
+    for i = 0 to array.size(box_array) - 1
+        top_val = box.get_top(array.get(box_array, i))
+        if not na(top_val) and top_val > price
+            if na(nearest) or top_val < nearest
+                nearest := top_val
+    nearest
+
+// ═══════════════════════════════════
+// COMPUTE SL & FIRE ALERTS (JSON FOR LAMBDA)
+// ═══════════════════════════════════
+var float buy_sl     = na
+var float sell_sl    = na
+var float p1_buy_sl  = na
+var float p1_sell_sl = na
+
+f_sl_text(sl_val) =>
+    na(sl_val) ? "N/A" : str.tostring(sl_val, format.mintick)
+
+f_json(action, source, sl_val) =>
+    _sl    = na(sl_val) ? "N/A" : str.tostring(sl_val, format.mintick)
+    _price = str.tostring(close, format.mintick)
+    _high  = str.tostring(high, format.mintick)
+    _low   = str.tostring(low, format.mintick)
+    _vol   = str.tostring(volume)
+    _time  = str.format_time(timenow, "yyyy-MM-dd'T'HH:mm:ss'Z'", "UTC")
+    _msg   = source + " " + action + "\\n" +
+             "Ticker: " + syminfo.ticker + " (" + syminfo.prefix + ")\\n" +
+             "Interval: " + timeframe.period + "\\n" +
+             "Price: " + _price + "\\n" +
+             "High: " + _high + " | Low: " + _low + "\\n" +
+             "SL: " + _sl + "\\n" +
+             "Volume: " + _vol + "\\n" +
+             "Time: " + _time
+    '{' +
+     '"side":"'     + action            + '",' +
+     '"source":"'   + source            + '",' +
+     '"ticker":"'   + syminfo.ticker    + '",' +
+     '"exchange":"' + syminfo.prefix    + '",' +
+     '"interval":"' + timeframe.period  + '",' +
+     '"price":"'    + _price            + '",' +
+     '"sl":"'       + _sl               + '",' +
+     '"message":"'  + _msg              + '",' +
+     '"time":"'     + _time             + '"' +
+     '}'
+
+// Confirmed BUY alert
+if confirmed_buy
+    buy_sl := f_nearest_demand_below(close, current_demand_box)
+    alert(f_json("BUY", "CONFIRMED", buy_sl), alert.freq_once_per_bar_close)
+
+// Confirmed SELL alert
+if confirmed_sell
+    sell_sl := f_nearest_supply_above(close, current_supply_box)
+    alert(f_json("SELL", "CONFIRMED", sell_sl), alert.freq_once_per_bar_close)
+
+// OBV BUY alert
+if obv_buy_signal
+    _obv_sl = f_nearest_demand_below(close, current_demand_box)
+    alert(f_json("BUY", "OBV", _obv_sl), alert.freq_once_per_bar_close)
+
+// OBV SELL alert
+if obv_sell_signal
+    _obv_sl = f_nearest_supply_above(close, current_supply_box)
+    alert(f_json("SELL", "OBV", _obv_sl), alert.freq_once_per_bar_close)
+
+// P1 BUY — trend + entry aligned
+if p1_buy
+    last_p1    := 1
+    p1_buy_sl  := f_nearest_demand_below(close, current_demand_box)
+    alert(f_json("BUY", "P1", p1_buy_sl), alert.freq_once_per_bar_close)
+
+// P1 SELL — trend + entry aligned
+if p1_sell
+    last_p1    := -1
+    p1_sell_sl := f_nearest_supply_above(close, current_supply_box)
+    alert(f_json("SELL", "P1", p1_sell_sl), alert.freq_once_per_bar_close)
+
+// ═══════════════════════════════════
+// PLOTTING
+// ═══════════════════════════════════
+
+// Bollinger Bands
+p_upper = plot(show_bb ? bb_upper : na, "BB Upper", color=color.green, linewidth=1)
+p_lower = plot(show_bb ? bb_lower : na, "BB Lower", color=color.red, linewidth=1)
+center_color = bb_green ? color.green : bb_red ? color.red : color.gray
+p_basis = plot(show_bb ? bb_basis : na, "BB Center", color=center_color, linewidth=3)
+fill(p_upper, p_basis, color=color.new(color.red, 85))
+fill(p_lower, p_basis, color=color.new(color.green, 85))
+
+// UT Bot line
+plot(show_utbot ? xATRTrailingStop : na, "UT Bot",
+     color=pos == 1 ? color.green : color.red, linewidth=2)
+
+// Pending UT signals (waiting for BB alignment)
+plotshape(show_pending and ut_buy_signal  and not bb_green and last_signal != 1,  "Pending Buy",
+          shape.circle, location.belowbar, color=color.yellow, size=size.tiny, text="?")
+plotshape(show_pending and ut_sell_signal and not bb_red   and last_signal != -1, "Pending Sell",
+          shape.circle, location.abovebar, color=color.orange, size=size.tiny, text="?")
+
+// Preliminary signals
+plotshape(preliminary_buy,  "Preliminary Buy",
+          shape.diamond, location.belowbar, color=color.yellow, size=size.small, text="P")
+plotshape(preliminary_sell, "Preliminary Sell",
+          shape.diamond, location.abovebar, color=color.orange, size=size.small, text="P")
+
+// Confirmed signals
+plotshape(show_confirmed and confirmed_buy,  "CONFIRMED BUY",
+          shape.triangleup, location.belowbar, color=color.lime, size=size.normal)
+plotshape(show_confirmed and confirmed_sell, "CONFIRMED SELL",
+          shape.triangledown, location.abovebar, color=color.red, size=size.normal)
+
+// OBV signals
+plotshape(show_obv_buy  and obv_buy_signal,  "O-Buy",
+          shape.labelup, location.belowbar,
+          color=color.teal, textcolor=color.white,
+          size=size.small, text="O-Buy")
+plotshape(show_obv_sell and obv_sell_signal, "O-Sell",
+          shape.labeldown, location.abovebar,
+          color=color.maroon, textcolor=color.white,
+          size=size.small, text="O-Sell")
+
+// P1 signals (large arrows — the main trade signal)
+plotshape(show_p1_buy  and p1_buy,  "P1-BUY",
+          shape.arrowup, location.belowbar,
+          color=color.blue, size=size.large)
+plotshape(show_p1_sell and p1_sell, "P1-SELL",
+          shape.arrowdown, location.abovebar,
+          color=color.purple, size=size.large)
+
+// Confirmed labels with SL
+if confirmed_buy and show_confirmed
+    label.new(bar_index, low,
+              "BUY @ " + str.tostring(close, format.mintick) + "\nSL: " + f_sl_text(buy_sl),
+              color=color.green, textcolor=color.white,
+              style=label.style_label_up, size=size.normal)
+
+if confirmed_sell and show_confirmed
+    label.new(bar_index, high,
+              "SELL @ " + str.tostring(close, format.mintick) + "\nSL: " + f_sl_text(sell_sl),
+              color=color.red, textcolor=color.white,
+              style=label.style_label_down, size=size.normal)
+
+// P1 labels with SL (large & prominent)
+if p1_buy and show_p1_buy
+    label.new(bar_index, low,
+              "P1-BUY\n@ " + str.tostring(close, format.mintick) + "\nSL: " + f_sl_text(p1_buy_sl),
+              color=color.blue, textcolor=color.white,
+              style=label.style_label_up, size=size.large)
+
+if p1_sell and show_p1_sell
+    label.new(bar_index, high,
+              "P1-SELL\n@ " + str.tostring(close, format.mintick) + "\nSL: " + f_sl_text(p1_sell_sl),
+              color=color.purple, textcolor=color.white,
+              style=label.style_label_down, size=size.large)
+
+// Background
+bgcolor(bb_green ? color.new(color.green, 95) : bb_red ? color.new(color.red, 95) : na)
+
+// ═══════════════════════════════════
+// DASHBOARD
+// ═══════════════════════════════════
+var table info = table.new(position.top_right, 2, 11)
+
+if barstate.islast
+    table.cell(info, 0, 0, "BB Trend", bgcolor=color.gray, text_color=color.white)
+    table.cell(info, 1, 0, bb_green ? "GREEN" : "RED",
+               bgcolor=bb_green ? color.green : color.red, text_color=color.white)
+
+    table.cell(info, 0, 1, "UT Bot", bgcolor=color.gray, text_color=color.white)
+    table.cell(info, 1, 1, pos == 1 ? "BULLISH" : "BEARISH",
+               bgcolor=pos == 1 ? color.green : color.red, text_color=color.white)
+
+    table.cell(info, 0, 2, "UT Signal", bgcolor=color.gray, text_color=color.white)
+    ut_text = ut_buy_signal ? "BUY ↑" : ut_sell_signal ? "SELL ↓" : "---"
+    table.cell(info, 1, 2, ut_text, bgcolor=color.new(color.gray, 70), text_color=color.white)
+
+    table.cell(info, 0, 3, "Last Signal", bgcolor=color.gray, text_color=color.white)
+    last_sig_text  = last_signal == 1 ? "BUY" : last_signal == -1 ? "SELL" : "NONE"
+    last_sig_color = last_signal == 1 ? color.green : last_signal == -1 ? color.red : color.gray
+    table.cell(info, 1, 3, last_sig_text,
+               bgcolor=color.new(last_sig_color, 50), text_color=color.white)
+
+    table.cell(info, 0, 4, "Pending Buy", bgcolor=color.gray, text_color=color.white)
+    table.cell(info, 1, 4, pending_buy ? "YES (wait BB green)" : "NO",
+               bgcolor=pending_buy ? color.new(color.yellow, 50) : color.new(color.gray, 70),
+               text_color=color.white)
+
+    table.cell(info, 0, 5, "Pending Sell", bgcolor=color.gray, text_color=color.white)
+    table.cell(info, 1, 5, pending_sell ? "YES (wait BB red)" : "NO",
+               bgcolor=pending_sell ? color.new(color.orange, 50) : color.new(color.gray, 70),
+               text_color=color.white)
+
+    _bars_left_buy  = awaiting_buy  ? math.max(0, nz(buy_confirm_bar, 0)  + confirm_bars - bar_index) : 0
+    _bars_left_sell = awaiting_sell ? math.max(0, nz(sell_confirm_bar, 0) + confirm_bars - bar_index) : 0
+
+    table.cell(info, 0, 6, "Await Buy", bgcolor=color.gray, text_color=color.white)
+    table.cell(info, 1, 6, awaiting_buy ? "YES (" + str.tostring(_bars_left_buy) + " bars)" : "NO",
+               bgcolor=awaiting_buy ? color.new(color.lime, 50) : color.new(color.gray, 70),
+               text_color=color.white)
+
+    table.cell(info, 0, 7, "Await Sell", bgcolor=color.gray, text_color=color.white)
+    table.cell(info, 1, 7, awaiting_sell ? "YES (" + str.tostring(_bars_left_sell) + " bars)" : "NO",
+               bgcolor=awaiting_sell ? color.new(color.red, 50) : color.new(color.gray, 70),
+               text_color=color.white)
+
+    table.cell(info, 0, 8, "OBV Trend", bgcolor=color.gray, text_color=color.white)
+    table.cell(info, 1, 8, obv_is_buy ? "BULLISH" : obv_is_sell ? "BEARISH" : "---",
+               bgcolor=obv_is_buy ? color.teal : obv_is_sell ? color.maroon : color.new(color.gray, 70),
+               text_color=color.white)
+
+    table.cell(info, 0, 9, "P1 Signal", bgcolor=color.gray, text_color=color.white)
+    p1_text  = last_p1 == 1 ? "P1-BUY" : last_p1 == -1 ? "P1-SELL" : "---"
+    p1_color = last_p1 == 1 ? color.blue : last_p1 == -1 ? color.purple : color.new(color.gray, 70)
+    table.cell(info, 1, 9, p1_text, bgcolor=p1_color, text_color=color.white)
+
+    table.cell(info, 0, 10, "Price", bgcolor=color.gray, text_color=color.white)
+    table.cell(info, 1, 10, str.tostring(close, format.mintick),
+               bgcolor=color.new(color.gray, 70), text_color=color.white)
+
+// ═══════════════════════════════════
+// SIGNAL LEVEL LINES
+// ═══════════════════════════════════
+
+// Confirmation level (during waiting window)
+_in_buy_wait  = awaiting_buy  and not na(buy_confirm_bar)  and bar_index >= buy_confirm_bar  and bar_index <= buy_confirm_bar  + confirm_bars
+_in_sell_wait = awaiting_sell and not na(sell_confirm_bar) and bar_index >= sell_confirm_bar and bar_index <= sell_confirm_bar + confirm_bars
+
+plot(_in_buy_wait  ? buy_confirm_level  : na, "Buy Confirm Level",  color=color.new(color.yellow, 20), linewidth=2,
+     style=signal_line_style == "Dots" ? plot.style_circles : plot.style_linebr)
+plot(_in_sell_wait ? sell_confirm_level : na, "Sell Confirm Level", color=color.new(color.orange, 20), linewidth=2,
+     style=signal_line_style == "Dots" ? plot.style_circles : plot.style_linebr)
+
+// Entry level (after final confirmation)
+var float _buy_lvl  = na
+var int   _buy_bar  = na
+var float _sell_lvl = na
+var int   _sell_bar = na
+
+if confirmed_buy
+    _buy_lvl := close
+    _buy_bar := bar_index
+
+if confirmed_sell
+    _sell_lvl := close
+    _sell_bar := bar_index
+
+_in_buy_zone  = not na(_buy_bar)  and bar_index >= _buy_bar  and bar_index <= _buy_bar  + signal_line_bars
+_in_sell_zone = not na(_sell_bar) and bar_index >= _sell_bar and bar_index <= _sell_bar + signal_line_bars
+
+plot(_in_buy_zone  ? _buy_lvl  : na, "Buy Entry Line",  color=color.lime, linewidth=2,
+     style=signal_line_style == "Dots" ? plot.style_circles : plot.style_linebr)
+plot(_in_sell_zone ? _sell_lvl : na, "Sell Entry Line", color=color.red,  linewidth=2,
+     style=signal_line_style == "Dots" ? plot.style_circles : plot.style_linebr)
+
+// SL level (after final confirmation)
+var float _buy_sl_lvl  = na
+var int   _buy_sl_bar  = na
+var float _sell_sl_lvl = na
+var int   _sell_sl_bar = na
+
+if confirmed_buy
+    _buy_sl_lvl := buy_sl
+    _buy_sl_bar := bar_index
+
+if confirmed_sell
+    _sell_sl_lvl := sell_sl
+    _sell_sl_bar := bar_index
+
+_in_buy_sl  = show_sl_lines and not na(_buy_sl_bar)  and not na(_buy_sl_lvl)  and bar_index >= _buy_sl_bar  and bar_index <= _buy_sl_bar  + signal_line_bars
+_in_sell_sl = show_sl_lines and not na(_sell_sl_bar) and not na(_sell_sl_lvl) and bar_index >= _sell_sl_bar and bar_index <= _sell_sl_bar + signal_line_bars
+
+plot(_in_buy_sl  ? _buy_sl_lvl  : na, "Buy SL Line",  color=color.fuchsia, linewidth=2,
+     style=signal_line_style == "Dots" ? plot.style_circles : plot.style_linebr)
+plot(_in_sell_sl ? _sell_sl_lvl : na, "Sell SL Line", color=color.fuchsia, linewidth=2,
+     style=signal_line_style == "Dots" ? plot.style_circles : plot.style_linebr)
