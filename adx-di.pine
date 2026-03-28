@@ -9,6 +9,10 @@ grp1 = "ADX / DI Settings"
 adx_len = input.int(14, title="ADX Period", group=grp1, minval=1, maxval=100)
 di_len  = input.int(14, title="DI Length",  group=grp1, minval=1, maxval=100)
 
+grp_smooth = "DI Smoothing"
+smooth_method = input.string("DEMA", title="Smoothing Method", options=["EMA", "DEMA", "TEMA", "RMA"], group=grp_smooth)
+smooth_len    = input.int(3, title="Smoothing Length (1 = off)", group=grp_smooth, minval=1, maxval=50)
+
 grp2 = "Levels"
 upper_level = input.int(25, title="Upper Level (Strong Trend)", group=grp2, minval=1, maxval=100)
 lower_level = input.int(20, title="Lower Level (Weak Trend)",   group=grp2, minval=1, maxval=100)
@@ -23,7 +27,25 @@ col_lower = input.color(color.new(color.gray,   0), title="Lower Level Line",  g
 // ─────────────────────────────────────────────
 //  CALCULATIONS
 // ─────────────────────────────────────────────
-[di_plus, di_minus, adx_val] = ta.dmi(di_len, adx_len)
+[di_plus_raw, di_minus_raw, adx_val] = ta.dmi(di_len, adx_len)
+
+f_smooth(src, len, method) =>
+    if method == "EMA"
+        ta.ema(src, len)
+    else if method == "DEMA"
+        e1 = ta.ema(src, len)
+        e2 = ta.ema(e1, len)
+        2 * e1 - e2
+    else if method == "TEMA"
+        e1 = ta.ema(src, len)
+        e2 = ta.ema(e1, len)
+        e3 = ta.ema(e2, len)
+        3 * e1 - 3 * e2 + e3
+    else // RMA
+        ta.rma(src, len)
+
+di_plus  = f_smooth(di_plus_raw,  smooth_len, smooth_method)
+di_minus = f_smooth(di_minus_raw, smooth_len, smooth_method)
 
 // ─────────────────────────────────────────────
 //  BACKGROUND ZONES
