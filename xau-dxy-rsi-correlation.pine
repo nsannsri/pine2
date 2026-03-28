@@ -1,0 +1,129 @@
+//@version=5
+indicator("San - XAUUSD vs DXY RSI Correlation", overlay=false)
+
+// ─────────────────────────────────────────────
+//  INPUTS
+// ─────────────────────────────────────────────
+grp1 = "RSI Settings"
+rsi_len     = input.int(14,  title="RSI Length",          group=grp1, minval=1)
+ob_level    = input.int(70,  title="Overbought Level",    group=grp1, minval=50, maxval=100)
+os_level    = input.int(30,  title="Oversold Level",      group=grp1, minval=0,  maxval=50)
+mid_level   = input.int(50,  title="Midline",             group=grp1)
+
+grp2 = "Correlation Detection"
+slope_bars  = input.int(3,   title="Direction Lookback (bars)", group=grp2, minval=1, maxval=20,
+     tooltip="How many bars back to measure RSI slope direction")
+min_rsi_move = input.float(1.5, title="Min RSI Move to Qualify (pts)", group=grp2, minval=0.0,
+     tooltip="Minimum RSI change over the lookback to count as 'moving'. Filters noise.")
+
+grp3 = "Symbols"
+dxy_sym     = input.string("TVC:DXY", title="DXY Symbol", group=grp3)
+xau_sym     = input.string("XAUUSD",  title="XAU Symbol (leave blank = current chart)", group=grp3,
+     tooltip="Leave as XAUUSD or change if chart is a different gold instrument")
+
+grp4 = "Colors"
+col_xau     = input.color(color.new(color.yellow, 0), title="XAUUSD RSI",    group=grp4)
+col_dxy     = input.color(color.new(color.blue,   0), title="DXY RSI",       group=grp4)
+col_both_up = input.color(color.new(color.lime,  75), title="Both Rising BG",  group=grp4)
+col_both_dn = input.color(color.new(color.red,   75), title="Both Falling BG", group=grp4)
+
+// ─────────────────────────────────────────────
+//  DATA
+// ─────────────────────────────────────────────
+xau_close = request.security(xau_sym, timeframe.period, close)
+dxy_close = request.security(dxy_sym, timeframe.period, close)
+
+rsi_xau = ta.rsi(xau_close, rsi_len)
+rsi_dxy = ta.rsi(dxy_close, rsi_len)
+
+// ─────────────────────────────────────────────
+//  DIRECTION LOGIC
+//  Both rising or both falling = correlated move
+//  (normally they should be inverse)
+// ─────────────────────────────────────────────
+xau_delta = rsi_xau - rsi_xau[slope_bars]
+dxy_delta = rsi_dxy - rsi_dxy[slope_bars]
+
+xau_rising  = xau_delta >  min_rsi_move
+xau_falling = xau_delta < -min_rsi_move
+dxy_rising  = dxy_delta >  min_rsi_move
+dxy_falling = dxy_delta < -min_rsi_move
+
+// Anomalous correlation: both moving the same direction
+corr_bull = xau_rising  and dxy_rising   // XAU up + DXY up   → unusual, potential XAU strength
+corr_bear = xau_falling and dxy_falling  // XAU dn + DXY dn   → unusual, potential XAU weakness
+
+// Normal inverse (reference)
+inverse_ok = (xau_rising and dxy_falling) or (xau_falling and dxy_rising)
+
+// ─────────────────────────────────────────────
+//  BACKGROUND
+// ─────────────────────────────────────────────
+bgcolor(corr_bull ? col_both_up : na, title="Correlated Bull Zone")
+bgcolor(corr_bear ? col_both_dn : na, title="Correlated Bear Zone")
+
+// ─────────────────────────────────────────────
+//  PLOTS
+// ─────────────────────────────────────────────
+p_xau = plot(rsi_xau, title="XAUUSD RSI", color=col_xau, linewidth=2)
+p_dxy = plot(rsi_dxy, title="DXY RSI",   color=col_dxy,  linewidth=2)
+
+hline(ob_level,  title="Overbought", color=color.new(color.orange, 30), linestyle=hline.style_dashed)
+hline(os_level,  title="Oversold",   color=color.new(color.teal,   30), linestyle=hline.style_dashed)
+hline(mid_level, title="Midline",    color=color.new(color.white,  70), linestyle=hline.style_dotted)
+hline(0,         color=color.new(color.white, 90))
+
+// Fill between the two RSI lines to show divergence visually
+fill(p_xau, p_dxy,
+     color = rsi_xau > rsi_dxy
+     ? color.new(color.yellow, 88)
+     : color.new(color.blue,   88),
+     title="RSI Spread Fill")
+
+// ─────────────────────────────────────────────
+//  SIGNAL MARKERS
+// ─────────────────────────────────────────────
+// Mark the START of a correlated move (transition bar)
+corr_bull_start = corr_bull and not corr_bull[1]
+corr_bear_start = corr_bear and not corr_bear[1]
+
+plotshape(corr_bull_start, title="Corr. Bull Start",
+     location=location.bottom, style=shape.labelup,
+     color=color.new(color.lime, 0), textcolor=color.black,
+     text="↑↑", size=size.small)
+
+plotshape(corr_bear_start, title="Corr. Bear Start",
+     location=location.top, style=shape.labeldown,
+     color=color.new(color.red, 0), textcolor=color.white,
+     text="↓↓", size=size.small)
+
+// ─────────────────────────────────────────────
+//  INFO LABEL
+// ─────────────────────────────────────────────
+xau_dir = xau_rising ? "↑" : xau_falling ? "↓" : "─"
+dxy_dir = dxy_rising ? "↑" : dxy_falling ? "↓" : "─"
+
+state_str = corr_bull ? "CORR BULL ⚠" : corr_bear ? "CORR BEAR ⚠" : inverse_ok ? "Normal Inverse" : "Flat / Mixed"
+
+lbl_col = corr_bull ? color.lime : corr_bear ? color.red : color.gray
+
+var label info_lbl = na
+label.delete(info_lbl)
+info_lbl := label.new(
+     x         = bar_index,
+     y         = 95,
+     text      = "XAU RSI: " + str.tostring(math.round(rsi_xau, 1)) + " " + xau_dir +
+                 "   DXY RSI: " + str.tostring(math.round(rsi_dxy, 1)) + " " + dxy_dir +
+                 "\n" + state_str,
+     style     = label.style_label_left,
+     color     = color.new(color.black, 60),
+     textcolor = lbl_col,
+     size      = size.normal)
+
+// ─────────────────────────────────────────────
+//  ALERTS
+// ─────────────────────────────────────────────
+alertcondition(corr_bull_start, title="XAU+DXY Both Rising",
+     message="⚠ XAUUSD & DXY RSI both rising on {{ticker}} {{interval}} — anomalous correlation, watch for XAU breakout")
+alertcondition(corr_bear_start, title="XAU+DXY Both Falling",
+     message="⚠ XAUUSD & DXY RSI both falling on {{ticker}} {{interval}} — anomalous correlation, watch for XAU breakdown")
