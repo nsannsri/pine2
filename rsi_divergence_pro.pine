@@ -1,0 +1,274 @@
+//@version=5
+indicator("RSI Divergence Pro [XAUUSD M1]",
+          shorttitle       = "RSI Div Pro",
+          overlay          = false,
+          max_lines_count  = 500,
+          max_labels_count = 500)
+
+// ════════════════════════════════════════════════════════════════
+//  INPUTS
+// ════════════════════════════════════════════════════════════════
+
+var string G1 = "RSI Settings"
+rsiLen  = input.int   (9,    "RSI Period",       group=G1, minval=1, maxval=50)
+rsiSrc  = input.source(close,"Source",            group=G1)
+obLvl   = input.int   (80,   "Overbought Level",  group=G1, minval=60, maxval=100)
+osLvl   = input.int   (20,   "Oversold Level",    group=G1, minval=0,  maxval=40)
+
+var string G2 = "Pivot Detection"
+lLeft   = input.int(5,  "Left Bars",                       group=G2, minval=1, maxval=20)
+lRight  = input.int(3,  "Right Bars (confirmation delay)",  group=G2, minval=1, maxval=20)
+minBars = input.int(5,  "Min Bars Between Pivots",          group=G2, minval=1)
+maxBars = input.int(40, "Max Bars Between Pivots",          group=G2, minval=5, maxval=300)
+
+var string G3 = "Divergence Settings"
+showReg  = input.bool(true, "Show Regular Divergence",          group=G3)
+showHid  = input.bool(true, "Show Hidden Divergence",           group=G3)
+obosFltr = input.bool(true, "OB/OS Zone Filter (Regular Only)", group=G3,
+           tooltip="Regular bearish needs RSI near OB; regular bullish needs RSI near OS. Hidden divergence uses no zone filter.")
+obBuf    = input.int (5,    "OB/OS Tolerance (± RSI points)",   group=G3, minval=0, maxval=20,
+           tooltip="With OB=80 and tolerance=5, regular bearish triggers when RSI ≥ 75 (at current or prior pivot)")
+
+var string G4 = "Filters"
+useEma   = input.bool   (true,        "200 EMA Trend Filter",              group=G4,
+           tooltip="Bullish signals only when price is above EMA. Bearish only below EMA.")
+emaPer   = input.int    (200,         "EMA Period",                         group=G4, minval=10)
+useSess  = input.bool   (true,        "London/NY Session Filter",           group=G4,
+           tooltip="Signals only fire during the defined session window.")
+sessStr  = input.session("1300-1700", "Session Window (GMT+0)",             group=G4,
+           tooltip="London/NY overlap is 13:00–17:00 GMT. Adjust for your broker's timezone.")
+useEntry = input.bool   (true,        "Show Entry Trigger (RSI exits zone)", group=G4,
+           tooltip="After divergence detected, shows arrow when RSI crosses back through OB/OS level — the entry timing signal.")
+
+var string G5 = "Style"
+lwReg    = input.int  (2,       "Regular Div Line Width", group=G5, minval=1, maxval=4)
+lwHid    = input.int  (1,       "Hidden Div Line Width",  group=G5, minval=1, maxval=4)
+cBullReg = input.color(#00E676, "Regular Bullish Color",  group=G5)
+cBearReg = input.color(#FF1744, "Regular Bearish Color",  group=G5)
+cBullHid = input.color(#69F0AE, "Hidden Bullish Color",   group=G5)
+cBearHid = input.color(#FF9100, "Hidden Bearish Color",   group=G5)
+
+// ════════════════════════════════════════════════════════════════
+//  CORE CALCULATIONS
+// ════════════════════════════════════════════════════════════════
+
+rsi    = ta.rsi(rsiSrc, rsiLen)
+ema200 = ta.ema(close, emaPer)
+
+// Session: London/NY overlap, Monday–Friday only
+inSess = useSess ? not na(time(timeframe.period, sessStr + ":23456", "GMT+0")) : true
+
+// EMA trend bias for signal filtering
+bullBias = not useEma or close > ema200
+bearBias = not useEma or close < ema200
+
+// Price pivot detection
+// RSI is sampled at the same bar as each confirmed price pivot
+phP = ta.pivothigh(high, lLeft, lRight)
+plP = ta.pivotlow (low,  lLeft, lRight)
+
+// ════════════════════════════════════════════════════════════════
+//  DIVERGENCE DETECTION ENGINE
+//
+//  Regular Divergence  → reversal signal
+//    Bull: price Lower Low  + RSI Higher Low  (+ RSI near OS zone)
+//    Bear: price Higher High + RSI Lower High (+ RSI near OB zone)
+//
+//  Hidden Divergence   → continuation signal (no zone filter)
+//    Bull: price Higher Low + RSI Lower Low
+//    Bear: price Lower High + RSI Higher High
+// ════════════════════════════════════════════════════════════════
+
+// Persistent storage: last confirmed pivot (price + RSI value + bar index)
+var float prevHP = na
+var float prevHR = na
+var int   prevHB = na
+var float prevLP = na
+var float prevLR = na
+var int   prevLB = na
+
+// Snapshot BEFORE any update this bar (used for line drawing on detection bar)
+float lastHP = prevHP
+float lastHR = prevHR
+int   lastHB = prevHB
+float lastLP = prevLP
+float lastLR = prevLR
+int   lastLB = prevLB
+
+// ── Bearish signals on pivot highs ──────────────────────────────
+bool regBear = false
+bool hidBear = false
+
+if not na(phP)
+    float curH = high[lRight]   // current price pivot high
+    float curR = rsi[lRight]    // RSI at current pivot high bar
+    int   curB = bar_index - lRight
+
+    if not na(lastHB)
+        int dist = curB - lastHB
+        if dist >= minBars and dist <= maxBars
+            // Regular Bearish: price HH, RSI LH
+            if showReg and curH > lastHP and curR < lastHR
+                bool zOk = not obosFltr or curR >= (obLvl - obBuf) or lastHR >= (obLvl - obBuf)
+                if zOk and bearBias and inSess
+                    regBear := true
+            // Hidden Bearish: price LH, RSI HH (no OB/OS zone filter)
+            if showHid and curH < lastHP and curR > lastHR
+                if bearBias and inSess
+                    hidBear := true
+
+    prevHP := curH
+    prevHR := curR
+    prevHB := curB
+
+// ── Bullish signals on pivot lows ───────────────────────────────
+bool regBull = false
+bool hidBull = false
+
+if not na(plP)
+    float curL = low[lRight]    // current price pivot low
+    float curR = rsi[lRight]    // RSI at current pivot low bar
+    int   curB = bar_index - lRight
+
+    if not na(lastLB)
+        int dist = curB - lastLB
+        if dist >= minBars and dist <= maxBars
+            // Regular Bullish: price LL, RSI HL
+            if showReg and curL < lastLP and curR > lastLR
+                bool zOk = not obosFltr or curR <= (osLvl + obBuf) or lastLR <= (osLvl + obBuf)
+                if zOk and bullBias and inSess
+                    regBull := true
+            // Hidden Bullish: price HL, RSI LL (no OB/OS zone filter)
+            if showHid and curL > lastLP and curR < lastLR
+                if bullBias and inSess
+                    hidBull := true
+
+    prevLP := curL
+    prevLR := curR
+    prevLB := curB
+
+// ── Entry Trigger: RSI exits OB/OS zone after divergence ────────
+// After any divergence, wait for RSI to cross back through the OB/OS level.
+// This is the actual entry timing signal (not just the divergence itself).
+var bool awaitBull = false
+var bool awaitBear = false
+
+if regBull or hidBull
+    awaitBull := true
+    awaitBear := false   // cancel opposing pending trigger
+if regBear or hidBear
+    awaitBear := true
+    awaitBull := false   // cancel opposing pending trigger
+
+bool bullTrigger = useEntry and awaitBull and ta.crossover (rsi, osLvl)
+bool bearTrigger = useEntry and awaitBear and ta.crossunder(rsi, obLvl)
+
+if bullTrigger
+    awaitBull := false
+if bearTrigger
+    awaitBear := false
+
+// ════════════════════════════════════════════════════════════════
+//  VISUALS
+// ════════════════════════════════════════════════════════════════
+
+// ── RSI line (color changes by zone) ────────────────────────────
+rsiLineCol = rsi >= obLvl ? color.new(cBearReg, 20) :
+             rsi <= osLvl ? color.new(cBullReg, 20) :
+             color.new(color.gray, 10)
+plot(rsi, "RSI", color=rsiLineCol, linewidth=2)
+
+// ── OB/OS horizontal levels + zone fill ─────────────────────────
+// hline() requires const values — use plot() for dynamic OB/OS inputs
+hline(50, "Midline", color=color.new(color.gray, 60), linestyle=hline.style_dotted)
+
+pTop = plot(100,   color=na, display=display.none, editable=false)
+pOb  = plot(obLvl, "Overbought", color=color.new(color.red,   50), linewidth=1)
+pOs  = plot(osLvl, "Oversold",   color=color.new(color.green, 50), linewidth=1)
+pBot = plot(0,     color=na, display=display.none, editable=false)
+
+fill(pTop, pOb, color=color.new(color.red,   92), title="OB Zone")
+fill(pBot, pOs, color=color.new(color.green, 92), title="OS Zone")
+
+// ── Session background shading ───────────────────────────────────
+bgcolor(inSess ? color.new(color.blue, 95) : na, title="Active Session BG")
+
+// ── EMA bias indicator: colored dot at pane edge ─────────────────
+// Dot sits just above OB (bull) or below OS (bear) to show trend direction at a glance
+float emaPlotVal = useEma ? (close > ema200 ? float(obLvl) + 3 : close < ema200 ? float(osLvl) - 3 : 50.0) : na
+color emaPlotCol = close > ema200 ? color.new(color.green, 0) : color.new(color.red, 0)
+plot(emaPlotVal, "EMA Bias", color=emaPlotCol, linewidth=4, style=plot.style_circles, display=display.pane)
+
+// ── Divergence lines & labels on RSI pane ───────────────────────
+if regBear
+    line.new(lastHB, lastHR, bar_index - lRight, rsi[lRight],
+             color=cBearReg, width=lwReg, style=line.style_solid)
+    label.new(bar_index - lRight, rsi[lRight], "RBear ▼",
+              color=cBearReg, textcolor=color.white,
+              style=label.style_label_down, size=size.small)
+
+if hidBear
+    line.new(lastHB, lastHR, bar_index - lRight, rsi[lRight],
+             color=cBearHid, width=lwHid, style=line.style_dashed)
+    label.new(bar_index - lRight, rsi[lRight], "HBear ▼",
+              color=cBearHid, textcolor=color.white,
+              style=label.style_label_down, size=size.small)
+
+if regBull
+    line.new(lastLB, lastLR, bar_index - lRight, rsi[lRight],
+             color=cBullReg, width=lwReg, style=line.style_solid)
+    label.new(bar_index - lRight, rsi[lRight], "RBull ▲",
+              color=cBullReg, textcolor=color.white,
+              style=label.style_label_up, size=size.small)
+
+if hidBull
+    line.new(lastLB, lastLR, bar_index - lRight, rsi[lRight],
+             color=cBullHid, width=lwHid, style=line.style_dashed)
+    label.new(bar_index - lRight, rsi[lRight], "HBull ▲",
+              color=cBullHid, textcolor=color.white,
+              style=label.style_label_up, size=size.small)
+
+// ── Entry trigger arrows ─────────────────────────────────────────
+plotshape(bullTrigger, "Bull Entry Trigger", shape.triangleup,
+          location.bottom, color.new(color.green, 0), size=size.normal)
+plotshape(bearTrigger, "Bear Entry Trigger", shape.triangledown,
+          location.top, color.new(color.red, 0), size=size.normal)
+
+// ── Info table (top-right corner) ────────────────────────────────
+var table tbl = table.new(position.top_right, 2, 5,
+                           border_color=color.new(color.gray, 40), border_width=1,
+                           bgcolor=color.new(color.black, 75))
+
+if barstate.islast
+    string rsiTxt  = str.tostring(math.round(rsi, 1))
+    color  rsiTCol = rsi >= obLvl ? color.red : rsi <= osLvl ? color.lime : color.silver
+    string emaTxt  = close > ema200 ? "▲ Bull" : close < ema200 ? "▼ Bear" : "─ Flat"
+    color  emaCol  = close > ema200 ? color.lime : close < ema200 ? color.red : color.gray
+    string sesTxt  = inSess ? "● LIVE" : "○ Off"
+    color  sesCol  = inSess ? color.lime : color.gray
+    string trigTxt = awaitBull ? "⟳ Bull" : awaitBear ? "⟳ Bear" : "─"
+    color  trigCol = awaitBull ? color.lime : awaitBear ? color.red : color.gray
+
+    table.cell(tbl, 0, 0, "RSI",     text_color=color.white, bgcolor=color.new(color.navy, 30), text_size=size.small)
+    table.cell(tbl, 1, 0, rsiTxt,    text_color=rsiTCol,     text_size=size.small)
+    table.cell(tbl, 0, 1, "EMA",     text_color=color.white, text_size=size.small)
+    table.cell(tbl, 1, 1, emaTxt,    text_color=emaCol,      text_size=size.small)
+    table.cell(tbl, 0, 2, "Session", text_color=color.white, text_size=size.small)
+    table.cell(tbl, 1, 2, sesTxt,    text_color=sesCol,      text_size=size.small)
+    table.cell(tbl, 0, 3, "Trigger", text_color=color.white, text_size=size.small)
+    table.cell(tbl, 1, 3, trigTxt,   text_color=trigCol,     text_size=size.small)
+    table.cell(tbl, 0, 4, "TF",      text_color=color.white, text_size=size.small)
+    table.cell(tbl, 1, 4, timeframe.period, text_color=color.silver, text_size=size.small)
+
+// ════════════════════════════════════════════════════════════════
+//  ALERTS
+// ════════════════════════════════════════════════════════════════
+
+alertcondition(regBull,            "▲ Regular Bull Divergence", "RSI Div Pro: Regular BULLISH divergence — {{ticker}} {{interval}}")
+alertcondition(regBear,            "▼ Regular Bear Divergence", "RSI Div Pro: Regular BEARISH divergence — {{ticker}} {{interval}}")
+alertcondition(hidBull,            "▲ Hidden Bull Divergence",  "RSI Div Pro: Hidden BULLISH divergence — {{ticker}} {{interval}}")
+alertcondition(hidBear,            "▼ Hidden Bear Divergence",  "RSI Div Pro: Hidden BEARISH divergence — {{ticker}} {{interval}}")
+alertcondition(bullTrigger,        "▲ Bull Entry Trigger",      "RSI Div Pro: BULL ENTRY — RSI exited OS zone after bullish divergence — {{ticker}} {{interval}}")
+alertcondition(bearTrigger,        "▼ Bear Entry Trigger",      "RSI Div Pro: BEAR ENTRY — RSI exited OB zone after bearish divergence — {{ticker}} {{interval}}")
+alertcondition(regBull or hidBull, "▲ Any Bullish Signal",      "RSI Div Pro: BULLISH signal — {{ticker}} {{interval}}")
+alertcondition(regBear or hidBear, "▼ Any Bearish Signal",      "RSI Div Pro: BEARISH signal — {{ticker}} {{interval}}")

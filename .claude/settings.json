@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:metalorix.com)",
+      "WebFetch(domain:www.stockcanny.com)",
+      "WebFetch(domain:www.quantifiedstrategies.com)"
+    ]
+  }
+}

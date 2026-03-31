@@ -7,7 +7,12 @@
       "Bash(git push:*)",
       "Bash(git pull:*)",
       "Bash(git merge:*)",
-      "Bash(git branch:*)"
+      "Bash(git branch:*)",
+      "WebFetch(domain:blog.opofinance.com)",
+      "WebFetch(domain:fxnx.com)",
+      "WebFetch(domain:www.tradingview.com)",
+      "WebFetch(domain:acy.com)",
+      "WebFetch(domain:pineify.app)"
     ]
   }
 }
