@@ -13,21 +13,23 @@ grp_smooth = "DI Smoothing"
 smooth_method = input.string("DEMA", title="Smoothing Method", options=["None", "EMA", "DEMA", "TEMA", "RMA"], group=grp_smooth)
 smooth_len    = input.int(3, title="Smoothing Length", group=grp_smooth, minval=1, maxval=50)
 
+grp_htf = "Higher Time Frame"
+htf_tf = input.timeframe("", title="Timeframe (blank = chart TF)", group=grp_htf)
+
 grp2 = "Levels"
 upper_level = input.int(25, title="Upper Level (Strong Trend)", group=grp2, minval=1, maxval=100)
 lower_level = input.int(20, title="Lower Level (Weak Trend)",   group=grp2, minval=1, maxval=100)
 
 grp3 = "Colors"
-col_adx   = input.color(color.new(color.yellow, 0), title="ADX Line",          group=grp3)
-col_dipl  = input.color(color.new(color.green,  0), title="DI+ Line",          group=grp3)
-col_dimi  = input.color(color.new(color.red,    0), title="DI- Line",          group=grp3)
-col_upper = input.color(color.new(color.orange, 0), title="Upper Level Line",  group=grp3)
-col_lower = input.color(color.new(color.gray,   0), title="Lower Level Line",  group=grp3)
+col_adx   = input.color(color.new(color.yellow, 0), title="ADX Line",         group=grp3)
+col_dipl  = input.color(color.new(color.green,  0), title="DI+ Line",         group=grp3)
+col_dimi  = input.color(color.new(color.red,    0), title="DI- Line",         group=grp3)
+col_upper = input.color(color.new(color.orange, 0), title="Upper Level Line", group=grp3)
+col_lower = input.color(color.new(color.gray,   0), title="Lower Level Line", group=grp3)
 
 // ─────────────────────────────────────────────
-//  CALCULATIONS
+//  SMOOTHING FUNCTION
 // ─────────────────────────────────────────────
-[di_plus_raw, di_minus_raw, adx_val] = ta.dmi(di_len, adx_len)
 
 f_smooth(src, len, method) =>
     if method == "None"
@@ -46,12 +48,23 @@ f_smooth(src, len, method) =>
     else // RMA
         ta.rma(src, len)
 
-di_plus  = f_smooth(di_plus_raw,  smooth_len, smooth_method)
-di_minus = f_smooth(di_minus_raw, smooth_len, smooth_method)
+// ─────────────────────────────────────────────
+//  CALCULATIONS — resolve timeframe
+// ─────────────────────────────────────────────
+
+_tf    = htf_tf == "" ? timeframe.period : htf_tf
+is_htf = _tf != timeframe.period
+
+[dip_raw, dim_raw, adx_raw] = request.security(syminfo.tickerid, _tf, ta.dmi(di_len, adx_len), lookahead=barmerge.lookahead_off)
+
+adx_val  = adx_raw
+di_plus  = f_smooth(dip_raw, smooth_len, smooth_method)
+di_minus = f_smooth(dim_raw, smooth_len, smooth_method)
 
 // ─────────────────────────────────────────────
 //  BACKGROUND ZONES
 // ─────────────────────────────────────────────
+
 strong_bull = adx_val >= upper_level and di_plus > di_minus
 strong_bear = adx_val >= upper_level and di_minus > di_plus
 weak_zone   = adx_val < lower_level
@@ -63,6 +76,7 @@ bgcolor(weak_zone   ? color.new(color.gray,  92) : na, title="Weak / No Trend Zo
 // ─────────────────────────────────────────────
 //  PLOTS
 // ─────────────────────────────────────────────
+
 plot(adx_val,  title="ADX",  color=col_adx,  linewidth=2)
 plot(di_plus,  title="DI+",  color=col_dipl, linewidth=1)
 plot(di_minus, title="DI-",  color=col_dimi, linewidth=1)
@@ -74,6 +88,7 @@ hline(0, color=color.new(color.white, 80), linestyle=hline.style_solid, linewidt
 // ─────────────────────────────────────────────
 //  DI CROSS SIGNALS
 // ─────────────────────────────────────────────
+
 di_bull_cross = ta.crossover(di_plus,  di_minus)
 di_bear_cross = ta.crossunder(di_plus, di_minus)
 
@@ -86,17 +101,20 @@ plotshape(valid_bear, title="DI- Cross (Bear)", location=location.top,    style=
 // ─────────────────────────────────────────────
 //  INFO LABEL
 // ─────────────────────────────────────────────
+
+lbl_tf        = is_htf ? " [" + _tf + "]" : ""
 trend_str     = adx_val >= 75 ? "EXTREME" : adx_val >= 50 ? "VERY STRONG" : adx_val >= upper_level ? "STRONG" : adx_val >= lower_level ? "WEAK" : "NO TREND"
 direction_str = di_plus > di_minus ? "BULL" : "BEAR"
 lbl_color     = adx_val >= upper_level ? (di_plus > di_minus ? color.green : color.red) : color.gray
 
 var label info_lbl = na
 label.delete(info_lbl)
-info_lbl := label.new(x=bar_index, y=95, text="ADX: " + str.tostring(math.round(adx_val, 1)) + "  |  " + trend_str + "  |  " + direction_str + "\nDI+: " + str.tostring(math.round(di_plus, 1)) + "   DI-: " + str.tostring(math.round(di_minus, 1)), style=label.style_label_left, color=color.new(color.black, 60), textcolor=lbl_color, size=size.normal)
+info_lbl := label.new(x=bar_index, y=95, text="ADX: " + str.tostring(math.round(adx_val, 1)) + "  |  " + trend_str + "  |  " + direction_str + lbl_tf + "\nDI+: " + str.tostring(math.round(di_plus, 1)) + "   DI-: " + str.tostring(math.round(di_minus, 1)), style=label.style_label_left, color=color.new(color.black, 60), textcolor=lbl_color, size=size.normal)
 
 // ─────────────────────────────────────────────
 //  ALERTS
 // ─────────────────────────────────────────────
+
 alertcondition(valid_bull,             title="DI+ Bull Cross",    message="San Gold ADX - DI+ crossed above DI- on {{ticker}} {{interval}}")
 alertcondition(valid_bear,             title="DI- Bear Cross",    message="San Gold ADX - DI- crossed above DI+ on {{ticker}} {{interval}}")
 alertcondition(adx_val >= upper_level, title="ADX Strong Trend",  message="San Gold ADX - Strong trend confirmed on {{ticker}} {{interval}}")
