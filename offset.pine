@@ -1,0 +1,25 @@
+//@version=5
+indicator("Offset Bollinger Bands", overlay=true)
+
+// === INPUTS ===
+length = input.int(20, minval=1, title="Length")
+src = input.source(close, title="Source")
+mult = input.float(2.0, minval=0.1, title="Multiplier")
+offsetBars = input.int(10, title="Offset (bars)")
+
+// === CALCULATIONS ===
+basis = ta.sma(src, length)
+dev = mult * ta.stdev(src, length)
+upper = basis + dev
+lower = basis - dev
+
+// === OFFSET ===
+basisOffset = basis[offsetBars]
+upperOffset = upper[offsetBars]
+lowerOffset = lower[offsetBars]
+
+// === PLOTTING ===
+plot(basisOffset, color=color.orange, title="Basis (Offset)")
+plot(upperOffset, color=color.green, title="Upper Band (Offset)")
+plot(lowerOffset, color=color.red, title="Lower Band (Offset)")
+fill(plot1=plot(upperOffset), plot2=plot(lowerOffset), color=color.new(color.blue, 90), title="Band Fill")

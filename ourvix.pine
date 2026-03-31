@@ -1,0 +1,39 @@
+//@version=6
+indicator('OURVIX Indicator', overlay = false)
+
+// --- Inputs ---
+length      = input.int(21,    'Lookback Length',    minval = 1)
+smooth_len  = input.int(5,     'Smoothing Length',   minval = 1)
+use_smooth  = input.bool(true, 'Show Smoothed Line')
+lvl_low     = input.float(10,  'Low Threshold',      minval = 0)
+lvl_mid     = input.float(20,  'Mid Threshold',      minval = 0)
+lvl_high    = input.float(35,  'High Threshold',     minval = 0)
+
+// --- Core Calculation ---
+highest_close = ta.highest(close, length)
+ourvix        = 100 * ((highest_close - low) / highest_close)
+ourvix_smooth = ta.ema(ourvix, smooth_len)
+
+// --- Zone Coloring ---
+zone_color =
+     ourvix >= lvl_high ? color.new(color.red,    70) :
+     ourvix >= lvl_mid  ? color.new(color.orange, 70) :
+     ourvix >= lvl_low  ? color.new(color.yellow, 70) :
+                          color.new(color.green,  70)
+
+// --- Plots ---
+plot(ourvix,        title = 'OURVIX',          color = zone_color,         linewidth = 2)
+plot(use_smooth ? ourvix_smooth : na, title = 'Smoothed', color = color.white, linewidth = 1)
+
+// --- Threshold Lines ---
+hline(lvl_high, 'High Stress',   color = color.red,    linestyle = hline.style_dashed)
+hline(lvl_mid,  'Mid Stress',    color = color.orange, linestyle = hline.style_dashed)
+hline(lvl_low,  'Low Stress',    color = color.yellow, linestyle = hline.style_dotted)
+hline(0,        'Zero',          color = color.gray,   linestyle = hline.style_dotted)
+
+// --- Background highlight on extreme stress ---
+bgcolor(ourvix >= lvl_high ? color.new(color.red, 90) : na, title = 'Extreme Stress Zone')
+
+// --- Alerts ---
+alertcondition(ourvix >= lvl_high, 'OURVIX High Stress',  'OURVIX crossed above High threshold')
+alertcondition(ourvix >= lvl_mid,  'OURVIX Mid Stress',   'OURVIX crossed above Mid threshold')
