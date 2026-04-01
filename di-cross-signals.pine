@@ -1,0 +1,110 @@
+//@version=5
+indicator("San - DI Cross Signals [Overlay]", overlay=true)
+
+// ─────────────────────────────────────────────
+//  INPUTS  (match San ADX+DI settings)
+// ─────────────────────────────────────────────
+
+grp1 = "ADX / DI Settings"
+adx_len = input.int(14, "ADX Period", group=grp1, minval=1, maxval=100)
+di_len  = input.int(14, "DI Length",  group=grp1, minval=1, maxval=100)
+
+grp2 = "DI Smoothing"
+smooth_method = input.string("DEMA", "Smoothing Method", options=["None", "EMA", "DEMA", "TEMA", "RMA"], group=grp2)
+smooth_len    = input.int(3, "Smoothing Length", group=grp2, minval=1, maxval=50)
+
+grp3 = "Filter"
+use_adx_filter = input.bool(true,  "ADX Strength Filter",       group=grp3,
+                  tooltip="Only signal when ADX is above the minimum level (avoids choppy/no-trend signals)")
+adx_min        = input.int(20,    "Min ADX Level",              group=grp3, minval=1, maxval=100)
+
+grp4 = "Higher Time Frame"
+htf_tf = input.timeframe("", "Timeframe (blank = chart TF)", group=grp4)
+
+grp5 = "Style"
+show_label  = input.bool(true, "Show BUY / SELL Labels",   group=grp5)
+show_shape  = input.bool(true, "Show Arrow Shapes",        group=grp5)
+show_line   = input.bool(true, "Show Signal Bar Highlight", group=grp5)
+lbl_size    = input.string(size.normal, "Label Size", options=[size.tiny, size.small, size.normal, size.large], group=grp5)
+col_buy     = input.color(#00E676, "Buy Color",  group=grp5)
+col_sell    = input.color(#FF1744, "Sell Color", group=grp5)
+
+// ─────────────────────────────────────────────
+//  SMOOTHING FUNCTION  (identical to ADX+DI)
+// ─────────────────────────────────────────────
+
+f_smooth(src, len, method) =>
+    if method == "None"
+        src
+    else if method == "EMA"
+        ta.ema(src, len)
+    else if method == "DEMA"
+        e1 = ta.ema(src, len)
+        e2 = ta.ema(e1, len)
+        2 * e1 - e2
+    else if method == "TEMA"
+        e1 = ta.ema(src, len)
+        e2 = ta.ema(e1, len)
+        e3 = ta.ema(e2, len)
+        3 * e1 - 3 * e2 + e3
+    else // RMA
+        ta.rma(src, len)
+
+// ─────────────────────────────────────────────
+//  CALCULATIONS
+// ─────────────────────────────────────────────
+
+_tf = htf_tf == "" ? timeframe.period : htf_tf
+
+[dip_raw, dim_raw, adx_raw] = request.security(syminfo.tickerid, _tf,
+     ta.dmi(di_len, adx_len), lookahead=barmerge.lookahead_off)
+
+adx_val  = adx_raw
+di_plus  = f_smooth(dip_raw, smooth_len, smooth_method)
+di_minus = f_smooth(dim_raw, smooth_len, smooth_method)
+
+// ─────────────────────────────────────────────
+//  SIGNAL LOGIC
+// ─────────────────────────────────────────────
+
+di_bull = ta.crossover (di_plus, di_minus)   // DI+ crosses above DI-  → BUY
+di_bear = ta.crossunder(di_plus, di_minus)   // DI- crosses above DI+  → SELL
+
+adx_ok = not use_adx_filter or adx_val >= adx_min
+
+buy_sig  = di_bull and adx_ok
+sell_sig = di_bear and adx_ok
+
+// ─────────────────────────────────────────────
+//  VISUALS
+// ─────────────────────────────────────────────
+
+// Arrow shapes below/above candle
+plotshape(show_shape and buy_sig,  "Buy Arrow",  shape.triangleup,
+          location.belowbar, col_buy,  size=size.small, title="Buy Signal")
+plotshape(show_shape and sell_sig, "Sell Arrow", shape.triangledown,
+          location.abovebar, col_sell, size=size.small, title="Sell Signal")
+
+// BUY / SELL labels on the bar
+if show_label and buy_sig
+    label.new(bar_index, low,  "BUY",
+              style=label.style_label_up,
+              color=col_buy, textcolor=color.black,
+              size=lbl_size)
+
+if show_label and sell_sig
+    label.new(bar_index, high, "SELL",
+              style=label.style_label_down,
+              color=col_sell, textcolor=color.white,
+              size=lbl_size)
+
+// Optional candle highlight on signal bar
+barcolor(show_line and buy_sig  ? col_buy  : na, title="Buy Bar Color")
+barcolor(show_line and sell_sig ? col_sell : na, title="Sell Bar Color")
+
+// ─────────────────────────────────────────────
+//  ALERTS
+// ─────────────────────────────────────────────
+
+alertcondition(buy_sig,  "DI+ Cross — BUY",  "San DI Cross: BUY signal — DI+ crossed above DI- on {{ticker}} {{interval}}")
+alertcondition(sell_sig, "DI- Cross — SELL", "San DI Cross: SELL signal — DI- crossed above DI+ on {{ticker}} {{interval}}")
