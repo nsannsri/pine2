@@ -72,8 +72,28 @@ di_bear = ta.crossunder(di_plus, di_minus)   // DI- crosses above DI+  → SELL
 
 adx_ok = not use_adx_filter or adx_val >= adx_min
 
-buy_sig  = di_bull and adx_ok
-sell_sig = di_bear and adx_ok
+// Pending-cross flags — conditions 1 & 2 may occur on different candles
+var bool pending_buy  = false
+var bool pending_sell = false
+
+if di_bull
+    pending_buy  := true
+    pending_sell := false   // reset opposite side
+
+if di_bear
+    pending_sell := true
+    pending_buy  := false   // reset opposite side
+
+// BUY  fires when cross already happened and DI+ >= 25
+// SELL fires when cross already happened and DI- >= 25
+buy_sig  = pending_buy  and adx_ok and di_plus  >= 25
+sell_sig = pending_sell and adx_ok and di_minus >= 25
+
+// Clear flag once signal fires so it only triggers once per cross
+if buy_sig
+    pending_buy  := false
+if sell_sig
+    pending_sell := false
 
 // ─────────────────────────────────────────────
 //  VISUALS
