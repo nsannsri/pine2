@@ -359,31 +359,39 @@ schtasks /delete /tn "webhook" /f  # Delete task
 
 ### Manual Renewal Steps
 
-**Step 1: Open port 80 in AWS Security Group**
+**Step 1: Disable Cloudflare Proxy**
+- Go to Cloudflare → DNS
+- Click orange cloud next to `webhook.safeguardi.com` → turn it **gray (DNS only)**
+
+**Step 2: Open port 80 in AWS Security Group**
 - Go to AWS Console → EC2 → Security Groups
 - Add inbound rule: HTTP (port 80) → `0.0.0.0/0`
 
-**Step 2: Run renewal**
+**Step 3: Run renewal**
 ```powershell
 cd C:\wacs
 .\wacs.exe --renew --baseuri "https://acme-v02.api.letsencrypt.org/"
 ```
 
-**Step 3: Re-export PEM files**
+**Step 4: Re-export PEM files**
 ```powershell
 .\wacs.exe --source manual --host webhook.safeguardi.com --store pemfiles --pemfilespath C:\nginx\ssl
 ```
 
-**Step 4: Restart nginx**
+**Step 5: Restart nginx**
 ```powershell
 C:\nssm\nssm-2.24\win64\nssm.exe restart nginx
 ```
 
-**Step 5: Close port 80 in AWS Security Group**
+**Step 6: Close port 80 in AWS Security Group**
 - Go to AWS Console → EC2 → Security Groups
 - Remove the HTTP (port 80) `0.0.0.0/0` inbound rule
 
-**Step 6: Verify HTTPS still works**
+**Step 7: Re-enable Cloudflare Proxy**
+- Go to Cloudflare → DNS
+- Click gray cloud next to `webhook.safeguardi.com` → turn it **orange (Proxied)**
+
+**Step 8: Verify HTTPS still works**
 ```powershell
 curl -I https://webhook.safeguardi.com
 ```
