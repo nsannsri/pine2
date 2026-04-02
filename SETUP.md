@@ -208,14 +208,22 @@ TradingView → Cloudflare WAF (allow only TradingView IPs) → Cloudflare Proxy
 ### Cloudflare WAF Rules
 
 **Rule 1 — Allow TradingView (order: 1)**
-- Name: `Allow TradingView`
-- Condition: `IP Source Address is in` → TradingView IPs below
+- Name: `Allow TradingView only`
+- Expression:
+```
+(ip.src in {52.89.214.238 34.212.75.30 54.218.53.128 52.32.178.7}) and (http.request.uri.query contains "key=solteju123!")
+```
 - Action: **Skip** → All remaining custom rules
 
 **Rule 2 — Block everyone else (order: 2)**
 - Name: `Block all others`
-- Condition: `IP Source Address is not in` → TradingView IPs below
+- Expression:
+```
+(not ip.src in {52.89.214.238 34.212.75.30 54.218.53.128 52.32.178.7}) or (not http.request.uri.query contains "key=solteju123!")
+```
 - Action: **Block**
+
+> Rule order matters — Rule 1 must be above Rule 2.
 
 **TradingView IPs (official):**
 ```
@@ -225,6 +233,18 @@ TradingView → Cloudflare WAF (allow only TradingView IPs) → Cloudflare Proxy
 52.32.178.7
 ```
 > Reference: https://www.tradingview.com/support/solutions/43000529348
+
+### Security Layers
+| Layer | Where | What it checks |
+|---|---|---|
+| 1 | Cloudflare WAF | TradingView IPs only |
+| 2 | Cloudflare WAF | Secret key in URL `?key=solteju123!` |
+| 3 | Flask | Secret token in JSON body |
+
+### TradingView Webhook URL
+```
+https://webhook.safeguardi.com/webhook?key=solteju123!
+```
 
 ---
 
