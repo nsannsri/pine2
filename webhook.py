@@ -36,12 +36,12 @@ def close_existing(symbol):
         print("Closed position:", pos.ticket, "Result:", result.retcode)
 
 
-def open_trade(symbol, action, lots):
+def open_trade(symbol, action, lots, tp=None):
     order_type = mt5.ORDER_TYPE_BUY if action == 'buy' else mt5.ORDER_TYPE_SELL
     tick  = mt5.symbol_info_tick(symbol)
     price = tick.ask if action == 'buy' else tick.bid
 
-    result = mt5.order_send({
+    order = {
         "action"       : mt5.TRADE_ACTION_DEAL,
         "symbol"       : symbol,
         "volume"       : lots,
@@ -52,7 +52,12 @@ def open_trade(symbol, action, lots):
         "comment"      : "TradingView signal",
         "type_time"    : mt5.ORDER_TIME_GTC,
         "type_filling" : mt5.ORDER_FILLING_FOK,
-    })
+    }
+
+    if tp:
+        order["tp"] = price + tp if action == 'buy' else price - tp
+
+    result = mt5.order_send(order)
     print("Opened trade:", result)
     return result
 
@@ -69,6 +74,7 @@ def webhook():
     symbol = data.get('symbol', 'XAUUSD')
     action = data.get('action', 'buy').lower()
     lots   = float(data.get('lots', 0.1))
+    tp     = float(data['tp']) if data.get('tp') else None
 
     if action == 'close':
         close_existing(symbol)
@@ -85,7 +91,7 @@ def webhook():
                 break
 
     # Open new trade
-    result = open_trade(symbol, action, lots)
+    result = open_trade(symbol, action, lots, tp)
 
     if result.retcode == mt5.TRADE_RETCODE_DONE:
         return jsonify({"status": "success", "order": result.order}), 200
