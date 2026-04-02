@@ -27,6 +27,44 @@ Key challenges I faced:
 
 ---
 
+### The Hardest Challenge — TradingView IP Whitelisting Is Not Enough
+
+My first instinct was to whitelist TradingView's 4 official webhook server IPs at the AWS Security Group level. This felt secure — only TradingView's servers can reach mine, right?
+
+**Wrong.** Here's the problem:
+
+TradingView is a platform used by millions of traders. **Any TradingView user** can create an alert and point the webhook URL to any endpoint on the internet — including mine. Since their request originates from TradingView's servers, it passes the IP whitelist check.
+
+So a malicious TradingView user could:
+1. Point their alert to `https://webhook.safeguardi.com/webhook`
+2. Send requests from TradingView's official IPs — passing the IP whitelist ✅
+3. Flood the server with fake traffic — overloading it
+4. If they somehow guess the secret token — execute real trades with real money 💸
+
+**IP whitelisting alone was not sufficient.**
+
+### The Solution — Secret Key at Cloudflare WAF Level
+
+The fix was adding a **secret key as a URL query parameter** (`?key=***`) and validating it at **Cloudflare WAF level** — before the request ever reaches the server.
+
+```
+https://webhook.safeguardi.com/webhook?key=***
+```
+
+Cloudflare WAF rule:
+- Request has correct TradingView IP **AND** correct `?key` → **Allow**
+- Missing key OR wrong IP → **Block at Cloudflare edge**
+
+This means:
+- A random TradingView user doesn't know the secret key
+- Their request gets **dropped at Cloudflare** — never touches the server
+- Zero load on the origin server from fake traffic
+- Only the legitimate TradingView alert (configured with the secret key) gets through
+
+The beauty of this approach — **Cloudflare absorbs all the fake traffic at the edge**, protecting the origin server completely.
+
+---
+
 ### The Architecture
 
 ```
