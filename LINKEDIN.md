@@ -102,7 +102,7 @@ MetaTrader 5 API
 TradingView publishes 4 official webhook server IPs. I whitelisted only these at Cloudflare WAF level — all other IPs are blocked before they even reach my infrastructure.
 
 **Layer 2 — Secret Key in URL Query String**
-Even if someone spoofs a TradingView IP, they still need the secret key in the URL (`?key=***`). This is validated at Cloudflare WAF level — invalid requests are dropped at the edge, never touching the origin server.
+IP whitelisting alone is not enough — any real TradingView user can send webhook requests from TradingView's official IPs to any URL. To block this, a secret key is required in the URL (`?key=***`). Cloudflare WAF validates this key at the edge — requests without the correct key are dropped immediately, never reaching the origin server, regardless of whether they came from TradingView's IPs.
 
 **Layer 3 — Secret Token in JSON Body**
 A final token check inside the Flask app. Since Cloudflare cannot inspect JSON request bodies, this layer is handled at the application level — ensuring only authenticated TradingView alerts execute trades.
