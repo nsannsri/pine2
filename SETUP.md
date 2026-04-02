@@ -237,9 +237,11 @@ TradingView → Cloudflare WAF (allow only TradingView IPs) → Cloudflare Proxy
 ### Security Layers
 | Layer | Where | What it checks |
 |---|---|---|
-| 1 | Cloudflare WAF | TradingView IPs only |
-| 2 | Cloudflare WAF | Secret key in URL `?key=solteju123!` |
-| 3 | Flask | Secret token in JSON body |
+| 1 | AWS Security Group | Only Cloudflare IPs allowed on port 443 |
+| 2 | nginx | Drops direct IP access — only domain requests pass (return 444) |
+| 3 | Cloudflare WAF Rule 1 | Only TradingView IPs + secret key in URL passes |
+| 4 | Cloudflare WAF Rule 2 | Everything else blocked |
+| 5 | Flask | Secret token in JSON body |
 
 ### TradingView Webhook URL
 ```
