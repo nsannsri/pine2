@@ -254,20 +254,44 @@ schtasks /delete /tn "webhook" /f  # Delete task
 
 ## SSL Certificate Renewal
 
-win-acme auto-renews via scheduled task. If manual renewal needed:
+**Certificate validity:** 90 days
+**Current cert issued:** 2026/04/02
+**Renewal due:** 2026/05/27 (set a calendar reminder for 2026/05/20)
 
+> Port 80 must be open temporarily during renewal for Let's Encrypt domain validation.
+> Auto-renewal via scheduled task is disabled — renewal is done manually.
+
+### Manual Renewal Steps
+
+**Step 1: Open port 80 in AWS Security Group**
+- Go to AWS Console → EC2 → Security Groups
+- Add inbound rule: HTTP (port 80) → `0.0.0.0/0`
+
+**Step 2: Run renewal**
 ```powershell
 cd C:\wacs
 .\wacs.exe --renew --baseuri "https://acme-v02.api.letsencrypt.org/"
 ```
 
-After renewal, re-export PEM files and restart nginx:
+**Step 3: Re-export PEM files**
 ```powershell
 .\wacs.exe --source manual --host webhook.safeguardi.com --store pemfiles --pemfilespath C:\nginx\ssl
+```
+
+**Step 4: Restart nginx**
+```powershell
 C:\nssm\nssm-2.24\win64\nssm.exe restart nginx
 ```
 
-> Note: Temporarily open port 80 in AWS Security Group during renewal, then close it again.
+**Step 5: Close port 80 in AWS Security Group**
+- Go to AWS Console → EC2 → Security Groups
+- Remove the HTTP (port 80) `0.0.0.0/0` inbound rule
+
+**Step 6: Verify HTTPS still works**
+```powershell
+curl -I https://webhook.safeguardi.com
+```
+Should return `HTTP/1.1 404 NOT FOUND` with `Server: nginx`
 
 ---
 
