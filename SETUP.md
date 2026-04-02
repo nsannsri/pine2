@@ -253,6 +253,21 @@ TradingView → Cloudflare WAF (allow only TradingView IPs) → Cloudflare Proxy
 
 > Cloudflare official IP reference: https://www.cloudflare.com/ips-v4
 
+### Get Latest Cloudflare IPs
+Always fetch the latest IPs from Cloudflare before updating Security Group rules.
+
+**Via browser:**
+```
+https://www.cloudflare.com/ips-v4
+```
+
+**Via API:**
+```bash
+curl --request GET \
+  --url https://api.cloudflare.com/client/v4/ips \
+  --header 'Content-Type: application/json'
+```
+
 ### Add Cloudflare IPs via AWS CLI
 ```powershell
 aws ec2 authorize-security-group-ingress --group-id sg-0cb697626eb8c84e0 --ip-permissions file://C:\cf_rules.json
