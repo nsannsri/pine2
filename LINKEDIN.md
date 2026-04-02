@@ -111,7 +111,11 @@ A final token check inside the Flask app. Since Cloudflare cannot inspect JSON r
 The EC2 instance only accepts traffic from Cloudflare's official IP ranges. Direct access to the server IP is impossible — all traffic must pass through Cloudflare first.
 
 **Layer 5 — Cloudflare Proxy**
-The real server IP is hidden behind Cloudflare. Even a full DDoS attack hits Cloudflare's global network, not the trading server.
+The webhook URL is public — anyone on the internet can send a request to it. But Cloudflare WAF sits in front and enforces two strict rules:
+- **Rule 1 (Skip):** Only allow requests that come from TradingView's 4 official IPs **AND** have the correct secret key in the URL → passes through
+- **Rule 2 (Block):** Everything else is blocked — wrong IP, missing key, or even a real TradingView user without the secret key
+
+This means the origin server only ever receives traffic that has passed both checks. All other traffic — including DDoS floods, random internet scanners, and fake TradingView signals — is dropped at Cloudflare's edge before touching the server.
 
 ---
 
