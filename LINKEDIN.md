@@ -96,7 +96,7 @@ MetaTrader 5 API
 
 ---
 
-### Security Layers — Defence in Depth
+### Security Layers — Defence in Depth (6 Layers)
 
 **Layer 1 — IP Whitelisting at Cloudflare WAF**
 TradingView publishes 4 official webhook server IPs. I whitelisted only these at Cloudflare WAF level — all other IPs are blocked before they even reach my infrastructure.
@@ -110,7 +110,10 @@ A final token check inside the Flask app. Since Cloudflare cannot inspect JSON r
 **Layer 4 — AWS Security Group**
 The EC2 instance only accepts traffic from Cloudflare's official IP ranges. Direct access to the server IP is impossible — all traffic must pass through Cloudflare first.
 
-**Layer 5 — Cloudflare Proxy**
+**Layer 5 — nginx Direct IP Block**
+Even if someone bypasses Cloudflare and reaches the server directly via IP, nginx rejects the connection immediately with no response (`return 444`). nginx only serves requests where the Host header matches the domain `webhook.safeguardi.com` — direct IP requests are silently dropped at the server level.
+
+**Layer 6 — Cloudflare Proxy + WAF**
 The webhook URL is public — anyone on the internet can send a request to it. But Cloudflare WAF sits in front and enforces two strict rules:
 - **Rule 1 (Skip):** Only allow requests that come from TradingView's 4 official IPs **AND** have the correct secret key in the URL → passes through
 - **Rule 2 (Block):** Everything else is blocked — wrong IP, missing key, or even a real TradingView user without the secret key
