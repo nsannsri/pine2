@@ -188,17 +188,76 @@ schtasks /run /tn "webhook"
 
 ---
 
+## Security Architecture
+
+```
+TradingView → Cloudflare WAF (allow only TradingView IPs) → Cloudflare Proxy → AWS Security Group (allow only Cloudflare IPs) → nginx (443) → Flask (5000) → MT5
+```
+
+---
+
+## Cloudflare Setup
+
+**Dashboard:** https://dash.cloudflare.com/bc285e21dde1921ae41e3e8877632d22/safeguardi.com/security/security-rules
+
+**DNS Record:**
+| Name | Type | Value | Proxy |
+|------|------|-------|-------|
+| webhook | A | 35.159.46.170 | Orange cloud (Proxied) |
+
+### Cloudflare WAF Rules
+
+**Rule 1 — Allow TradingView (order: 1)**
+- Name: `Allow TradingView`
+- Condition: `IP Source Address is in` → TradingView IPs below
+- Action: **Skip** → All remaining custom rules
+
+**Rule 2 — Block everyone else (order: 2)**
+- Name: `Block all others`
+- Condition: `IP Source Address is not in` → TradingView IPs below
+- Action: **Block**
+
+**TradingView IPs (official):**
+```
+52.89.214.238
+34.212.75.30
+54.218.53.128
+52.32.178.7
+```
+> Reference: https://www.tradingview.com/support/solutions/43000529348
+
+---
+
 ## AWS Security Group - Inbound Rules
 
-| Port | Protocol | Source | Purpose |
-|------|----------|--------|---------|
-| 443  | TCP | 52.89.214.238/32 | TradingView |
-| 443  | TCP | 34.212.75.30/32  | TradingView |
-| 443  | TCP | 54.218.53.128/32 | TradingView |
-| 443  | TCP | 52.32.178.7/32   | TradingView |
+**Security Group ID:** `sg-0cb697626eb8c84e0`
+
+| Port | Protocol | Source | Description |
+|------|----------|--------|-------------|
+| 443  | TCP | 173.245.48.0/20 | Cloudflare |
+| 443  | TCP | 103.21.244.0/22 | Cloudflare |
+| 443  | TCP | 103.22.200.0/22 | Cloudflare |
+| 443  | TCP | 103.31.4.0/22   | Cloudflare |
+| 443  | TCP | 141.101.64.0/18 | Cloudflare |
+| 443  | TCP | 108.162.192.0/18 | Cloudflare |
+| 443  | TCP | 190.93.240.0/20 | Cloudflare |
+| 443  | TCP | 188.114.96.0/20 | Cloudflare |
+| 443  | TCP | 197.234.240.0/22 | Cloudflare |
+| 443  | TCP | 198.41.128.0/17 | Cloudflare |
+| 443  | TCP | 162.158.0.0/15  | Cloudflare |
+| 443  | TCP | 104.16.0.0/13   | Cloudflare |
+| 443  | TCP | 104.24.0.0/14   | Cloudflare |
+| 443  | TCP | 172.64.0.0/13   | Cloudflare |
+| 443  | TCP | 131.0.72.0/22   | Cloudflare |
 | 3389 | TCP | Your IP | RDP access |
 
-> TradingView official IP reference: https://www.tradingview.com/support/solutions/43000529348
+> Cloudflare official IP reference: https://www.cloudflare.com/ips-v4
+
+### Add Cloudflare IPs via AWS CLI
+```powershell
+aws ec2 authorize-security-group-ingress --group-id sg-0cb697626eb8c84e0 --ip-permissions file://C:\cf_rules.json
+```
+> `cf_rules.json` is stored in this repo at `cf_rules.json`
 
 ---
 
