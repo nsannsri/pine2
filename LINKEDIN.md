@@ -173,6 +173,31 @@ Cloudflare WAF cannot inspect JSON request bodies — so the URL key handles edg
 
 ---
 
+---
+
+### Q&A — Questions I Asked Myself During Design
+
+**Q: IP whitelisting TradingView looks secure — is that enough?**
+A: No. TradingView is a platform used by millions. Any TradingView user can create an alert pointing to your webhook URL. Their request comes from TradingView's official IPs — passing the IP whitelist. They can flood your server with fake traffic or if they guess your token, execute real trades. IP whitelisting alone is not sufficient.
+
+**Q: What if I just restrict AWS Security Group to Cloudflare IPs — is that enough?**
+A: Almost. It blocks direct IP access at network level. But anyone can still send requests through Cloudflare to your public domain URL. Cloudflare WAF rules are needed to filter at the edge.
+
+**Q: What if someone opens port 443 to all IPs (0.0.0.0/0) on AWS — is the server exposed?**
+A: Not really — because:
+- Direct IP access → nginx immediately closes the connection (`return 444`) ✅
+- Domain access → Cloudflare WAF blocks non-TradingView IPs and missing key ✅
+However, restricting to Cloudflare IPs only is better — attackers can't even establish a TCP connection, zero load on the server.
+
+**Q: Can Cloudflare read our JSON payload and validate the secret token?**
+A: No. Cloudflare WAF cannot inspect JSON request bodies — only IP, headers, URL path and query string. This is why the secret token stays inside the JSON body as an application-level check, invisible to Cloudflare.
+
+**Q: Can TradingView send custom HTTP headers for extra security?**
+A: No. TradingView only allows setting the webhook URL and JSON body — no custom headers. This is why the secret key is passed as a URL query parameter (`?key=***`) which Cloudflare WAF can validate.
+
+**Q: Does the SSL certificate protect against direct IP access?**
+A: No. SSL only encrypts traffic — it has no role in access control. The certificate is issued for the domain, so hitting the IP directly causes a cert mismatch error, but an attacker using `--insecure` can still connect. The real protection is AWS Security Group + nginx `return 444`.
+
 *Interested in algorithmic trading infrastructure or have questions about the architecture? Drop a comment below.*
 
 **#AWS #CloudSecurity #AlgoTrading #Cloudflare #Python #MetaTrader5 #TradingView #DevOps #WebSecurity #FinTech**
