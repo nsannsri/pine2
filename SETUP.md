@@ -16,7 +16,194 @@ TradingView → AWS Security Group (IP whitelist) → nginx (443/HTTPS) → Flas
 
 ---
 
+## Full Installation Guide (Fresh Server)
+
+### Step 1: Install Python
+
+1. Download Python 3.11 from https://www.python.org/downloads/windows/
+2. Run the installer — **check "Add Python to PATH"**
+3. Verify installation:
+```powershell
+python --version
+```
+
+### Step 2: Install Python Packages
+
+```powershell
+pip install flask MetaTrader5
+```
+
+Verify:
+```powershell
+pip list | findstr -i "flask\|MetaTrader"
+```
+
+### Step 3: Copy webhook.py to Server
+
+- Place `webhook.py` at `C:\trading\webhook.py`
+- Create the folder if needed:
+```powershell
+mkdir C:\trading
+```
+
+### Step 4: Install nginx
+
+```powershell
+Invoke-WebRequest -Uri "http://nginx.org/download/nginx-1.26.2.zip" -OutFile "C:\nginx.zip"
+Expand-Archive -Path "C:\nginx.zip" -DestinationPath "C:\"
+Rename-Item "C:\nginx-1.26.2" "C:\nginx"
+```
+
+Create SSL folder:
+```powershell
+mkdir C:\nginx\ssl
+```
+
+### Step 5: Configure nginx
+
+Replace contents of `C:\nginx\conf\nginx.conf` with:
+
+```nginx
+events {}
+
+http {
+    server {
+        listen 80;
+        server_name webhook.safeguardi.com;
+
+        location /.well-known/acme-challenge/ {
+            root C:/nginx/html;
+        }
+
+        location / {
+            return 301 https://$host$request_uri;
+        }
+    }
+
+    server {
+        listen 443 ssl;
+        server_name webhook.safeguardi.com;
+
+        ssl_certificate      C:/nginx/ssl/webhook.safeguardi.com-chain.pem;
+        ssl_certificate_key  C:/nginx/ssl/webhook.safeguardi.com-key.pem;
+
+        location / {
+            proxy_pass http://127.0.0.1:5000;
+        }
+    }
+}
+```
+
+> Replace `webhook.safeguardi.com` with your domain if different.
+
+### Step 6: Install win-acme (Let's Encrypt SSL)
+
+```powershell
+Invoke-WebRequest -Uri "https://github.com/win-acme/win-acme/releases/download/v2.2.9.1701/win-acme.v2.2.9.1701.x64.trimmed.zip" -OutFile "C:\wacs.zip"
+Expand-Archive -Path "C:\wacs.zip" -DestinationPath "C:\wacs"
+```
+
+### Step 7: Get SSL Certificate
+
+> Before running, make sure:
+> - DNS A record for your domain points to your server IP (Cloudflare gray cloud / DNS only)
+> - Port 80 is open to `0.0.0.0/0` in AWS Security Group temporarily
+> - nginx is NOT running (stop it if running)
+> - Windows Firewall allows port 80:
+> ```powershell
+> netsh advfirewall firewall add rule name="HTTP-80" dir=in action=allow protocol=TCP localport=80
+> ```
+
+Run win-acme:
+```powershell
+cd C:\wacs
+.\wacs.exe
+```
+
+Follow these steps in the menu:
+1. Press `N` — Create certificate (default settings)
+2. Press `2` — Manual input
+3. Enter your domain: `webhook.safeguardi.com`
+4. Press `3` — No additional installation steps
+5. Press `y` — Accept terms
+6. Enter your email for notifications
+
+After certificate is issued, export PEM files for nginx:
+```powershell
+.\wacs.exe --source manual --host webhook.safeguardi.com --store pemfiles --pemfilespath C:\nginx\ssl
+```
+
+Verify files exist:
+```powershell
+dir C:\nginx\ssl
+```
+
+You should see:
+- `webhook.safeguardi.com-chain.pem`
+- `webhook.safeguardi.com-key.pem`
+- `webhook.safeguardi.com-crt.pem`
+- `webhook.safeguardi.com-chain-only.pem`
+
+> After getting the cert, close port 80 in AWS Security Group (remove the 0.0.0.0/0 rule).
+
+### Step 8: Configure Windows Firewall for HTTPS
+
+```powershell
+netsh advfirewall firewall add rule name="HTTPS-443" dir=in action=allow protocol=TCP localport=443
+```
+
+### Step 9: Install NSSM (for nginx auto-start)
+
+```powershell
+Invoke-WebRequest -Uri "https://nssm.cc/release/nssm-2.24.zip" -OutFile "C:\nssm.zip"
+Expand-Archive -Path "C:\nssm.zip" -DestinationPath "C:\nssm"
+```
+
+Register nginx as a Windows service:
+```powershell
+C:\nssm\nssm-2.24\win64\nssm.exe install nginx C:\nginx\nginx.exe
+C:\nssm\nssm-2.24\win64\nssm.exe start nginx
+```
+
+Verify:
+```powershell
+C:\nssm\nssm-2.24\win64\nssm.exe status nginx
+# Should show: SERVICE_RUNNING
+```
+
+### Step 10: Setup webhook.py Auto-start (Task Scheduler)
+
+> We use Task Scheduler (not a service) because MT5 requires an interactive user session.
+
+```powershell
+$action = New-ScheduledTaskAction -Execute "C:\Program Files\Python311\python.exe" -Argument "C:\trading\webhook.py"
+$trigger = New-ScheduledTaskTrigger -AtLogOn -User "Administrator"
+Register-ScheduledTask -TaskName "webhook" -Action $action -Trigger $trigger -RunLevel Highest -Force
+```
+
+Test it runs:
+```powershell
+schtasks /run /tn "webhook"
+```
+
+---
+
+## AWS Security Group - Inbound Rules
+
+| Port | Protocol | Source | Purpose |
+|------|----------|--------|---------|
+| 443  | TCP | 52.89.214.238/32 | TradingView |
+| 443  | TCP | 34.212.75.30/32  | TradingView |
+| 443  | TCP | 54.218.53.128/32 | TradingView |
+| 443  | TCP | 52.32.178.7/32   | TradingView |
+| 3389 | TCP | Your IP | RDP access |
+
+> TradingView official IP reference: https://www.tradingview.com/support/solutions/43000529348
+
+---
+
 ## TradingView Payload Format
+
 ```json
 {
   "token": "xau-tv-9x2k7p",
@@ -33,51 +220,8 @@ TradingView → AWS Security Group (IP whitelist) → nginx (443/HTTPS) → Flas
 
 ---
 
-## Security
-
-### AWS Security Group - Inbound Rules
-| Port | Protocol | Source | Purpose |
-|------|----------|--------|---------|
-| 443  | TCP      | 52.89.214.238/32 | TradingView |
-| 443  | TCP      | 34.212.75.30/32  | TradingView |
-| 443  | TCP      | 54.218.53.128/32 | TradingView |
-| 443  | TCP      | 52.32.178.7/32   | TradingView |
-| 3389 | TCP      | Your IP | RDP access |
-
-> TradingView official IP reference: https://www.tradingview.com/support/solutions/43000529348
-
-### Secret Token
-Token is hardcoded in `webhook.py`:
-```python
-SECRET_TOKEN = "xau-tv-9x2k7p"
-```
-
----
-
-## Server Components
-
-### 1. Flask App (webhook.py)
-- **Location:** `C:\trading\webhook.py`
-- **Port:** `5000`
-- **Auto-start:** Windows Task Scheduler (runs at Administrator logon)
-
-### 2. nginx
-- **Location:** `C:\nginx`
-- **Config:** `C:\nginx\conf\nginx.conf`
-- **Port:** `443` (HTTPS) → proxies to Flask on `5000`
-- **Auto-start:** NSSM Windows Service
-
-### 3. SSL Certificate
-- **Provider:** Let's Encrypt (via win-acme)
-- **Location:** `C:\nginx\ssl\`
-  - `webhook.safeguardi.com-chain.pem` (certificate)
-  - `webhook.safeguardi.com-key.pem` (private key)
-- **Expiry:** Every 198 days
-- **Auto-renewal:** win-acme scheduled task runs daily at 09:00
-
----
-
 ## File Locations on Server
+
 | File | Path |
 |------|------|
 | webhook.py | `C:\trading\webhook.py` |
@@ -93,75 +237,51 @@ SECRET_TOKEN = "xau-tv-9x2k7p"
 
 ### nginx (NSSM service)
 ```powershell
-# Start
 C:\nssm\nssm-2.24\win64\nssm.exe start nginx
-
-# Stop
 C:\nssm\nssm-2.24\win64\nssm.exe stop nginx
-
-# Restart
 C:\nssm\nssm-2.24\win64\nssm.exe restart nginx
-
-# Status
 C:\nssm\nssm-2.24\win64\nssm.exe status nginx
 ```
 
 ### webhook.py (Task Scheduler)
 ```powershell
-# Run manually
-schtasks /run /tn "webhook"
-
-# Stop
-schtasks /end /tn "webhook"
-
-# Delete task
-schtasks /delete /tn "webhook" /f
+schtasks /run /tn "webhook"      # Start
+schtasks /end /tn "webhook"      # Stop
+schtasks /delete /tn "webhook" /f  # Delete task
 ```
 
 ---
 
 ## SSL Certificate Renewal
-win-acme auto-renews the certificate. If manual renewal needed:
+
+win-acme auto-renews via scheduled task. If manual renewal needed:
 
 ```powershell
 cd C:\wacs
 .\wacs.exe --renew --baseuri "https://acme-v02.api.letsencrypt.org/"
 ```
 
-After renewal, restart nginx:
+After renewal, re-export PEM files and restart nginx:
 ```powershell
+.\wacs.exe --source manual --host webhook.safeguardi.com --store pemfiles --pemfilespath C:\nginx\ssl
 C:\nssm\nssm-2.24\win64\nssm.exe restart nginx
 ```
 
----
-
-## Windows Firewall Rules
-```powershell
-# Allow HTTPS
-netsh advfirewall firewall add rule name="HTTPS-443" dir=in action=allow protocol=TCP localport=443
-
-# Allow HTTP (only needed temporarily for Let's Encrypt renewal)
-netsh advfirewall firewall add rule name="HTTP-80" dir=in action=allow protocol=TCP localport=80
-```
+> Note: Temporarily open port 80 in AWS Security Group during renewal, then close it again.
 
 ---
 
 ## Testing
+
 ```powershell
 # Sell order with TP
-curl -X POST https://webhook.safeguardi.com/webhook `
-  -H "Content-Type: application/json" `
-  -d '{"token":"xau-tv-9x2k7p","symbol":"XAUUSD","action":"sell","lots":1,"tp":20}'
+curl -X POST https://webhook.safeguardi.com/webhook -H "Content-Type: application/json" -d '{\"token\":\"xau-tv-9x2k7p\",\"symbol\":\"XAUUSD\",\"action\":\"sell\",\"lots\":1,\"tp\":20}'
 
 # Buy order with TP
-curl -X POST https://webhook.safeguardi.com/webhook `
-  -H "Content-Type: application/json" `
-  -d '{"token":"xau-tv-9x2k7p","symbol":"XAUUSD","action":"buy","lots":1,"tp":20}'
+curl -X POST https://webhook.safeguardi.com/webhook -H "Content-Type: application/json" -d '{\"token\":\"xau-tv-9x2k7p\",\"symbol\":\"XAUUSD\",\"action\":\"buy\",\"lots\":1,\"tp\":20}'
 
 # Close position
-curl -X POST https://webhook.safeguardi.com/webhook `
-  -H "Content-Type: application/json" `
-  -d '{"token":"xau-tv-9x2k7p","symbol":"XAUUSD","action":"close"}'
+curl -X POST https://webhook.safeguardi.com/webhook -H "Content-Type: application/json" -d '{\"token\":\"xau-tv-9x2k7p\",\"symbol\":\"XAUUSD\",\"action\":\"close\"}'
 ```
 
 ---
@@ -170,11 +290,8 @@ curl -X POST https://webhook.safeguardi.com/webhook `
 
 ### nginx not starting
 ```powershell
-# Check config syntax
-C:\nginx\nginx.exe -t
-
-# Check if port 443 is listening
-netstat -an | findstr :443
+C:\nginx\nginx.exe -t          # Check config syntax
+netstat -an | findstr :443     # Check if port 443 is listening
 ```
 
 ### webhook returning 502
@@ -183,9 +300,12 @@ netstat -an | findstr :443
 
 ### webhook returning 500
 - MT5 not connected — ensure MT5 is running in the user session
-- Services can't access MT5 GUI — always run webhook.py via Task Scheduler (not as a service)
+- Always run webhook.py via Task Scheduler (not as a Windows service) — MT5 needs interactive session
 
 ### SSL certificate issues
-- Check cert expiry date in `C:\nginx\ssl\`
-- Run manual renewal if needed (see above)
+- Check cert files exist in `C:\nginx\ssl\`
+- Run manual renewal (see above)
 - Temporarily open port 80 in AWS Security Group for Let's Encrypt validation
+
+### Let's Encrypt rate limit error
+- Too many failed attempts on same domain — use a different subdomain and try again after 1 hour
