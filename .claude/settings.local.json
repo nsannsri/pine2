@@ -17,7 +17,9 @@
       "Bash(python3 -c \" import sys, re html = sys.stdin.read\\(\\) text = re.sub\\(r'<[^>]+>', '', html\\) text = re.sub\\(r'\\\\n\\\\s*\\\\n', '\\\\n\\\\n', text\\) text = re.sub\\(r' +', ' ', text\\) print\\(text[:6000]\\) \")",
       "Bash(python3 -c \" import sys, re html = sys.stdin.read\\(\\) text = re.sub\\(r'<[^>]+>', '', html\\) text = re.sub\\(r'\\\\n\\\\s*\\\\n', '\\\\n\\\\n', text\\) text = re.sub\\(r' +', ' ', text\\) print\\(text[:5000]\\) \")",
       "WebFetch(domain:aws.amazon.com)",
-      "Bash(nslookup:*)"
+      "Bash(nslookup:*)",
+      "Bash(git add:*)",
+      "Bash(git commit -m ':*)"
     ]
   }
 }
