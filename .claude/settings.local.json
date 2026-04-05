@@ -19,7 +19,14 @@
       "WebFetch(domain:aws.amazon.com)",
       "Bash(nslookup:*)",
       "Bash(git add:*)",
-      "Bash(git commit -m ':*)"
+      "Bash(git commit -m ':*)",
+      "Bash(git clone:*)",
+      "Read(//c/Users/teju/tradingview-mcp-jackson/**)",
+      "Bash(npm install:*)",
+      "Bash(node ~/tradingview-mcp-jackson/src/server.js --version)",
+      "Bash(node -e \"require\\('/c/Users/teju/tradingview-mcp-jackson/src/server.js'\\)\")",
+      "Bash(where TradingView)",
+      "Read(//c/Users/teju/AppData/Local/**)"
     ]
   }
 }

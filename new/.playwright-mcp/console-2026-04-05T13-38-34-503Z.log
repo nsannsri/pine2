@@ -1,0 +1,2 @@
+[    2290ms] [LOG] JQMIGRATE: Migrate is installed, version 3.4.1 @ https://hedgepulse.com/wp-includes/js/jquery/jquery-migrate.min.js?ver=3.4.1:1
+[    5345ms] [WARNING] Failed to execute 'postMessage' on 'DOMWindow': The target origin provided ('https://www.youtube.com') does not match the recipient window's origin ('https://hedgepulse.com'). @ https://www.youtube.com/s/player/f4c47414/www-widgetapi.vflset/www-widgetapi.js:209

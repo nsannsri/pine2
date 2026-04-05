@@ -1,0 +1,545 @@
+- main [ref=e3]:
+  - generic [ref=e4]:
+    - complementary [ref=e5]:
+      - generic [ref=e6]:
+        - link "MenthorQ Logo" [ref=e7] [cursor=pointer]:
+          - /url: https://menthorq.com
+          - img "MenthorQ Logo" [ref=e8]
+        - text: 
+      - navigation [ref=e9]:
+        - main [ref=e10]:
+          - generic [ref=e12] [cursor=pointer]:
+            - generic [ref=e13]:
+              - generic [ref=e14]: 
+              - generic [ref=e15]: Home
+            - generic [ref=e16]: 
+          - generic [ref=e18] [cursor=pointer]:
+            - generic [ref=e19]:
+              - img "Quin" [ref=e20]
+              - generic [ref=e21]: Quin
+              - generic [ref=e22]: NEW
+            - generic [ref=e23]: 
+          - generic [ref=e25] [cursor=pointer]:
+            - generic [ref=e26]:
+              - generic [ref=e27]: 
+              - generic [ref=e28]: Indices & Stocks
+            - generic [ref=e29]: 
+          - generic [ref=e30]:
+            - generic [ref=e31] [cursor=pointer]:
+              - generic [ref=e32]:
+                - generic [ref=e33]: 
+                - generic [ref=e34]: Futures
+              - generic [ref=e35]: 
+            - generic [ref=e36]:
+              - link "Active Futures" [ref=e37] [cursor=pointer]:
+                - /url: /account/?action=data&type=summary&category=futures
+                - generic [ref=e38]: Active Futures
+              - link "Futures" [ref=e39] [cursor=pointer]:
+                - /url: /account/?action=data&type=dashboard&commands=futures&tickers=futures
+                - generic [ref=e40]: Futures
+          - generic [ref=e42] [cursor=pointer]:
+            - generic [ref=e43]:
+              - generic [ref=e44]: 
+              - generic [ref=e45]: CTAs & Vol Models
+            - generic [ref=e46]: 
+          - generic [ref=e48] [cursor=pointer]:
+            - generic [ref=e49]:
+              - generic [ref=e50]: 
+              - generic [ref=e51]: Forex
+            - generic [ref=e52]: 
+          - generic [ref=e54] [cursor=pointer]:
+            - generic [ref=e55]:
+              - generic [ref=e56]: 
+              - generic [ref=e57]: Crypto
+            - generic [ref=e58]: 
+          - generic [ref=e60] [cursor=pointer]:
+            - generic [ref=e61]:
+              - generic [ref=e62]: 
+              - generic [ref=e63]: Screeners
+            - generic [ref=e64]: 
+          - generic [ref=e66] [cursor=pointer]:
+            - generic [ref=e67]:
+              - generic [ref=e68]: 
+              - generic [ref=e69]: Integrations
+            - generic [ref=e70]: 
+          - generic [ref=e72] [cursor=pointer]:
+            - generic [ref=e73]:
+              - generic [ref=e74]: 
+              - generic [ref=e75]: Academy
+            - generic [ref=e76]: 
+          - generic [ref=e78] [cursor=pointer]:
+            - generic [ref=e79]:
+              - generic [ref=e80]: 
+              - generic [ref=e81]: Financial Wiki
+            - generic [ref=e82]: 
+          - generic [ref=e84] [cursor=pointer]:
+            - generic [ref=e85]:
+              - generic [ref=e86]: 
+              - generic [ref=e87]: Community
+            - generic [ref=e88]: 
+          - generic [ref=e89]:
+            - generic [ref=e90] [cursor=pointer]:
+              - generic [ref=e91]:
+                - generic [ref=e92]: 
+                - generic [ref=e93]: Live
+              - generic [ref=e94]: 
+            - text:  
+          - generic [ref=e96] [cursor=pointer]:
+            - generic [ref=e97]:
+              - generic [ref=e98]: 
+              - generic [ref=e99]: Affiliate
+            - generic [ref=e100]: 
+        - generic [ref=e103] [cursor=pointer]:
+          - img "User Avatar" [ref=e105]
+          - generic [ref=e106]:
+            - generic [ref=e107]: sankara Naraharisetti
+            - generic [ref=e108]: premium
+          - text:     
+    - generic [ref=e111]:
+      - generic [ref=e112]:
+        - generic [ref=e114]: Active Futures
+        - generic [ref=e116]:
+          - textbox [ref=e117]: 2026-04-05
+          - text: 
+        - generic [ref=e118]:
+          - generic [ref=e119]: 
+          - generic [ref=e120]: Ready
+      - main [ref=e121]:
+        - main [ref=e122]:
+          - generic [ref=e123]:
+            - searchbox "Search:" [ref=e126]
+            - table [ref=e127]:
+              - rowgroup [ref=e135]:
+                - 'row "Ticker Ticker: Activate to sort BASE BASE: Activate to sort CATEGORY CATEGORY: Activate to sort OI % OI %: Activate to sort VOLUME % VOLUME %: Activate to sort NET GEX NET GEX: Activate to sort" [ref=e136]':
+                  - 'columnheader "Ticker Ticker: Activate to sort" [ref=e137] [cursor=pointer]':
+                    - generic [ref=e138]:
+                      - generic [ref=e139]: Ticker
+                      - 'button "Ticker: Activate to sort" [ref=e140]'
+                  - 'columnheader "BASE BASE: Activate to sort" [ref=e141] [cursor=pointer]':
+                    - generic [ref=e142]:
+                      - generic [ref=e143]: BASE
+                      - 'button "BASE: Activate to sort" [ref=e144]'
+                  - 'columnheader "CATEGORY CATEGORY: Activate to sort" [ref=e145] [cursor=pointer]':
+                    - generic [ref=e146]:
+                      - generic [ref=e147]: CATEGORY
+                      - 'button "CATEGORY: Activate to sort" [ref=e148]'
+                  - 'columnheader "OI % OI %: Activate to sort" [ref=e149] [cursor=pointer]':
+                    - generic [ref=e150]:
+                      - generic [ref=e151]: OI %
+                      - 'button "OI %: Activate to sort" [ref=e152]'
+                  - 'columnheader "VOLUME % VOLUME %: Activate to sort" [ref=e153] [cursor=pointer]':
+                    - generic [ref=e154]:
+                      - generic [ref=e155]: VOLUME %
+                      - 'button "VOLUME %: Activate to sort" [ref=e156]'
+                  - 'columnheader "NET GEX NET GEX: Activate to sort" [ref=e157] [cursor=pointer]':
+                    - generic [ref=e158]:
+                      - generic [ref=e159]: NET GEX
+                      - 'button "NET GEX: Activate to sort" [ref=e160]'
+              - rowgroup [ref=e161]:
+                - row " 10-Year T-Note Futures (3 contracts)" [ref=e162]:
+                  - cell " 10-Year T-Note Futures (3 contracts)" [ref=e163] [cursor=pointer]:
+                    - generic [ref=e164]: 
+                    - text: 10-Year T-Note Futures (3 contracts)
+                - row "ZNM2026 ZN RATES 98.8 98.95 -6.99B" [ref=e165]:
+                  - cell "ZNM2026" [ref=e166]:
+                    - link "ZNM2026" [ref=e167]:
+                      - /url: /account/?action=data&type=dashboard&commands=futures&tickers=futures&date=2026-04-05&ticker=ZNM2026
+                  - cell "ZN" [ref=e168]:
+                    - generic "ZN" [ref=e169]
+                  - cell "RATES" [ref=e170]:
+                    - generic [ref=e171]: RATES
+                  - cell "98.8" [ref=e172]
+                  - cell "98.95" [ref=e173]
+                  - cell "-6.99B" [ref=e174]
+                - row "ZNU2026 ZN RATES 1.2 1.05 5.77M" [ref=e175]:
+                  - cell "ZNU2026" [ref=e176]:
+                    - link "ZNU2026" [ref=e177]:
+                      - /url: /account/?action=data&type=dashboard&commands=futures&tickers=futures&date=2026-04-05&ticker=ZNU2026
+                  - cell "ZN" [ref=e178]:
+                    - generic "ZN" [ref=e179]
+                  - cell "RATES" [ref=e180]:
+                    - generic [ref=e181]: RATES
+                  - cell "1.2" [ref=e182]
+                  - cell "1.05" [ref=e183]
+                  - cell "5.77M" [ref=e184]
+                - row "ZNZ2026 ZN RATES 0 0 0" [ref=e185]:
+                  - cell "ZNZ2026" [ref=e186]:
+                    - link "ZNZ2026" [ref=e187]:
+                      - /url: /account/?action=data&type=dashboard&commands=futures&tickers=futures&date=2026-04-05&ticker=ZNZ2026
+                  - cell "ZN" [ref=e188]:
+                    - generic "ZN" [ref=e189]
+                  - cell "RATES" [ref=e190]:
+                    - generic [ref=e191]: RATES
+                  - cell "0" [ref=e192]
+                  - cell "0" [ref=e193]
+                  - cell "0" [ref=e194]
+                - row " 2-Year T-Note Futures (3 contracts)" [ref=e195]:
+                  - cell " 2-Year T-Note Futures (3 contracts)" [ref=e196] [cursor=pointer]:
+                    - generic [ref=e197]: 
+                    - text: 2-Year T-Note Futures (3 contracts)
+                - row "ZTM2026 ZT RATES 99.69 100 -11.09B" [ref=e198]:
+                  - cell "ZTM2026" [ref=e199]:
+                    - link "ZTM2026" [ref=e200]:
+                      - /url: /account/?action=data&type=dashboard&commands=futures&tickers=futures&date=2026-04-05&ticker=ZTM2026
+                  - cell "ZT" [ref=e201]:
+                    - generic "ZT" [ref=e202]
+                  - cell "RATES" [ref=e203]:
+                    - generic [ref=e204]: RATES
+                  - cell "99.69" [ref=e205]
+                  - cell "100" [ref=e206]
+                  - cell "-11.09B" [ref=e207]
+                - row "ZTU2026 ZT RATES 0.31 0 -21.44M" [ref=e208]:
+                  - cell "ZTU2026" [ref=e209]:
+                    - link "ZTU2026" [ref=e210]:
+                      - /url: /account/?action=data&type=dashboard&commands=futures&tickers=futures&date=2026-04-05&ticker=ZTU2026
+                  - cell "ZT" [ref=e211]:
+                    - generic "ZT" [ref=e212]
+                  - cell "RATES" [ref=e213]:
+                    - generic [ref=e214]: RATES
+                  - cell "0.31" [ref=e215]
+                  - cell "0" [ref=e216]
+                  - cell "-21.44M" [ref=e217]
+                - row "ZTZ2026 ZT RATES 0 0 0" [ref=e218]:
+                  - cell "ZTZ2026" [ref=e219]:
+                    - link "ZTZ2026" [ref=e220]:
+                      - /url: /account/?action=data&type=dashboard&commands=futures&tickers=futures&date=2026-04-05&ticker=ZTZ2026
+                  - cell "ZT" [ref=e221]:
+                    - generic "ZT" [ref=e222]
+                  - cell "RATES" [ref=e223]:
+                    - generic [ref=e224]: RATES
+                  - cell "0" [ref=e225]
+                  - cell "0" [ref=e226]
+                  - cell "0" [ref=e227]
+                - row " Australian Dollar Futures (3 contracts)" [ref=e228]:
+                  - cell " Australian Dollar Futures (3 contracts)" [ref=e229] [cursor=pointer]:
+                    - generic [ref=e230]: 
+                    - text: Australian Dollar Futures (3 contracts)
+                - row "6AM2026 6A FOREX 68.89 58.08 -4.89B" [ref=e231]:
+                  - cell "6AM2026" [ref=e232]:
+                    - link "6AM2026" [ref=e233]:
+                      - /url: /account/?action=data&type=dashboard&commands=futures&tickers=futures&date=2026-04-05&ticker=6AM2026
+                  - cell "6A" [ref=e234]:
+                    - generic "6A" [ref=e235]
+                  - cell "FOREX" [ref=e236]:
+                    - generic [ref=e237]: FOREX
+                  - cell "68.89" [ref=e238]
+                  - cell "58.08" [ref=e239]
+                  - cell "-4.89B" [ref=e240]
+                - row "6AU2026 6A FOREX 24.39 41.92 -1.13B" [ref=e241]:
+                  - cell "6AU2026" [ref=e242]:
+                    - link "6AU2026" [ref=e243]:
+                      - /url: /account/?action=data&type=dashboard&commands=futures&tickers=futures&date=2026-04-05&ticker=6AU2026
+                  - cell "6A" [ref=e244]:
+                    - generic "6A" [ref=e245]
+                  - cell "FOREX" [ref=e246]:
+                    - generic [ref=e247]: FOREX
+                  - cell "24.39" [ref=e248]
+                  - cell "41.92" [ref=e249]
+                  - cell "-1.13B" [ref=e250]
+                - row "6AZ2026 6A FOREX 4.43 0 -88.68M" [ref=e251]:
+                  - cell "6AZ2026" [ref=e252]:
+                    - link "6AZ2026" [ref=e253]:
+                      - /url: /account/?action=data&type=dashboard&commands=futures&tickers=futures&date=2026-04-05&ticker=6AZ2026
+                  - cell "6A" [ref=e254]:
+                    - generic "6A" [ref=e255]
+                  - cell "FOREX" [ref=e256]:
+                    - generic [ref=e257]: FOREX
+                  - cell "4.43" [ref=e258]
+                  - cell "0" [ref=e259]
+                  - cell "-88.68M" [ref=e260]
+                - row " British Pound Futures (3 contracts)" [ref=e261]:
+                  - cell " British Pound Futures (3 contracts)" [ref=e262] [cursor=pointer]:
+                    - generic [ref=e263]: 
+                    - text: British Pound Futures (3 contracts)
+                - row "6BM2026 6B FOREX 60.23 96.67 -12.3B" [ref=e264]:
+                  - cell "6BM2026" [ref=e265]:
+                    - link "6BM2026" [ref=e266]:
+                      - /url: /account/?action=data&type=dashboard&commands=futures&tickers=futures&date=2026-04-05&ticker=6BM2026
+                  - cell "6B" [ref=e267]:
+                    - generic "6B" [ref=e268]
+                  - cell "FOREX" [ref=e269]:
+                    - generic [ref=e270]: FOREX
+                  - cell "60.23" [ref=e271]
+                  - cell "96.67" [ref=e272]
+                  - cell "-12.3B" [ref=e273]
+                - row "6BU2026 6B FOREX 24.87 2.77 -696.6M" [ref=e274]:
+                  - cell "6BU2026" [ref=e275]:
+                    - link "6BU2026" [ref=e276]:
+                      - /url: /account/?action=data&type=dashboard&commands=futures&tickers=futures&date=2026-04-05&ticker=6BU2026
+                  - cell "6B" [ref=e277]:
+                    - generic "6B" [ref=e278]
+                  - cell "FOREX" [ref=e279]:
+                    - generic [ref=e280]: FOREX
+                  - cell "24.87" [ref=e281]
+                  - cell "2.77" [ref=e282]
+                  - cell "-696.6M" [ref=e283]
+                - row "6BZ2026 6B FOREX 11.71 0.42 732M" [ref=e284]:
+                  - cell "6BZ2026" [ref=e285]:
+                    - link "6BZ2026" [ref=e286]:
+                      - /url: /account/?action=data&type=dashboard&commands=futures&tickers=futures&date=2026-04-05&ticker=6BZ2026
+                  - cell "6B" [ref=e287]:
+                    - generic "6B" [ref=e288]
+                  - cell "FOREX" [ref=e289]:
+                    - generic [ref=e290]: FOREX
+                  - cell "11.71" [ref=e291]
+                  - cell "0.42" [ref=e292]
+                  - cell "732M" [ref=e293]
+                - row " Canadian Dollar Futures (3 contracts)" [ref=e294]:
+                  - cell " Canadian Dollar Futures (3 contracts)" [ref=e295] [cursor=pointer]:
+                    - generic [ref=e296]: 
+                    - text: Canadian Dollar Futures (3 contracts)
+                - row "6CM2026 6C FOREX 49.93 94.56 -9.25B" [ref=e297]:
+                  - cell "6CM2026" [ref=e298]:
+                    - link "6CM2026" [ref=e299]:
+                      - /url: /account/?action=data&type=dashboard&commands=futures&tickers=futures&date=2026-04-05&ticker=6CM2026
+                  - cell "6C" [ref=e300]:
+                    - generic "6C" [ref=e301]
+                  - cell "FOREX" [ref=e302]:
+                    - generic [ref=e303]: FOREX
+                  - cell "49.93" [ref=e304]
+                  - cell "94.56" [ref=e305]
+                  - cell "-9.25B" [ref=e306]
+                - row "6CU2026 6C FOREX 36.21 4.34 9.78B" [ref=e307]:
+                  - cell "6CU2026" [ref=e308]:
+                    - link "6CU2026" [ref=e309]:
+                      - /url: /account/?action=data&type=dashboard&commands=futures&tickers=futures&date=2026-04-05&ticker=6CU2026
+                  - cell "6C" [ref=e310]:
+                    - generic "6C" [ref=e311]
+                  - cell "FOREX" [ref=e312]:
+                    - generic [ref=e313]: FOREX
+                  - cell "36.21" [ref=e314]
+                  - cell "4.34" [ref=e315]
+                  - cell "9.78B" [ref=e316]
+                - row "6CZ2026 6C FOREX 7.94 1.11 1.12B" [ref=e317]:
+                  - cell "6CZ2026" [ref=e318]:
+                    - link "6CZ2026" [ref=e319]:
+                      - /url: /account/?action=data&type=dashboard&commands=futures&tickers=futures&date=2026-04-05&ticker=6CZ2026
+                  - cell "6C" [ref=e320]:
+                    - generic "6C" [ref=e321]
+                  - cell "FOREX" [ref=e322]:
+                    - generic [ref=e323]: FOREX
+                  - cell "7.94" [ref=e324]
+                  - cell "1.11" [ref=e325]
+                  - cell "1.12B" [ref=e326]
+                - row " Euro FX Futures (3 contracts)" [ref=e327]:
+                  - cell " Euro FX Futures (3 contracts)" [ref=e328] [cursor=pointer]:
+                    - generic [ref=e329]: 
+                    - text: Euro FX Futures (3 contracts)
+                - row "6EM2026 6E FOREX 50.66 84.91 -95.04B" [ref=e330]:
+                  - cell "6EM2026" [ref=e331]:
+                    - link "6EM2026" [ref=e332]:
+                      - /url: /account/?action=data&type=dashboard&commands=futures&tickers=futures&date=2026-04-05&ticker=6EM2026
+                  - cell "6E" [ref=e333]:
+                    - generic "6E" [ref=e334]
+                  - cell "FOREX" [ref=e335]:
+                    - generic [ref=e336]: FOREX
+                  - cell "50.66" [ref=e337]
+                  - cell "84.91" [ref=e338]
+                  - cell "-95.04B" [ref=e339]
+                - row "6EU2026 6E FOREX 27.65 12.02 17.46B" [ref=e340]:
+                  - cell "6EU2026" [ref=e341]:
+                    - link "6EU2026" [ref=e342]:
+                      - /url: /account/?action=data&type=dashboard&commands=futures&tickers=futures&date=2026-04-05&ticker=6EU2026
+                  - cell "6E" [ref=e343]:
+                    - generic "6E" [ref=e344]
+                  - cell "FOREX" [ref=e345]:
+                    - generic [ref=e346]: FOREX
+                  - cell "27.65" [ref=e347]
+                  - cell "12.02" [ref=e348]
+                  - cell "17.46B" [ref=e349]
+                - row "6EZ2026 6E FOREX 17.14 3 1.02B" [ref=e350]:
+                  - cell "6EZ2026" [ref=e351]:
+                    - link "6EZ2026" [ref=e352]:
+                      - /url: /account/?action=data&type=dashboard&commands=futures&tickers=futures&date=2026-04-05&ticker=6EZ2026
+                  - cell "6E" [ref=e353]:
+                    - generic "6E" [ref=e354]
+                  - cell "FOREX" [ref=e355]:
+                    - generic [ref=e356]: FOREX
+                  - cell "17.14" [ref=e357]
+                  - cell "3" [ref=e358]
+                  - cell "1.02B" [ref=e359]
+                - row " Five-Year US Treasury Note Futures (3 contracts)" [ref=e360]:
+                  - cell " Five-Year US Treasury Note Futures (3 contracts)" [ref=e361] [cursor=pointer]:
+                    - generic [ref=e362]: 
+                    - text: Five-Year US Treasury Note Futures (3 contracts)
+                - row "ZFM2026 ZF RATES 99.15 99.5 -3.85B" [ref=e363]:
+                  - cell "ZFM2026" [ref=e364]:
+                    - link "ZFM2026" [ref=e365]:
+                      - /url: /account/?action=data&type=dashboard&commands=futures&tickers=futures&date=2026-04-05&ticker=ZFM2026
+                  - cell "ZF" [ref=e366]:
+                    - generic "ZF" [ref=e367]
+                  - cell "RATES" [ref=e368]:
+                    - generic [ref=e369]: RATES
+                  - cell "99.15" [ref=e370]
+                  - cell "99.5" [ref=e371]
+                  - cell "-3.85B" [ref=e372]
+                - row "ZFU2026 ZF RATES 0.85 0.5 -130.66M" [ref=e373]:
+                  - cell "ZFU2026" [ref=e374]:
+                    - link "ZFU2026" [ref=e375]:
+                      - /url: /account/?action=data&type=dashboard&commands=futures&tickers=futures&date=2026-04-05&ticker=ZFU2026
+                  - cell "ZF" [ref=e376]:
+                    - generic "ZF" [ref=e377]
+                  - cell "RATES" [ref=e378]:
+                    - generic [ref=e379]: RATES
+                  - cell "0.85" [ref=e380]
+                  - cell "0.5" [ref=e381]
+                  - cell "-130.66M" [ref=e382]
+                - row "ZFZ2026 ZF RATES 0 0 0" [ref=e383]:
+                  - cell "ZFZ2026" [ref=e384]:
+                    - link "ZFZ2026" [ref=e385]:
+                      - /url: /account/?action=data&type=dashboard&commands=futures&tickers=futures&date=2026-04-05&ticker=ZFZ2026
+                  - cell "ZF" [ref=e386]:
+                    - generic "ZF" [ref=e387]
+                  - cell "RATES" [ref=e388]:
+                    - generic [ref=e389]: RATES
+                  - cell "0" [ref=e390]
+                  - cell "0" [ref=e391]
+                  - cell "0" [ref=e392]
+                - row " Japanese Yen Futures (3 contracts)" [ref=e393]:
+                  - cell " Japanese Yen Futures (3 contracts)" [ref=e394] [cursor=pointer]:
+                    - generic [ref=e395]: 
+                    - text: Japanese Yen Futures (3 contracts)
+                - row "6JM2026 6J FOREX 71.26 98.5 -6.65B" [ref=e396]:
+                  - cell "6JM2026" [ref=e397]:
+                    - link "6JM2026" [ref=e398]:
+                      - /url: /account/?action=data&type=dashboard&commands=futures&tickers=futures&date=2026-04-05&ticker=6JM2026
+                  - cell "6J" [ref=e399]:
+                    - generic "6J" [ref=e400]
+                  - cell "FOREX" [ref=e401]:
+                    - generic [ref=e402]: FOREX
+                  - cell "71.26" [ref=e403]
+                  - cell "98.5" [ref=e404]
+                  - cell "-6.65B" [ref=e405]
+                - row "6JZ2026 6J FOREX 15.14 0.26 -2.06B" [ref=e406]:
+                  - cell "6JZ2026" [ref=e407]:
+                    - link "6JZ2026" [ref=e408]:
+                      - /url: /account/?action=data&type=dashboard&commands=futures&tickers=futures&date=2026-04-05&ticker=6JZ2026
+                  - cell "6J" [ref=e409]:
+                    - generic "6J" [ref=e410]
+                  - cell "FOREX" [ref=e411]:
+                    - generic [ref=e412]: FOREX
+                  - cell "15.14" [ref=e413]
+                  - cell "0.26" [ref=e414]
+                  - cell "-2.06B" [ref=e415]
+                - row "6JU2026 6J FOREX 11.6 0.88 -1.13B" [ref=e416]:
+                  - cell "6JU2026" [ref=e417]:
+                    - link "6JU2026" [ref=e418]:
+                      - /url: /account/?action=data&type=dashboard&commands=futures&tickers=futures&date=2026-04-05&ticker=6JU2026
+                  - cell "6J" [ref=e419]:
+                    - generic "6J" [ref=e420]
+                  - cell "FOREX" [ref=e421]:
+                    - generic [ref=e422]: FOREX
+                  - cell "11.6" [ref=e423]
+                  - cell "0.88" [ref=e424]
+                  - cell "-1.13B" [ref=e425]
+                - row " Micro Bitcoin Futures (3 contracts)" [ref=e426]:
+                  - cell " Micro Bitcoin Futures (3 contracts)" [ref=e427] [cursor=pointer]:
+                    - generic [ref=e428]: 
+                    - text: Micro Bitcoin Futures (3 contracts)
+                - row "MBTJ2026 MBT CRYPTO 52.45 85.93 -3.19K" [ref=e429]:
+                  - cell "MBTJ2026" [ref=e430]:
+                    - link "MBTJ2026" [ref=e431]:
+                      - /url: /account/?action=data&type=dashboard&commands=futures&tickers=futures&date=2026-04-05&ticker=MBTJ2026
+                  - cell "MBT" [ref=e432]:
+                    - generic "MBT" [ref=e433]
+                  - cell "CRYPTO" [ref=e434]:
+                    - generic [ref=e435]: CRYPTO
+                  - cell "52.45" [ref=e436]
+                  - cell "85.93" [ref=e437]
+                  - cell "-3.19K" [ref=e438]
+                - row "MBTM2026 MBT CRYPTO 25.27 5.93 -174.24" [ref=e439]:
+                  - cell "MBTM2026" [ref=e440]:
+                    - link "MBTM2026" [ref=e441]:
+                      - /url: /account/?action=data&type=dashboard&commands=futures&tickers=futures&date=2026-04-05&ticker=MBTM2026
+                  - cell "MBT" [ref=e442]:
+                    - generic "MBT" [ref=e443]
+                  - cell "CRYPTO" [ref=e444]:
+                    - generic [ref=e445]: CRYPTO
+                  - cell "25.27" [ref=e446]
+                  - cell "5.93" [ref=e447]
+                  - cell "-174.24" [ref=e448]
+                - row "MBTK2026 MBT CRYPTO 16.92 8.15 722.2" [ref=e449]:
+                  - cell "MBTK2026" [ref=e450]:
+                    - link "MBTK2026" [ref=e451]:
+                      - /url: /account/?action=data&type=dashboard&commands=futures&tickers=futures&date=2026-04-05&ticker=MBTK2026
+                  - cell "MBT" [ref=e452]:
+                    - generic "MBT" [ref=e453]
+                  - cell "CRYPTO" [ref=e454]:
+                    - generic [ref=e455]: CRYPTO
+                  - cell "16.92" [ref=e456]
+                  - cell "8.15" [ref=e457]
+                  - cell "722.2" [ref=e458]
+                - row " Swiss Franc Futures (3 contracts)" [ref=e459]:
+                  - cell " Swiss Franc Futures (3 contracts)" [ref=e460] [cursor=pointer]:
+                    - generic [ref=e461]: 
+                    - text: Swiss Franc Futures (3 contracts)
+                - row "6SM2026 6S FOREX 57.33 94.59 -2.53B" [ref=e462]:
+                  - cell "6SM2026" [ref=e463]:
+                    - link "6SM2026" [ref=e464]:
+                      - /url: /account/?action=data&type=dashboard&commands=futures&tickers=futures&date=2026-04-05&ticker=6SM2026
+                  - cell "6S" [ref=e465]:
+                    - generic "6S" [ref=e466]
+                  - cell "FOREX" [ref=e467]:
+                    - generic [ref=e468]: FOREX
+                  - cell "57.33" [ref=e469]
+                  - cell "94.59" [ref=e470]
+                  - cell "-2.53B" [ref=e471]
+                - row "6SU2026 6S FOREX 36.42 5.14 3.4B" [ref=e472]:
+                  - cell "6SU2026" [ref=e473]:
+                    - link "6SU2026" [ref=e474]:
+                      - /url: /account/?action=data&type=dashboard&commands=futures&tickers=futures&date=2026-04-05&ticker=6SU2026
+                  - cell "6S" [ref=e475]:
+                    - generic "6S" [ref=e476]
+                  - cell "FOREX" [ref=e477]:
+                    - generic [ref=e478]: FOREX
+                  - cell "36.42" [ref=e479]
+                  - cell "5.14" [ref=e480]
+                  - cell "3.4B" [ref=e481]
+                - row "6SZ2026 6S FOREX 3.61 0.23 -76.61M" [ref=e482]:
+                  - cell "6SZ2026" [ref=e483]:
+                    - link "6SZ2026" [ref=e484]:
+                      - /url: /account/?action=data&type=dashboard&commands=futures&tickers=futures&date=2026-04-05&ticker=6SZ2026
+                  - cell "6S" [ref=e485]:
+                    - generic "6S" [ref=e486]
+                  - cell "FOREX" [ref=e487]:
+                    - generic [ref=e488]: FOREX
+                  - cell "3.61" [ref=e489]
+                  - cell "0.23" [ref=e490]
+                  - cell "-76.61M" [ref=e491]
+                - row " U.S. Treasury Bond Futures (3 contracts)" [ref=e492]:
+                  - cell " U.S. Treasury Bond Futures (3 contracts)" [ref=e493] [cursor=pointer]:
+                    - generic [ref=e494]: 
+                    - text: U.S. Treasury Bond Futures (3 contracts)
+                - row "ZBM2026 ZB RATES 97.6 99.39 -820.4M" [ref=e495]:
+                  - cell "ZBM2026" [ref=e496]:
+                    - link "ZBM2026" [ref=e497]:
+                      - /url: /account/?action=data&type=dashboard&commands=futures&tickers=futures&date=2026-04-05&ticker=ZBM2026
+                  - cell "ZB" [ref=e498]:
+                    - generic "ZB" [ref=e499]
+                  - cell "RATES" [ref=e500]:
+                    - generic [ref=e501]: RATES
+                  - cell "97.6" [ref=e502]
+                  - cell "99.39" [ref=e503]
+                  - cell "-820.4M" [ref=e504]
+                - row "ZBU2026 ZB RATES 2.4 0.61 -25.42M" [ref=e505]:
+                  - cell "ZBU2026" [ref=e506]:
+                    - link "ZBU2026" [ref=e507]:
+                      - /url: /account/?action=data&type=dashboard&commands=futures&tickers=futures&date=2026-04-05&ticker=ZBU2026
+                  - cell "ZB" [ref=e508]:
+                    - generic "ZB" [ref=e509]
+                  - cell "RATES" [ref=e510]:
+                    - generic [ref=e511]: RATES
+                  - cell "2.4" [ref=e512]
+                  - cell "0.61" [ref=e513]
+                  - cell "-25.42M" [ref=e514]
+                - row "ZBZ2026 ZB RATES 0 0 0" [ref=e515]:
+                  - cell "ZBZ2026" [ref=e516]:
+                    - link "ZBZ2026" [ref=e517]:
+                      - /url: /account/?action=data&type=dashboard&commands=futures&tickers=futures&date=2026-04-05&ticker=ZBZ2026
+                  - cell "ZB" [ref=e518]:
+                    - generic "ZB" [ref=e519]
+                  - cell "RATES" [ref=e520]:
+                    - generic [ref=e521]: RATES
+                  - cell "0" [ref=e522]
+                  - cell "0" [ref=e523]
+                  - cell "0" [ref=e524]

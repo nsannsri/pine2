@@ -1,0 +1,547 @@
+- generic [active] [ref=e1]:
+  - link "Skip to main content" [ref=e3] [cursor=pointer]:
+    - /url: "#tm-main"
+  - generic [ref=e4]:
+    - banner [ref=e5]:
+      - navigation [ref=e8]:
+        - link "Back to home" [ref=e10] [cursor=pointer]:
+          - /url: https://menthorq.com/
+          - img "MenthorQ" [ref=e11]
+        - list [ref=e13]:
+          - listitem [ref=e14]:
+            - button "Features" [ref=e15] [cursor=pointer]
+          - listitem [ref=e16]:
+            - button "Academy" [ref=e17] [cursor=pointer]
+          - listitem [ref=e18]:
+            - link "QUIN AI" [ref=e19] [cursor=pointer]:
+              - /url: https://menthorq.com/landing/quin-the-quant-engine/
+          - listitem [ref=e20]:
+            - link "Pricing" [ref=e21] [cursor=pointer]:
+              - /url: https://menthorq.com/pricing/
+        - list [ref=e23]:
+          - listitem [ref=e24]:
+            - link [ref=e25] [cursor=pointer]:
+              - /url: https://menthorq.com/login/
+          - listitem [ref=e26]:
+            - link "Start Free" [ref=e27] [cursor=pointer]:
+              - /url: /landing/start-free/
+    - main [ref=e28]:
+      - generic [ref=e30]:
+        - generic [ref=e33]:
+          - heading "Institutional Quant Data. For Active Traders." [level=1] [ref=e34]:
+            - text: Institutional Quant Data.
+            - generic [ref=e35]: For Active Traders.
+          - generic [ref=e36]: "MenthorQ brings the same quantitative models used by hedge funds and market makers directly into your trading workflow. Options and Futures analytics, Gamma Levels, GEX and Volatility Models: all in one platform."
+          - link "Start Free – No Credit Card" [ref=e38] [cursor=pointer]:
+            - /url: /landing/start-free?utm_source=menthorq&utm_medium=website&utm_content=startfree
+        - generic [ref=e47]:
+          - generic [ref=e49]:
+            - heading "64+" [level=3] [ref=e50]
+            - generic [ref=e51]: Quant Models
+          - generic [ref=e53]:
+            - heading "1k+" [level=3] [ref=e54]
+            - generic [ref=e55]: Assets Covered
+          - generic [ref=e57]:
+            - heading "7k+" [level=3] [ref=e58]
+            - generic [ref=e59]: Active Traders
+          - generic [ref=e61]:
+            - heading "500h+" [level=3] [ref=e62]
+            - generic [ref=e63]: Academy Content
+      - generic [ref=e67]:
+        - generic [ref=e69]: Trusted by top companies
+        - region [ref=e70]:
+          - generic [ref=e72]:
+            - group "1 of 7" [ref=e73]:
+              - img "Home - bloomberh wh" [ref=e75]
+            - group "2 of 7" [ref=e76]:
+              - img "Home - Benzinga WH" [ref=e78]
+            - group "3 of 7" [ref=e79]:
+              - img "Home - TradingView WH" [ref=e81]
+            - group "4 of 7" [ref=e82]:
+              - img "Home - BusinessInsider WH" [ref=e84]
+            - group "5 of 7" [ref=e85]:
+              - img "Home - NinjaTrader WH" [ref=e87]
+            - group "6 of 7" [ref=e88]:
+              - img "Home - MarketWatch WH" [ref=e90]
+            - group [ref=e91]:
+              - img [ref=e93]
+      - generic [ref=e96]:
+        - img "SPY options gamma exposure chart showing strike prices vs GEX with positive/negative bars and key support/resistance levels" [ref=e101]
+        - generic [ref=e103]:
+          - generic [ref=e104]:
+            - text: The only platform with native
+            - text: Futures Options Gamma Levels.
+          - generic [ref=e105]: "We calculate Gamma Levels directly from Futures Options chains: ES, NQ, RTY, CL, GC, and more. Real data. Real positioning."
+          - generic [ref=e107]:
+            - generic [ref=e110]:
+              - img [ref=e113]
+              - generic [ref=e115]:
+                - heading "Direct Futures Options chains" [level=4] [ref=e116]
+                - generic [ref=e117]: Not derived, not mapped from equity options. Calculated natively from futures market data for maximum accuracy.
+            - generic [ref=e120]:
+              - img [ref=e123]
+              - generic [ref=e125]:
+                - heading "True Call Resistance, Put Support & HVL" [level=4] [ref=e126]
+                - generic [ref=e127]: Gamma Flip levels that reflect actual futures market maker positioning — not approximations.
+            - generic [ref=e130]:
+              - img [ref=e133]
+              - generic [ref=e135]:
+                - heading "Full asset spectrum" [level=4] [ref=e136]
+                - generic [ref=e137]: Indices, commodities, metals, rates, and forex futures — all with native gamma analytics.
+      - generic [ref=e139]:
+        - generic [ref=e143]: Complete Analytics Suite
+        - generic [ref=e144]:
+          - generic [ref=e146]:
+            - text: Every angle.
+            - text: One platform.
+          - paragraph [ref=e149]:
+            - text: Every model in MenthorQ is
+            - strong [ref=e150]: quantitative
+            - text: . No opinions, no narrative — pure data, math, and machine learning applied to market structure. The same approach used by institutional desks, now accessible to active traders.
+        - generic [ref=e152]:
+          - generic [ref=e154]:
+            - link "Net Gamma Exposure Gain an edge with Net Gamma Exposure, revealing key strike levels by combining Gamma and Open Interest, helping traders discover reaction zones." [ref=e157] [cursor=pointer]:
+              - /url: https://menthorq.com/quantitative-model/net-gamma-exposure/
+              - heading "Net Gamma Exposure" [level=4] [ref=e158]
+              - paragraph [ref=e160]: Gain an edge with Net Gamma Exposure, revealing key strike levels by combining Gamma and Open Interest, helping traders discover reaction zones.
+            - link "Q-Score The Q-Score is a powerful, data-driven metric that evaluates assets based on momentum, seasonality, volatility, and options activity." [ref=e163] [cursor=pointer]:
+              - /url: https://menthorq.com/quantitative-model/q-score/
+              - heading "Q-Score" [level=4] [ref=e164]
+              - paragraph [ref=e166]: The Q-Score is a powerful, data-driven metric that evaluates assets based on momentum, seasonality, volatility, and options activity.
+            - link "Gamma Levels on Stocks Access gamma levels across a wide range of stocks, ETFs, and indices, providing you with a comprehensive view of the market." [ref=e169] [cursor=pointer]:
+              - /url: https://menthorq.com/quantitative-model/gamma-levels/
+              - heading "Gamma Levels on Stocks" [level=4] [ref=e170]
+              - paragraph [ref=e172]: Access gamma levels across a wide range of stocks, ETFs, and indices, providing you with a comprehensive view of the market.
+            - link "Gamma Levels on Futures Gamma Levels on Futures show market maker exposure on options, vital for understanding price action zones in Index, Commodity, Metals, Rates, Forex." [ref=e175] [cursor=pointer]:
+              - /url: https://menthorq.com/quantitative-model/gamma-levels-on-futures/
+              - heading "Gamma Levels on Futures" [level=4] [ref=e176]
+              - paragraph [ref=e178]: Gamma Levels on Futures show market maker exposure on options, vital for understanding price action zones in Index, Commodity, Metals, Rates, Forex.
+            - link "Blind Spot Levels Indicator Leverage our Blind Spot Levels Indicator to uncover hidden market inflection points by utilizing Key Gamma Levels on correlated assets." [ref=e181] [cursor=pointer]:
+              - /url: https://menthorq.com/quantitative-model/blind-spot-levels/
+              - heading "Blind Spot Levels Indicator" [level=4] [ref=e182]
+              - paragraph [ref=e184]: Leverage our Blind Spot Levels Indicator to uncover hidden market inflection points by utilizing Key Gamma Levels on correlated assets.
+            - link "Volatility Risk Premium (VRP) The Volatility Risk Premium Model compares today’s implied vs. historical volatility to show if the market is cheap, expensive, or fairly priced." [ref=e187] [cursor=pointer]:
+              - /url: https://menthorq.com/quantitative-model/volatility-risk-premium/
+              - heading "Volatility Risk Premium (VRP)" [level=4] [ref=e188]
+              - paragraph [ref=e190]: The Volatility Risk Premium Model compares today’s implied vs. historical volatility to show if the market is cheap, expensive, or fairly priced.
+            - link "Volatility Smile The Volatility Smile shows how Implied Volatility (IV) changes across different strike prices and it reflects the market’s pricing of risk." [ref=e193] [cursor=pointer]:
+              - /url: https://menthorq.com/quantitative-model/volatility-smile/
+              - heading "Volatility Smile" [level=4] [ref=e194]
+              - paragraph [ref=e196]: The Volatility Smile shows how Implied Volatility (IV) changes across different strike prices and it reflects the market’s pricing of risk.
+            - link "Swing Trading Model Our Swing Trading Model uses advanced machine learning to forecast price volatility movements with reliable 5-day and 20-day predictions." [ref=e199] [cursor=pointer]:
+              - /url: https://menthorq.com/quantitative-model/swing-trading-model/
+              - heading "Swing Trading Model" [level=4] [ref=e200]
+              - paragraph [ref=e202]: Our Swing Trading Model uses advanced machine learning to forecast price volatility movements with reliable 5-day and 20-day predictions.
+            - link "Skew The Volatility Skew tracks implied volatility across options with the same expiration but different strikes, revealing market risk perception." [ref=e205] [cursor=pointer]:
+              - /url: https://menthorq.com/quantitative-model/skew-2/
+              - heading "Skew" [level=4] [ref=e206]
+              - paragraph [ref=e208]: The Volatility Skew tracks implied volatility across options with the same expiration but different strikes, revealing market risk perception.
+          - generic [ref=e210]: We’re a quant firm. Built for active traders.
+          - region [ref=e211]:
+            - generic [ref=e214]:
+              - tabpanel "1 of 17" [ref=e215]:
+                - link "Volume and Open Interest The Volume and Open Interest Tracker helps traders identify trends, assess price movements, gauge market participation, and spot opportunities." [ref=e217] [cursor=pointer]:
+                  - /url: https://menthorq.com/quantitative-model/volume-and-open-interest/
+                  - heading "Volume and Open Interest" [level=5] [ref=e218]
+                  - paragraph [ref=e220]: The Volume and Open Interest Tracker helps traders identify trends, assess price movements, gauge market participation, and spot opportunities.
+              - tabpanel "2 of 17" [ref=e221]:
+                - link "Intraday Gamma Models Intraday Models deliver actionable market insights, helping traders navigate shifts in sentiment, liquidity, and key reaction zones." [ref=e223] [cursor=pointer]:
+                  - /url: https://menthorq.com/quantitative-model/intraday-gamma-models/
+                  - heading "Intraday Gamma Models" [level=5] [ref=e224]
+                  - paragraph [ref=e226]: Intraday Models deliver actionable market insights, helping traders navigate shifts in sentiment, liquidity, and key reaction zones.
+              - tabpanel "3 of 17" [ref=e227]:
+                - link "Crypto Quant Models MenthorQ’s Crypto Technical Models combine quantitative indicators and market regime filters to help traders identify momentum shifts." [ref=e229] [cursor=pointer]:
+                  - /url: https://menthorq.com/quantitative-model/crypto-technical-models-3/
+                  - heading "Crypto Quant Models" [level=5] [ref=e230]
+                  - paragraph [ref=e232]: MenthorQ’s Crypto Technical Models combine quantitative indicators and market regime filters to help traders identify momentum shifts.
+              - tabpanel [ref=e233]:
+                - link [ref=e235] [cursor=pointer]:
+                  - /url: https://menthorq.com/quantitative-model/crypto-gamma-models/
+                  - heading [level=5] [ref=e236]: Crypto Gamma Models
+                  - paragraph [ref=e238]: Crypto Gamma Models are designed to give traders visibility into the often-invisible dealer flows and positioning in the crypto options market.
+              - tabpanel [ref=e239]:
+                - link [ref=e241] [cursor=pointer]:
+                  - /url: https://menthorq.com/quantitative-model/key-levels-on-forex/
+                  - heading [level=5] [ref=e242]: Key Levels on Forex
+                  - paragraph [ref=e244]: Trade smarter with Gamma Levels & Blind Spots—uncover high-impact zones in Forex using options data, momentum shifts, and market flow.
+              - tabpanel [ref=e245]:
+                - link [ref=e247] [cursor=pointer]:
+                  - /url: https://menthorq.com/quantitative-model/3d-volatility-surface/
+                  - heading [level=5] [ref=e248]: 3D Volatility Surface
+                  - paragraph [ref=e250]: The Volatility Surface offers a 3D view of how implied volatility (IV) varies across both strike prices and expiration dates.
+              - tabpanel [ref=e251]:
+                - link [ref=e253] [cursor=pointer]:
+                  - /url: https://menthorq.com/quantitative-model/momentum-models/
+                  - heading [level=5] [ref=e254]: Momentum Models
+                  - paragraph [ref=e256]: Momentum Models use technical indicators to assess market trends, offering insights into price, volatility, and volume to predict trend changes.
+              - tabpanel [ref=e257]:
+                - link [ref=e259] [cursor=pointer]:
+                  - /url: https://menthorq.com/quantitative-model/net-delta-exposure/
+                  - heading [level=5] [ref=e260]: Net Delta Exposure
+                  - paragraph [ref=e262]: Unlock Net Delta Exposure to decode market maker strategies. Analyze their net positions for insights and anticipate market movements.
+              - tabpanel [ref=e263]:
+                - link [ref=e265] [cursor=pointer]:
+                  - /url: https://menthorq.com/quantitative-model/1d-move-indicator/
+                  - heading [level=5] [ref=e266]: 1 Day Expected Move Indicator
+                  - paragraph [ref=e268]: The 1D Move Indicator uses implied volatility to forecast next-day price movements, offering a range ideal for intraday trading and risk management.
+              - tabpanel [ref=e269]:
+                - link [ref=e271] [cursor=pointer]:
+                  - /url: https://menthorq.com/quantitative-model/options-screeners/
+                  - heading [level=5] [ref=e272]: Options Screeners
+                  - paragraph [ref=e274]: Screeners identify trending stocks using quantitative factors and momentum, helping traders pinpoint opportunities and market trends.
+              - tabpanel [ref=e275]:
+                - link [ref=e277] [cursor=pointer]:
+                  - /url: https://menthorq.com/quantitative-model/long-short-volatility-models/
+                  - heading [level=5] [ref=e278]: Long Short Volatility Models
+                  - paragraph [ref=e280]: Our Volatility Index gauges market sentiment through volatility, focusing on ETF positioning for precise market insights and strategic trading.
+              - tabpanel [ref=e281]:
+                - link [ref=e283] [cursor=pointer]:
+                  - /url: https://menthorq.com/quantitative-model/volatility-control-models/
+                  - heading [level=5] [ref=e284]: Volatility Control Fund Model
+                  - paragraph [ref=e286]: Systematic funds are gaining prominence. With growing assets and AI integration, they are becoming increasingly influential in the financial market.
+              - tabpanel [ref=e287]:
+                - link [ref=e289] [cursor=pointer]:
+                  - /url: https://menthorq.com/quantitative-model/ctas-models/
+                  - heading [level=5] [ref=e290]: CTAs Models
+                  - paragraph [ref=e292]: CTAs add/remove liquidity based on price triggers. Our models confirm trends and, with gamma levels, enhance decision-making and risk management.
+              - tabpanel [ref=e293]:
+                - link [ref=e295] [cursor=pointer]:
+                  - /url: https://menthorq.com/quantitative-model/term-structure/
+                  - heading [level=5] [ref=e296]: Term Structure
+                  - paragraph [ref=e298]: The Term Structure shows how expected volatility for a stock or index varies at different time horizons.
+              - tabpanel [ref=e299]:
+                - link [ref=e301] [cursor=pointer]:
+                  - /url: https://menthorq.com/quantitative-model/implied-volatility-per-open-interest/
+                  - heading [level=5] [ref=e302]: Implied Volatility per Open Interest
+                  - paragraph [ref=e304]: Combine Implied Volatility and Open Interest to identify ‘sticky strikes,’ enhancing analysis and optimizing your trading strategies.
+              - tabpanel [ref=e305]:
+                - link [ref=e307] [cursor=pointer]:
+                  - /url: https://menthorq.com/quantitative-model/0dte-levels/
+                  - heading [level=5] [ref=e308]: 0DTE Levels
+                  - paragraph [ref=e310]: Gain a competitive edge with Gamma Levels & Open Interest analysis for 0DTE options. Monitor key reaction zones to optimize your trading strategy.
+              - tabpanel [ref=e311]:
+                - link [ref=e313] [cursor=pointer]:
+                  - /url: https://menthorq.com/quantitative-model/option-matrix/
+                  - heading [level=5] [ref=e314]: Option Matrix
+                  - paragraph [ref=e316]: Menthor Q Option Matrix offers traders a detailed summary of 0DTE options, gamma and delta exposure, and key levels for any ticker.
+            - tablist [ref=e318]:
+              - tab "Slide 1" [selected] [ref=e319] [cursor=pointer]
+              - tab "Slide 2" [ref=e320] [cursor=pointer]
+              - tab "Slide 3" [ref=e321] [cursor=pointer]
+              - tab "Slide 4" [ref=e322] [cursor=pointer]
+              - tab "Slide 5" [ref=e323] [cursor=pointer]
+              - tab "Slide 6" [ref=e324] [cursor=pointer]
+              - tab "Slide 7" [ref=e325] [cursor=pointer]
+              - tab "Slide 8" [ref=e326] [cursor=pointer]
+              - tab "Slide 9" [ref=e327] [cursor=pointer]
+              - tab "Slide 10" [ref=e328] [cursor=pointer]
+              - tab "Slide 11" [ref=e329] [cursor=pointer]
+              - tab "Slide 12" [ref=e330] [cursor=pointer]
+              - tab "Slide 13" [ref=e331] [cursor=pointer]
+              - tab "Slide 14" [ref=e332] [cursor=pointer]
+              - tab "Slide 15" [ref=e333] [cursor=pointer]
+              - tab "Slide 16" [ref=e334] [cursor=pointer]
+              - tab "Slide 17" [ref=e335] [cursor=pointer]
+      - generic [ref=e337]:
+        - generic [ref=e338]:
+          - generic [ref=e339]:
+            - generic [ref=e341]: Quin AI
+            - generic [ref=e342]:
+              - text: Your quant analyst.
+              - text: Always on.
+          - paragraph [ref=e346]:
+            - text: QUIN is not a chatbot. It is
+            - strong [ref=e347]: cognitive infrastructure built for traders
+            - text: ", turning raw ideas into actionable trade opportunities. It screens for setups, analyzes historical positioning, and compares market behavior across any MenthorQ metric, in real time."
+        - generic [ref=e351]:
+          - generic [ref=e353]:
+            - heading "Intelligent Screener" [level=3] [ref=e354]:
+              - generic [ref=e355]: Intelligent Screener
+            - generic [ref=e356]: “Screen for stocks near call resistance with high Q-Score and rising OI.”
+            - paragraph [ref=e358]: Filter stocks and ETFs by Q-Score, momentum, IV percentile, options flow sentiment, gamma positioning, and 20+ quant parameters, in natural language.
+          - generic [ref=e360]:
+            - heading "Side-by-Side Comparison" [level=3] [ref=e361]:
+              - generic [ref=e362]: Side-by-Side Comparison
+            - generic [ref=e363]: “Compare SPY vs QQQ gamma exposure heading into Opex.”
+            - paragraph [ref=e365]: Compare any tickers across any MenthorQ metric. Historical regimes, current positioning, volatility behavior, all in one response. No spreadsheets needed.
+          - generic [ref=e367]:
+            - heading "Multi-Factor Queries" [level=3] [ref=e368]:
+              - generic [ref=e369]: Multi-Factor Queries
+            - generic [ref=e370]: “Find S&P 500 names with low IV rank and Options Q-Score above 3.”
+            - generic [ref=e371]: Run research workflows professionals use, without spreadsheets. Filter, rank, cross-reference, and surface trade candidates across multiple quant dimensions in seconds.
+        - generic [ref=e372]:
+          - generic [ref=e374]:
+            - heading "From Thought to Quant Logic" [level=1] [ref=e375]
+            - generic [ref=e376]:
+              - paragraph [ref=e377]:
+                - text: A Quant Engine translates.
+                - text: "It transforms natural language into:"
+              - list [ref=e378]:
+                - listitem [ref=e379]: Structured market conditions
+                - listitem [ref=e380]: Quantitative constraints
+                - listitem [ref=e381]: Ranked opportunity sets
+              - paragraph [ref=e382]:
+                - text: This is not automation.
+                - text: It is cognitive infrastructure for traders.
+          - generic [ref=e385]:
+            - img "Home - explore 29418bd9" [ref=e389]
+            - img "Home - compose 7bb8f278" [ref=e393]
+            - img "Home - analyze 4cb4f5c6" [ref=e397]
+            - img "Home - inspire 171770f2" [ref=e401]
+        - region [ref=e404]:
+          - generic [ref=e405]:
+            - generic [ref=e407]:
+              - tabpanel "1 of 3" [ref=e408]:
+                - generic [ref=e410]:
+                  - img "Home - Show me the top 25 Stocks with IV Rank above 70 Positive GEX and Market Cap over 20B e7db4e78" [ref=e413]
+                  - heading "Show me the top 25 Stocks with IV Rank above 70%, Positive GEX, and Market Cap over $20B" [level=3] [ref=e416]
+              - tabpanel [ref=e417]:
+                - generic [ref=e419]:
+                  - img [ref=e422]
+                  - heading [level=3] [ref=e425]: Find Technology Stocks with high Momentum Score, low Implied Volatility
+              - tabpanel [ref=e426]:
+                - generic [ref=e428]:
+                  - img [ref=e431]
+                  - heading [level=3] [ref=e434]: Show me the biggest Momentum Score increases vs yesterday where IV Rank is still below 50%
+            - button "Previous slide" [ref=e436] [cursor=pointer]:
+              - img [ref=e437]
+            - button "Next slide" [ref=e440] [cursor=pointer]:
+              - img [ref=e441]
+          - tablist [ref=e444]:
+            - tab "Slide 1" [selected] [ref=e445] [cursor=pointer]
+            - tab "Slide 2" [ref=e446] [cursor=pointer]
+            - tab "Slide 3" [ref=e447] [cursor=pointer]
+      - generic [ref=e449]:
+        - generic [ref=e451]:
+          - generic [ref=e453]: Asset Coverage
+          - generic [ref=e454]:
+            - text: Every market.
+            - text: Every asset class.
+        - region [ref=e458]:
+          - generic [ref=e461]:
+            - tabpanel "1 of 8" [ref=e462]:
+              - heading "Futures" [level=3] [ref=e464]
+            - tabpanel "2 of 8" [ref=e465]:
+              - heading "Stocks" [level=3] [ref=e467]
+            - tabpanel "3 of 8" [ref=e468]:
+              - heading "ETFs" [level=3] [ref=e470]
+            - tabpanel "4 of 8" [ref=e471]:
+              - heading "Indices" [level=3] [ref=e473]
+            - tabpanel [ref=e474]:
+              - heading [level=3] [ref=e476]: Crypto
+            - tabpanel [ref=e477]:
+              - heading [level=3] [ref=e479]: Forex
+            - tabpanel [ref=e480]:
+              - heading [level=3] [ref=e482]: Fixed Income
+            - tabpanel [ref=e483]:
+              - heading [level=3] [ref=e485]: Commodities
+          - tablist [ref=e487]:
+            - tab "Slide 1" [selected] [ref=e488] [cursor=pointer]
+            - tab "Slide 2" [ref=e489] [cursor=pointer]
+            - tab "Slide 3" [ref=e490] [cursor=pointer]
+            - tab "Slide 4" [ref=e491] [cursor=pointer]
+            - tab "Slide 5" [ref=e492] [cursor=pointer]
+            - tab "Slide 6" [ref=e493] [cursor=pointer]
+            - tab "Slide 7" [ref=e494] [cursor=pointer]
+            - tab "Slide 8" [ref=e495] [cursor=pointer]
+      - generic [ref=e497]:
+        - generic [ref=e498]:
+          - generic [ref=e499]:
+            - generic [ref=e501]: Integrations
+            - generic [ref=e502]:
+              - text: Works where
+              - text: You trade.
+          - generic [ref=e505]: 10 native integrations. Plug MenthorQ Gamma Levels and indicators directly into your existing setup.
+        - generic [ref=e509]:
+          - link "TradingView TradingView" [ref=e512] [cursor=pointer]:
+            - /url: https://menthorq.com/integration/tradingview-levels-premium/
+            - img "TradingView" [ref=e513]
+            - heading "TradingView" [level=4] [ref=e514]
+          - link "NinjaTrader NinjaTrader" [ref=e517] [cursor=pointer]:
+            - /url: https://menthorq.com/integration/ninjatrader/
+            - img "NinjaTrader" [ref=e518]
+            - heading "NinjaTrader" [level=4] [ref=e519]
+          - link "TrendSpider TrendSpider" [ref=e522] [cursor=pointer]:
+            - /url: https://menthorq.com/integration/trendspider/
+            - img "TrendSpider" [ref=e523]
+            - heading "TrendSpider" [level=4] [ref=e524]
+          - link "ATAS ATAS" [ref=e527] [cursor=pointer]:
+            - /url: https://menthorq.com/integration/atas/
+            - img "ATAS" [ref=e528]
+            - heading "ATAS" [level=4] [ref=e529]
+          - link "Quantower Quantower" [ref=e532] [cursor=pointer]:
+            - /url: https://menthorq.com/integration/quantower/
+            - img "Quantower" [ref=e533]
+            - heading "Quantower" [level=4] [ref=e534]
+          - link "Bookmap Bookmap" [ref=e537] [cursor=pointer]:
+            - /url: https://menthorq.com/integration/bookmap/
+            - img "Bookmap" [ref=e538]
+            - heading "Bookmap" [level=4] [ref=e539]
+          - link "Sierra Chart Sierra Chart" [ref=e542] [cursor=pointer]:
+            - /url: https://menthorq.com/integration/sierrachart/
+            - img "Sierra Chart" [ref=e543]
+            - heading "Sierra Chart" [level=4] [ref=e544]
+          - link "MotiveWave MotiveWave" [ref=e547] [cursor=pointer]:
+            - /url: https://menthorq.com/integration/motivewave/
+            - img "MotiveWave" [ref=e548]
+            - heading "MotiveWave" [level=4] [ref=e549]
+          - link "EdgeClear EdgeClear" [ref=e552] [cursor=pointer]:
+            - /url: https://menthorq.com/integration/edgeclear/
+            - img "EdgeClear" [ref=e553]
+            - heading "EdgeClear" [level=4] [ref=e554]
+          - link "Tickblaze Tickblaze" [ref=e557] [cursor=pointer]:
+            - /url: https://menthorq.com/integration/tickblaze/
+            - img "Tickblaze" [ref=e558]
+            - heading "Tickblaze" [level=4] [ref=e559]
+      - generic [ref=e560]:
+        - generic [ref=e563]:
+          - generic [ref=e565]: Reviews
+          - generic [ref=e566]: Trusted by serious traders.
+        - region [ref=e569]:
+          - generic [ref=e571]:
+            - group "1 of 10" [ref=e572]:
+              - generic [ref=e573]:
+                - img "Home - Trustpilot" [ref=e574]
+                - generic [ref=e575]: I’ve been here for one month and the levels…
+                - generic [ref=e576]: Yeti
+                - paragraph [ref=e578]: I’ve been here 1 month and the levels have proven themselves to be money makers. Earned a long term subscription from me.
+            - group "2 of 10" [ref=e579]:
+              - generic [ref=e580]:
+                - img "Home - Trustpilot" [ref=e581]
+                - generic [ref=e582]: Data + Knowledge
+                - generic [ref=e583]: Theo
+                - paragraph [ref=e585]:
+                  - text: I follow Menthor Q since they appeared on X and bought the Course and the Discord Membership. The guys are working hard to improve the service and have always a open ear for the members.
+                  - text: Data is great but you have to learn how to adopt for your trading, its not a edge by just looking at them, you still have to put effort in this game. the service includes options greeks, volatility data for a large pile of tickers, TradingView indicators for gamma levels, volatility models, CTA models. The Premium section chat is also worth to look, some very experienced lads over there and some great chatter. Pricing is really affordable for all what you get.
+            - group "3 of 10" [ref=e586]:
+              - generic [ref=e587]:
+                - img "Home - Trustpilot" [ref=e588]
+                - generic [ref=e589]: Positioning and Volatility Game Changer!
+                - generic [ref=e590]: Mark
+                - paragraph [ref=e592]: My trading was decent prior to joining Menthor Q; but there were times when the market just didn’t follow the technicals I reference. I would just sit out during those times due to the increased risk, since something was missing from my trading. With the Menthor Q data, it not only potentially foreshadows these events, but provides data to validate positioning and volatility to keep my risk in check during these times. By allowing me to trade when I would normally sit out, the data has already paid for itself several years over. I’m still wrapping my head around all the nuance; but the comradery in the premium chat is helping me get better every day.
+            - group "4 of 10" [ref=e593]:
+              - generic [ref=e594]:
+                - img "Home - Trustpilot" [ref=e595]
+                - generic [ref=e596]: Institutional Level Research
+                - generic [ref=e597]: Danilo
+                - paragraph [ref=e599]: I have subscribed to the Menthor Q research for a few months now. I receive a lot of newsletters and most of them end up in my trash folder. But this one is key for me. I read it everyday. The Daily report from Menthor Q is like having a secret weapon in the markets. It’s a game-changer that provides timely and accurate information. I now have a much clearer understanding of the markets and am not afraid of taking decisions.
+            - group [ref=e600]:
+              - generic [ref=e601]:
+                - img [ref=e602]
+                - generic [ref=e603]: Super useful and easy to understand!
+                - generic [ref=e604]: Erik A.
+                - paragraph [ref=e606]: The course was so useful! I honestly had a very basic understanding of options trading before taking the course and it has really helped me get the right fundamentals to become much more independent and confident. I’ll keep referencing it as I go. Can’t recommend enough!
+            - group [ref=e607]:
+              - generic [ref=e608]:
+                - img [ref=e609]
+                - generic [ref=e610]: Great course
+                - generic [ref=e611]: Don
+                - paragraph [ref=e613]: Great course, data and insights are easy to understand but also very comprehensive and technical, actionable content.
+            - group [ref=e614]:
+              - generic [ref=e615]:
+                - img [ref=e616]
+                - generic [ref=e617]: Great study materials and course
+                - generic [ref=e618]: Enea Tarenzi
+                - paragraph [ref=e620]: I signed up for the course at the beginning of July. Great content and the teacher is able to simplify the theory of options trading. The course also offers a good practical section as well as teaching how to use the Menthor Q Models. Highly recommended.
+            - group [ref=e621]:
+              - generic [ref=e622]:
+                - img [ref=e623]
+                - generic [ref=e624]: Exceptional Course
+                - generic [ref=e625]: Not Defined
+                - paragraph [ref=e627]: The course provided me with a structured approach to options trading, which helped me build a solid foundation. Concepts like options pricing, volatility, and various strategies were broken down in a way that made them easy to understand and implement. One of the most significant benefits of the Menthor Q Course was learning how to manage risk effectively and protect my portfolio. I can now trade with more confidence and feel prepared to handle any market situation. The Daily report is a fantastic addition to their program!
+            - group [ref=e628]:
+              - generic [ref=e629]:
+                - img [ref=e630]
+                - generic [ref=e631]: "Option course: game changer!"
+                - generic [ref=e632]: Marco
+                - paragraph [ref=e634]: I was a beginner option trader before taking this course, and I must say, it has been a game-changer for me. The course content is very detailed, but presented in a way that’s easy to understand, even for beginners like me. I’ve learned various trading strategies, risk management techniques, and how to analyze market trends effectively. The course also provided practical examples that helped solidify my knowledge. Thanks to this course and the daily report, my trading performance has improved significantly, and I now approach the market with more confidence.
+            - group [ref=e635]:
+              - generic [ref=e636]:
+                - img [ref=e637]
+                - generic [ref=e638]: 24/7 Support
+                - generic [ref=e639]: Jason
+                - paragraph [ref=e641]: Exceptional Course Support! Menthor Q’s support team is great. They have been instrumental in answering my questions and providing guidance, ensuring I get the most out of the course. They reply at any hour of the day and weekend. I really appreciate their dedication to the project.
+      - generic [ref=e645]:
+        - heading "Transform your trading Strategy" [level=2] [ref=e646]:
+          - generic [ref=e647]:
+            - text: Transform your
+            - text: trading Strategy
+        - generic [ref=e648]: Let us simplify the market and provide you the tools to make actionable decisions.
+        - generic [ref=e650]:
+          - link "Start Free" [ref=e652] [cursor=pointer]:
+            - /url: /landing/start-free?utm_source=menthorq&utm_medium=website&utm_content=startfree
+          - link "See Pricing" [ref=e654] [cursor=pointer]:
+            - /url: /pricing/
+    - contentinfo [ref=e655]:
+      - generic [ref=e657]:
+        - generic [ref=e658]:
+          - generic [ref=e659]:
+            - img "MenthorQ" [ref=e661]
+            - heading "MenthorQ ©2025" [level=6] [ref=e662]
+            - generic [ref=e663]:
+              - text: 701 Brickell Key BLVD
+              - text: 33131, Miami (FL)
+          - generic [ref=e664]:
+            - heading "Quantitative Models" [level=4] [ref=e665]
+            - list [ref=e666]:
+              - listitem [ref=e667]:
+                - link "Net Gamma Exposure" [ref=e669] [cursor=pointer]:
+                  - /url: https://menthorq.com/quantitative-model/net-gamma-exposure/
+              - listitem [ref=e670]:
+                - link "Q-Score" [ref=e672] [cursor=pointer]:
+                  - /url: https://menthorq.com/quantitative-model/q-score/
+              - listitem [ref=e673]:
+                - link "Gamma Levels on Stocks" [ref=e675] [cursor=pointer]:
+                  - /url: https://menthorq.com/quantitative-model/gamma-levels/
+              - listitem [ref=e676]:
+                - link "Gamma Levels on Futures" [ref=e678] [cursor=pointer]:
+                  - /url: https://menthorq.com/quantitative-model/gamma-levels-on-futures/
+              - listitem [ref=e679]:
+                - link "Blind Spot Levels Indicator" [ref=e681] [cursor=pointer]:
+                  - /url: https://menthorq.com/quantitative-model/blind-spot-levels/
+              - listitem [ref=e682]:
+                - link "All Models →" [ref=e684] [cursor=pointer]:
+                  - /url: /quantitative-models
+          - generic [ref=e685]:
+            - heading "Resources" [level=4] [ref=e686]
+            - list [ref=e687]:
+              - listitem [ref=e688]:
+                - link "Daily Newsletter" [ref=e690] [cursor=pointer]:
+                  - /url: https://menthorq.com/category/daily/
+              - listitem [ref=e691]:
+                - link "Finance Wiki" [ref=e693] [cursor=pointer]:
+                  - /url: https://menthorq.com/guides/
+              - listitem [ref=e694]:
+                - link "MenthorQ Affiliate Program" [ref=e696] [cursor=pointer]:
+                  - /url: https://menthorq.com/landing/affiliate-program/
+          - generic [ref=e697]:
+            - heading "Company" [level=4] [ref=e698]
+            - list [ref=e699]:
+              - listitem [ref=e700]:
+                - link "About Us" [ref=e702] [cursor=pointer]:
+                  - /url: https://menthorq.com/about-us/
+              - listitem [ref=e703]:
+                - link "Privacy Policy" [ref=e705] [cursor=pointer]:
+                  - /url: https://menthorq.com/privacy-policy/
+              - listitem [ref=e706]:
+                - link "Terms of Use" [ref=e708] [cursor=pointer]:
+                  - /url: https://menthorq.com/terms-of-use/
+              - listitem [ref=e709]:
+                - link "Privacy Settings" [ref=e711] [cursor=pointer]:
+                  - /url: "#"
+          - generic [ref=e712]:
+            - heading "Account" [level=4] [ref=e713]
+            - list [ref=e714]:
+              - listitem [ref=e715]:
+                - link "Profile" [ref=e717] [cursor=pointer]:
+                  - /url: /account/?action=profile
+              - listitem [ref=e718]:
+                - link "Support" [ref=e720] [cursor=pointer]:
+                  - /url: https://menthorq.com/support/
+              - listitem [ref=e721]:
+                - link "Start Free" [ref=e723] [cursor=pointer]:
+                  - /url: /membership/free/
+        - paragraph [ref=e727]:
+          - text: Futures and forex trading contains substantial risk and is not for every investor. An investor could potentially lose all or more than the initial investment. Risk capital is money that can be lost without jeopardizing ones’ financial security or life style. Only risk capital should be used for trading and only those with sufficient risk capital should consider trading. Past performance is not necessarily indicative of future results.
+          - link "View Risk Disclosure Page." [ref=e728] [cursor=pointer]:
+            - /url: /risk-disclosure/

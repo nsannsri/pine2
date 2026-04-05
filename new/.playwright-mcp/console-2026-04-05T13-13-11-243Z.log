@@ -1,0 +1,37 @@
+[    1081ms] [INFO] Analytics not ready or no user session:  @ https://app.menthorq.io/_next/static/chunks/938baa658786d4fa.js:2
+[    1089ms] [LOG] Expected analytics providers set: mixpanel, google-analytics @ https://app.menthorq.io/_next/static/chunks/938baa658786d4fa.js:2
+[    1338ms] [LOG] Usercentrics consent updated: {abTestVariant: undefined, source: undefined, type: CMP_ELIGIBLE} @ https://app.menthorq.io/_next/static/chunks/938baa658786d4fa.js:2
+[    1339ms] [LOG] All consents: [] @ https://app.menthorq.io/_next/static/chunks/938baa658786d4fa.js:2
+[    1340ms] [WARNING] Mixpanel consent not found in consent update event. Make sure Mixpanel is added in Usercentrics. @ https://app.menthorq.io/_next/static/chunks/938baa658786d4fa.js:2
+[    1341ms] [WARNING] Google Analytics consent not found in consent update event. Make sure Google Analytics is added in Usercentrics. @ https://app.menthorq.io/_next/static/chunks/938baa658786d4fa.js:2
+[    1392ms] [LOG] Usercentrics consent updated: {abTestVariant: undefined, source: none, type: CMP_SHOWN} @ https://app.menthorq.io/_next/static/chunks/938baa658786d4fa.js:2
+[    1393ms] [LOG] All consents: [] @ https://app.menthorq.io/_next/static/chunks/938baa658786d4fa.js:2
+[    1393ms] [WARNING] Mixpanel consent not found in consent update event. Make sure Mixpanel is added in Usercentrics. @ https://app.menthorq.io/_next/static/chunks/938baa658786d4fa.js:2
+[    1393ms] [WARNING] Google Analytics consent not found in consent update event. Make sure Google Analytics is added in Usercentrics. @ https://app.menthorq.io/_next/static/chunks/938baa658786d4fa.js:2
+[    1531ms] [LOG] Usercentrics UI initialized @ https://app.menthorq.io/_next/static/chunks/938baa658786d4fa.js:2
+[    1608ms] [LOG] Usercentrics services: [Object, Object, Object] @ https://app.menthorq.io/_next/static/chunks/938baa658786d4fa.js:2
+[    1608ms] [LOG] Found Mixpanel service: {categorySlug: functional, consent: Object, description: This is a web analytics service. , fetchSubServices: , id: N5uvpK-j} @ https://app.menthorq.io/_next/static/chunks/938baa658786d4fa.js:2
+[    1609ms] [LOG] Mixpanel consent not granted yet @ https://app.menthorq.io/_next/static/chunks/938baa658786d4fa.js:2
+[    1609ms] [LOG] Found Google Analytics service: {categorySlug: functional, consent: Object, description: This is a web analytics service. With this, the us…ior with flash, video, websites and applications., fetchSubServices: , id: HkocEodjb7} @ https://app.menthorq.io/_next/static/chunks/938baa658786d4fa.js:2
+[    1610ms] [LOG] Google Analytics consent not granted yet @ https://app.menthorq.io/_next/static/chunks/938baa658786d4fa.js:2
+[    3406ms] [LOG] Usercentrics consent updated: {abTestVariant: undefined, source: first, type: ACCEPT_ALL} @ https://app.menthorq.io/_next/static/chunks/938baa658786d4fa.js:2
+[    3407ms] [LOG] All consents: [] @ https://app.menthorq.io/_next/static/chunks/938baa658786d4fa.js:2
+[    3407ms] [WARNING] Mixpanel consent not found in consent update event. Make sure Mixpanel is added in Usercentrics. @ https://app.menthorq.io/_next/static/chunks/938baa658786d4fa.js:2
+[    3408ms] [WARNING] Google Analytics consent not found in consent update event. Make sure Google Analytics is added in Usercentrics. @ https://app.menthorq.io/_next/static/chunks/938baa658786d4fa.js:2
+[    7434ms] [INFO] Analytics not ready or no user session:  @ https://app.menthorq.io/_next/static/chunks/938baa658786d4fa.js:2
+[    7438ms] [LOG] Expected analytics providers set: mixpanel, google-analytics @ https://app.menthorq.io/_next/static/chunks/938baa658786d4fa.js:2
+[    7439ms] [LOG] Usercentrics UI initialized @ https://app.menthorq.io/_next/static/chunks/938baa658786d4fa.js:2
+[    7477ms] [LOG] Usercentrics services: [Object, Object, Object] @ https://app.menthorq.io/_next/static/chunks/938baa658786d4fa.js:2
+[    7477ms] [LOG] Found Mixpanel service: {categorySlug: functional, consent: Object, description: This is a web analytics service. , fetchSubServices: , id: N5uvpK-j} @ https://app.menthorq.io/_next/static/chunks/938baa658786d4fa.js:2
+[    7478ms] [LOG] Mixpanel consent already granted, initializing... @ https://app.menthorq.io/_next/static/chunks/938baa658786d4fa.js:2
+[    7496ms] [LOG] Mixpanel initialized successfully @ https://app.menthorq.io/_next/static/chunks/938baa658786d4fa.js:2
+[    7497ms] [LOG] Analytics provider "mixpanel" registered @ https://app.menthorq.io/_next/static/chunks/938baa658786d4fa.js:2
+[    7498ms] [LOG] Mixpanel provider initialized and registered @ https://app.menthorq.io/_next/static/chunks/938baa658786d4fa.js:2
+[    7498ms] [LOG] Found Google Analytics service: {categorySlug: functional, consent: Object, description: This is a web analytics service. With this, the us…ior with flash, video, websites and applications., fetchSubServices: , id: HkocEodjb7} @ https://app.menthorq.io/_next/static/chunks/938baa658786d4fa.js:2
+[    7498ms] [LOG] Google Analytics consent already granted, initializing... @ https://app.menthorq.io/_next/static/chunks/938baa658786d4fa.js:2
+[    7500ms] [LOG] Analytics provider "google-analytics" registered @ https://app.menthorq.io/_next/static/chunks/938baa658786d4fa.js:2
+[    7500ms] [LOG] Google Analytics provider initialized and registered @ https://app.menthorq.io/_next/static/chunks/938baa658786d4fa.js:2
+[    7505ms] [INFO] Analytics not ready or no user session:  @ https://app.menthorq.io/_next/static/chunks/938baa658786d4fa.js:2
+[    7631ms] [LOG] Google Analytics initialized successfully @ https://app.menthorq.io/_next/static/chunks/938baa658786d4fa.js:2
+[    7771ms] [INFO] Identifying user for Analytics @ https://app.menthorq.io/_next/static/chunks/938baa658786d4fa.js:2
+[    8100ms] [INFO] User already identified for Analytics @ https://app.menthorq.io/_next/static/chunks/938baa658786d4fa.js:2

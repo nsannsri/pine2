@@ -1,0 +1,515 @@
+- main [ref=e3]:
+  - generic [ref=e4]:
+    - complementary [ref=e5]:
+      - generic [ref=e6]:
+        - link "MenthorQ Logo" [ref=e7] [cursor=pointer]:
+          - /url: https://menthorq.com
+          - img "MenthorQ Logo" [ref=e8]
+        - text: 
+      - navigation [ref=e9]:
+        - main [ref=e10]:
+          - generic [ref=e12] [cursor=pointer]:
+            - generic [ref=e13]:
+              - generic [ref=e14]: 
+              - generic [ref=e15]: Home
+            - generic [ref=e16]: 
+          - generic [ref=e18] [cursor=pointer]:
+            - generic [ref=e19]:
+              - img "Quin" [ref=e20]
+              - generic [ref=e21]: Quin
+              - generic [ref=e22]: NEW
+            - generic [ref=e23]: 
+          - generic [ref=e25] [cursor=pointer]:
+            - generic [ref=e26]:
+              - generic [ref=e27]: 
+              - generic [ref=e28]: Indices & Stocks
+            - generic [ref=e29]: 
+          - generic [ref=e30]:
+            - generic [ref=e31] [cursor=pointer]:
+              - generic [ref=e32]:
+                - generic [ref=e33]: 
+                - generic [ref=e34]: Futures
+              - generic [ref=e35]: 
+            - generic [ref=e36]:
+              - link "Active Futures" [ref=e37] [cursor=pointer]:
+                - /url: /account/?action=data&type=summary&category=futures
+                - generic [ref=e38]: Active Futures
+              - link "Futures" [ref=e39] [cursor=pointer]:
+                - /url: /account/?action=data&type=dashboard&commands=futures&tickers=futures
+                - generic [ref=e40]: Futures
+          - generic [ref=e42] [cursor=pointer]:
+            - generic [ref=e43]:
+              - generic [ref=e44]: 
+              - generic [ref=e45]: CTAs & Vol Models
+            - generic [ref=e46]: 
+          - generic [ref=e48] [cursor=pointer]:
+            - generic [ref=e49]:
+              - generic [ref=e50]: 
+              - generic [ref=e51]: Forex
+            - generic [ref=e52]: 
+          - generic [ref=e54] [cursor=pointer]:
+            - generic [ref=e55]:
+              - generic [ref=e56]: 
+              - generic [ref=e57]: Crypto
+            - generic [ref=e58]: 
+          - generic [ref=e60] [cursor=pointer]:
+            - generic [ref=e61]:
+              - generic [ref=e62]: 
+              - generic [ref=e63]: Screeners
+            - generic [ref=e64]: 
+          - generic [ref=e66] [cursor=pointer]:
+            - generic [ref=e67]:
+              - generic [ref=e68]: 
+              - generic [ref=e69]: Integrations
+            - generic [ref=e70]: 
+          - generic [ref=e72] [cursor=pointer]:
+            - generic [ref=e73]:
+              - generic [ref=e74]: 
+              - generic [ref=e75]: Academy
+            - generic [ref=e76]: 
+          - generic [ref=e78] [cursor=pointer]:
+            - generic [ref=e79]:
+              - generic [ref=e80]: 
+              - generic [ref=e81]: Financial Wiki
+            - generic [ref=e82]: 
+          - generic [ref=e84] [cursor=pointer]:
+            - generic [ref=e85]:
+              - generic [ref=e86]: 
+              - generic [ref=e87]: Community
+            - generic [ref=e88]: 
+          - generic [ref=e89]:
+            - generic [ref=e90] [cursor=pointer]:
+              - generic [ref=e91]:
+                - generic [ref=e92]: 
+                - generic [ref=e93]: Live
+              - generic [ref=e94]: 
+            - text:  
+          - generic [ref=e96] [cursor=pointer]:
+            - generic [ref=e97]:
+              - generic [ref=e98]: 
+              - generic [ref=e99]: Affiliate
+            - generic [ref=e100]: 
+        - generic [ref=e103] [cursor=pointer]:
+          - img "User Avatar" [ref=e105]
+          - generic [ref=e106]:
+            - generic [ref=e107]: sankara Naraharisetti
+            - generic [ref=e108]: premium
+          - text:     
+    - generic [ref=e111]:
+      - generic [ref=e113]:
+        - generic [ref=e114]:
+          - textbox "Search..." [active] [ref=e115]: es1!
+          - generic [ref=e299]:
+            - generic [ref=e300]: FUTURE
+            - generic [ref=e301] [cursor=pointer]:
+              - term [ref=e302]: es1!
+              - definition [ref=e303]: E-Mini S&P 500
+            - generic [ref=e304] [cursor=pointer]:
+              - term [ref=e305]: mbt1!
+              - definition [ref=e306]: Micro Bitcoin Futures
+            - generic [ref=e307] [cursor=pointer]:
+              - term [ref=e308]: nq1!
+              - definition [ref=e309]: Nasdaq 100
+            - generic [ref=e310] [cursor=pointer]:
+              - term [ref=e311]: rty1!
+              - definition [ref=e312]: E-mini Russell 2000 Index Futures
+            - generic [ref=e313] [cursor=pointer]:
+              - term [ref=e314]: zb1!
+              - definition [ref=e315]: U.S. Treasury Bond Futures
+            - generic [ref=e316] [cursor=pointer]:
+              - term [ref=e317]: zf1!
+              - definition [ref=e318]: Five-Year US Treasury Note Futures
+            - generic [ref=e319] [cursor=pointer]:
+              - term [ref=e320]: zn1!
+              - definition [ref=e321]: 10-Year T-Note Futures
+            - generic [ref=e322] [cursor=pointer]:
+              - term [ref=e323]: zt1!
+              - definition [ref=e324]: 2-Year T-Note Futures
+            - generic [ref=e325] [cursor=pointer]:
+              - term [ref=e326]: 6am2026
+              - definition [ref=e327]: Australian Dollar Futures Futures Jun 2026
+            - generic [ref=e328] [cursor=pointer]:
+              - term [ref=e329]: 6au2026
+              - definition [ref=e330]: Australian Dollar Futures Futures Sep 2026
+            - generic [ref=e331] [cursor=pointer]:
+              - term [ref=e332]: 6az2026
+              - definition [ref=e333]: Australian Dollar Futures Futures Dec 2026
+            - generic [ref=e334] [cursor=pointer]:
+              - term [ref=e335]: 6bm2026
+              - definition [ref=e336]: British Pound Futures Futures Jun 2026
+            - generic [ref=e337] [cursor=pointer]:
+              - term [ref=e338]: 6bu2026
+              - definition [ref=e339]: British Pound Futures Futures Sep 2026
+            - generic [ref=e340] [cursor=pointer]:
+              - term [ref=e341]: 6bz2026
+              - definition [ref=e342]: British Pound Futures Futures Dec 2026
+            - generic [ref=e343] [cursor=pointer]:
+              - term [ref=e344]: 6cm2026
+              - definition [ref=e345]: Canadian Dollar Futures Futures Jun 2026
+            - generic [ref=e346] [cursor=pointer]:
+              - term [ref=e347]: 6cu2026
+              - definition [ref=e348]: Canadian Dollar Futures Futures Sep 2026
+            - generic [ref=e349] [cursor=pointer]:
+              - term [ref=e350]: 6cz2026
+              - definition [ref=e351]: Canadian Dollar Futures Futures Dec 2026
+            - generic [ref=e352] [cursor=pointer]:
+              - term [ref=e353]: 6em2026
+              - definition [ref=e354]: Euro FX Futures Futures Jun 2026
+            - generic [ref=e355] [cursor=pointer]:
+              - term [ref=e356]: 6eu2026
+              - definition [ref=e357]: Euro FX Futures Futures Sep 2026
+            - generic [ref=e358] [cursor=pointer]:
+              - term [ref=e359]: 6ez2026
+              - definition [ref=e360]: Euro FX Futures Futures Dec 2026
+            - generic [ref=e361] [cursor=pointer]:
+              - term [ref=e362]: 6jm2026
+              - definition [ref=e363]: Japanese Yen Futures Futures Jun 2026
+            - generic [ref=e364] [cursor=pointer]:
+              - term [ref=e365]: 6ju2026
+              - definition [ref=e366]: Japanese Yen Futures Futures Sep 2026
+            - generic [ref=e367] [cursor=pointer]:
+              - term [ref=e368]: 6jz2026
+              - definition [ref=e369]: Japanese Yen Futures Futures Dec 2026
+            - generic [ref=e370] [cursor=pointer]:
+              - term [ref=e371]: 6sm2026
+              - definition [ref=e372]: Swiss Franc Futures Futures Jun 2026
+            - generic [ref=e373] [cursor=pointer]:
+              - term [ref=e374]: 6su2026
+              - definition [ref=e375]: Swiss Franc Futures Futures Sep 2026
+            - generic [ref=e376] [cursor=pointer]:
+              - term [ref=e377]: 6sz2026
+              - definition [ref=e378]: Swiss Franc Futures Futures Dec 2026
+            - generic [ref=e379] [cursor=pointer]:
+              - term [ref=e380]: clk2026
+              - definition [ref=e381]: Crude Oil Futures May 2026
+            - generic [ref=e382] [cursor=pointer]:
+              - term [ref=e383]: clm2026
+              - definition [ref=e384]: Crude Oil Futures Jun 2026
+            - generic [ref=e385] [cursor=pointer]:
+              - term [ref=e386]: clz2026
+              - definition [ref=e387]: Crude Oil Futures Dec 2026
+            - generic [ref=e388] [cursor=pointer]:
+              - term [ref=e389]: esm2026
+              - definition [ref=e390]: E-Mini S&P 500 Futures Jun 2026
+            - generic [ref=e391] [cursor=pointer]:
+              - term [ref=e392]: esu2026
+              - definition [ref=e393]: E-Mini S&P 500 Futures Sep 2026
+            - generic [ref=e394] [cursor=pointer]:
+              - term [ref=e395]: esz2026
+              - definition [ref=e396]: E-Mini S&P 500 Futures Dec 2026
+            - generic [ref=e397] [cursor=pointer]:
+              - term [ref=e398]: gcm2026
+              - definition [ref=e399]: Gold Futures Jun 2026
+            - generic [ref=e400] [cursor=pointer]:
+              - term [ref=e401]: gcq2026
+              - definition [ref=e402]: Gold Futures Aug 2026
+            - generic [ref=e403] [cursor=pointer]:
+              - term [ref=e404]: gcz2026
+              - definition [ref=e405]: Gold Futures Dec 2026
+            - generic [ref=e406] [cursor=pointer]:
+              - term [ref=e407]: hgk2026
+              - definition [ref=e408]: Copper Futures May 2026
+            - generic [ref=e409] [cursor=pointer]:
+              - term [ref=e410]: hgn2026
+              - definition [ref=e411]: Copper Futures Jul 2026
+            - generic [ref=e412] [cursor=pointer]:
+              - term [ref=e413]: hgz2026
+              - definition [ref=e414]: Copper Futures Dec 2026
+            - generic [ref=e415] [cursor=pointer]:
+              - term [ref=e416]: mbtj2026
+              - definition [ref=e417]: Micro Bitcoin Futures Futures Apr 2026
+            - generic [ref=e418] [cursor=pointer]:
+              - term [ref=e419]: mbtk2026
+              - definition [ref=e420]: Micro Bitcoin Futures Futures May 2026
+            - generic [ref=e421] [cursor=pointer]:
+              - term [ref=e422]: mbtm2026
+              - definition [ref=e423]: Micro Bitcoin Futures Futures Jun 2026
+            - generic [ref=e424] [cursor=pointer]:
+              - term [ref=e425]: ngk2026
+              - definition [ref=e426]: Natural Gas Futures May 2026
+            - generic [ref=e427] [cursor=pointer]:
+              - term [ref=e428]: ngm2026
+              - definition [ref=e429]: Natural Gas Futures Jun 2026
+            - generic [ref=e430] [cursor=pointer]:
+              - term [ref=e431]: ngn2026
+              - definition [ref=e432]: Natural Gas Futures Jul 2026
+            - generic [ref=e433] [cursor=pointer]:
+              - term [ref=e434]: nqm2026
+              - definition [ref=e435]: Nasdaq 100 Futures Jun 2026
+            - generic [ref=e436] [cursor=pointer]:
+              - term [ref=e437]: nqu2026
+              - definition [ref=e438]: Nasdaq 100 Futures Sep 2026
+            - generic [ref=e439] [cursor=pointer]:
+              - term [ref=e440]: nqz2026
+              - definition [ref=e441]: Nasdaq 100 Futures Dec 2026
+            - generic [ref=e442] [cursor=pointer]:
+              - term [ref=e443]: plf2027
+              - definition [ref=e444]: Platinum Futures Jan 2027
+            - generic [ref=e445] [cursor=pointer]:
+              - term [ref=e446]: pln2026
+              - definition [ref=e447]: Platinum Futures Jul 2026
+            - generic [ref=e448] [cursor=pointer]:
+              - term [ref=e449]: plv2026
+              - definition [ref=e450]: Platinum Futures Oct 2026
+            - generic [ref=e451] [cursor=pointer]:
+              - term [ref=e452]: rtym2026
+              - definition [ref=e453]: E-mini Russell 2000 Index Futures Futures Jun 2026
+            - generic [ref=e454] [cursor=pointer]:
+              - term [ref=e455]: rtyu2026
+              - definition [ref=e456]: E-mini Russell 2000 Index Futures Futures Sep 2026
+            - generic [ref=e457] [cursor=pointer]:
+              - term [ref=e458]: rtyz2026
+              - definition [ref=e459]: E-mini Russell 2000 Index Futures Futures Dec 2026
+            - generic [ref=e460] [cursor=pointer]:
+              - term [ref=e461]: sik2026
+              - definition [ref=e462]: Silver Futures May 2026
+            - generic [ref=e463] [cursor=pointer]:
+              - term [ref=e464]: sin2026
+              - definition [ref=e465]: Silver Futures Jul 2026
+            - generic [ref=e466] [cursor=pointer]:
+              - term [ref=e467]: siz2026
+              - definition [ref=e468]: Silver Futures Dec 2026
+            - generic [ref=e469] [cursor=pointer]:
+              - term [ref=e470]: ymm2026
+              - definition [ref=e471]: E-mini Dow Jones Industrial Futures Jun 2026
+            - generic [ref=e472] [cursor=pointer]:
+              - term [ref=e473]: ymu2026
+              - definition [ref=e474]: E-mini Dow Jones Industrial Futures Sep 2026
+            - generic [ref=e475] [cursor=pointer]:
+              - term [ref=e476]: zbm2026
+              - definition [ref=e477]: U.S. Treasury Bond Futures Futures Jun 2026
+            - generic [ref=e478] [cursor=pointer]:
+              - term [ref=e479]: zbu2026
+              - definition [ref=e480]: U.S. Treasury Bond Futures Futures Sep 2026
+            - generic [ref=e481] [cursor=pointer]:
+              - term [ref=e482]: zbz2026
+              - definition [ref=e483]: U.S. Treasury Bond Futures Futures Dec 2026
+            - generic [ref=e484] [cursor=pointer]:
+              - term [ref=e485]: zck2026
+              - definition [ref=e486]: Corn Futures Futures May 2026
+            - generic [ref=e487] [cursor=pointer]:
+              - term [ref=e488]: zcn2026
+              - definition [ref=e489]: Corn Futures Futures Jul 2026
+            - generic [ref=e490] [cursor=pointer]:
+              - term [ref=e491]: zcu2026
+              - definition [ref=e492]: Corn Futures Futures Sep 2026
+            - generic [ref=e493] [cursor=pointer]:
+              - term [ref=e494]: zfm2026
+              - definition [ref=e495]: Five-Year US Treasury Note Futures Futures Jun 2026
+            - generic [ref=e496] [cursor=pointer]:
+              - term [ref=e497]: zfu2026
+              - definition [ref=e498]: Five-Year US Treasury Note Futures Futures Sep 2026
+            - generic [ref=e499] [cursor=pointer]:
+              - term [ref=e500]: zfz2026
+              - definition [ref=e501]: Five-Year US Treasury Note Futures Futures Dec 2026
+            - generic [ref=e502] [cursor=pointer]:
+              - term [ref=e503]: znm2026
+              - definition [ref=e504]: 10-Year T-Note Futures Futures Jun 2026
+            - generic [ref=e505] [cursor=pointer]:
+              - term [ref=e506]: znu2026
+              - definition [ref=e507]: 10-Year T-Note Futures Futures Sep 2026
+            - generic [ref=e508] [cursor=pointer]:
+              - term [ref=e509]: znz2026
+              - definition [ref=e510]: 10-Year T-Note Futures Futures Dec 2026
+            - generic [ref=e511] [cursor=pointer]:
+              - term [ref=e512]: zsk2026
+              - definition [ref=e513]: Soybean Futures Futures May 2026
+            - generic [ref=e514] [cursor=pointer]:
+              - term [ref=e515]: zsn2026
+              - definition [ref=e516]: Soybean Futures Futures Jul 2026
+            - generic [ref=e517] [cursor=pointer]:
+              - term [ref=e518]: zsx2026
+              - definition [ref=e519]: Soybean Futures Futures Nov 2026
+            - generic [ref=e520] [cursor=pointer]:
+              - term [ref=e521]: ztm2026
+              - definition [ref=e522]: 2-Year T-Note Futures Futures Jun 2026
+            - generic [ref=e523] [cursor=pointer]:
+              - term [ref=e524]: ztu2026
+              - definition [ref=e525]: 2-Year T-Note Futures Futures Sep 2026
+            - generic [ref=e526] [cursor=pointer]:
+              - term [ref=e527]: ztz2026
+              - definition [ref=e528]: 2-Year T-Note Futures Futures Dec 2026
+            - generic [ref=e529] [cursor=pointer]:
+              - term [ref=e530]: zwk2026
+              - definition [ref=e531]: Chicago SRW Wheat Futures Futures May 2026
+            - generic [ref=e532] [cursor=pointer]:
+              - term [ref=e533]: zwn2026
+              - definition [ref=e534]: Chicago SRW Wheat Futures Futures Jul 2026
+            - generic [ref=e535] [cursor=pointer]:
+              - term [ref=e536]: zwu2026
+              - definition [ref=e537]: Chicago SRW Wheat Futures Futures Sep 2026
+          - button "+" [ref=e141] [cursor=pointer]:
+            - generic [ref=e117]: +
+        - generic [ref=e118]:
+          - textbox "Date" [ref=e119]: 2026-04-02
+          - text: 
+        - button "Add Command" [ref=e120] [cursor=pointer]
+      - main [ref=e121]:
+        - generic [ref=e122]:
+          - heading "Futures" [level=1] [ref=e123]
+          - generic [ref=e125]: 
+        - generic [ref=e142]:
+          - generic [ref=e143]:
+            - generic [ref=e146]: E-Mini S&P 500 Futures
+            - main [ref=e147]:
+              - generic [ref=e148]:
+                - generic [ref=e149]:
+                  - generic [ref=e150]: P/C OI
+                  - generic [ref=e151]: "2.83"
+                - generic [ref=e152]:
+                  - generic [ref=e153]: 1D Exp Move %
+                  - generic [ref=e154]: ± 1.24%
+                - generic [ref=e155]:
+                  - generic [ref=e156]: Gamma Condition
+                  - generic [ref=e157]: Negative
+                - generic [ref=e158]:
+                  - generic [ref=e159]: Implied Vol 30D
+                  - generic [ref=e160]: 19.65%
+          - generic [ref=e161]:
+            - generic [ref=e162]:
+              - img "Q-Score" [ref=e163]
+              - generic [ref=e164]: Our quantitative score that condenses key market data into a single, actionable signal.
+            - main [ref=e165]:
+              - generic [ref=e166]:
+                - generic [ref=e167]: "1"
+                - generic [ref=e168]: Low
+                - generic [ref=e169]: Option
+                - generic [ref=e170]: Option score is Low and we are in a Bearish Option Positioning environment.
+              - generic [ref=e171]:
+                - generic [ref=e172]: "4"
+                - generic [ref=e173]: High
+                - generic [ref=e174]: Volatility
+                - generic [ref=e175]: Volatility score is High and we are in a Volatile environment.
+              - generic [ref=e176]:
+                - generic [ref=e177]: "2"
+                - generic [ref=e178]: Neutral
+                - generic [ref=e179]: Momentum
+                - generic [ref=e180]: Momentum score is Neutral and we are in a Neutral Momentum environment.
+              - generic [ref=e181]:
+                - generic [ref=e182]: "0"
+                - generic [ref=e183]: Neutral
+                - generic [ref=e184]: Seasonality
+                - generic [ref=e185]: Seasonality score is Neutral and we foresee a Neutral Seasonality environment for the next 5 days.
+        - main [ref=e127]:
+          - generic [ref=e186]:
+            - generic [ref=e187]:
+              - generic [ref=e188]:
+                - heading "Net GEX" [level=3] [ref=e189]
+                - paragraph [ref=e190]: Analyzes positive and negative gamma exposure to pinpoint market reaction zones and market maker activity.
+              - menubar [ref=e191]:
+                - link "Ask Quin" [ref=e192] [cursor=pointer]:
+                  - /url: https://app.menthorq.io/en/chats?template=netgex&ticker=es1!&date=2026-04-03
+                - button "Toggle actions menu" [ref=e193] [cursor=pointer]:
+                  - generic [ref=e194]: 
+                - text:    
+            - main [ref=e195]:
+              - generic [ref=e196]:
+                - img "Command visualization container" [ref=e197]:
+                  - button "Open image in lightbox" [ref=e198] [cursor=pointer]:
+                    - img "Command visualization" [ref=e199]
+                - generic [ref=e200]:
+                  - generic [ref=e201]:
+                    - generic [ref=e202]: Call Resistance
+                    - generic [ref=e203]: "6800"
+                  - generic [ref=e204]:
+                    - generic [ref=e205]: Put Support
+                    - generic [ref=e206]: "6500"
+                  - generic [ref=e207]:
+                    - generic [ref=e208]: HVL
+                    - generic [ref=e209]: "6605"
+                  - generic [ref=e210]:
+                    - generic [ref=e211]: Top Net GEX Strikes
+                    - generic [ref=e212]: 6600,6675,6575
+          - generic [ref=e213]:
+            - generic [ref=e214]:
+              - generic [ref=e215]:
+                - heading "Net GEX Multiple Expirations" [level=3] [ref=e216]
+                - paragraph [ref=e217]: Analyzes positive and negative gamma exposure to pinpoint market reaction zones and market maker activity across multiple expirations including 0DTE options.
+              - menubar [ref=e218]:
+                - button "Toggle actions menu" [ref=e219] [cursor=pointer]:
+                  - generic [ref=e220]: 
+                - text:    
+            - main [ref=e221]:
+              - img "Command visualization container" [ref=e223]:
+                - button "Open image in lightbox" [ref=e224] [cursor=pointer]:
+                  - img "Command visualization" [ref=e225]
+          - generic [ref=e226]:
+            - generic [ref=e227]:
+              - generic [ref=e228]:
+                - heading "Key Levels" [level=3] [ref=e229]
+                - paragraph [ref=e230]: Summarizes options positioning data, highlighting essential levels to guide your daily trading plan with actionable insights.
+              - menubar [ref=e231]:
+                - button "Toggle actions menu" [ref=e232] [cursor=pointer]:
+                  - generic [ref=e233]: 
+                - text:   
+            - main [ref=e234]:
+              - generic [ref=e236]:
+                - generic [ref=e237]:
+                  - generic [ref=e238]: Call Resistance
+                  - generic [ref=e239]: "6800"
+                - generic [ref=e240]:
+                  - generic [ref=e241]: Call Resistance 0DTE
+                  - generic [ref=e242]: "6700"
+                - generic [ref=e243]:
+                  - generic [ref=e244]: High Vol Level
+                  - generic [ref=e245]: "6605"
+                - generic [ref=e246]:
+                  - generic [ref=e247]: Put Support
+                  - generic [ref=e248]: "6500"
+                - generic [ref=e249]:
+                  - generic [ref=e250]: Put Support 0DTE
+                  - generic [ref=e251]: "6550"
+                - generic [ref=e252]:
+                  - generic [ref=e253]: 1D Max.
+                  - generic [ref=e254]: "6704.22"
+                - generic [ref=e255]:
+                  - generic [ref=e256]: 1D Min.
+                  - generic [ref=e257]: "6540.28"
+                - generic [ref=e258]:
+                  - generic [ref=e259]: Distance to HVL %
+                  - generic [ref=e260]: 0.26%
+                - generic [ref=e261]:
+                  - generic [ref=e262]: Implied Vol 30D
+                  - generic [ref=e263]: "19.65"
+                - generic [ref=e264]:
+                  - generic [ref=e265]: Total GEX
+                  - generic [ref=e266]: 465.56M
+                - generic [ref=e267]:
+                  - generic [ref=e268]: Net GEX
+                  - generic [ref=e269]: "-64.44M"
+                - generic [ref=e270]:
+                  - generic [ref=e271]: Expiring GEX
+                  - generic [ref=e272]: 0.32M
+                - generic [ref=e273]:
+                  - generic [ref=e274]: Put/Call GEX
+                  - generic [ref=e275]: "1.32"
+                - generic [ref=e276]:
+                  - generic [ref=e277]: Total DEX
+                  - generic [ref=e278]: 182.18B
+                - generic [ref=e279]:
+                  - generic [ref=e280]: Net DEX
+                  - generic [ref=e281]: "-11.97B"
+                - generic [ref=e282]:
+                  - generic [ref=e283]: Put/Call DEX
+                  - generic [ref=e284]: "1.14"
+          - generic [ref=e285]:
+            - generic [ref=e286]:
+              - generic [ref=e287]:
+                - heading "Option Matrix" [level=3] [ref=e288]
+                - paragraph [ref=e289]: Provides a comprehensive view of options data, highlighting key metrics like open interest, volume, and gamma levels.
+              - menubar [ref=e290]:
+                - button "Toggle actions menu" [ref=e291] [cursor=pointer]:
+                  - generic [ref=e292]: 
+                - text:    
+            - main [ref=e293]:
+              - img "Command visualization container" [ref=e295]:
+                - button "Open image in lightbox" [ref=e296] [cursor=pointer]:
+                  - img "Command visualization" [ref=e297]
+      - complementary [ref=e132]:
+        - heading "Watchlist Toggle Watchlist" [level=3] [ref=e134]:
+          - generic [ref=e135]: Watchlist
+          - generic "Toggle Watchlist" [ref=e136]:
+            - generic [ref=e137]: 
+        - generic [ref=e138]:
+          - generic [ref=e139]: 
+          - generic [ref=e140]: No tickers saved to watchlist.

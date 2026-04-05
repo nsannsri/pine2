@@ -1,0 +1,120 @@
+- generic [ref=e1]:
+  - generic [ref=e4]:
+    - generic [ref=e7]:
+      - generic [ref=e8]:
+        - generic [ref=e9]:
+          - button "Toggle Sidebar" [ref=e10]:
+            - img
+            - generic [ref=e11]: Toggle Sidebar
+          - link "Quin" [ref=e12] [cursor=pointer]:
+            - /url: /en/chats
+            - img "Quin" [ref=e13]
+          - link [ref=e14] [cursor=pointer]:
+            - /url: https://menthorq.com/support/
+            - button [ref=e15]:
+              - img
+        - generic [ref=e16]:
+          - img
+          - textbox "Search" [ref=e17]
+      - generic [ref=e18]:
+        - list [ref=e20]:
+          - listitem [ref=e21]:
+            - link "New Chat" [ref=e22] [cursor=pointer]:
+              - /url: /en/chats
+              - img [ref=e23]
+              - generic [ref=e25]: New Chat
+          - listitem [ref=e26]:
+            - link "Inspire Me" [ref=e27] [cursor=pointer]:
+              - /url: /en/chats/suggestions
+              - img [ref=e28]
+              - generic [ref=e30]: Inspire Me
+          - listitem [ref=e31]:
+            - link "Levels" [ref=e32] [cursor=pointer]:
+              - /url: /en/levels
+              - img [ref=e33]
+              - generic [ref=e35]: Levels
+          - listitem [ref=e36]:
+            - link "Dashboard" [ref=e37] [cursor=pointer]:
+              - /url: https://menthorq.com/account/?action=data&type=dashboard&commands=eod&tickers=commons
+              - img [ref=e38]
+              - generic [ref=e40]: Dashboard
+        - generic [ref=e41]:
+          - generic [ref=e42]: Screeners
+          - list [ref=e44]:
+            - listitem [ref=e45]:
+              - link "Explore" [ref=e46] [cursor=pointer]:
+                - /url: /en/screeners
+                - img [ref=e47]
+                - generic [ref=e49]: Explore
+            - listitem [ref=e50]:
+              - link "Create" [ref=e51] [cursor=pointer]:
+                - /url: /en/screeners/create
+                - img [ref=e52]
+                - generic [ref=e54]: Create
+            - listitem [ref=e55]:
+              - link "Saved" [ref=e56] [cursor=pointer]:
+                - /url: /en/screeners/saved
+                - img [ref=e57]
+                - generic [ref=e59]: Saved
+        - generic [ref=e60]:
+          - generic [ref=e61]: Chats
+          - list [ref=e63]:
+            - listitem [ref=e64]:
+              - link "Fetch Net GEX, OI, IV, week change and monthly change about spx" [ref=e65] [cursor=pointer]:
+                - /url: /en/chats/4997894b-5823-4492-8af9-6b210c7b5290
+                - generic [ref=e66]: Fetch Net GEX, OI, IV, week change and monthly change about spx
+              - button [ref=e67] [cursor=pointer]:
+                - img [ref=e68]
+            - listitem [ref=e70]:
+              - link "Hello Tell me about XAUUSD ?" [ref=e71] [cursor=pointer]:
+                - /url: /en/chats/30d138cc-b2cf-45ec-a9e4-da109d37544f
+                - generic [ref=e72]: Hello Tell me about XAUUSD ?
+              - button [ref=e73] [cursor=pointer]:
+                - img [ref=e74]
+            - listitem [ref=e76]:
+              - link "gold gamma levels" [ref=e77] [cursor=pointer]:
+                - /url: /en/chats/63cb12b1-9d14-4d8e-a777-e9ee0093ae90
+                - generic [ref=e78]: gold gamma levels
+              - button [ref=e79] [cursor=pointer]:
+                - img [ref=e80]
+      - button "sN sankara premium" [ref=e83]:
+        - generic [ref=e84]: sN
+        - generic [ref=e85]:
+          - generic [ref=e86]: sankara
+          - generic [ref=e87]: premium
+    - main [ref=e88]:
+      - generic [ref=e90]:
+        - generic [ref=e91]:
+          - heading "Request Levels" [level=1] [ref=e92]
+          - paragraph [ref=e93]: Get Gamma Levels, Blind Spots, and Swing Levels for Stocks, ETFs, Indices, Futures or Crypto. Return the TradingView code ready to plot on your charts. Up to 5 tickers per request.
+        - generic [ref=e94]:
+          - generic [ref=e96]:
+            - generic [ref=e97]:
+              - tablist [ref=e98]:
+                - tab "Search Tickers" [selected] [ref=e99]
+                - tab "Paste Tickers" [ref=e100]
+              - tabpanel "Search Tickers" [ref=e101]:
+                - generic [ref=e102]:
+                  - combobox [expanded] [ref=e103]:
+                    - generic [ref=e1478]:
+                      - text: XAUUSD
+                      - generic [ref=e1479]:
+                        - img
+                    - img
+                  - generic [ref=e107]: Maximum of 5 tickers can be selected
+            - combobox [ref=e108]:
+              - generic: Gamma Levels Intraday
+              - img
+            - button "Search" [ref=e109]
+          - generic [ref=e112]: No levels found for the selected ticker and level type.
+  - alert [ref=e113]
+  - dialog [ref=e115]:
+    - generic [ref=e116]:
+      - generic [ref=e118]:
+        - img [ref=e119]
+        - combobox [expanded] [ref=e121]: xau
+      - listbox "Suggestions" [active] [ref=e122]:
+        - group [ref=e124]:
+          - option "XAUUSD" [selected] [ref=e1406]:
+            - img
+            - text: XAUUSD

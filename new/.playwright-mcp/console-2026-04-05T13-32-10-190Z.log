@@ -1,0 +1,14 @@
+[    2414ms] [LOG] JQMIGRATE: Migrate is installed, version 3.4.1 @ https://menthorq.com/wp-includes/js/jquery/jquery-migrate.min.js?ver=3.4.1:1
+[    2788ms] [LOG] GTM: Environment data pushed -  production @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/GoogleTagManager/Assets/Public/Js/gtm-tracking.js?ver=1774344957:44
+[    2909ms] [LOG] 📁 ucCategory (oggetto): {marketing: true, functional: true, essential: true} @ :0
+[    2910ms] [LOG] 📄 categories (keys): [marketing, functional, essential] @ :0
+[    2910ms] [LOG] 🔍 hasFunctional: true @ :0
+[    2910ms] [LOG] 🔍 hasMarketing: true @ :0
+[    2911ms] [LOG] 🧱 Consent Object to push: {analytics_storage: granted, functionality_storage: granted, personalization_storage: granted} @ :1
+[    2911ms] [LOG] ✅ gtag consent updated! @ :1
+[    3844ms] [LOG] %c🧠 GTM Debug Info: color: #2196f3; font-weight: bold; @ :0
+[    3844ms] [LOG] 📦 GTM Container ID: GTM-599ZCR89 @ :0
+[    3844ms] [LOG] 🟡 GTM Container Version: 113 @ :0
+[    3845ms] [LOG] 🌍 GTM Environment:  @ :0
+[    3845ms] [LOG] ✅ GTM Loaded ✔️ @ :0
+[  703440ms] [ERROR] Failed to load resource: the server responded with a status of 503 () @ https://menthorq.com/pricing/:0

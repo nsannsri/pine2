@@ -1,0 +1,276 @@
+- main [ref=e3]:
+  - generic [ref=e4]:
+    - complementary [ref=e5]:
+      - generic [ref=e6]:
+        - link "MenthorQ Logo" [ref=e7] [cursor=pointer]:
+          - /url: https://menthorq.com
+          - img "MenthorQ Logo" [ref=e8]
+        - text: 
+      - navigation [ref=e9]:
+        - main [ref=e10]:
+          - generic [ref=e12] [cursor=pointer]:
+            - generic [ref=e13]:
+              - generic [ref=e14]: 
+              - generic [ref=e15]: Home
+            - generic [ref=e16]: 
+          - generic [ref=e18] [cursor=pointer]:
+            - generic [ref=e19]:
+              - img "Quin" [ref=e20]
+              - generic [ref=e21]: Quin
+              - generic [ref=e22]: NEW
+            - generic [ref=e23]: 
+          - generic [ref=e25] [cursor=pointer]:
+            - generic [ref=e26]:
+              - generic [ref=e27]: 
+              - generic [ref=e28]: Indices & Stocks
+            - generic [ref=e29]: 
+          - generic [ref=e30]:
+            - generic [ref=e31] [cursor=pointer]:
+              - generic [ref=e32]:
+                - generic [ref=e33]: 
+                - generic [ref=e34]: Futures
+              - generic [ref=e35]: 
+            - generic [ref=e36]:
+              - link "Active Futures" [ref=e37] [cursor=pointer]:
+                - /url: /account/?action=data&type=summary&category=futures
+                - generic [ref=e38]: Active Futures
+              - link "Futures" [ref=e39] [cursor=pointer]:
+                - /url: /account/?action=data&type=dashboard&commands=futures&tickers=futures
+                - generic [ref=e40]: Futures
+          - generic [ref=e42] [cursor=pointer]:
+            - generic [ref=e43]:
+              - generic [ref=e44]: 
+              - generic [ref=e45]: CTAs & Vol Models
+            - generic [ref=e46]: 
+          - generic [ref=e48] [cursor=pointer]:
+            - generic [ref=e49]:
+              - generic [ref=e50]: 
+              - generic [ref=e51]: Forex
+            - generic [ref=e52]: 
+          - generic [ref=e54] [cursor=pointer]:
+            - generic [ref=e55]:
+              - generic [ref=e56]: 
+              - generic [ref=e57]: Crypto
+            - generic [ref=e58]: 
+          - generic [ref=e60] [cursor=pointer]:
+            - generic [ref=e61]:
+              - generic [ref=e62]: 
+              - generic [ref=e63]: Screeners
+            - generic [ref=e64]: 
+          - generic [ref=e66] [cursor=pointer]:
+            - generic [ref=e67]:
+              - generic [ref=e68]: 
+              - generic [ref=e69]: Integrations
+            - generic [ref=e70]: 
+          - generic [ref=e72] [cursor=pointer]:
+            - generic [ref=e73]:
+              - generic [ref=e74]: 
+              - generic [ref=e75]: Academy
+            - generic [ref=e76]: 
+          - generic [ref=e78] [cursor=pointer]:
+            - generic [ref=e79]:
+              - generic [ref=e80]: 
+              - generic [ref=e81]: Financial Wiki
+            - generic [ref=e82]: 
+          - generic [ref=e84] [cursor=pointer]:
+            - generic [ref=e85]:
+              - generic [ref=e86]: 
+              - generic [ref=e87]: Community
+            - generic [ref=e88]: 
+          - generic [ref=e89]:
+            - generic [ref=e90] [cursor=pointer]:
+              - generic [ref=e91]:
+                - generic [ref=e92]: 
+                - generic [ref=e93]: Live
+              - generic [ref=e94]: 
+            - text:  
+          - generic [ref=e96] [cursor=pointer]:
+            - generic [ref=e97]:
+              - generic [ref=e98]: 
+              - generic [ref=e99]: Affiliate
+            - generic [ref=e100]: 
+        - generic [ref=e103] [cursor=pointer]:
+          - img "User Avatar" [ref=e105]
+          - generic [ref=e106]:
+            - generic [ref=e107]: sankara Naraharisetti
+            - generic [ref=e108]: premium
+          - text:     
+    - generic [ref=e111]:
+      - generic [ref=e113]:
+        - generic [ref=e114]:
+          - textbox "Search..." [active] [ref=e115]: gcm2026
+          - button "+" [ref=e141] [cursor=pointer]:
+            - generic [ref=e117]: +
+        - generic [ref=e118]:
+          - textbox "Date" [ref=e119]: 2026-04-02
+          - text: 
+        - button "Add Command" [ref=e120] [cursor=pointer]
+      - main [ref=e121]:
+        - generic [ref=e122]:
+          - heading "Futures" [level=1] [ref=e123]
+          - generic [ref=e125]: 
+        - generic [ref=e142]:
+          - generic [ref=e538]:
+            - generic [ref=e541]: Gold Futures Jun 2026
+            - main [ref=e542]:
+              - generic [ref=e543]:
+                - generic [ref=e544]:
+                  - generic [ref=e545]: P/C OI
+                  - generic [ref=e546]: "0.66"
+                - generic [ref=e547]:
+                  - generic [ref=e548]: 1D Exp Move %
+                  - generic [ref=e549]: ± 2.01%
+                - generic [ref=e550]:
+                  - generic [ref=e551]: Gamma Condition
+                  - generic [ref=e552]: Positive
+                - generic [ref=e553]:
+                  - generic [ref=e554]: Implied Vol 30D
+                  - generic [ref=e555]: 31.97%
+          - generic [ref=e556]:
+            - generic [ref=e557]:
+              - img "Q-Score" [ref=e558]
+              - generic [ref=e559]: Our quantitative score that condenses key market data into a single, actionable signal.
+            - main [ref=e560]:
+              - generic [ref=e561]:
+                - generic [ref=e562]: "2"
+                - generic [ref=e563]: Neutral
+                - generic [ref=e564]: Option
+                - generic [ref=e565]: Option score is Neutral and we are in a Neutral Option Positioning environment.
+              - generic [ref=e566]:
+                - generic [ref=e567]: "4"
+                - generic [ref=e568]: High
+                - generic [ref=e569]: Volatility
+                - generic [ref=e570]: Volatility score is High and we are in a Volatile environment.
+              - generic [ref=e571]:
+                - generic [ref=e572]: "3"
+                - generic [ref=e573]: Neutral
+                - generic [ref=e574]: Momentum
+                - generic [ref=e575]: Momentum score is Neutral and we are in a Neutral Momentum environment.
+              - generic [ref=e576]:
+                - generic [ref=e577]: "4"
+                - generic [ref=e578]: Positive
+                - generic [ref=e579]: Seasonality
+                - generic [ref=e580]: Seasonality score is Very High and we foresee a Positive Seasonality environment for the next 5 days.
+        - main [ref=e127]:
+          - generic [ref=e581]:
+            - generic [ref=e582]:
+              - generic [ref=e583]:
+                - heading "Net GEX" [level=3] [ref=e584]
+                - paragraph [ref=e585]: Analyzes positive and negative gamma exposure to pinpoint market reaction zones and market maker activity.
+              - menubar [ref=e586]:
+                - link "Ask Quin" [ref=e587] [cursor=pointer]:
+                  - /url: https://app.menthorq.io/en/chats?template=netgex&ticker=gcm2026&date=2026-04-03
+                - button "Toggle actions menu" [ref=e588] [cursor=pointer]:
+                  - generic [ref=e589]: 
+                - text:    
+            - main [ref=e590]:
+              - generic [ref=e591]:
+                - img "Command visualization container" [ref=e592]:
+                  - button "Open image in lightbox" [ref=e593] [cursor=pointer]:
+                    - img "Command visualization" [ref=e594]
+                - generic [ref=e595]:
+                  - generic [ref=e596]:
+                    - generic [ref=e597]: Call Resistance
+                    - generic [ref=e598]: "5000"
+                  - generic [ref=e599]:
+                    - generic [ref=e600]: Put Support
+                    - generic [ref=e601]: "4400"
+                  - generic [ref=e602]:
+                    - generic [ref=e603]: HVL
+                    - generic [ref=e604]: "4595"
+                  - generic [ref=e605]:
+                    - generic [ref=e606]: Top Net GEX Strikes
+                    - generic [ref=e607]: 4700,4750,4650
+          - generic [ref=e608]:
+            - generic [ref=e609]:
+              - generic [ref=e610]:
+                - heading "Net GEX Multiple Expirations" [level=3] [ref=e611]
+                - paragraph [ref=e612]: Analyzes positive and negative gamma exposure to pinpoint market reaction zones and market maker activity across multiple expirations including 0DTE options.
+              - menubar [ref=e613]:
+                - button "Toggle actions menu" [ref=e614] [cursor=pointer]:
+                  - generic [ref=e615]: 
+                - text:    
+            - main [ref=e616]:
+              - img "Command visualization container" [ref=e618]:
+                - button "Open image in lightbox" [ref=e619] [cursor=pointer]:
+                  - img "Command visualization" [ref=e620]
+          - generic [ref=e621]:
+            - generic [ref=e622]:
+              - generic [ref=e623]:
+                - heading "Key Levels" [level=3] [ref=e624]
+                - paragraph [ref=e625]: Summarizes options positioning data, highlighting essential levels to guide your daily trading plan with actionable insights.
+              - menubar [ref=e626]:
+                - button "Toggle actions menu" [ref=e627] [cursor=pointer]:
+                  - generic [ref=e628]: 
+                - text:   
+            - main [ref=e629]:
+              - generic [ref=e631]:
+                - generic [ref=e632]:
+                  - generic [ref=e633]: Call Resistance
+                  - generic [ref=e634]: "5000"
+                - generic [ref=e635]:
+                  - generic [ref=e636]: Call Resistance 0DTE
+                  - generic [ref=e637]: "4770"
+                - generic [ref=e638]:
+                  - generic [ref=e639]: High Vol Level
+                  - generic [ref=e640]: "4595"
+                - generic [ref=e641]:
+                  - generic [ref=e642]: Put Support
+                  - generic [ref=e643]: "4400"
+                - generic [ref=e644]:
+                  - generic [ref=e645]: Put Support 0DTE
+                  - generic [ref=e646]: "4600"
+                - generic [ref=e647]:
+                  - generic [ref=e648]: 1D Max.
+                  - generic [ref=e649]: "4773.95"
+                - generic [ref=e650]:
+                  - generic [ref=e651]: 1D Min.
+                  - generic [ref=e652]: "4585.45"
+                - generic [ref=e653]:
+                  - generic [ref=e654]: Distance to HVL %
+                  - generic [ref=e655]: 1.81%
+                - generic [ref=e656]:
+                  - generic [ref=e657]: Implied Vol 30D
+                  - generic [ref=e658]: "31.97"
+                - generic [ref=e659]:
+                  - generic [ref=e660]: Total GEX
+                  - generic [ref=e661]: 97.29M
+                - generic [ref=e662]:
+                  - generic [ref=e663]: Net GEX
+                  - generic [ref=e664]: 16.54M
+                - generic [ref=e665]:
+                  - generic [ref=e666]: Expiring GEX
+                  - generic [ref=e667]: 0.37M
+                - generic [ref=e668]:
+                  - generic [ref=e669]: Put/Call GEX
+                  - generic [ref=e670]: "0.71"
+                - generic [ref=e671]:
+                  - generic [ref=e672]: Total DEX
+                  - generic [ref=e673]: 57.48B
+                - generic [ref=e674]:
+                  - generic [ref=e675]: Net DEX
+                  - generic [ref=e676]: 10.32B
+                - generic [ref=e677]:
+                  - generic [ref=e678]: Put/Call DEX
+                  - generic [ref=e679]: "0.7"
+          - generic [ref=e680]:
+            - generic [ref=e681]:
+              - generic [ref=e682]:
+                - heading "Option Matrix" [level=3] [ref=e683]
+                - paragraph [ref=e684]: Provides a comprehensive view of options data, highlighting key metrics like open interest, volume, and gamma levels.
+              - menubar [ref=e685]:
+                - button "Toggle actions menu" [ref=e686] [cursor=pointer]:
+                  - generic [ref=e687]: 
+                - text:    
+            - main [ref=e688]:
+              - img "Command visualization container" [ref=e690]:
+                - button "Open image in lightbox" [ref=e691] [cursor=pointer]:
+                  - img "Command visualization" [ref=e692]
+      - complementary [ref=e132]:
+        - heading "Watchlist Toggle Watchlist" [level=3] [ref=e134]:
+          - generic [ref=e135]: Watchlist
+          - generic "Toggle Watchlist" [ref=e136]:
+            - generic [ref=e137]: 
+        - generic [ref=e138]:
+          - generic [ref=e139]: 
+          - generic [ref=e140]: No tickers saved to watchlist.

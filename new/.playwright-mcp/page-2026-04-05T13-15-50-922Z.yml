@@ -1,0 +1,4173 @@
+- generic [ref=e1]:
+  - generic [ref=e4]:
+    - generic [ref=e7]:
+      - generic [ref=e8]:
+        - generic [ref=e9]:
+          - button "Toggle Sidebar" [ref=e10]:
+            - img
+            - generic [ref=e11]: Toggle Sidebar
+          - link "Quin" [ref=e12] [cursor=pointer]:
+            - /url: /en/chats
+            - img "Quin" [ref=e13]
+          - link [ref=e14] [cursor=pointer]:
+            - /url: https://menthorq.com/support/
+            - button [ref=e15]:
+              - img
+        - generic [ref=e16]:
+          - img
+          - textbox "Search" [ref=e17]
+      - generic [ref=e18]:
+        - list [ref=e20]:
+          - listitem [ref=e21]:
+            - link "New Chat" [ref=e22] [cursor=pointer]:
+              - /url: /en/chats
+              - img [ref=e23]
+              - generic [ref=e25]: New Chat
+          - listitem [ref=e26]:
+            - link "Inspire Me" [ref=e27] [cursor=pointer]:
+              - /url: /en/chats/suggestions
+              - img [ref=e28]
+              - generic [ref=e30]: Inspire Me
+          - listitem [ref=e31]:
+            - link "Levels" [ref=e32] [cursor=pointer]:
+              - /url: /en/levels
+              - img [ref=e33]
+              - generic [ref=e35]: Levels
+          - listitem [ref=e36]:
+            - link "Dashboard" [ref=e37] [cursor=pointer]:
+              - /url: https://menthorq.com/account/?action=data&type=dashboard&commands=eod&tickers=commons
+              - img [ref=e38]
+              - generic [ref=e40]: Dashboard
+        - generic [ref=e41]:
+          - generic [ref=e42]: Screeners
+          - list [ref=e44]:
+            - listitem [ref=e45]:
+              - link "Explore" [ref=e46] [cursor=pointer]:
+                - /url: /en/screeners
+                - img [ref=e47]
+                - generic [ref=e49]: Explore
+            - listitem [ref=e50]:
+              - link "Create" [ref=e51] [cursor=pointer]:
+                - /url: /en/screeners/create
+                - img [ref=e52]
+                - generic [ref=e54]: Create
+            - listitem [ref=e55]:
+              - link "Saved" [ref=e56] [cursor=pointer]:
+                - /url: /en/screeners/saved
+                - img [ref=e57]
+                - generic [ref=e59]: Saved
+        - generic [ref=e60]:
+          - generic [ref=e61]: Chats
+          - list [ref=e63]:
+            - listitem [ref=e64]:
+              - link "Fetch Net GEX, OI, IV, week change and monthly change about spx" [ref=e65] [cursor=pointer]:
+                - /url: /en/chats/4997894b-5823-4492-8af9-6b210c7b5290
+                - generic [ref=e66]: Fetch Net GEX, OI, IV, week change and monthly change about spx
+              - button [ref=e67] [cursor=pointer]:
+                - img [ref=e68]
+            - listitem [ref=e70]:
+              - link "Hello Tell me about XAUUSD ?" [ref=e71] [cursor=pointer]:
+                - /url: /en/chats/30d138cc-b2cf-45ec-a9e4-da109d37544f
+                - generic [ref=e72]: Hello Tell me about XAUUSD ?
+              - button [ref=e73] [cursor=pointer]:
+                - img [ref=e74]
+            - listitem [ref=e76]:
+              - link "gold gamma levels" [ref=e77] [cursor=pointer]:
+                - /url: /en/chats/63cb12b1-9d14-4d8e-a777-e9ee0093ae90
+                - generic [ref=e78]: gold gamma levels
+              - button [ref=e79] [cursor=pointer]:
+                - img [ref=e80]
+      - button "sN sankara premium" [ref=e83]:
+        - generic [ref=e84]: sN
+        - generic [ref=e85]:
+          - generic [ref=e86]: sankara
+          - generic [ref=e87]: premium
+    - main [ref=e88]:
+      - generic [ref=e90]:
+        - generic [ref=e91]:
+          - heading "Request Levels" [level=1] [ref=e92]
+          - paragraph [ref=e93]: Get Gamma Levels, Blind Spots, and Swing Levels for Stocks, ETFs, Indices, Futures or Crypto. Return the TradingView code ready to plot on your charts. Up to 5 tickers per request.
+        - generic [ref=e94]:
+          - generic [ref=e96]:
+            - generic [ref=e97]:
+              - tablist [ref=e98]:
+                - tab "Search Tickers" [selected] [ref=e99]
+                - tab "Paste Tickers" [ref=e100]
+              - tabpanel "Search Tickers" [ref=e101]:
+                - generic [ref=e102]:
+                  - combobox [expanded] [ref=e103]:
+                    - generic [ref=e105]:
+                      - text: XAUUSD
+                      - generic [ref=e106]:
+                        - img
+                    - img
+                  - generic [ref=e107]: Maximum of 5 tickers can be selected
+            - combobox [ref=e108]:
+              - generic: Gamma Levels Intraday
+              - img
+            - button "Search" [ref=e109]
+          - generic [ref=e112]: No levels found for the selected ticker and level type.
+  - alert [ref=e113]
+  - dialog [ref=e115]:
+    - generic [ref=e116]:
+      - generic [ref=e118]:
+        - img [ref=e119]
+        - combobox [expanded] [active] [ref=e121]
+      - listbox "Suggestions" [ref=e122]:
+        - group [ref=e124]:
+          - option "6AM2026" [selected] [ref=e125]:
+            - img
+            - text: 6AM2026
+          - option "6AU2026" [ref=e126]:
+            - img
+            - text: 6AU2026
+          - option "6AZ2026" [ref=e127]:
+            - img
+            - text: 6AZ2026
+          - option "6BM2026" [ref=e128]:
+            - img
+            - text: 6BM2026
+          - option "6BU2026" [ref=e129]:
+            - img
+            - text: 6BU2026
+          - option "6BZ2026" [ref=e130]:
+            - img
+            - text: 6BZ2026
+          - option "6CM2026" [ref=e131]:
+            - img
+            - text: 6CM2026
+          - option "6CU2026" [ref=e132]:
+            - img
+            - text: 6CU2026
+          - option "6CZ2026" [ref=e133]:
+            - img
+            - text: 6CZ2026
+          - option "6EM2026" [ref=e134]:
+            - img
+            - text: 6EM2026
+          - option "6EU2026" [ref=e135]:
+            - img
+            - text: 6EU2026
+          - option "6EZ2026" [ref=e136]:
+            - img
+            - text: 6EZ2026
+          - option "6JM2026" [ref=e137]:
+            - img
+            - text: 6JM2026
+          - option "6JU2026" [ref=e138]:
+            - img
+            - text: 6JU2026
+          - option "6JZ2026" [ref=e139]:
+            - img
+            - text: 6JZ2026
+          - option "6SM2026" [ref=e140]:
+            - img
+            - text: 6SM2026
+          - option "6SU2026" [ref=e141]:
+            - img
+            - text: 6SU2026
+          - option "6SZ2026" [ref=e142]:
+            - img
+            - text: 6SZ2026
+          - option "A" [ref=e143]:
+            - img
+            - text: A
+          - option "AA" [ref=e144]:
+            - img
+            - text: AA
+          - option "AAL" [ref=e145]:
+            - img
+            - text: AAL
+          - option "AAOI" [ref=e146]:
+            - img
+            - text: AAOI
+          - option "AAP" [ref=e147]:
+            - img
+            - text: AAP
+          - option "AAPL" [ref=e148]:
+            - img
+            - text: AAPL
+          - option "ABBV" [ref=e149]:
+            - img
+            - text: ABBV
+          - option "ABEV" [ref=e150]:
+            - img
+            - text: ABEV
+          - option "ABNB" [ref=e151]:
+            - img
+            - text: ABNB
+          - option "ABR" [ref=e152]:
+            - img
+            - text: ABR
+          - option "ABT" [ref=e153]:
+            - img
+            - text: ABT
+          - option "ABTC" [ref=e154]:
+            - img
+            - text: ABTC
+          - option "ABUS" [ref=e155]:
+            - img
+            - text: ABUS
+          - option "ACAD" [ref=e156]:
+            - img
+            - text: ACAD
+          - option "ACB" [ref=e157]:
+            - img
+            - text: ACB
+          - option "ACGL" [ref=e158]:
+            - img
+            - text: ACGL
+          - option "ACHR" [ref=e159]:
+            - img
+            - text: ACHR
+          - option "ACI" [ref=e160]:
+            - img
+            - text: ACI
+          - option "ACLS" [ref=e161]:
+            - img
+            - text: ACLS
+          - option "ACMR" [ref=e162]:
+            - img
+            - text: ACMR
+          - option "ACN" [ref=e163]:
+            - img
+            - text: ACN
+          - option "ADBE" [ref=e164]:
+            - img
+            - text: ADBE
+          - option "ADI" [ref=e165]:
+            - img
+            - text: ADI
+          - option "ADM" [ref=e166]:
+            - img
+            - text: ADM
+          - option "ADP" [ref=e167]:
+            - img
+            - text: ADP
+          - option "ADSK" [ref=e168]:
+            - img
+            - text: ADSK
+          - option "AEE" [ref=e169]:
+            - img
+            - text: AEE
+          - option "AEHR" [ref=e170]:
+            - img
+            - text: AEHR
+          - option "AEM" [ref=e171]:
+            - img
+            - text: AEM
+          - option "AEO" [ref=e172]:
+            - img
+            - text: AEO
+          - option "AEP" [ref=e173]:
+            - img
+            - text: AEP
+          - option "AES" [ref=e174]:
+            - img
+            - text: AES
+          - option "AFL" [ref=e175]:
+            - img
+            - text: AFL
+          - option "AFRM" [ref=e176]:
+            - img
+            - text: AFRM
+          - option "AG" [ref=e177]:
+            - img
+            - text: AG
+          - option "AGEN" [ref=e178]:
+            - img
+            - text: AGEN
+          - option "AGG" [ref=e179]:
+            - img
+            - text: AGG
+          - option "AGI" [ref=e180]:
+            - img
+            - text: AGI
+          - option "AGNC" [ref=e181]:
+            - img
+            - text: AGNC
+          - option "AGQ" [ref=e182]:
+            - img
+            - text: AGQ
+          - option "AGX" [ref=e183]:
+            - img
+            - text: AGX
+          - option "AI" [ref=e184]:
+            - img
+            - text: AI
+          - option "AIG" [ref=e185]:
+            - img
+            - text: AIG
+          - option "AIQ" [ref=e186]:
+            - img
+            - text: AIQ
+          - option "AIZ" [ref=e187]:
+            - img
+            - text: AIZ
+          - option "AJG" [ref=e188]:
+            - img
+            - text: AJG
+          - option "AKAM" [ref=e189]:
+            - img
+            - text: AKAM
+          - option "AKBA" [ref=e190]:
+            - img
+            - text: AKBA
+          - option "ALAB" [ref=e191]:
+            - img
+            - text: ALAB
+          - option "ALB" [ref=e192]:
+            - img
+            - text: ALB
+          - option "ALGM" [ref=e193]:
+            - img
+            - text: ALGM
+          - option "ALGN" [ref=e194]:
+            - img
+            - text: ALGN
+          - option "ALL" [ref=e195]:
+            - img
+            - text: ALL
+          - option "ALLE" [ref=e196]:
+            - img
+            - text: ALLE
+          - option "ALLY" [ref=e197]:
+            - img
+            - text: ALLY
+          - option "ALNY" [ref=e198]:
+            - img
+            - text: ALNY
+          - option "ALT" [ref=e199]:
+            - img
+            - text: ALT
+          - option "AM" [ref=e200]:
+            - img
+            - text: AM
+          - option "AMAT" [ref=e201]:
+            - img
+            - text: AMAT
+          - option "AMC" [ref=e202]:
+            - img
+            - text: AMC
+          - option "AMCR" [ref=e203]:
+            - img
+            - text: AMCR
+          - option "AMD" [ref=e204]:
+            - img
+            - text: AMD
+          - option "AME" [ref=e205]:
+            - img
+            - text: AME
+          - option "AMGN" [ref=e206]:
+            - img
+            - text: AMGN
+          - option "AMKR" [ref=e207]:
+            - img
+            - text: AMKR
+          - option "AMLX" [ref=e208]:
+            - img
+            - text: AMLX
+          - option "AMP" [ref=e209]:
+            - img
+            - text: AMP
+          - option "AMSC" [ref=e210]:
+            - img
+            - text: AMSC
+          - option "AMT" [ref=e211]:
+            - img
+            - text: AMT
+          - option "AMTM" [ref=e212]:
+            - img
+            - text: AMTM
+          - option "AMTX" [ref=e213]:
+            - img
+            - text: AMTX
+          - option "AMZN" [ref=e214]:
+            - img
+            - text: AMZN
+          - option "ANET" [ref=e215]:
+            - img
+            - text: ANET
+          - option "ANF" [ref=e216]:
+            - img
+            - text: ANF
+          - option "AON" [ref=e217]:
+            - img
+            - text: AON
+          - option "AOS" [ref=e218]:
+            - img
+            - text: AOS
+          - option "APA" [ref=e219]:
+            - img
+            - text: APA
+          - option "APAM" [ref=e220]:
+            - img
+            - text: APAM
+          - option "APD" [ref=e221]:
+            - img
+            - text: APD
+          - option "APH" [ref=e222]:
+            - img
+            - text: APH
+          - option "APLD" [ref=e223]:
+            - img
+            - text: APLD
+          - option "APO" [ref=e224]:
+            - img
+            - text: APO
+          - option "APP" [ref=e225]:
+            - img
+            - text: APP
+          - option "APTV" [ref=e226]:
+            - img
+            - text: APTV
+          - option "AQST" [ref=e227]:
+            - img
+            - text: AQST
+          - option "AR" [ref=e228]:
+            - img
+            - text: AR
+          - option "ARCC" [ref=e229]:
+            - img
+            - text: ARCC
+          - option "ARDX" [ref=e230]:
+            - img
+            - text: ARDX
+          - option "ARE" [ref=e231]:
+            - img
+            - text: ARE
+          - option "ARES" [ref=e232]:
+            - img
+            - text: ARES
+          - option "ARHS" [ref=e233]:
+            - img
+            - text: ARHS
+          - option "ARKF" [ref=e234]:
+            - img
+            - text: ARKF
+          - option "ARKG" [ref=e235]:
+            - img
+            - text: ARKG
+          - option "ARKK" [ref=e236]:
+            - img
+            - text: ARKK
+          - option "ARM" [ref=e237]:
+            - img
+            - text: ARM
+          - option "ARWR" [ref=e238]:
+            - img
+            - text: ARWR
+          - option "AS" [ref=e239]:
+            - img
+            - text: AS
+          - option "ASAN" [ref=e240]:
+            - img
+            - text: ASAN
+          - option "ASHR" [ref=e241]:
+            - img
+            - text: ASHR
+          - option "ASHS" [ref=e242]:
+            - img
+            - text: ASHS
+          - option "ASML" [ref=e243]:
+            - img
+            - text: ASML
+          - option "ASTS" [ref=e244]:
+            - img
+            - text: ASTS
+          - option "ATAT" [ref=e245]:
+            - img
+            - text: ATAT
+          - option "ATI" [ref=e246]:
+            - img
+            - text: ATI
+          - option "ATMU" [ref=e247]:
+            - img
+            - text: ATMU
+          - option "ATO" [ref=e248]:
+            - img
+            - text: ATO
+          - option "AU" [ref=e249]:
+            - img
+            - text: AU
+          - option "AUDUSD" [ref=e250]:
+            - img
+            - text: AUDUSD
+          - option "AUR" [ref=e251]:
+            - img
+            - text: AUR
+          - option "AVAV" [ref=e252]:
+            - img
+            - text: AVAV
+          - option "AVB" [ref=e253]:
+            - img
+            - text: AVB
+          - option "AVGO" [ref=e254]:
+            - img
+            - text: AVGO
+          - option "AVTR" [ref=e255]:
+            - img
+            - text: AVTR
+          - option "AVY" [ref=e256]:
+            - img
+            - text: AVY
+          - option "AWK" [ref=e257]:
+            - img
+            - text: AWK
+          - option "AX" [ref=e258]:
+            - img
+            - text: AX
+          - option "AXON" [ref=e259]:
+            - img
+            - text: AXON
+          - option "AXP" [ref=e260]:
+            - img
+            - text: AXP
+          - option "AZN" [ref=e261]:
+            - img
+            - text: AZN
+          - option "AZO" [ref=e262]:
+            - img
+            - text: AZO
+          - option "B" [ref=e263]:
+            - img
+            - text: B
+          - option "BA" [ref=e264]:
+            - img
+            - text: BA
+          - option "BABA" [ref=e265]:
+            - img
+            - text: BABA
+          - option "BAC" [ref=e266]:
+            - img
+            - text: BAC
+          - option "BALL" [ref=e267]:
+            - img
+            - text: BALL
+          - option "BAM" [ref=e268]:
+            - img
+            - text: BAM
+          - option "BAX" [ref=e269]:
+            - img
+            - text: BAX
+          - option "BB" [ref=e270]:
+            - img
+            - text: BB
+          - option "BBAI" [ref=e271]:
+            - img
+            - text: BBAI
+          - option "BBBY" [ref=e272]:
+            - img
+            - text: BBBY
+          - option "BBD" [ref=e273]:
+            - img
+            - text: BBD
+          - option "BBWI" [ref=e274]:
+            - img
+            - text: BBWI
+          - option "BBY" [ref=e275]:
+            - img
+            - text: BBY
+          - option "BCRX" [ref=e276]:
+            - img
+            - text: BCRX
+          - option "BCS" [ref=e277]:
+            - img
+            - text: BCS
+          - option "BDX" [ref=e278]:
+            - img
+            - text: BDX
+          - option "BE" [ref=e279]:
+            - img
+            - text: BE
+          - option "BEKE" [ref=e280]:
+            - img
+            - text: BEKE
+          - option "BEN" [ref=e281]:
+            - img
+            - text: BEN
+          - option "BF.B" [ref=e282]:
+            - img
+            - text: BF.B
+          - option "BG" [ref=e283]:
+            - img
+            - text: BG
+          - option "BHC" [ref=e284]:
+            - img
+            - text: BHC
+          - option "BHP" [ref=e285]:
+            - img
+            - text: BHP
+          - option "BIDU" [ref=e286]:
+            - img
+            - text: BIDU
+          - option "BIIB" [ref=e287]:
+            - img
+            - text: BIIB
+          - option "BIL" [ref=e288]:
+            - img
+            - text: BIL
+          - option "BILI" [ref=e289]:
+            - img
+            - text: BILI
+          - option "BILL" [ref=e290]:
+            - img
+            - text: BILL
+          - option "BITF" [ref=e291]:
+            - img
+            - text: BITF
+          - option "BITI" [ref=e292]:
+            - img
+            - text: BITI
+          - option "BITO" [ref=e293]:
+            - img
+            - text: BITO
+          - option "BITU" [ref=e294]:
+            - img
+            - text: BITU
+          - option "BITX" [ref=e295]:
+            - img
+            - text: BITX
+          - option "BJ" [ref=e296]:
+            - img
+            - text: BJ
+          - option "BK" [ref=e297]:
+            - img
+            - text: BK
+          - option "BKNG" [ref=e298]:
+            - img
+            - text: BKNG
+          - option "BKR" [ref=e299]:
+            - img
+            - text: BKR
+          - option "BLDR" [ref=e300]:
+            - img
+            - text: BLDR
+          - option "BLK" [ref=e301]:
+            - img
+            - text: BLK
+          - option "BLNK" [ref=e302]:
+            - img
+            - text: BLNK
+          - option "BLOK" [ref=e303]:
+            - img
+            - text: BLOK
+          - option "BMEA" [ref=e304]:
+            - img
+            - text: BMEA
+          - option "BMNR" [ref=e305]:
+            - img
+            - text: BMNR
+          - option "BMY" [ref=e306]:
+            - img
+            - text: BMY
+          - option "BND" [ref=e307]:
+            - img
+            - text: BND
+          - option "BNDX" [ref=e308]:
+            - img
+            - text: BNDX
+          - option "BNTX" [ref=e309]:
+            - img
+            - text: BNTX
+          - option "BOIL" [ref=e310]:
+            - img
+            - text: BOIL
+          - option "BOTZ" [ref=e311]:
+            - img
+            - text: BOTZ
+          - option "BOX" [ref=e312]:
+            - img
+            - text: BOX
+          - option "BP" [ref=e313]:
+            - img
+            - text: BP
+          - option "BR" [ref=e314]:
+            - img
+            - text: BR
+          - option "BRK.B" [ref=e315]:
+            - img
+            - text: BRK.B
+          - option "BRO" [ref=e316]:
+            - img
+            - text: BRO
+          - option "BROS" [ref=e317]:
+            - img
+            - text: BROS
+          - option "BSX" [ref=e318]:
+            - img
+            - text: BSX
+          - option "BTBT" [ref=e319]:
+            - img
+            - text: BTBT
+          - option "BTC" [ref=e320]:
+            - img
+            - text: BTC
+          - option "BTCUSD" [ref=e321]:
+            - img
+            - text: BTCUSD
+          - option "BTI" [ref=e322]:
+            - img
+            - text: BTI
+          - option "BTU" [ref=e323]:
+            - img
+            - text: BTU
+          - option "BUD" [ref=e324]:
+            - img
+            - text: BUD
+          - option "BULL" [ref=e325]:
+            - img
+            - text: BULL
+          - option "BURL" [ref=e326]:
+            - img
+            - text: BURL
+          - option "BW" [ref=e327]:
+            - img
+            - text: BW
+          - option "BWA" [ref=e328]:
+            - img
+            - text: BWA
+          - option "BX" [ref=e329]:
+            - img
+            - text: BX
+          - option "BXMT" [ref=e330]:
+            - img
+            - text: BXMT
+          - option "BXP" [ref=e331]:
+            - img
+            - text: BXP
+          - option "BYD" [ref=e332]:
+            - img
+            - text: BYD
+          - option "BYND" [ref=e333]:
+            - img
+            - text: BYND
+          - option "C" [ref=e334]:
+            - img
+            - text: C
+          - option "CADUSD" [ref=e335]:
+            - img
+            - text: CADUSD
+          - option "CAG" [ref=e336]:
+            - img
+            - text: CAG
+          - option "CAH" [ref=e337]:
+            - img
+            - text: CAH
+          - option "CAKE" [ref=e338]:
+            - img
+            - text: CAKE
+          - option "CALY" [ref=e339]:
+            - img
+            - text: CALY
+          - option "CAR" [ref=e340]:
+            - img
+            - text: CAR
+          - option "CARR" [ref=e341]:
+            - img
+            - text: CARR
+          - option "CART" [ref=e342]:
+            - img
+            - text: CART
+          - option "CARZ" [ref=e343]:
+            - img
+            - text: CARZ
+          - option "CAT" [ref=e344]:
+            - img
+            - text: CAT
+          - option "CAVA" [ref=e345]:
+            - img
+            - text: CAVA
+          - option "CB" [ref=e346]:
+            - img
+            - text: CB
+          - option "CBIO" [ref=e347]:
+            - img
+            - text: CBIO
+          - option "CBOE" [ref=e348]:
+            - img
+            - text: CBOE
+          - option "CBRE" [ref=e349]:
+            - img
+            - text: CBRE
+          - option "CCCC" [ref=e350]:
+            - img
+            - text: CCCC
+          - option "CCEP" [ref=e351]:
+            - img
+            - text: CCEP
+          - option "CCI" [ref=e352]:
+            - img
+            - text: CCI
+          - option "CCJ" [ref=e353]:
+            - img
+            - text: CCJ
+          - option "CCL" [ref=e354]:
+            - img
+            - text: CCL
+          - option "CDE" [ref=e355]:
+            - img
+            - text: CDE
+          - option "CDLX" [ref=e356]:
+            - img
+            - text: CDLX
+          - option "CDNS" [ref=e357]:
+            - img
+            - text: CDNS
+          - option "CDW" [ref=e358]:
+            - img
+            - text: CDW
+          - option "CE" [ref=e359]:
+            - img
+            - text: CE
+          - option "CEG" [ref=e360]:
+            - img
+            - text: CEG
+          - option "CELH" [ref=e361]:
+            - img
+            - text: CELH
+          - option "CF" [ref=e362]:
+            - img
+            - text: CF
+          - option "CFG" [ref=e363]:
+            - img
+            - text: CFG
+          - option "CFLT" [ref=e364]:
+            - img
+            - text: CFLT
+          - option "CGC" [ref=e365]:
+            - img
+            - text: CGC
+          - option "CGNT" [ref=e366]:
+            - img
+            - text: CGNT
+          - option "CGNX" [ref=e367]:
+            - img
+            - text: CGNX
+          - option "CHAU" [ref=e368]:
+            - img
+            - text: CHAU
+          - option "CHD" [ref=e369]:
+            - img
+            - text: CHD
+          - option "CHFUSD" [ref=e370]:
+            - img
+            - text: CHFUSD
+          - option "CHPT" [ref=e371]:
+            - img
+            - text: CHPT
+          - option "CHRW" [ref=e372]:
+            - img
+            - text: CHRW
+          - option "CHTR" [ref=e373]:
+            - img
+            - text: CHTR
+          - option "CHWY" [ref=e374]:
+            - img
+            - text: CHWY
+          - option "CI" [ref=e375]:
+            - img
+            - text: CI
+          - option "CIBR" [ref=e376]:
+            - img
+            - text: CIBR
+          - option "CIEN" [ref=e377]:
+            - img
+            - text: CIEN
+          - option "CIFR" [ref=e378]:
+            - img
+            - text: CIFR
+          - option "CINF" [ref=e379]:
+            - img
+            - text: CINF
+          - option "CL" [ref=e380]:
+            - img
+            - text: CL
+          - option "CLBT" [ref=e381]:
+            - img
+            - text: CLBT
+          - option "CLF" [ref=e382]:
+            - img
+            - text: CLF
+          - option "CLK2026" [ref=e383]:
+            - img
+            - text: CLK2026
+          - option "CLM2026" [ref=e384]:
+            - img
+            - text: CLM2026
+          - option "CLOV" [ref=e385]:
+            - img
+            - text: CLOV
+          - option "CLS" [ref=e386]:
+            - img
+            - text: CLS
+          - option "CLSK" [ref=e387]:
+            - img
+            - text: CLSK
+          - option "CLX" [ref=e388]:
+            - img
+            - text: CLX
+          - option "CLZ2026" [ref=e389]:
+            - img
+            - text: CLZ2026
+          - option "CMA" [ref=e390]:
+            - img
+            - text: CMA
+          - option "CMCSA" [ref=e391]:
+            - img
+            - text: CMCSA
+          - option "CME" [ref=e392]:
+            - img
+            - text: CME
+          - option "CMG" [ref=e393]:
+            - img
+            - text: CMG
+          - option "CMI" [ref=e394]:
+            - img
+            - text: CMI
+          - option "CMS" [ref=e395]:
+            - img
+            - text: CMS
+          - option "CNC" [ref=e396]:
+            - img
+            - text: CNC
+          - option "CNK" [ref=e397]:
+            - img
+            - text: CNK
+          - option "CNM" [ref=e398]:
+            - img
+            - text: CNM
+          - option "CNP" [ref=e399]:
+            - img
+            - text: CNP
+          - option "CNQ" [ref=e400]:
+            - img
+            - text: CNQ
+          - option "COF" [ref=e401]:
+            - img
+            - text: COF
+          - option "COHR" [ref=e402]:
+            - img
+            - text: COHR
+          - option "COIN" [ref=e403]:
+            - img
+            - text: COIN
+          - option "CONL" [ref=e404]:
+            - img
+            - text: CONL
+          - option "CONY" [ref=e405]:
+            - img
+            - text: CONY
+          - option "COO" [ref=e406]:
+            - img
+            - text: COO
+          - option "COP" [ref=e407]:
+            - img
+            - text: COP
+          - option "COPX" [ref=e408]:
+            - img
+            - text: COPX
+          - option "COR" [ref=e409]:
+            - img
+            - text: COR
+          - option "CORT" [ref=e410]:
+            - img
+            - text: CORT
+          - option "CORZ" [ref=e411]:
+            - img
+            - text: CORZ
+          - option "COST" [ref=e412]:
+            - img
+            - text: COST
+          - option "COTY" [ref=e413]:
+            - img
+            - text: COTY
+          - option "COUR" [ref=e414]:
+            - img
+            - text: COUR
+          - option "CPAY" [ref=e415]:
+            - img
+            - text: CPAY
+          - option "CPB" [ref=e416]:
+            - img
+            - text: CPB
+          - option "CPNG" [ref=e417]:
+            - img
+            - text: CPNG
+          - option "CPRI" [ref=e418]:
+            - img
+            - text: CPRI
+          - option "CPRT" [ref=e419]:
+            - img
+            - text: CPRT
+          - option "CPT" [ref=e420]:
+            - img
+            - text: CPT
+          - option "CRBG" [ref=e421]:
+            - img
+            - text: CRBG
+          - option "CRCL" [ref=e422]:
+            - img
+            - text: CRCL
+          - option "CRDO" [ref=e423]:
+            - img
+            - text: CRDO
+          - option "CRH" [ref=e424]:
+            - img
+            - text: CRH
+          - option "CRL" [ref=e425]:
+            - img
+            - text: CRL
+          - option "CRM" [ref=e426]:
+            - img
+            - text: CRM
+          - option "CRON" [ref=e427]:
+            - img
+            - text: CRON
+          - option "CROX" [ref=e428]:
+            - img
+            - text: CROX
+          - option "CRSP" [ref=e429]:
+            - img
+            - text: CRSP
+          - option "CRWD" [ref=e430]:
+            - img
+            - text: CRWD
+          - option "CRWV" [ref=e431]:
+            - img
+            - text: CRWV
+          - option "CSCO" [ref=e432]:
+            - img
+            - text: CSCO
+          - option "CSGP" [ref=e433]:
+            - img
+            - text: CSGP
+          - option "CSIQ" [ref=e434]:
+            - img
+            - text: CSIQ
+          - option "CSX" [ref=e435]:
+            - img
+            - text: CSX
+          - option "CTAS" [ref=e436]:
+            - img
+            - text: CTAS
+          - option "CTRA" [ref=e437]:
+            - img
+            - text: CTRA
+          - option "CTSH" [ref=e438]:
+            - img
+            - text: CTSH
+          - option "CTVA" [ref=e439]:
+            - img
+            - text: CTVA
+          - option "CVE" [ref=e440]:
+            - img
+            - text: CVE
+          - option "CVLG" [ref=e441]:
+            - img
+            - text: CVLG
+          - option "CVNA" [ref=e442]:
+            - img
+            - text: CVNA
+          - option "CVS" [ref=e443]:
+            - img
+            - text: CVS
+          - option "CVX" [ref=e444]:
+            - img
+            - text: CVX
+          - option "CWEB" [ref=e445]:
+            - img
+            - text: CWEB
+          - option "CX" [ref=e446]:
+            - img
+            - text: CX
+          - option "CYBR" [ref=e447]:
+            - img
+            - text: CYBR
+          - option "CYTK" [ref=e448]:
+            - img
+            - text: CYTK
+          - option "CZR" [ref=e449]:
+            - img
+            - text: CZR
+          - option "D" [ref=e450]:
+            - img
+            - text: D
+          - option "DAL" [ref=e451]:
+            - img
+            - text: DAL
+          - option "DASH" [ref=e452]:
+            - img
+            - text: DASH
+          - option "DAVE" [ref=e453]:
+            - img
+            - text: DAVE
+          - option "DAY" [ref=e454]:
+            - img
+            - text: DAY
+          - option "DD" [ref=e455]:
+            - img
+            - text: DD
+          - option "DDOG" [ref=e456]:
+            - img
+            - text: DDOG
+          - option "DE" [ref=e457]:
+            - img
+            - text: DE
+          - option "DECK" [ref=e458]:
+            - img
+            - text: DECK
+          - option "DELL" [ref=e459]:
+            - img
+            - text: DELL
+          - option "DFEN" [ref=e460]:
+            - img
+            - text: DFEN
+          - option "DG" [ref=e461]:
+            - img
+            - text: DG
+          - option "DGX" [ref=e462]:
+            - img
+            - text: DGX
+          - option "DHI" [ref=e463]:
+            - img
+            - text: DHI
+          - option "DHR" [ref=e464]:
+            - img
+            - text: DHR
+          - option "DHT" [ref=e465]:
+            - img
+            - text: DHT
+          - option "DIA" [ref=e466]:
+            - img
+            - text: DIA
+          - option "DINO" [ref=e467]:
+            - img
+            - text: DINO
+          - option "DIS" [ref=e468]:
+            - img
+            - text: DIS
+          - option "DJT" [ref=e469]:
+            - img
+            - text: DJT
+          - option "DKNG" [ref=e470]:
+            - img
+            - text: DKNG
+          - option "DKS" [ref=e471]:
+            - img
+            - text: DKS
+          - option "DLO" [ref=e472]:
+            - img
+            - text: DLO
+          - option "DLR" [ref=e473]:
+            - img
+            - text: DLR
+          - option "DLTR" [ref=e474]:
+            - img
+            - text: DLTR
+          - option "DNA" [ref=e475]:
+            - img
+            - text: DNA
+          - option "DNN" [ref=e476]:
+            - img
+            - text: DNN
+          - option "DOC" [ref=e477]:
+            - img
+            - text: DOC
+          - option "DOCS" [ref=e478]:
+            - img
+            - text: DOCS
+          - option "DOCU" [ref=e479]:
+            - img
+            - text: DOCU
+          - option "DOV" [ref=e480]:
+            - img
+            - text: DOV
+          - option "DOW" [ref=e481]:
+            - img
+            - text: DOW
+          - option "DPST" [ref=e482]:
+            - img
+            - text: DPST
+          - option "DPZ" [ref=e483]:
+            - img
+            - text: DPZ
+          - option "DRD" [ref=e484]:
+            - img
+            - text: DRD
+          - option "DRI" [ref=e485]:
+            - img
+            - text: DRI
+          - option "DRV" [ref=e486]:
+            - img
+            - text: DRV
+          - option "DTE" [ref=e487]:
+            - img
+            - text: DTE
+          - option "DUK" [ref=e488]:
+            - img
+            - text: DUK
+          - option "DUOL" [ref=e489]:
+            - img
+            - text: DUOL
+          - option "DUST" [ref=e490]:
+            - img
+            - text: DUST
+          - option "DVA" [ref=e491]:
+            - img
+            - text: DVA
+          - option "DVAX" [ref=e492]:
+            - img
+            - text: DVAX
+          - option "DVN" [ref=e493]:
+            - img
+            - text: DVN
+          - option "DXCM" [ref=e494]:
+            - img
+            - text: DXCM
+          - option "DXJ" [ref=e495]:
+            - img
+            - text: DXJ
+          - option "EA" [ref=e496]:
+            - img
+            - text: EA
+          - option "EBAY" [ref=e497]:
+            - img
+            - text: EBAY
+          - option "ECL" [ref=e498]:
+            - img
+            - text: ECL
+          - option "ED" [ref=e499]:
+            - img
+            - text: ED
+          - option "EDIT" [ref=e500]:
+            - img
+            - text: EDIT
+          - option "EDZ" [ref=e501]:
+            - img
+            - text: EDZ
+          - option "EEM" [ref=e502]:
+            - img
+            - text: EEM
+          - option "EFA" [ref=e503]:
+            - img
+            - text: EFA
+          - option "EFX" [ref=e504]:
+            - img
+            - text: EFX
+          - option "EG" [ref=e505]:
+            - img
+            - text: EG
+          - option "EGO" [ref=e506]:
+            - img
+            - text: EGO
+          - option "EH" [ref=e507]:
+            - img
+            - text: EH
+          - option "EIX" [ref=e508]:
+            - img
+            - text: EIX
+          - option "EL" [ref=e509]:
+            - img
+            - text: EL
+          - option "ELF" [ref=e510]:
+            - img
+            - text: ELF
+          - option "ELV" [ref=e511]:
+            - img
+            - text: ELV
+          - option "EMB" [ref=e512]:
+            - img
+            - text: EMB
+          - option "EMBJ" [ref=e513]:
+            - img
+            - text: EMBJ
+          - option "EME" [ref=e514]:
+            - img
+            - text: EME
+          - option "EMN" [ref=e515]:
+            - img
+            - text: EMN
+          - option "EMR" [ref=e516]:
+            - img
+            - text: EMR
+          - option "ENB" [ref=e517]:
+            - img
+            - text: ENB
+          - option "ENPH" [ref=e518]:
+            - img
+            - text: ENPH
+          - option "ENVX" [ref=e519]:
+            - img
+            - text: ENVX
+          - option "EOG" [ref=e520]:
+            - img
+            - text: EOG
+          - option "EOSE" [ref=e521]:
+            - img
+            - text: EOSE
+          - option "EPAM" [ref=e522]:
+            - img
+            - text: EPAM
+          - option "EPD" [ref=e523]:
+            - img
+            - text: EPD
+          - option "EQIX" [ref=e524]:
+            - img
+            - text: EQIX
+          - option "EQNR" [ref=e525]:
+            - img
+            - text: EQNR
+          - option "EQR" [ref=e526]:
+            - img
+            - text: EQR
+          - option "EQT" [ref=e527]:
+            - img
+            - text: EQT
+          - option "EQX" [ref=e528]:
+            - img
+            - text: EQX
+          - option "ERIE" [ref=e529]:
+            - img
+            - text: ERIE
+          - option "ERX" [ref=e530]:
+            - img
+            - text: ERX
+          - option "ES" [ref=e531]:
+            - img
+            - text: ES
+          - option "ES1!" [ref=e532]:
+            - img
+            - text: ES1!
+          - option "ESLT" [ref=e533]:
+            - img
+            - text: ESLT
+          - option "ESM2026" [ref=e534]:
+            - img
+            - text: ESM2026
+          - option "ESPO" [ref=e535]:
+            - img
+            - text: ESPO
+          - option "ESS" [ref=e536]:
+            - img
+            - text: ESS
+          - option "ESTC" [ref=e537]:
+            - img
+            - text: ESTC
+          - option "ESU2026" [ref=e538]:
+            - img
+            - text: ESU2026
+          - option "ESZ2026" [ref=e539]:
+            - img
+            - text: ESZ2026
+          - option "ET" [ref=e540]:
+            - img
+            - text: ET
+          - option "ETHA" [ref=e541]:
+            - img
+            - text: ETHA
+          - option "ETHE" [ref=e542]:
+            - img
+            - text: ETHE
+          - option "ETHUSD" [ref=e543]:
+            - img
+            - text: ETHUSD
+          - option "ETN" [ref=e544]:
+            - img
+            - text: ETN
+          - option "ETR" [ref=e545]:
+            - img
+            - text: ETR
+          - option "ETSY" [ref=e546]:
+            - img
+            - text: ETSY
+          - option "EURUSD" [ref=e547]:
+            - img
+            - text: EURUSD
+          - option "EVRG" [ref=e548]:
+            - img
+            - text: EVRG
+          - option "EW" [ref=e549]:
+            - img
+            - text: EW
+          - option "EWG" [ref=e550]:
+            - img
+            - text: EWG
+          - option "EWH" [ref=e551]:
+            - img
+            - text: EWH
+          - option "EWJ" [ref=e552]:
+            - img
+            - text: EWJ
+          - option "EWW" [ref=e553]:
+            - img
+            - text: EWW
+          - option "EWY" [ref=e554]:
+            - img
+            - text: EWY
+          - option "EWZ" [ref=e555]:
+            - img
+            - text: EWZ
+          - option "EXAS" [ref=e556]:
+            - img
+            - text: EXAS
+          - option "EXC" [ref=e557]:
+            - img
+            - text: EXC
+          - option "EXE" [ref=e558]:
+            - img
+            - text: EXE
+          - option "EXPD" [ref=e559]:
+            - img
+            - text: EXPD
+          - option "EXPE" [ref=e560]:
+            - img
+            - text: EXPE
+          - option "EXR" [ref=e561]:
+            - img
+            - text: EXR
+          - option "EZU" [ref=e562]:
+            - img
+            - text: EZU
+          - option "F" [ref=e563]:
+            - img
+            - text: F
+          - option "FANG" [ref=e564]:
+            - img
+            - text: FANG
+          - option "FAS" [ref=e565]:
+            - img
+            - text: FAS
+          - option "FAST" [ref=e566]:
+            - img
+            - text: FAST
+          - option "FAZ" [ref=e567]:
+            - img
+            - text: FAZ
+          - option "FCEL" [ref=e568]:
+            - img
+            - text: FCEL
+          - option "FCX" [ref=e569]:
+            - img
+            - text: FCX
+          - option "FDS" [ref=e570]:
+            - img
+            - text: FDS
+          - option "FDX" [ref=e571]:
+            - img
+            - text: FDX
+          - option "FE" [ref=e572]:
+            - img
+            - text: FE
+          - option "FER" [ref=e573]:
+            - img
+            - text: FER
+          - option "FEZ" [ref=e574]:
+            - img
+            - text: FEZ
+          - option "FFIV" [ref=e575]:
+            - img
+            - text: FFIV
+          - option "FFTY" [ref=e576]:
+            - img
+            - text: FFTY
+          - option "FHN" [ref=e577]:
+            - img
+            - text: FHN
+          - option "FICO" [ref=e578]:
+            - img
+            - text: FICO
+          - option "FIG" [ref=e579]:
+            - img
+            - text: FIG
+          - option "FIS" [ref=e580]:
+            - img
+            - text: FIS
+          - option "FISV" [ref=e581]:
+            - img
+            - text: FISV
+          - option "FITB" [ref=e582]:
+            - img
+            - text: FITB
+          - option "FIX" [ref=e583]:
+            - img
+            - text: FIX
+          - option "FLEX" [ref=e584]:
+            - img
+            - text: FLEX
+          - option "FLGT" [ref=e585]:
+            - img
+            - text: FLGT
+          - option "FLNC" [ref=e586]:
+            - img
+            - text: FLNC
+          - option "FLR" [ref=e587]:
+            - img
+            - text: FLR
+          - option "FMC" [ref=e588]:
+            - img
+            - text: FMC
+          - option "FMX" [ref=e589]:
+            - img
+            - text: FMX
+          - option "FND" [ref=e590]:
+            - img
+            - text: FND
+          - option "FNGS" [ref=e591]:
+            - img
+            - text: FNGS
+          - option "FORM" [ref=e592]:
+            - img
+            - text: FORM
+          - option "FOUR" [ref=e593]:
+            - img
+            - text: FOUR
+          - option "FOX" [ref=e594]:
+            - img
+            - text: FOX
+          - option "FOXA" [ref=e595]:
+            - img
+            - text: FOXA
+          - option "FROG" [ref=e596]:
+            - img
+            - text: FROG
+          - option "FRT" [ref=e597]:
+            - img
+            - text: FRT
+          - option "FSLR" [ref=e598]:
+            - img
+            - text: FSLR
+          - option "FSLY" [ref=e599]:
+            - img
+            - text: FSLY
+          - option "FTDR" [ref=e600]:
+            - img
+            - text: FTDR
+          - option "FTNT" [ref=e601]:
+            - img
+            - text: FTNT
+          - option "FTV" [ref=e602]:
+            - img
+            - text: FTV
+          - option "FUBO" [ref=e603]:
+            - img
+            - text: FUBO
+          - option "FUTU" [ref=e604]:
+            - img
+            - text: FUTU
+          - option "FWONK" [ref=e605]:
+            - img
+            - text: FWONK
+          - option "FXE" [ref=e606]:
+            - img
+            - text: FXE
+          - option "FXF" [ref=e607]:
+            - img
+            - text: FXF
+          - option "FXI" [ref=e608]:
+            - img
+            - text: FXI
+          - option "FXY" [ref=e609]:
+            - img
+            - text: FXY
+          - option "GAP" [ref=e610]:
+            - img
+            - text: GAP
+          - option "GBPUSD" [ref=e611]:
+            - img
+            - text: GBPUSD
+          - option "GCM2026" [ref=e612]:
+            - img
+            - text: GCM2026
+          - option "GCQ2026" [ref=e613]:
+            - img
+            - text: GCQ2026
+          - option "GCT" [ref=e614]:
+            - img
+            - text: GCT
+          - option "GCZ2026" [ref=e615]:
+            - img
+            - text: GCZ2026
+          - option "GD" [ref=e616]:
+            - img
+            - text: GD
+          - option "GDDY" [ref=e617]:
+            - img
+            - text: GDDY
+          - option "GDX" [ref=e618]:
+            - img
+            - text: GDX
+          - option "GDXJ" [ref=e619]:
+            - img
+            - text: GDXJ
+          - option "GE" [ref=e620]:
+            - img
+            - text: GE
+          - option "GEHC" [ref=e621]:
+            - img
+            - text: GEHC
+          - option "GEN" [ref=e622]:
+            - img
+            - text: GEN
+          - option "GEO" [ref=e623]:
+            - img
+            - text: GEO
+          - option "GERN" [ref=e624]:
+            - img
+            - text: GERN
+          - option "GES" [ref=e625]:
+            - img
+            - text: GES
+          - option "GEV" [ref=e626]:
+            - img
+            - text: GEV
+          - option "GFI" [ref=e627]:
+            - img
+            - text: GFI
+          - option "GFS" [ref=e628]:
+            - img
+            - text: GFS
+          - option "GGAL" [ref=e629]:
+            - img
+            - text: GGAL
+          - option "GGLL" [ref=e630]:
+            - img
+            - text: GGLL
+          - option "GGME" [ref=e631]:
+            - img
+            - text: GGME
+          - option "GILD" [ref=e632]:
+            - img
+            - text: GILD
+          - option "GIS" [ref=e633]:
+            - img
+            - text: GIS
+          - option "GL" [ref=e634]:
+            - img
+            - text: GL
+          - option "GLBE" [ref=e635]:
+            - img
+            - text: GLBE
+          - option "GLD" [ref=e636]:
+            - img
+            - text: GLD
+          - option "GLNG" [ref=e637]:
+            - img
+            - text: GLNG
+          - option "GLW" [ref=e638]:
+            - img
+            - text: GLW
+          - option "GM" [ref=e639]:
+            - img
+            - text: GM
+          - option "GME" [ref=e640]:
+            - img
+            - text: GME
+          - option "GNRC" [ref=e641]:
+            - img
+            - text: GNRC
+          - option "GOOG" [ref=e642]:
+            - img
+            - text: GOOG
+          - option "GOOGL" [ref=e643]:
+            - img
+            - text: GOOGL
+          - option "GOVT" [ref=e644]:
+            - img
+            - text: GOVT
+          - option "GPC" [ref=e645]:
+            - img
+            - text: GPC
+          - option "GPN" [ref=e646]:
+            - img
+            - text: GPN
+          - option "GRAB" [ref=e647]:
+            - img
+            - text: GRAB
+          - option "GRMN" [ref=e648]:
+            - img
+            - text: GRMN
+          - option "GRPN" [ref=e649]:
+            - img
+            - text: GRPN
+          - option "GS" [ref=e650]:
+            - img
+            - text: GS
+          - option "GSAT" [ref=e651]:
+            - img
+            - text: GSAT
+          - option "GSK" [ref=e652]:
+            - img
+            - text: GSK
+          - option "GTLB" [ref=e653]:
+            - img
+            - text: GTLB
+          - option "GUSH" [ref=e654]:
+            - img
+            - text: GUSH
+          - option "GWW" [ref=e655]:
+            - img
+            - text: GWW
+          - option "H" [ref=e656]:
+            - img
+            - text: H
+          - option "HAL" [ref=e657]:
+            - img
+            - text: HAL
+          - option "HAS" [ref=e658]:
+            - img
+            - text: HAS
+          - option "HBAN" [ref=e659]:
+            - img
+            - text: HBAN
+          - option "HCA" [ref=e660]:
+            - img
+            - text: HCA
+          - option "HCC" [ref=e661]:
+            - img
+            - text: HCC
+          - option "HD" [ref=e662]:
+            - img
+            - text: HD
+          - option "HDGE" [ref=e663]:
+            - img
+            - text: HDGE
+          - option "HE" [ref=e664]:
+            - img
+            - text: HE
+          - option "HEI" [ref=e665]:
+            - img
+            - text: HEI
+          - option "HEWJ" [ref=e666]:
+            - img
+            - text: HEWJ
+          - option "HEZU" [ref=e667]:
+            - img
+            - text: HEZU
+          - option "HGK2026" [ref=e668]:
+            - img
+            - text: HGK2026
+          - option "HGN2026" [ref=e669]:
+            - img
+            - text: HGN2026
+          - option "HGZ2026" [ref=e670]:
+            - img
+            - text: HGZ2026
+          - option "HIG" [ref=e671]:
+            - img
+            - text: HIG
+          - option "HII" [ref=e672]:
+            - img
+            - text: HII
+          - option "HIMS" [ref=e673]:
+            - img
+            - text: HIMS
+          - option "HL" [ref=e674]:
+            - img
+            - text: HL
+          - option "HLT" [ref=e675]:
+            - img
+            - text: HLT
+          - option "HMY" [ref=e676]:
+            - img
+            - text: HMY
+          - option "HODL" [ref=e677]:
+            - img
+            - text: HODL
+          - option "HOLX" [ref=e678]:
+            - img
+            - text: HOLX
+          - option "HON" [ref=e679]:
+            - img
+            - text: HON
+          - option "HOOD" [ref=e680]:
+            - img
+            - text: HOOD
+          - option "HPE" [ref=e681]:
+            - img
+            - text: HPE
+          - option "HPQ" [ref=e682]:
+            - img
+            - text: HPQ
+          - option "HRB" [ref=e683]:
+            - img
+            - text: HRB
+          - option "HRL" [ref=e684]:
+            - img
+            - text: HRL
+          - option "HSAI" [ref=e685]:
+            - img
+            - text: HSAI
+          - option "HSBC" [ref=e686]:
+            - img
+            - text: HSBC
+          - option "HSIC" [ref=e687]:
+            - img
+            - text: HSIC
+          - option "HST" [ref=e688]:
+            - img
+            - text: HST
+          - option "HSY" [ref=e689]:
+            - img
+            - text: HSY
+          - option "HTZ" [ref=e690]:
+            - img
+            - text: HTZ
+          - option "HUBB" [ref=e691]:
+            - img
+            - text: HUBB
+          - option "HUBS" [ref=e692]:
+            - img
+            - text: HUBS
+          - option "HUM" [ref=e693]:
+            - img
+            - text: HUM
+          - option "HUT" [ref=e694]:
+            - img
+            - text: HUT
+          - option "HUYA" [ref=e695]:
+            - img
+            - text: HUYA
+          - option "HWM" [ref=e696]:
+            - img
+            - text: HWM
+          - option "HYG" [ref=e697]:
+            - img
+            - text: HYG
+          - option "IAI" [ref=e698]:
+            - img
+            - text: IAI
+          - option "IAU" [ref=e699]:
+            - img
+            - text: IAU
+          - option "IBB" [ref=e700]:
+            - img
+            - text: IBB
+          - option "IBIT" [ref=e701]:
+            - img
+            - text: IBIT
+          - option "IBKR" [ref=e702]:
+            - img
+            - text: IBKR
+          - option "IBM" [ref=e703]:
+            - img
+            - text: IBM
+          - option "IBRX" [ref=e704]:
+            - img
+            - text: IBRX
+          - option "IBUY" [ref=e705]:
+            - img
+            - text: IBUY
+          - option "ICE" [ref=e706]:
+            - img
+            - text: ICE
+          - option "ICLN" [ref=e707]:
+            - img
+            - text: ICLN
+          - option "IDA" [ref=e708]:
+            - img
+            - text: IDA
+          - option "IDXX" [ref=e709]:
+            - img
+            - text: IDXX
+          - option "IEF" [ref=e710]:
+            - img
+            - text: IEF
+          - option "IEFA" [ref=e711]:
+            - img
+            - text: IEFA
+          - option "IEMG" [ref=e712]:
+            - img
+            - text: IEMG
+          - option "IEP" [ref=e713]:
+            - img
+            - text: IEP
+          - option "IEX" [ref=e714]:
+            - img
+            - text: IEX
+          - option "IFF" [ref=e715]:
+            - img
+            - text: IFF
+          - option "IGV" [ref=e716]:
+            - img
+            - text: IGV
+          - option "IHF" [ref=e717]:
+            - img
+            - text: IHF
+          - option "IHI" [ref=e718]:
+            - img
+            - text: IHI
+          - option "IJH" [ref=e719]:
+            - img
+            - text: IJH
+          - option "IJR" [ref=e720]:
+            - img
+            - text: IJR
+          - option "ILMN" [ref=e721]:
+            - img
+            - text: ILMN
+          - option "INCY" [ref=e722]:
+            - img
+            - text: INCY
+          - option "INDA" [ref=e723]:
+            - img
+            - text: INDA
+          - option "INFY" [ref=e724]:
+            - img
+            - text: INFY
+          - option "INSM" [ref=e725]:
+            - img
+            - text: INSM
+          - option "INTC" [ref=e726]:
+            - img
+            - text: INTC
+          - option "INTU" [ref=e727]:
+            - img
+            - text: INTU
+          - option "INVH" [ref=e728]:
+            - img
+            - text: INVH
+          - option "IONQ" [ref=e729]:
+            - img
+            - text: IONQ
+          - option "IOT" [ref=e730]:
+            - img
+            - text: IOT
+          - option "IOVA" [ref=e731]:
+            - img
+            - text: IOVA
+          - option "IP" [ref=e732]:
+            - img
+            - text: IP
+          - option "IPO" [ref=e733]:
+            - img
+            - text: IPO
+          - option "IQ" [ref=e734]:
+            - img
+            - text: IQ
+          - option "IQV" [ref=e735]:
+            - img
+            - text: IQV
+          - option "IR" [ref=e736]:
+            - img
+            - text: IR
+          - option "IREN" [ref=e737]:
+            - img
+            - text: IREN
+          - option "IRM" [ref=e738]:
+            - img
+            - text: IRM
+          - option "IRWD" [ref=e739]:
+            - img
+            - text: IRWD
+          - option "ISRG" [ref=e740]:
+            - img
+            - text: ISRG
+          - option "IT" [ref=e741]:
+            - img
+            - text: IT
+          - option "ITA" [ref=e742]:
+            - img
+            - text: ITA
+          - option "ITB" [ref=e743]:
+            - img
+            - text: ITB
+          - option "ITOT" [ref=e744]:
+            - img
+            - text: ITOT
+          - option "ITW" [ref=e745]:
+            - img
+            - text: ITW
+          - option "IVV" [ref=e746]:
+            - img
+            - text: IVV
+          - option "IVW" [ref=e747]:
+            - img
+            - text: IVW
+          - option "IVZ" [ref=e748]:
+            - img
+            - text: IVZ
+          - option "IWB" [ref=e749]:
+            - img
+            - text: IWB
+          - option "IWC" [ref=e750]:
+            - img
+            - text: IWC
+          - option "IWD" [ref=e751]:
+            - img
+            - text: IWD
+          - option "IWF" [ref=e752]:
+            - img
+            - text: IWF
+          - option "IWM" [ref=e753]:
+            - img
+            - text: IWM
+          - option "IWO" [ref=e754]:
+            - img
+            - text: IWO
+          - option "IXC" [ref=e755]:
+            - img
+            - text: IXC
+          - option "IYR" [ref=e756]:
+            - img
+            - text: IYR
+          - option "IYT" [ref=e757]:
+            - img
+            - text: IYT
+          - option "J" [ref=e758]:
+            - img
+            - text: J
+          - option "JBHT" [ref=e759]:
+            - img
+            - text: JBHT
+          - option "JBL" [ref=e760]:
+            - img
+            - text: JBL
+          - option "JBLU" [ref=e761]:
+            - img
+            - text: JBLU
+          - option "JBS" [ref=e762]:
+            - img
+            - text: JBS
+          - option "JCI" [ref=e763]:
+            - img
+            - text: JCI
+          - option "JD" [ref=e764]:
+            - img
+            - text: JD
+          - option "JDST" [ref=e765]:
+            - img
+            - text: JDST
+          - option "JEPI" [ref=e766]:
+            - img
+            - text: JEPI
+          - option "JEPQ" [ref=e767]:
+            - img
+            - text: JEPQ
+          - option "JETS" [ref=e768]:
+            - img
+            - text: JETS
+          - option "JKHY" [ref=e769]:
+            - img
+            - text: JKHY
+          - option "JMIA" [ref=e770]:
+            - img
+            - text: JMIA
+          - option "JNJ" [ref=e771]:
+            - img
+            - text: JNJ
+          - option "JNK" [ref=e772]:
+            - img
+            - text: JNK
+          - option "JNUG" [ref=e773]:
+            - img
+            - text: JNUG
+          - option "JOBY" [ref=e774]:
+            - img
+            - text: JOBY
+          - option "JOYY" [ref=e775]:
+            - img
+            - text: JOYY
+          - option "JPM" [ref=e776]:
+            - img
+            - text: JPM
+          - option "JPYUSD" [ref=e777]:
+            - img
+            - text: JPYUSD
+          - option "KBE" [ref=e778]:
+            - img
+            - text: KBE
+          - option "KBWP" [ref=e779]:
+            - img
+            - text: KBWP
+          - option "KCE" [ref=e780]:
+            - img
+            - text: KCE
+          - option "KDP" [ref=e781]:
+            - img
+            - text: KDP
+          - option "KEY" [ref=e782]:
+            - img
+            - text: KEY
+          - option "KEYS" [ref=e783]:
+            - img
+            - text: KEYS
+          - option "KGC" [ref=e784]:
+            - img
+            - text: KGC
+          - option "KHC" [ref=e785]:
+            - img
+            - text: KHC
+          - option "KIE" [ref=e786]:
+            - img
+            - text: KIE
+          - option "KIM" [ref=e787]:
+            - img
+            - text: KIM
+          - option "KKR" [ref=e788]:
+            - img
+            - text: KKR
+          - option "KLAC" [ref=e789]:
+            - img
+            - text: KLAC
+          - option "KLAR" [ref=e790]:
+            - img
+            - text: KLAR
+          - option "KMB" [ref=e791]:
+            - img
+            - text: KMB
+          - option "KMI" [ref=e792]:
+            - img
+            - text: KMI
+          - option "KMX" [ref=e793]:
+            - img
+            - text: KMX
+          - option "KNCT" [ref=e794]:
+            - img
+            - text: KNCT
+          - option "KNSL" [ref=e795]:
+            - img
+            - text: KNSL
+          - option "KO" [ref=e796]:
+            - img
+            - text: KO
+          - option "KODK" [ref=e797]:
+            - img
+            - text: KODK
+          - option "KOLD" [ref=e798]:
+            - img
+            - text: KOLD
+          - option "KR" [ref=e799]:
+            - img
+            - text: KR
+          - option "KRE" [ref=e800]:
+            - img
+            - text: KRE
+          - option "KSS" [ref=e801]:
+            - img
+            - text: KSS
+          - option "KTOS" [ref=e802]:
+            - img
+            - text: KTOS
+          - option "KVUE" [ref=e803]:
+            - img
+            - text: KVUE
+          - option "KWEB" [ref=e804]:
+            - img
+            - text: KWEB
+          - option "L" [ref=e805]:
+            - img
+            - text: L
+          - option "LABD" [ref=e806]:
+            - img
+            - text: LABD
+          - option "LABU" [ref=e807]:
+            - img
+            - text: LABU
+          - option "LAC" [ref=e808]:
+            - img
+            - text: LAC
+          - option "LAZR" [ref=e809]:
+            - img
+            - text: LAZR
+          - option "LCID" [ref=e810]:
+            - img
+            - text: LCID
+          - option "LDOS" [ref=e811]:
+            - img
+            - text: LDOS
+          - option "LEN" [ref=e812]:
+            - img
+            - text: LEN
+          - option "LEU" [ref=e813]:
+            - img
+            - text: LEU
+          - option "LH" [ref=e814]:
+            - img
+            - text: LH
+          - option "LHX" [ref=e815]:
+            - img
+            - text: LHX
+          - option "LI" [ref=e816]:
+            - img
+            - text: LI
+          - option "LII" [ref=e817]:
+            - img
+            - text: LII
+          - option "LIN" [ref=e818]:
+            - img
+            - text: LIN
+          - option "LIT" [ref=e819]:
+            - img
+            - text: LIT
+          - option "LITE" [ref=e820]:
+            - img
+            - text: LITE
+          - option "LKQ" [ref=e821]:
+            - img
+            - text: LKQ
+          - option "LLY" [ref=e822]:
+            - img
+            - text: LLY
+          - option "LMND" [ref=e823]:
+            - img
+            - text: LMND
+          - option "LMT" [ref=e824]:
+            - img
+            - text: LMT
+          - option "LNC" [ref=e825]:
+            - img
+            - text: LNC
+          - option "LNG" [ref=e826]:
+            - img
+            - text: LNG
+          - option "LNT" [ref=e827]:
+            - img
+            - text: LNT
+          - option "LNTH" [ref=e828]:
+            - img
+            - text: LNTH
+          - option "LOGI" [ref=e829]:
+            - img
+            - text: LOGI
+          - option "LOVE" [ref=e830]:
+            - img
+            - text: LOVE
+          - option "LOW" [ref=e831]:
+            - img
+            - text: LOW
+          - option "LPLA" [ref=e832]:
+            - img
+            - text: LPLA
+          - option "LQD" [ref=e833]:
+            - img
+            - text: LQD
+          - option "LRCX" [ref=e834]:
+            - img
+            - text: LRCX
+          - option "LSCC" [ref=e835]:
+            - img
+            - text: LSCC
+          - option "LU" [ref=e836]:
+            - img
+            - text: LU
+          - option "LULU" [ref=e837]:
+            - img
+            - text: LULU
+          - option "LUMN" [ref=e838]:
+            - img
+            - text: LUMN
+          - option "LUNR" [ref=e839]:
+            - img
+            - text: LUNR
+          - option "LUV" [ref=e840]:
+            - img
+            - text: LUV
+          - option "LVS" [ref=e841]:
+            - img
+            - text: LVS
+          - option "LW" [ref=e842]:
+            - img
+            - text: LW
+          - option "LYB" [ref=e843]:
+            - img
+            - text: LYB
+          - option "LYFT" [ref=e844]:
+            - img
+            - text: LYFT
+          - option "LYV" [ref=e845]:
+            - img
+            - text: LYV
+          - option "M" [ref=e846]:
+            - img
+            - text: M
+          - option "MA" [ref=e847]:
+            - img
+            - text: MA
+          - option "MAA" [ref=e848]:
+            - img
+            - text: MAA
+          - option "MAGS" [ref=e849]:
+            - img
+            - text: MAGS
+          - option "MAR" [ref=e850]:
+            - img
+            - text: MAR
+          - option "MARA" [ref=e851]:
+            - img
+            - text: MARA
+          - option "MAS" [ref=e852]:
+            - img
+            - text: MAS
+          - option "MBLY" [ref=e853]:
+            - img
+            - text: MBLY
+          - option "MBT1!" [ref=e854]:
+            - img
+            - text: MBT1!
+          - option "MBTJ2026" [ref=e855]:
+            - img
+            - text: MBTJ2026
+          - option "MBTK2026" [ref=e856]:
+            - img
+            - text: MBTK2026
+          - option "MBTM2026" [ref=e857]:
+            - img
+            - text: MBTM2026
+          - option "MC" [ref=e858]:
+            - img
+            - text: MC
+          - option "MCD" [ref=e859]:
+            - img
+            - text: MCD
+          - option "MCHI" [ref=e860]:
+            - img
+            - text: MCHI
+          - option "MCHP" [ref=e861]:
+            - img
+            - text: MCHP
+          - option "MCK" [ref=e862]:
+            - img
+            - text: MCK
+          - option "MCO" [ref=e863]:
+            - img
+            - text: MCO
+          - option "MDB" [ref=e864]:
+            - img
+            - text: MDB
+          - option "MDLN" [ref=e865]:
+            - img
+            - text: MDLN
+          - option "MDLZ" [ref=e866]:
+            - img
+            - text: MDLZ
+          - option "MDT" [ref=e867]:
+            - img
+            - text: MDT
+          - option "MDY" [ref=e868]:
+            - img
+            - text: MDY
+          - option "MDYG" [ref=e869]:
+            - img
+            - text: MDYG
+          - option "MELI" [ref=e870]:
+            - img
+            - text: MELI
+          - option "MET" [ref=e871]:
+            - img
+            - text: MET
+          - option "META" [ref=e872]:
+            - img
+            - text: META
+          - option "METV" [ref=e873]:
+            - img
+            - text: METV
+          - option "MFIN" [ref=e874]:
+            - img
+            - text: MFIN
+          - option "MGK" [ref=e875]:
+            - img
+            - text: MGK
+          - option "MGM" [ref=e876]:
+            - img
+            - text: MGM
+          - option "MHK" [ref=e877]:
+            - img
+            - text: MHK
+          - option "MJ" [ref=e878]:
+            - img
+            - text: MJ
+          - option "MKC" [ref=e879]:
+            - img
+            - text: MKC
+          - option "MKTX" [ref=e880]:
+            - img
+            - text: MKTX
+          - option "MLM" [ref=e881]:
+            - img
+            - text: MLM
+          - option "MMM" [ref=e882]:
+            - img
+            - text: MMM
+          - option "MNSO" [ref=e883]:
+            - img
+            - text: MNSO
+          - option "MNST" [ref=e884]:
+            - img
+            - text: MNST
+          - option "MO" [ref=e885]:
+            - img
+            - text: MO
+          - option "MOH" [ref=e886]:
+            - img
+            - text: MOH
+          - option "MOMO" [ref=e887]:
+            - img
+            - text: MOMO
+          - option "MOS" [ref=e888]:
+            - img
+            - text: MOS
+          - option "MP" [ref=e889]:
+            - img
+            - text: MP
+          - option "MPC" [ref=e890]:
+            - img
+            - text: MPC
+          - option "MPLX" [ref=e891]:
+            - img
+            - text: MPLX
+          - option "MPT" [ref=e892]:
+            - img
+            - text: MPT
+          - option "MPWR" [ref=e893]:
+            - img
+            - text: MPWR
+          - option "MRK" [ref=e894]:
+            - img
+            - text: MRK
+          - option "MRNA" [ref=e895]:
+            - img
+            - text: MRNA
+          - option "MRSH" [ref=e896]:
+            - img
+            - text: MRSH
+          - option "MRVL" [ref=e897]:
+            - img
+            - text: MRVL
+          - option "MS" [ref=e898]:
+            - img
+            - text: MS
+          - option "MSCI" [ref=e899]:
+            - img
+            - text: MSCI
+          - option "MSFT" [ref=e900]:
+            - img
+            - text: MSFT
+          - option "MSI" [ref=e901]:
+            - img
+            - text: MSI
+          - option "MSOS" [ref=e902]:
+            - img
+            - text: MSOS
+          - option "MSOX" [ref=e903]:
+            - img
+            - text: MSOX
+          - option "MSTR" [ref=e904]:
+            - img
+            - text: MSTR
+          - option "MT" [ref=e905]:
+            - img
+            - text: MT
+          - option "MTB" [ref=e906]:
+            - img
+            - text: MTB
+          - option "MTCH" [ref=e907]:
+            - img
+            - text: MTCH
+          - option "MTD" [ref=e908]:
+            - img
+            - text: MTD
+          - option "MTUM" [ref=e909]:
+            - img
+            - text: MTUM
+          - option "MTZ" [ref=e910]:
+            - img
+            - text: MTZ
+          - option "MU" [ref=e911]:
+            - img
+            - text: MU
+          - option "MUB" [ref=e912]:
+            - img
+            - text: MUB
+          - option "MVIS" [ref=e913]:
+            - img
+            - text: MVIS
+          - option "NAIL" [ref=e914]:
+            - img
+            - text: NAIL
+          - option "NAT" [ref=e915]:
+            - img
+            - text: NAT
+          - option "NBIS" [ref=e916]:
+            - img
+            - text: NBIS
+          - option "NCLH" [ref=e917]:
+            - img
+            - text: NCLH
+          - option "NDAQ" [ref=e918]:
+            - img
+            - text: NDAQ
+          - option "NDSN" [ref=e919]:
+            - img
+            - text: NDSN
+          - option "NDX" [ref=e920]:
+            - img
+            - text: NDX
+          - option "NEE" [ref=e921]:
+            - img
+            - text: NEE
+          - option "NEM" [ref=e922]:
+            - img
+            - text: NEM
+          - option "NEMCL" [ref=e923]:
+            - img
+            - text: NEMCL
+          - option "NET" [ref=e924]:
+            - img
+            - text: NET
+          - option "NFE" [ref=e925]:
+            - img
+            - text: NFE
+          - option "NFLX" [ref=e926]:
+            - img
+            - text: NFLX
+          - option "NGK2026" [ref=e927]:
+            - img
+            - text: NGK2026
+          - option "NGM2026" [ref=e928]:
+            - img
+            - text: NGM2026
+          - option "NGN2026" [ref=e929]:
+            - img
+            - text: NGN2026
+          - option "NI" [ref=e930]:
+            - img
+            - text: NI
+          - option "NIO" [ref=e931]:
+            - img
+            - text: NIO
+          - option "NKE" [ref=e932]:
+            - img
+            - text: NKE
+          - option "NLY" [ref=e933]:
+            - img
+            - text: NLY
+          - option "NN" [ref=e934]:
+            - img
+            - text: NN
+          - option "NNE" [ref=e935]:
+            - img
+            - text: NNE
+          - option "NNOX" [ref=e936]:
+            - img
+            - text: NNOX
+          - option "NOC" [ref=e937]:
+            - img
+            - text: NOC
+          - option "NOG" [ref=e938]:
+            - img
+            - text: NOG
+          - option "NOK" [ref=e939]:
+            - img
+            - text: NOK
+          - option "NOW" [ref=e940]:
+            - img
+            - text: NOW
+          - option "NQ1!" [ref=e941]:
+            - img
+            - text: NQ1!
+          - option "NQM2026" [ref=e942]:
+            - img
+            - text: NQM2026
+          - option "NQU2026" [ref=e943]:
+            - img
+            - text: NQU2026
+          - option "NQZ2026" [ref=e944]:
+            - img
+            - text: NQZ2026
+          - option "NRG" [ref=e945]:
+            - img
+            - text: NRG
+          - option "NSC" [ref=e946]:
+            - img
+            - text: NSC
+          - option "NTAP" [ref=e947]:
+            - img
+            - text: NTAP
+          - option "NTR" [ref=e948]:
+            - img
+            - text: NTR
+          - option "NTRS" [ref=e949]:
+            - img
+            - text: NTRS
+          - option "NU" [ref=e950]:
+            - img
+            - text: NU
+          - option "NUE" [ref=e951]:
+            - img
+            - text: NUE
+          - option "NUGT" [ref=e952]:
+            - img
+            - text: NUGT
+          - option "NVAX" [ref=e953]:
+            - img
+            - text: NVAX
+          - option "NVD" [ref=e954]:
+            - img
+            - text: NVD
+          - option "NVDA" [ref=e955]:
+            - img
+            - text: NVDA
+          - option "NVDL" [ref=e956]:
+            - img
+            - text: NVDL
+          - option "NVDS" [ref=e957]:
+            - img
+            - text: NVDS
+          - option "NVDU" [ref=e958]:
+            - img
+            - text: NVDU
+          - option "NVDX" [ref=e959]:
+            - img
+            - text: NVDX
+          - option "NVDY" [ref=e960]:
+            - img
+            - text: NVDY
+          - option "NVO" [ref=e961]:
+            - img
+            - text: NVO
+          - option "NVR" [ref=e962]:
+            - img
+            - text: NVR
+          - option "NVS" [ref=e963]:
+            - img
+            - text: NVS
+          - option "NVTS" [ref=e964]:
+            - img
+            - text: NVTS
+          - option "NWS" [ref=e965]:
+            - img
+            - text: NWS
+          - option "NWSA" [ref=e966]:
+            - img
+            - text: NWSA
+          - option "NXE" [ref=e967]:
+            - img
+            - text: NXE
+          - option "NXPI" [ref=e968]:
+            - img
+            - text: NXPI
+          - option "NXT" [ref=e969]:
+            - img
+            - text: NXT
+          - option "NXTG" [ref=e970]:
+            - img
+            - text: NXTG
+          - option "O" [ref=e971]:
+            - img
+            - text: O
+          - option "OCGN" [ref=e972]:
+            - img
+            - text: OCGN
+          - option "ODFL" [ref=e973]:
+            - img
+            - text: ODFL
+          - option "OIH" [ref=e974]:
+            - img
+            - text: OIH
+          - option "OKE" [ref=e975]:
+            - img
+            - text: OKE
+          - option "OKLO" [ref=e976]:
+            - img
+            - text: OKLO
+          - option "OKTA" [ref=e977]:
+            - img
+            - text: OKTA
+          - option "OLED" [ref=e978]:
+            - img
+            - text: OLED
+          - option "OMC" [ref=e979]:
+            - img
+            - text: OMC
+          - option "ON" [ref=e980]:
+            - img
+            - text: "ON"
+          - option "ONC" [ref=e981]:
+            - img
+            - text: ONC
+          - option "ONDS" [ref=e982]:
+            - img
+            - text: ONDS
+          - option "ONON" [ref=e983]:
+            - img
+            - text: ONON
+          - option "OPEN" [ref=e984]:
+            - img
+            - text: OPEN
+          - option "OPK" [ref=e985]:
+            - img
+            - text: OPK
+          - option "OR" [ref=e986]:
+            - img
+            - text: OR
+          - option "ORCL" [ref=e987]:
+            - img
+            - text: ORCL
+          - option "ORLY" [ref=e988]:
+            - img
+            - text: ORLY
+          - option "OSCR" [ref=e989]:
+            - img
+            - text: OSCR
+          - option "OTIS" [ref=e990]:
+            - img
+            - text: OTIS
+          - option "OUST" [ref=e991]:
+            - img
+            - text: OUST
+          - option "OWL" [ref=e992]:
+            - img
+            - text: OWL
+          - option "OXY" [ref=e993]:
+            - img
+            - text: OXY
+          - option "PAA" [ref=e994]:
+            - img
+            - text: PAA
+          - option "PAAS" [ref=e995]:
+            - img
+            - text: PAAS
+          - option "PAGP" [ref=e996]:
+            - img
+            - text: PAGP
+          - option "PANW" [ref=e997]:
+            - img
+            - text: PANW
+          - option "PATH" [ref=e998]:
+            - img
+            - text: PATH
+          - option "PAYC" [ref=e999]:
+            - img
+            - text: PAYC
+          - option "PAYX" [ref=e1000]:
+            - img
+            - text: PAYX
+          - option "PBF" [ref=e1001]:
+            - img
+            - text: PBF
+          - option "PBJ" [ref=e1002]:
+            - img
+            - text: PBJ
+          - option "PBR" [ref=e1003]:
+            - img
+            - text: PBR
+          - option "PCAR" [ref=e1004]:
+            - img
+            - text: PCAR
+          - option "PCG" [ref=e1005]:
+            - img
+            - text: PCG
+          - option "PCT" [ref=e1006]:
+            - img
+            - text: PCT
+          - option "PDD" [ref=e1007]:
+            - img
+            - text: PDD
+          - option "PEG" [ref=e1008]:
+            - img
+            - text: PEG
+          - option "PEJ" [ref=e1009]:
+            - img
+            - text: PEJ
+          - option "PENN" [ref=e1010]:
+            - img
+            - text: PENN
+          - option "PEP" [ref=e1011]:
+            - img
+            - text: PEP
+          - option "PFE" [ref=e1012]:
+            - img
+            - text: PFE
+          - option "PFF" [ref=e1013]:
+            - img
+            - text: PFF
+          - option "PFG" [ref=e1014]:
+            - img
+            - text: PFG
+          - option "PG" [ref=e1015]:
+            - img
+            - text: PG
+          - option "PGJ" [ref=e1016]:
+            - img
+            - text: PGJ
+          - option "PGR" [ref=e1017]:
+            - img
+            - text: PGR
+          - option "PH" [ref=e1018]:
+            - img
+            - text: PH
+          - option "PHM" [ref=e1019]:
+            - img
+            - text: PHM
+          - option "PINS" [ref=e1020]:
+            - img
+            - text: PINS
+          - option "PKG" [ref=e1021]:
+            - img
+            - text: PKG
+          - option "PLCE" [ref=e1022]:
+            - img
+            - text: PLCE
+          - option "PLD" [ref=e1023]:
+            - img
+            - text: PLD
+          - option "PLF2027" [ref=e1024]:
+            - img
+            - text: PLF2027
+          - option "PLN2026" [ref=e1025]:
+            - img
+            - text: PLN2026
+          - option "PLTR" [ref=e1026]:
+            - img
+            - text: PLTR
+          - option "PLUG" [ref=e1027]:
+            - img
+            - text: PLUG
+          - option "PLV2026" [ref=e1028]:
+            - img
+            - text: PLV2026
+          - option "PM" [ref=e1029]:
+            - img
+            - text: PM
+          - option "PNC" [ref=e1030]:
+            - img
+            - text: PNC
+          - option "PNQI" [ref=e1031]:
+            - img
+            - text: PNQI
+          - option "PNR" [ref=e1032]:
+            - img
+            - text: PNR
+          - option "PNW" [ref=e1033]:
+            - img
+            - text: PNW
+          - option "PODD" [ref=e1034]:
+            - img
+            - text: PODD
+          - option "PONY" [ref=e1035]:
+            - img
+            - text: PONY
+          - option "POOL" [ref=e1036]:
+            - img
+            - text: POOL
+          - option "PPA" [ref=e1037]:
+            - img
+            - text: PPA
+          - option "PPG" [ref=e1038]:
+            - img
+            - text: PPG
+          - option "PPL" [ref=e1039]:
+            - img
+            - text: PPL
+          - option "PR" [ref=e1040]:
+            - img
+            - text: PR
+          - option "PRU" [ref=e1041]:
+            - img
+            - text: PRU
+          - option "PSA" [ref=e1042]:
+            - img
+            - text: PSA
+          - option "PSEC" [ref=e1043]:
+            - img
+            - text: PSEC
+          - option "PSI" [ref=e1044]:
+            - img
+            - text: PSI
+          - option "PSKY" [ref=e1045]:
+            - img
+            - text: PSKY
+          - option "PSQ" [ref=e1046]:
+            - img
+            - text: PSQ
+          - option "PSTG" [ref=e1047]:
+            - img
+            - text: PSTG
+          - option "PSX" [ref=e1048]:
+            - img
+            - text: PSX
+          - option "PTC" [ref=e1049]:
+            - img
+            - text: PTC
+          - option "PTON" [ref=e1050]:
+            - img
+            - text: PTON
+          - option "PWR" [ref=e1051]:
+            - img
+            - text: PWR
+          - option "PYPL" [ref=e1052]:
+            - img
+            - text: PYPL
+          - option "PZZA" [ref=e1053]:
+            - img
+            - text: PZZA
+          - option "Q" [ref=e1054]:
+            - img
+            - text: Q
+          - option "QBTS" [ref=e1055]:
+            - img
+            - text: QBTS
+          - option "QCOM" [ref=e1056]:
+            - img
+            - text: QCOM
+          - option "QID" [ref=e1057]:
+            - img
+            - text: QID
+          - option "QLD" [ref=e1058]:
+            - img
+            - text: QLD
+          - option "QQQ" [ref=e1059]:
+            - img
+            - text: QQQ
+          - option "QQQE" [ref=e1060]:
+            - img
+            - text: QQQE
+          - option "QQQM" [ref=e1061]:
+            - img
+            - text: QQQM
+          - option "QRVO" [ref=e1062]:
+            - img
+            - text: QRVO
+          - option "QS" [ref=e1063]:
+            - img
+            - text: QS
+          - option "QUBT" [ref=e1064]:
+            - img
+            - text: QUBT
+          - option "QUIK" [ref=e1065]:
+            - img
+            - text: QUIK
+          - option "QXO" [ref=e1066]:
+            - img
+            - text: QXO
+          - option "RACE" [ref=e1067]:
+            - img
+            - text: RACE
+          - option "RBLX" [ref=e1068]:
+            - img
+            - text: RBLX
+          - option "RBRK" [ref=e1069]:
+            - img
+            - text: RBRK
+          - option "RCL" [ref=e1070]:
+            - img
+            - text: RCL
+          - option "RDDT" [ref=e1071]:
+            - img
+            - text: RDDT
+          - option "REG" [ref=e1072]:
+            - img
+            - text: REG
+          - option "REGN" [ref=e1073]:
+            - img
+            - text: REGN
+          - option "REM" [ref=e1074]:
+            - img
+            - text: REM
+          - option "REMX" [ref=e1075]:
+            - img
+            - text: REMX
+          - option "RF" [ref=e1076]:
+            - img
+            - text: RF
+          - option "RFIL" [ref=e1077]:
+            - img
+            - text: RFIL
+          - option "RGTI" [ref=e1078]:
+            - img
+            - text: RGTI
+          - option "RH" [ref=e1079]:
+            - img
+            - text: RH
+          - option "RIG" [ref=e1080]:
+            - img
+            - text: RIG
+          - option "RILY" [ref=e1081]:
+            - img
+            - text: RILY
+          - option "RIO" [ref=e1082]:
+            - img
+            - text: RIO
+          - option "RIOT" [ref=e1083]:
+            - img
+            - text: RIOT
+          - option "RITM" [ref=e1084]:
+            - img
+            - text: RITM
+          - option "RIVN" [ref=e1085]:
+            - img
+            - text: RIVN
+          - option "RJF" [ref=e1086]:
+            - img
+            - text: RJF
+          - option "RKLB" [ref=e1087]:
+            - img
+            - text: RKLB
+          - option "RKT" [ref=e1088]:
+            - img
+            - text: RKT
+          - option "RL" [ref=e1089]:
+            - img
+            - text: RL
+          - option "RMBS" [ref=e1090]:
+            - img
+            - text: RMBS
+          - option "RMD" [ref=e1091]:
+            - img
+            - text: RMD
+          - option "ROBO" [ref=e1092]:
+            - img
+            - text: ROBO
+          - option "ROK" [ref=e1093]:
+            - img
+            - text: ROK
+          - option "ROKU" [ref=e1094]:
+            - img
+            - text: ROKU
+          - option "ROL" [ref=e1095]:
+            - img
+            - text: ROL
+          - option "ROOT" [ref=e1096]:
+            - img
+            - text: ROOT
+          - option "ROP" [ref=e1097]:
+            - img
+            - text: ROP
+          - option "ROST" [ref=e1098]:
+            - img
+            - text: ROST
+          - option "RSG" [ref=e1099]:
+            - img
+            - text: RSG
+          - option "RSP" [ref=e1100]:
+            - img
+            - text: RSP
+          - option "RTX" [ref=e1101]:
+            - img
+            - text: RTX
+          - option "RTY1!" [ref=e1102]:
+            - img
+            - text: RTY1!
+          - option "RTYM2026" [ref=e1103]:
+            - img
+            - text: RTYM2026
+          - option "RTYU2026" [ref=e1104]:
+            - img
+            - text: RTYU2026
+          - option "RTYZ2026" [ref=e1105]:
+            - img
+            - text: RTYZ2026
+          - option "RUM" [ref=e1106]:
+            - img
+            - text: RUM
+          - option "RUN" [ref=e1107]:
+            - img
+            - text: RUN
+          - option "RUT" [ref=e1108]:
+            - img
+            - text: RUT
+          - option "RVMD" [ref=e1109]:
+            - img
+            - text: RVMD
+          - option "RVTY" [ref=e1110]:
+            - img
+            - text: RVTY
+          - option "RXRX" [ref=e1111]:
+            - img
+            - text: RXRX
+          - option "RYTM" [ref=e1112]:
+            - img
+            - text: RYTM
+          - option "S" [ref=e1113]:
+            - img
+            - text: S
+          - option "SAM" [ref=e1114]:
+            - img
+            - text: SAM
+          - option "SAN" [ref=e1115]:
+            - img
+            - text: SAN
+          - option "SANM" [ref=e1116]:
+            - img
+            - text: SANM
+          - option "SAP" [ref=e1117]:
+            - img
+            - text: SAP
+          - option "SARK" [ref=e1118]:
+            - img
+            - text: SARK
+          - option "SATS" [ref=e1119]:
+            - img
+            - text: SATS
+          - option "SBAC" [ref=e1120]:
+            - img
+            - text: SBAC
+          - option "SBET" [ref=e1121]:
+            - img
+            - text: SBET
+          - option "SBSW" [ref=e1122]:
+            - img
+            - text: SBSW
+          - option "SBUX" [ref=e1123]:
+            - img
+            - text: SBUX
+          - option "SCCO" [ref=e1124]:
+            - img
+            - text: SCCO
+          - option "SCHD" [ref=e1125]:
+            - img
+            - text: SCHD
+          - option "SCHW" [ref=e1126]:
+            - img
+            - text: SCHW
+          - option "SCO" [ref=e1127]:
+            - img
+            - text: SCO
+          - option "SCZ" [ref=e1128]:
+            - img
+            - text: SCZ
+          - option "SDOW" [ref=e1129]:
+            - img
+            - text: SDOW
+          - option "SDS" [ref=e1130]:
+            - img
+            - text: SDS
+          - option "SE" [ref=e1131]:
+            - img
+            - text: SE
+          - option "SEDG" [ref=e1132]:
+            - img
+            - text: SEDG
+          - option "SEI" [ref=e1133]:
+            - img
+            - text: SEI
+          - option "SFM" [ref=e1134]:
+            - img
+            - text: SFM
+          - option "SGML" [ref=e1135]:
+            - img
+            - text: SGML
+          - option "SH" [ref=e1136]:
+            - img
+            - text: SH
+          - option "SHAK" [ref=e1137]:
+            - img
+            - text: SHAK
+          - option "SHEL" [ref=e1138]:
+            - img
+            - text: SHEL
+          - option "SHOP" [ref=e1139]:
+            - img
+            - text: SHOP
+          - option "SHV" [ref=e1140]:
+            - img
+            - text: SHV
+          - option "SHW" [ref=e1141]:
+            - img
+            - text: SHW
+          - option "SHY" [ref=e1142]:
+            - img
+            - text: SHY
+          - option "SIK2026" [ref=e1143]:
+            - img
+            - text: SIK2026
+          - option "SIL" [ref=e1144]:
+            - img
+            - text: SIL
+          - option "SILJ" [ref=e1145]:
+            - img
+            - text: SILJ
+          - option "SIMO" [ref=e1146]:
+            - img
+            - text: SIMO
+          - option "SIN2026" [ref=e1147]:
+            - img
+            - text: SIN2026
+          - option "SIRI" [ref=e1148]:
+            - img
+            - text: SIRI
+          - option "SIVR" [ref=e1149]:
+            - img
+            - text: SIVR
+          - option "SIZ2026" [ref=e1150]:
+            - img
+            - text: SIZ2026
+          - option "SJM" [ref=e1151]:
+            - img
+            - text: SJM
+          - option "SKLZ" [ref=e1152]:
+            - img
+            - text: SKLZ
+          - option "SKYY" [ref=e1153]:
+            - img
+            - text: SKYY
+          - option "SLB" [ref=e1154]:
+            - img
+            - text: SLB
+          - option "SLV" [ref=e1155]:
+            - img
+            - text: SLV
+          - option "SMCI" [ref=e1156]:
+            - img
+            - text: SMCI
+          - option "SMH" [ref=e1157]:
+            - img
+            - text: SMH
+          - option "SMR" [ref=e1158]:
+            - img
+            - text: SMR
+          - option "SMTC" [ref=e1159]:
+            - img
+            - text: SMTC
+          - option "SNA" [ref=e1160]:
+            - img
+            - text: SNA
+          - option "SNAP" [ref=e1161]:
+            - img
+            - text: SNAP
+          - option "SNDK" [ref=e1162]:
+            - img
+            - text: SNDK
+          - option "SNDL" [ref=e1163]:
+            - img
+            - text: SNDL
+          - option "SNEX" [ref=e1164]:
+            - img
+            - text: SNEX
+          - option "SNOW" [ref=e1165]:
+            - img
+            - text: SNOW
+          - option "SNPS" [ref=e1166]:
+            - img
+            - text: SNPS
+          - option "SNY" [ref=e1167]:
+            - img
+            - text: SNY
+          - option "SO" [ref=e1168]:
+            - img
+            - text: SO
+          - option "SOCL" [ref=e1169]:
+            - img
+            - text: SOCL
+          - option "SOFI" [ref=e1170]:
+            - img
+            - text: SOFI
+          - option "SOLUSDC" [ref=e1171]:
+            - img
+            - text: SOLUSDC
+          - option "SOLV" [ref=e1172]:
+            - img
+            - text: SOLV
+          - option "SONY" [ref=e1173]:
+            - img
+            - text: SONY
+          - option "SOUN" [ref=e1174]:
+            - img
+            - text: SOUN
+          - option "SOXL" [ref=e1175]:
+            - img
+            - text: SOXL
+          - option "SOXS" [ref=e1176]:
+            - img
+            - text: SOXS
+          - option "SOXX" [ref=e1177]:
+            - img
+            - text: SOXX
+          - option "SPCE" [ref=e1178]:
+            - img
+            - text: SPCE
+          - option "SPG" [ref=e1179]:
+            - img
+            - text: SPG
+          - option "SPGI" [ref=e1180]:
+            - img
+            - text: SPGI
+          - option "SPHB" [ref=e1181]:
+            - img
+            - text: SPHB
+          - option "SPOT" [ref=e1182]:
+            - img
+            - text: SPOT
+          - option "SPTM" [ref=e1183]:
+            - img
+            - text: SPTM
+          - option "SPX" [ref=e1184]:
+            - img
+            - text: SPX
+          - option "SPXL" [ref=e1185]:
+            - img
+            - text: SPXL
+          - option "SPXS" [ref=e1186]:
+            - img
+            - text: SPXS
+          - option "SPXU" [ref=e1187]:
+            - img
+            - text: SPXU
+          - option "SPY" [ref=e1188]:
+            - img
+            - text: SPY
+          - option "SPYD" [ref=e1189]:
+            - img
+            - text: SPYD
+          - option "SPYG" [ref=e1190]:
+            - img
+            - text: SPYG
+          - option "SPYM" [ref=e1191]:
+            - img
+            - text: SPYM
+          - option "SQQQ" [ref=e1192]:
+            - img
+            - text: SQQQ
+          - option "SRE" [ref=e1193]:
+            - img
+            - text: SRE
+          - option "SRG" [ref=e1194]:
+            - img
+            - text: SRG
+          - option "SRPT" [ref=e1195]:
+            - img
+            - text: SRPT
+          - option "SSO" [ref=e1196]:
+            - img
+            - text: SSO
+          - option "STE" [ref=e1197]:
+            - img
+            - text: STE
+          - option "STIP" [ref=e1198]:
+            - img
+            - text: STIP
+          - option "STLA" [ref=e1199]:
+            - img
+            - text: STLA
+          - option "STLD" [ref=e1200]:
+            - img
+            - text: STLD
+          - option "STM" [ref=e1201]:
+            - img
+            - text: STM
+          - option "STNE" [ref=e1202]:
+            - img
+            - text: STNE
+          - option "STNG" [ref=e1203]:
+            - img
+            - text: STNG
+          - option "STT" [ref=e1204]:
+            - img
+            - text: STT
+          - option "STX" [ref=e1205]:
+            - img
+            - text: STX
+          - option "STZ" [ref=e1206]:
+            - img
+            - text: STZ
+          - option "SU" [ref=e1207]:
+            - img
+            - text: SU
+          - option "SVIX" [ref=e1208]:
+            - img
+            - text: SVIX
+          - option "SVXY" [ref=e1209]:
+            - img
+            - text: SVXY
+          - option "SW" [ref=e1210]:
+            - img
+            - text: SW
+          - option "SWK" [ref=e1211]:
+            - img
+            - text: SWK
+          - option "SWKS" [ref=e1212]:
+            - img
+            - text: SWKS
+          - option "SYF" [ref=e1213]:
+            - img
+            - text: SYF
+          - option "SYK" [ref=e1214]:
+            - img
+            - text: SYK
+          - option "SYM" [ref=e1215]:
+            - img
+            - text: SYM
+          - option "SYY" [ref=e1216]:
+            - img
+            - text: SYY
+          - option "T" [ref=e1217]:
+            - img
+            - text: T
+          - option "TAL" [ref=e1218]:
+            - img
+            - text: TAL
+          - option "TAN" [ref=e1219]:
+            - img
+            - text: TAN
+          - option "TAP" [ref=e1220]:
+            - img
+            - text: TAP
+          - option "TBBK" [ref=e1221]:
+            - img
+            - text: TBBK
+          - option "TBT" [ref=e1222]:
+            - img
+            - text: TBT
+          - option "TCOM" [ref=e1223]:
+            - img
+            - text: TCOM
+          - option "TD" [ref=e1224]:
+            - img
+            - text: TD
+          - option "TDG" [ref=e1225]:
+            - img
+            - text: TDG
+          - option "TDOC" [ref=e1226]:
+            - img
+            - text: TDOC
+          - option "TDW" [ref=e1227]:
+            - img
+            - text: TDW
+          - option "TDY" [ref=e1228]:
+            - img
+            - text: TDY
+          - option "TEAM" [ref=e1229]:
+            - img
+            - text: TEAM
+          - option "TECH" [ref=e1230]:
+            - img
+            - text: TECH
+          - option "TECK" [ref=e1231]:
+            - img
+            - text: TECK
+          - option "TECL" [ref=e1232]:
+            - img
+            - text: TECL
+          - option "TECS" [ref=e1233]:
+            - img
+            - text: TECS
+          - option "TEL" [ref=e1234]:
+            - img
+            - text: TEL
+          - option "TEM" [ref=e1235]:
+            - img
+            - text: TEM
+          - option "TER" [ref=e1236]:
+            - img
+            - text: TER
+          - option "TEVA" [ref=e1237]:
+            - img
+            - text: TEVA
+          - option "TFC" [ref=e1238]:
+            - img
+            - text: TFC
+          - option "TFPM" [ref=e1239]:
+            - img
+            - text: TFPM
+          - option "TFX" [ref=e1240]:
+            - img
+            - text: TFX
+          - option "TGLS" [ref=e1241]:
+            - img
+            - text: TGLS
+          - option "TGT" [ref=e1242]:
+            - img
+            - text: TGT
+          - option "TGTX" [ref=e1243]:
+            - img
+            - text: TGTX
+          - option "TIGR" [ref=e1244]:
+            - img
+            - text: TIGR
+          - option "TIP" [ref=e1245]:
+            - img
+            - text: TIP
+          - option "TJX" [ref=e1246]:
+            - img
+            - text: TJX
+          - option "TKO" [ref=e1247]:
+            - img
+            - text: TKO
+          - option "TLN" [ref=e1248]:
+            - img
+            - text: TLN
+          - option "TLRY" [ref=e1249]:
+            - img
+            - text: TLRY
+          - option "TLT" [ref=e1250]:
+            - img
+            - text: TLT
+          - option "TMC" [ref=e1251]:
+            - img
+            - text: TMC
+          - option "TMDX" [ref=e1252]:
+            - img
+            - text: TMDX
+          - option "TME" [ref=e1253]:
+            - img
+            - text: TME
+          - option "TMF" [ref=e1254]:
+            - img
+            - text: TMF
+          - option "TMO" [ref=e1255]:
+            - img
+            - text: TMO
+          - option "TMUS" [ref=e1256]:
+            - img
+            - text: TMUS
+          - option "TMV" [ref=e1257]:
+            - img
+            - text: TMV
+          - option "TNA" [ref=e1258]:
+            - img
+            - text: TNA
+          - option "TOST" [ref=e1259]:
+            - img
+            - text: TOST
+          - option "TPL" [ref=e1260]:
+            - img
+            - text: TPL
+          - option "TPR" [ref=e1261]:
+            - img
+            - text: TPR
+          - option "TQQQ" [ref=e1262]:
+            - img
+            - text: TQQQ
+          - option "TRGP" [ref=e1263]:
+            - img
+            - text: TRGP
+          - option "TRI" [ref=e1264]:
+            - img
+            - text: TRI
+          - option "TRMB" [ref=e1265]:
+            - img
+            - text: TRMB
+          - option "TROW" [ref=e1266]:
+            - img
+            - text: TROW
+          - option "TRV" [ref=e1267]:
+            - img
+            - text: TRV
+          - option "TSCO" [ref=e1268]:
+            - img
+            - text: TSCO
+          - option "TSEM" [ref=e1269]:
+            - img
+            - text: TSEM
+          - option "TSLA" [ref=e1270]:
+            - img
+            - text: TSLA
+          - option "TSLL" [ref=e1271]:
+            - img
+            - text: TSLL
+          - option "TSLT" [ref=e1272]:
+            - img
+            - text: TSLT
+          - option "TSLY" [ref=e1273]:
+            - img
+            - text: TSLY
+          - option "TSM" [ref=e1274]:
+            - img
+            - text: TSM
+          - option "TSN" [ref=e1275]:
+            - img
+            - text: TSN
+          - option "TT" [ref=e1276]:
+            - img
+            - text: TT
+          - option "TTAN" [ref=e1277]:
+            - img
+            - text: TTAN
+          - option "TTD" [ref=e1278]:
+            - img
+            - text: TTD
+          - option "TTE" [ref=e1279]:
+            - img
+            - text: TTE
+          - option "TTWO" [ref=e1280]:
+            - img
+            - text: TTWO
+          - option "TUA" [ref=e1281]:
+            - img
+            - text: TUA
+          - option "TUR" [ref=e1282]:
+            - img
+            - text: TUR
+          - option "TWLO" [ref=e1283]:
+            - img
+            - text: TWLO
+          - option "TXN" [ref=e1284]:
+            - img
+            - text: TXN
+          - option "TXT" [ref=e1285]:
+            - img
+            - text: TXT
+          - option "TYL" [ref=e1286]:
+            - img
+            - text: TYL
+          - option "TZA" [ref=e1287]:
+            - img
+            - text: TZA
+          - option "TZOO" [ref=e1288]:
+            - img
+            - text: TZOO
+          - option "U" [ref=e1289]:
+            - img
+            - text: U
+          - option "UAA" [ref=e1290]:
+            - img
+            - text: UAA
+          - option "UAL" [ref=e1291]:
+            - img
+            - text: UAL
+          - option "UBER" [ref=e1292]:
+            - img
+            - text: UBER
+          - option "UBS" [ref=e1293]:
+            - img
+            - text: UBS
+          - option "UCO" [ref=e1294]:
+            - img
+            - text: UCO
+          - option "UDN" [ref=e1295]:
+            - img
+            - text: UDN
+          - option "UDOW" [ref=e1296]:
+            - img
+            - text: UDOW
+          - option "UDR" [ref=e1297]:
+            - img
+            - text: UDR
+          - option "UEC" [ref=e1298]:
+            - img
+            - text: UEC
+          - option "UGA" [ref=e1299]:
+            - img
+            - text: UGA
+          - option "UHS" [ref=e1300]:
+            - img
+            - text: UHS
+          - option "UI" [ref=e1301]:
+            - img
+            - text: UI
+          - option "UL" [ref=e1302]:
+            - img
+            - text: UL
+          - option "ULTA" [ref=e1303]:
+            - img
+            - text: ULTA
+          - option "UMC" [ref=e1304]:
+            - img
+            - text: UMC
+          - option "UNFI" [ref=e1305]:
+            - img
+            - text: UNFI
+          - option "UNG" [ref=e1306]:
+            - img
+            - text: UNG
+          - option "UNH" [ref=e1307]:
+            - img
+            - text: UNH
+          - option "UNP" [ref=e1308]:
+            - img
+            - text: UNP
+          - option "UP" [ref=e1309]:
+            - img
+            - text: UP
+          - option "UPRO" [ref=e1310]:
+            - img
+            - text: UPRO
+          - option "UPS" [ref=e1311]:
+            - img
+            - text: UPS
+          - option "UPST" [ref=e1312]:
+            - img
+            - text: UPST
+          - option "UPWK" [ref=e1313]:
+            - img
+            - text: UPWK
+          - option "URA" [ref=e1314]:
+            - img
+            - text: URA
+          - option "URBN" [ref=e1315]:
+            - img
+            - text: URBN
+          - option "URI" [ref=e1316]:
+            - img
+            - text: URI
+          - option "URNJ" [ref=e1317]:
+            - img
+            - text: URNJ
+          - option "URNM" [ref=e1318]:
+            - img
+            - text: URNM
+          - option "URTY" [ref=e1319]:
+            - img
+            - text: URTY
+          - option "USB" [ref=e1320]:
+            - img
+            - text: USB
+          - option "USD" [ref=e1321]:
+            - img
+            - text: USD
+          - option "USDCHF" [ref=e1322]:
+            - img
+            - text: USDCHF
+          - option "USDJPY" [ref=e1323]:
+            - img
+            - text: USDJPY
+          - option "USMV" [ref=e1324]:
+            - img
+            - text: USMV
+          - option "USO" [ref=e1325]:
+            - img
+            - text: USO
+          - option "UUP" [ref=e1326]:
+            - img
+            - text: UUP
+          - option "UUUU" [ref=e1327]:
+            - img
+            - text: UUUU
+          - option "UVIX" [ref=e1328]:
+            - img
+            - text: UVIX
+          - option "UVXY" [ref=e1329]:
+            - img
+            - text: UVXY
+          - option "V" [ref=e1330]:
+            - img
+            - text: V
+          - option "VALE" [ref=e1331]:
+            - img
+            - text: VALE
+          - option "VB" [ref=e1332]:
+            - img
+            - text: VB
+          - option "VEA" [ref=e1333]:
+            - img
+            - text: VEA
+          - option "VEEV" [ref=e1334]:
+            - img
+            - text: VEEV
+          - option "VERI" [ref=e1335]:
+            - img
+            - text: VERI
+          - option "VFC" [ref=e1336]:
+            - img
+            - text: VFC
+          - option "VFS" [ref=e1337]:
+            - img
+            - text: VFS
+          - option "VG" [ref=e1338]:
+            - img
+            - text: VG
+          - option "VGK" [ref=e1339]:
+            - img
+            - text: VGK
+          - option "VGT" [ref=e1340]:
+            - img
+            - text: VGT
+          - option "VICE" [ref=e1341]:
+            - img
+            - text: VICE
+          - option "VICI" [ref=e1342]:
+            - img
+            - text: VICI
+          - option "VIG" [ref=e1343]:
+            - img
+            - text: VIG
+          - option "VITL" [ref=e1344]:
+            - img
+            - text: VITL
+          - option "VIX" [ref=e1345]:
+            - img
+            - text: VIX
+          - option "VIXY" [ref=e1346]:
+            - img
+            - text: VIXY
+          - option "VKTX" [ref=e1347]:
+            - img
+            - text: VKTX
+          - option "VLO" [ref=e1348]:
+            - img
+            - text: VLO
+          - option "VLTO" [ref=e1349]:
+            - img
+            - text: VLTO
+          - option "VLY" [ref=e1350]:
+            - img
+            - text: VLY
+          - option "VMC" [ref=e1351]:
+            - img
+            - text: VMC
+          - option "VNQ" [ref=e1352]:
+            - img
+            - text: VNQ
+          - option "VNQI" [ref=e1353]:
+            - img
+            - text: VNQI
+          - option "VO" [ref=e1354]:
+            - img
+            - text: VO
+          - option "VOD" [ref=e1355]:
+            - img
+            - text: VOD
+          - option "VOO" [ref=e1356]:
+            - img
+            - text: VOO
+          - option "VRSK" [ref=e1357]:
+            - img
+            - text: VRSK
+          - option "VRSN" [ref=e1358]:
+            - img
+            - text: VRSN
+          - option "VRT" [ref=e1359]:
+            - img
+            - text: VRT
+          - option "VRTX" [ref=e1360]:
+            - img
+            - text: VRTX
+          - option "VSCO" [ref=e1361]:
+            - img
+            - text: VSCO
+          - option "VST" [ref=e1362]:
+            - img
+            - text: VST
+          - option "VT" [ref=e1363]:
+            - img
+            - text: VT
+          - option "VTI" [ref=e1364]:
+            - img
+            - text: VTI
+          - option "VTR" [ref=e1365]:
+            - img
+            - text: VTR
+          - option "VTRS" [ref=e1366]:
+            - img
+            - text: VTRS
+          - option "VTV" [ref=e1367]:
+            - img
+            - text: VTV
+          - option "VUG" [ref=e1368]:
+            - img
+            - text: VUG
+          - option "VWO" [ref=e1369]:
+            - img
+            - text: VWO
+          - option "VXUS" [ref=e1370]:
+            - img
+            - text: VXUS
+          - option "VXX" [ref=e1371]:
+            - img
+            - text: VXX
+          - option "VXZ" [ref=e1372]:
+            - img
+            - text: VXZ
+          - option "VYM" [ref=e1373]:
+            - img
+            - text: VYM
+          - option "VZ" [ref=e1374]:
+            - img
+            - text: VZ
+          - option "W" [ref=e1375]:
+            - img
+            - text: W
+          - option "WAB" [ref=e1376]:
+            - img
+            - text: WAB
+          - option "WAL" [ref=e1377]:
+            - img
+            - text: WAL
+          - option "WAT" [ref=e1378]:
+            - img
+            - text: WAT
+          - option "WBD" [ref=e1379]:
+            - img
+            - text: WBD
+          - option "WCN" [ref=e1380]:
+            - img
+            - text: WCN
+          - option "WDAY" [ref=e1381]:
+            - img
+            - text: WDAY
+          - option "WDC" [ref=e1382]:
+            - img
+            - text: WDC
+          - option "WEAT" [ref=e1383]:
+            - img
+            - text: WEAT
+          - option "WEC" [ref=e1384]:
+            - img
+            - text: WEC
+          - option "WELL" [ref=e1385]:
+            - img
+            - text: WELL
+          - option "WEN" [ref=e1386]:
+            - img
+            - text: WEN
+          - option "WES" [ref=e1387]:
+            - img
+            - text: WES
+          - option "WFC" [ref=e1388]:
+            - img
+            - text: WFC
+          - option "WGMI" [ref=e1389]:
+            - img
+            - text: WGMI
+          - option "WHR" [ref=e1390]:
+            - img
+            - text: WHR
+          - option "WING" [ref=e1391]:
+            - img
+            - text: WING
+          - option "WM" [ref=e1392]:
+            - img
+            - text: WM
+          - option "WMB" [ref=e1393]:
+            - img
+            - text: WMB
+          - option "WMT" [ref=e1394]:
+            - img
+            - text: WMT
+          - option "WOLF" [ref=e1395]:
+            - img
+            - text: WOLF
+          - option "WPM" [ref=e1396]:
+            - img
+            - text: WPM
+          - option "WRB" [ref=e1397]:
+            - img
+            - text: WRB
+          - option "WRBY" [ref=e1398]:
+            - img
+            - text: WRBY
+          - option "WSM" [ref=e1399]:
+            - img
+            - text: WSM
+          - option "WST" [ref=e1400]:
+            - img
+            - text: WST
+          - option "WTW" [ref=e1401]:
+            - img
+            - text: WTW
+          - option "WULF" [ref=e1402]:
+            - img
+            - text: WULF
+          - option "WY" [ref=e1403]:
+            - img
+            - text: WY
+          - option "WYNN" [ref=e1404]:
+            - img
+            - text: WYNN
+          - option "XAR" [ref=e1405]:
+            - img
+            - text: XAR
+          - option "XAUUSD" [ref=e1406]:
+            - img
+            - text: XAUUSD
+          - option "XBI" [ref=e1407]:
+            - img
+            - text: XBI
+          - option "XEL" [ref=e1408]:
+            - img
+            - text: XEL
+          - option "XHB" [ref=e1409]:
+            - img
+            - text: XHB
+          - option "XHE" [ref=e1410]:
+            - img
+            - text: XHE
+          - option "XLB" [ref=e1411]:
+            - img
+            - text: XLB
+          - option "XLC" [ref=e1412]:
+            - img
+            - text: XLC
+          - option "XLE" [ref=e1413]:
+            - img
+            - text: XLE
+          - option "XLF" [ref=e1414]:
+            - img
+            - text: XLF
+          - option "XLI" [ref=e1415]:
+            - img
+            - text: XLI
+          - option "XLK" [ref=e1416]:
+            - img
+            - text: XLK
+          - option "XLP" [ref=e1417]:
+            - img
+            - text: XLP
+          - option "XLRE" [ref=e1418]:
+            - img
+            - text: XLRE
+          - option "XLU" [ref=e1419]:
+            - img
+            - text: XLU
+          - option "XLV" [ref=e1420]:
+            - img
+            - text: XLV
+          - option "XLY" [ref=e1421]:
+            - img
+            - text: XLY
+          - option "XME" [ref=e1422]:
+            - img
+            - text: XME
+          - option "XOM" [ref=e1423]:
+            - img
+            - text: XOM
+          - option "XOP" [ref=e1424]:
+            - img
+            - text: XOP
+          - option "XP" [ref=e1425]:
+            - img
+            - text: XP
+          - option "XPEV" [ref=e1426]:
+            - img
+            - text: XPEV
+          - option "XPH" [ref=e1427]:
+            - img
+            - text: XPH
+          - option "XPO" [ref=e1428]:
+            - img
+            - text: XPO
+          - option "XRPUSDC" [ref=e1429]:
+            - img
+            - text: XRPUSDC
+          - option "XRT" [ref=e1430]:
+            - img
+            - text: XRT
+          - option "XTIUSD" [ref=e1431]:
+            - img
+            - text: XTIUSD
+          - option "XTN" [ref=e1432]:
+            - img
+            - text: XTN
+          - option "XYL" [ref=e1433]:
+            - img
+            - text: XYL
+          - option "XYZ" [ref=e1434]:
+            - img
+            - text: XYZ
+          - option "YANG" [ref=e1435]:
+            - img
+            - text: YANG
+          - option "YCL" [ref=e1436]:
+            - img
+            - text: YCL
+          - option "YCS" [ref=e1437]:
+            - img
+            - text: YCS
+          - option "YINN" [ref=e1438]:
+            - img
+            - text: YINN
+          - option "YMM2026" [ref=e1439]:
+            - img
+            - text: YMM2026
+          - option "YMU2026" [ref=e1440]:
+            - img
+            - text: YMU2026
+          - option "YPF" [ref=e1441]:
+            - img
+            - text: YPF
+          - option "YUM" [ref=e1442]:
+            - img
+            - text: YUM
+          - option "Z" [ref=e1443]:
+            - img
+            - text: Z
+          - option "ZB1!" [ref=e1444]:
+            - img
+            - text: ZB1!
+          - option "ZBH" [ref=e1445]:
+            - img
+            - text: ZBH
+          - option "ZBM2026" [ref=e1446]:
+            - img
+            - text: ZBM2026
+          - option "ZBRA" [ref=e1447]:
+            - img
+            - text: ZBRA
+          - option "ZBU2026" [ref=e1448]:
+            - img
+            - text: ZBU2026
+          - option "ZBZ2026" [ref=e1449]:
+            - img
+            - text: ZBZ2026
+          - option "ZCK2026" [ref=e1450]:
+            - img
+            - text: ZCK2026
+          - option "ZCN2026" [ref=e1451]:
+            - img
+            - text: ZCN2026
+          - option "ZCU2026" [ref=e1452]:
+            - img
+            - text: ZCU2026
+          - option "ZF1!" [ref=e1453]:
+            - img
+            - text: ZF1!
+          - option "ZFM2026" [ref=e1454]:
+            - img
+            - text: ZFM2026
+          - option "ZFU2026" [ref=e1455]:
+            - img
+            - text: ZFU2026
+          - option "ZFZ2026" [ref=e1456]:
+            - img
+            - text: ZFZ2026
+          - option "ZIM" [ref=e1457]:
+            - img
+            - text: ZIM
+          - option "ZION" [ref=e1458]:
+            - img
+            - text: ZION
+          - option "ZM" [ref=e1459]:
+            - img
+            - text: ZM
+          - option "ZN1!" [ref=e1460]:
+            - img
+            - text: ZN1!
+          - option "ZNM2026" [ref=e1461]:
+            - img
+            - text: ZNM2026
+          - option "ZNU2026" [ref=e1462]:
+            - img
+            - text: ZNU2026
+          - option "ZNZ2026" [ref=e1463]:
+            - img
+            - text: ZNZ2026
+          - option "ZROZ" [ref=e1464]:
+            - img
+            - text: ZROZ
+          - option "ZS" [ref=e1465]:
+            - img
+            - text: ZS
+          - option "ZSK2026" [ref=e1466]:
+            - img
+            - text: ZSK2026
+          - option "ZSN2026" [ref=e1467]:
+            - img
+            - text: ZSN2026
+          - option "ZSX2026" [ref=e1468]:
+            - img
+            - text: ZSX2026
+          - option "ZT1!" [ref=e1469]:
+            - img
+            - text: ZT1!
+          - option "ZTM2026" [ref=e1470]:
+            - img
+            - text: ZTM2026
+          - option "ZTS" [ref=e1471]:
+            - img
+            - text: ZTS
+          - option "ZTU2026" [ref=e1472]:
+            - img
+            - text: ZTU2026
+          - option "ZTZ2026" [ref=e1473]:
+            - img
+            - text: ZTZ2026
+          - option "ZWK2026" [ref=e1474]:
+            - img
+            - text: ZWK2026
+          - option "ZWN2026" [ref=e1475]:
+            - img
+            - text: ZWN2026
+          - option "ZWU2026" [ref=e1476]:
+            - img
+            - text: ZWU2026

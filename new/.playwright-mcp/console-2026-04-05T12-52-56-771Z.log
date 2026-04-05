@@ -1,0 +1,397 @@
+[     370ms] [LOG] JQMIGRATE: Migrate is installed, version 3.4.1 @ https://menthorq.com/wp-includes/js/jquery/jquery-migrate.min.js:1
+[    1610ms] [LOG] 📁 ucCategory (oggetto): {marketing: true, functional: true, essential: true} @ :0
+[    1611ms] [LOG] 📄 categories (keys): [marketing, functional, essential] @ :0
+[    1611ms] [LOG] 🔍 hasFunctional: true @ :0
+[    1611ms] [LOG] 🔍 hasMarketing: true @ :0
+[    1612ms] [LOG] 🧱 Consent Object to push: {analytics_storage: granted, functionality_storage: granted, personalization_storage: granted} @ :1
+[    1612ms] [LOG] ✅ gtag consent updated! @ :1
+[    1660ms] [LOG] %c🧠 GTM Debug Info: color: #2196f3; font-weight: bold; @ :0
+[    1660ms] [LOG] 📦 GTM Container ID: GTM-599ZCR89 @ :0
+[    1660ms] [LOG] 🟡 GTM Container Version: 113 @ :0
+[    1661ms] [LOG] 🌍 GTM Environment:  @ :0
+[    1661ms] [LOG] ✅ GTM Loaded ✔️ @ :0
+[    2014ms] [LOG] GTM: Environment data pushed -  production @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/GoogleTagManager/Assets/Public/Js/gtm-tracking.js:44
+[    9813ms] [ERROR] Failed to load resource: the server responded with a status of 503 () @ https://menthorq.com/landing/start-free/:0
+[   14939ms] [LOG] JQMIGRATE: Migrate is installed, version 3.4.1 @ https://menthorq.com/wp-includes/js/jquery/jquery-migrate.min.js?ver=3.4.1:1
+[   15345ms] [VERBOSE] [DOM] Input elements should have autocomplete attributes (suggested: "current-password"): (More info: https://goo.gl/9p2vKq) %o @ https://menthorq.com/login/:0
+[   15359ms] [LOG] GTM: Environment data pushed -  production @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/GoogleTagManager/Assets/Public/Js/gtm-tracking.js?ver=1774344957:44
+[   15409ms] [LOG] 📁 ucCategory (oggetto): {marketing: true, functional: true, essential: true} @ :0
+[   15409ms] [LOG] 📄 categories (keys): [marketing, functional, essential] @ :0
+[   15410ms] [LOG] 🔍 hasFunctional: true @ :0
+[   15410ms] [LOG] 🔍 hasMarketing: true @ :0
+[   15410ms] [LOG] 🧱 Consent Object to push: {analytics_storage: granted, functionality_storage: granted, personalization_storage: granted} @ :1
+[   15411ms] [LOG] ✅ gtag consent updated! @ :1
+[   16083ms] [LOG] %c🧠 GTM Debug Info: color: #2196f3; font-weight: bold; @ :0
+[   16083ms] [LOG] 📦 GTM Container ID: GTM-599ZCR89 @ :0
+[   16083ms] [LOG] 🟡 GTM Container Version: 113 @ :0
+[   16083ms] [LOG] 🌍 GTM Environment:  @ :0
+[   16083ms] [LOG] ✅ GTM Loaded ✔️ @ :0
+[   33919ms] [LOG] JQMIGRATE: Migrate is installed, version 3.4.1 @ https://menthorq.com/wp-includes/js/jquery/jquery-migrate.min.js?ver=3.4.1:1
+[   34454ms] [LOG] GTM: Environment data pushed -  production @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/GoogleTagManager/Assets/Public/Js/gtm-tracking.js?ver=1774344957:44
+[   34574ms] [LOG] 📁 ucCategory (oggetto): {marketing: true, functional: true, essential: true} @ :0
+[   34574ms] [LOG] 📄 categories (keys): [marketing, functional, essential] @ :0
+[   34575ms] [LOG] 🔍 hasFunctional: true @ :0
+[   34575ms] [LOG] 🔍 hasMarketing: true @ :0
+[   34575ms] [LOG] 🧱 Consent Object to push: {analytics_storage: granted, functionality_storage: granted, personalization_storage: granted} @ :1
+[   34575ms] [LOG] ✅ gtag consent updated! @ :1
+[   35497ms] [LOG] %c🧠 GTM Debug Info: color: #2196f3; font-weight: bold; @ :0
+[   35497ms] [LOG] 📦 GTM Container ID: GTM-599ZCR89 @ :0
+[   35497ms] [LOG] 🟡 GTM Container Version: 113 @ :0
+[   35497ms] [LOG] 🌍 GTM Environment:  @ :0
+[   35497ms] [LOG] ✅ GTM Loaded ✔️ @ :0
+[   42512ms] [LOG] JQMIGRATE: Migrate is installed, version 3.4.1 @ https://menthorq.com/wp-includes/js/jquery/jquery-migrate.min.js?ver=3.4.1:1
+[   42732ms] [LOG] GTM: Environment data pushed -  production @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/GoogleTagManager/Assets/Public/Js/gtm-tracking.js?ver=1774344957:44
+[   42754ms] [LOG] 📁 ucCategory (oggetto): {marketing: true, functional: true, essential: true} @ :0
+[   42755ms] [LOG] 📄 categories (keys): [marketing, functional, essential] @ :0
+[   42755ms] [LOG] 🔍 hasFunctional: true @ :0
+[   42755ms] [LOG] 🔍 hasMarketing: true @ :0
+[   42756ms] [LOG] 🧱 Consent Object to push: {analytics_storage: granted, functionality_storage: granted, personalization_storage: granted} @ :1
+[   42756ms] [LOG] ✅ gtag consent updated! @ :1
+[   43609ms] [LOG] %c🧠 GTM Debug Info: color: #2196f3; font-weight: bold; @ :0
+[   43610ms] [LOG] 📦 GTM Container ID: GTM-599ZCR89 @ :0
+[   43610ms] [LOG] 🟡 GTM Container Version: 113 @ :0
+[   43610ms] [LOG] 🌍 GTM Environment:  @ :0
+[   43610ms] [LOG] ✅ GTM Loaded ✔️ @ :0
+[  109261ms] [ERROR] Failed to load resource: the server responded with a status of 503 () @ https://menthorq.com/account/?action=data&type=summary&category=futures/:0
+[  109605ms] [LOG] JQMIGRATE: Migrate is installed, version 3.4.1 @ https://menthorq.com/wp-includes/js/jquery/jquery-migrate.min.js?ver=3.4.1:1
+[  109867ms] [LOG] GTM: Environment data pushed -  production @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/GoogleTagManager/Assets/Public/Js/gtm-tracking.js?ver=1774344957:44
+[  109910ms] [LOG] 📁 ucCategory (oggetto): {marketing: true, functional: true, essential: true} @ :0
+[  109910ms] [LOG] 📄 categories (keys): [marketing, functional, essential] @ :0
+[  109911ms] [LOG] 🔍 hasFunctional: true @ :0
+[  109911ms] [LOG] 🔍 hasMarketing: true @ :0
+[  109911ms] [LOG] 🧱 Consent Object to push: {analytics_storage: granted, functionality_storage: granted, personalization_storage: granted} @ :1
+[  109912ms] [LOG] ✅ gtag consent updated! @ :1
+[  110740ms] [LOG] %c🧠 GTM Debug Info: color: #2196f3; font-weight: bold; @ :0
+[  110740ms] [LOG] 📦 GTM Container ID: GTM-599ZCR89 @ :0
+[  110740ms] [LOG] 🟡 GTM Container Version: 113 @ :0
+[  110740ms] [LOG] 🌍 GTM Environment:  @ :0
+[  110740ms] [LOG] ✅ GTM Loaded ✔️ @ :0
+[  172493ms] [ERROR] Failed to load resource: the server responded with a status of 503 () @ https://menthorq.com/account/?action=data&type=dashboard&commands=futures&tickers=futures/:0
+[  172865ms] [LOG] JQMIGRATE: Migrate is installed, version 3.4.1 @ https://menthorq.com/wp-includes/js/jquery/jquery-migrate.min.js?ver=3.4.1:1
+[  173149ms] [LOG] GTM: Environment data pushed -  production @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/GoogleTagManager/Assets/Public/Js/gtm-tracking.js?ver=1774344957:44
+[  173163ms] [LOG] Container selector: #ticker-container @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:211
+[  173163ms] [LOG] Container found: 1 @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:212
+[  173163ms] [LOG] Should initialize: true @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:213
+[  173164ms] [LOG] URL Ticker: null @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:235
+[  173164ms] [LOG] URL Tickers Type: futures @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:236
+[  173164ms] [LOG] [Ticker] Waiting for tickers to be loaded... @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:357
+[  173169ms] [WARNING] [Ticker] No current valid ticker: null @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:1465
+[  173213ms] [LOG] 📁 ucCategory (oggetto): {marketing: true, functional: true, essential: true} @ :0
+[  173213ms] [LOG] 📄 categories (keys): [marketing, functional, essential] @ :0
+[  173214ms] [LOG] 🔍 hasFunctional: true @ :0
+[  173214ms] [LOG] 🔍 hasMarketing: true @ :0
+[  173214ms] [LOG] 🧱 Consent Object to push: {analytics_storage: granted, functionality_storage: granted, personalization_storage: granted} @ :1
+[  173215ms] [LOG] ✅ gtag consent updated! @ :1
+[  173800ms] [LOG] Tickers: [Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object] @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:363
+[  173802ms] [LOG] Tickers received: [Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object] @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:244
+[  173803ms] [LOG] Tickers count: 79 @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:245
+[  173803ms] [LOG] URL Ticker: null @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:246
+[  173803ms] [LOG] URL Tickers Type: futures @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:247
+[  173803ms] [LOG] First 5 tickers: [Object, Object, Object, Object, Object] @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:251
+[  173804ms] [LOG] INITIAL TICKERS: [Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object] @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:261
+[  173805ms] [LOG] [Ticker] No ticker in URL, trying default ticker @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:336
+[  173806ms] [LOG] Current commands category: futures @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:442
+[  173806ms] [LOG] Current tickers category: futures @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:443
+[  173806ms] [LOG] Default ticker config: {ticker: es1!, quoteType: FUTURE} @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:444
+[  173806ms] [LOG] Available tickers count: 79 @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:445
+[  173806ms] [LOG] First few tickers: [Object, Object, Object, Object, Object] @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:446
+[  173807ms] [LOG] [Ticker] Found potential match: {ticker: es1!, quoteType: FUTURE, exchange: undefined, tickerMatch: true, quoteTypeMatch: true} @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:460
+[  173807ms] [LOG] Selected ticker: {ticker: es1!, quoteType: FUTURE, shortName: E-Mini S&P 500, category: INDEXES, isGeneric: true} @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:477
+[  173808ms] [LOG] Ticker to match: es1! @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:478
+[  173808ms] [LOG] Current ticker: null @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:390
+[  173809ms] [LOG] Selected ticker: {ticker: es1!, quoteType: FUTURE, shortName: E-Mini S&P 500, category: INDEXES, isGeneric: true} @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:391
+[  173809ms] [LOG] [Ticker]: Reset isFirstLoad for new ticker: es1! @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:1314
+[  173810ms] [LOG] Ticker Selected: {ticker: es1!, quoteType: FUTURE, shortName: E-Mini S&P 500, category: INDEXES, isGeneric: true} @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:1320
+[  173812ms] [LOG] Ticker Data: {ticker: es1!, quoteType: FUTURE, shortName: E-Mini S&P 500, category: INDEXES, isGeneric: true} @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:519
+[  173813ms] [LOG] Ticker to get: es1! @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:520
+[  173814ms] [LOG] [Ticker]: Making request with auto_fallback = true , mode = eod @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:676
+[  174038ms] [LOG] %c🧠 GTM Debug Info: color: #2196f3; font-weight: bold; @ :0
+[  174039ms] [LOG] 📦 GTM Container ID: GTM-599ZCR89 @ :0
+[  174039ms] [LOG] 🟡 GTM Container Version: 113 @ :0
+[  174039ms] [LOG] 🌍 GTM Environment:  @ :0
+[  174040ms] [LOG] ✅ GTM Loaded ✔️ @ :0
+[  174975ms] [ERROR] [1/1] Failed: Net GEX The requested date (2026-04-05) is not available for data retrieval @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Commands/commandCardModule.js?ver=1774344957:193
+[  175321ms] [ERROR] [1/3] Failed: Net GEX Multiple Expirations The requested date (2026-04-05) is not available for data retrieval @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Commands/commandCardModule.js?ver=1774344957:193
+[  175323ms] [ERROR] [3/3] Failed: Option Matrix The requested date (2026-04-05) is not available for data retrieval @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Commands/commandCardModule.js?ver=1774344957:193
+[  175357ms] [ERROR] [2/3] Failed: Key Levels The requested date (2026-04-05) is not available for data retrieval @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Commands/commandCardModule.js?ver=1774344957:193
+[  175549ms] [LOG] Ticker Data: {success: true, data: Object} @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:532
+[  175550ms] [LOG] Full Response: {success: true, data: Object} @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:554
+[  175550ms] [LOG] Response Data: {ticker_data: Object, meta: Object} @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:555
+[  175551ms] [LOG] Ticker Data: {ticker: ES1!, quoteType: FUTURE, bid: null, ask: null, shortName: E-Mini S&P 500 Futures} @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:556
+[  175551ms] [LOG] Meta Info: {requested_date: 2026-04-05, actual_data_date: 2026-04-02, last_eod_date: 2026-04-02, last_intraday_date: null, missing_dates: Array(24)} @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:557
+[  175552ms] [LOG] Current Ticker Variable: es1! @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:558
+[  175552ms] [LOG] Ticker Data Ticker Property: ES1! @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:559
+[  175556ms] [LOG] Current ticker: {ticker: es1!, quoteType: FUTURE, shortName: E-Mini S&P 500, category: INDEXES, isGeneric: true} @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:405
+[  175557ms] [LOG] Ticker Data: {ticker: es1!, quoteType: FUTURE, shortName: E-Mini S&P 500, category: INDEXES, isGeneric: true} @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:519
+[  175558ms] [LOG] Ticker to get: es1! @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:520
+[  175559ms] [LOG] [Ticker]: Making request with auto_fallback = true , mode = eod @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:676
+[  175567ms] [LOG] [Ticker]: Date adjusted from 2026-04-05 to 2026-04-02 @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:586
+[  175597ms] [LOG] [Ticker]: Triggered missingDatesReceived event with availability data @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:601
+[  175597ms] [LOG] - Missing dates count: 24 @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:602
+[  175598ms] [LOG] - Last EOD date: 2026-04-02 @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:603
+[  175598ms] [LOG] - Last intraday date: null @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:604
+[  175598ms] [LOG] - First date: 2025-12-07 @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:605
+[  175598ms] [LOG] [Ticker]: Updating UI with ticker data for: ES1! @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:612
+[  176006ms] [ERROR] Failed to load resource: the server responded with a status of 404 () @ https://financialmodelingprep.com/image-stock/ES1!.png:0
+[  176538ms] [LOG] Ticker Data: {success: true, data: Object} @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:532
+[  176538ms] [LOG] Full Response: {success: true, data: Object} @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:554
+[  176539ms] [LOG] Response Data: {ticker_data: Object, meta: Object} @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:555
+[  176539ms] [LOG] Ticker Data: {ticker: ES1!, quoteType: FUTURE, bid: null, ask: null, shortName: E-Mini S&P 500 Futures} @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:556
+[  176539ms] [LOG] Meta Info: {requested_date: 2026-04-02, actual_data_date: 2026-04-02, last_eod_date: 2026-04-02, last_intraday_date: null, missing_dates: Array(24)} @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:557
+[  176539ms] [LOG] Current Ticker Variable: es1! @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:558
+[  176539ms] [LOG] Ticker Data Ticker Property: ES1! @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:559
+[  176555ms] [LOG] [Ticker]: Triggered missingDatesReceived event with availability data @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:601
+[  176555ms] [LOG] - Missing dates count: 24 @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:602
+[  176555ms] [LOG] - Last EOD date: 2026-04-02 @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:603
+[  176555ms] [LOG] - Last intraday date: null @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:604
+[  176555ms] [LOG] - First date: 2025-12-07 @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:605
+[  176556ms] [LOG] [Ticker]: Updating UI with ticker data for: ES1! @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:612
+[  201379ms] [LOG] Current ticker: {ticker: es1!, quoteType: FUTURE, shortName: E-Mini S&P 500, category: INDEXES, isGeneric: true} @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:390
+[  201379ms] [LOG] Selected ticker: {ticker: gcm2026, quoteType: FUTURE, shortName: Gold Futures Jun 2026, category: COMMODITIES, isGeneric: false} @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:391
+[  201380ms] [LOG] [Ticker]: Reset isFirstLoad for new ticker: gcm2026 @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:1314
+[  201380ms] [LOG] Ticker Selected: {ticker: gcm2026, quoteType: FUTURE, shortName: Gold Futures Jun 2026, category: COMMODITIES, isGeneric: false} @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:1320
+[  201383ms] [LOG] Ticker Data: {ticker: gcm2026, quoteType: FUTURE, shortName: Gold Futures Jun 2026, category: COMMODITIES, isGeneric: false} @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:519
+[  201383ms] [LOG] Ticker to get: gcm2026 @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:520
+[  201384ms] [LOG] [Ticker]: Making request with auto_fallback = true , mode = eod @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:676
+[  203465ms] [LOG] Ticker Data: {success: true, data: Object} @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:532
+[  203466ms] [LOG] Full Response: {success: true, data: Object} @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:554
+[  203466ms] [LOG] Response Data: {ticker_data: Object, meta: Object} @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:555
+[  203467ms] [LOG] Ticker Data: {ticker: GCM2026, quoteType: FUTURE, bid: null, ask: null, shortName: Gold Futures Jun 2026} @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:556
+[  203467ms] [LOG] Meta Info: {requested_date: 2026-04-02, actual_data_date: 2026-04-02, last_eod_date: 2026-04-02, last_intraday_date: null, missing_dates: Array(24)} @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:557
+[  203467ms] [LOG] Current Ticker Variable: gcm2026 @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:558
+[  203467ms] [LOG] Ticker Data Ticker Property: GCM2026 @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:559
+[  203483ms] [LOG] [Ticker]: Triggered missingDatesReceived event with availability data @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:601
+[  203483ms] [LOG] - Missing dates count: 24 @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:602
+[  203483ms] [LOG] - Last EOD date: 2026-04-02 @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:603
+[  203484ms] [LOG] - Last intraday date: null @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:604
+[  203484ms] [LOG] - First date: 2025-12-07 @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:605
+[  203484ms] [LOG] [Ticker]: Updating UI with ticker data for: GCM2026 @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:612
+[  203864ms] [ERROR] Failed to load resource: the server responded with a status of 404 () @ https://financialmodelingprep.com/image-stock/GCM2026.png:0
+[  622683ms] [LOG] Current ticker: {ticker: gcm2026, quoteType: FUTURE, shortName: Gold Futures Jun 2026, category: COMMODITIES, isGeneric: false} @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:390
+[  622683ms] [LOG] Selected ticker: {ticker: gcm2026, quoteType: FUTURE, shortName: Gold Futures Jun 2026, category: COMMODITIES, isGeneric: false} @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:391
+[  622684ms] [LOG] Ticker Selected: {ticker: gcm2026, quoteType: FUTURE, shortName: Gold Futures Jun 2026, category: COMMODITIES, isGeneric: false} @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:1320
+[  622685ms] [LOG] Ticker Data: {ticker: gcm2026, quoteType: FUTURE, shortName: Gold Futures Jun 2026, category: COMMODITIES, isGeneric: false} @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:519
+[  622686ms] [LOG] Ticker to get: gcm2026 @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:520
+[  622687ms] [LOG] [Ticker]: Making request with auto_fallback = false , mode = eod @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:676
+[  624578ms] [LOG] Ticker Data: {success: true, data: Object} @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:532
+[  624578ms] [LOG] Full Response: {success: true, data: Object} @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:554
+[  624578ms] [LOG] Response Data: {ticker_data: Object, meta: Object} @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:555
+[  624578ms] [LOG] Ticker Data: {ticker: GCM2026, quoteType: FUTURE, bid: null, ask: null, shortName: Gold Futures Jun 2026} @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:556
+[  624578ms] [LOG] Meta Info: {requested_date: 2026-04-02, actual_data_date: 2026-04-02, last_eod_date: 2026-04-02, last_intraday_date: null, missing_dates: Array(24)} @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:557
+[  624578ms] [LOG] Current Ticker Variable: gcm2026 @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:558
+[  624578ms] [LOG] Ticker Data Ticker Property: GCM2026 @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:559
+[  624590ms] [LOG] [Ticker]: Triggered missingDatesReceived event with availability data @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:601
+[  624590ms] [LOG] - Missing dates count: 24 @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:602
+[  624590ms] [LOG] - Last EOD date: 2026-04-02 @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:603
+[  624590ms] [LOG] - Last intraday date: null @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:604
+[  624590ms] [LOG] - First date: 2025-12-07 @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:605
+[  624590ms] [LOG] [Ticker]: Updating UI with ticker data for: GCM2026 @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:612
+[  687050ms] [LOG] JQMIGRATE: Migrate is installed, version 3.4.1 @ https://menthorq.com/wp-includes/js/jquery/jquery-migrate.min.js?ver=3.4.1:1
+[  687227ms] [LOG] GTM: Environment data pushed -  production @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/GoogleTagManager/Assets/Public/Js/gtm-tracking.js?ver=1774344957:44
+[  687240ms] [LOG] Container selector: #ticker-container @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:211
+[  687240ms] [LOG] Container found: 0 @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:212
+[  687240ms] [LOG] Should initialize: false @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:213
+[  687493ms] [LOG] 📁 ucCategory (oggetto): {marketing: true, functional: true, essential: true} @ :0
+[  687493ms] [LOG] 📄 categories (keys): [marketing, functional, essential] @ :0
+[  687493ms] [LOG] 🔍 hasFunctional: true @ :0
+[  687493ms] [LOG] 🔍 hasMarketing: true @ :0
+[  687494ms] [LOG] 🧱 Consent Object to push: {analytics_storage: granted, functionality_storage: granted, personalization_storage: granted} @ :1
+[  687494ms] [LOG] ✅ gtag consent updated! @ :1
+[  688297ms] [LOG] %c🧠 GTM Debug Info: color: #2196f3; font-weight: bold; @ :0
+[  688297ms] [LOG] 📦 GTM Container ID: GTM-599ZCR89 @ :0
+[  688297ms] [LOG] 🟡 GTM Container Version: 113 @ :0
+[  688297ms] [LOG] 🌍 GTM Environment:  @ :0
+[  688297ms] [LOG] ✅ GTM Loaded ✔️ @ :0
+[  689713ms] [ERROR] [1/1] Failed: Forex Gamma Failed to retrieve command data @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Commands/commandCardModule.js?ver=1774344957:193
+[  690563ms] [ERROR] [1/1] Failed: Forex Blindspot Failed to retrieve command data @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Commands/commandCardModule.js?ver=1774344957:193
+[  696889ms] [ERROR] Failed to load resource: the server responded with a status of 503 () @ https://menthorq.com/account/?action=data&type=dashboard&commands=forex&date=2026-04-05/:0
+[ 1173925ms] [ERROR] Failed to load resource: the server responded with a status of 503 () @ https://menthorq.com/account/?action=data&type=dashboard&commands=cryptos_technical&tickers=cryptos_technical/:0
+[ 1175339ms] [ERROR] Failed to load resource: the server responded with a status of 503 () @ https://menthorq.com/account/?action=data&type=dashboard&commands=forex/:0
+[ 1178423ms] [ERROR] Failed to load resource: the server responded with a status of 503 () @ https://menthorq.com/account/?action=data&type=dashboard&commands=futures&tickers=futures/:0
+[ 1179334ms] [LOG] JQMIGRATE: Migrate is installed, version 3.4.1 @ https://menthorq.com/wp-includes/js/jquery/jquery-migrate.min.js?ver=3.4.1:1
+[ 1179717ms] [LOG] GTM: Environment data pushed -  production @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/GoogleTagManager/Assets/Public/Js/gtm-tracking.js?ver=1774344957:44
+[ 1179750ms] [LOG] Container selector: #ticker-container @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:211
+[ 1179750ms] [LOG] Container found: 1 @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:212
+[ 1179750ms] [LOG] Should initialize: true @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:213
+[ 1179751ms] [LOG] URL Ticker: null @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:235
+[ 1179751ms] [LOG] URL Tickers Type: futures @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:236
+[ 1179753ms] [LOG] Tickers received: [Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object] @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:244
+[ 1179754ms] [LOG] Tickers count: 79 @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:245
+[ 1179754ms] [LOG] URL Ticker: null @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:246
+[ 1179754ms] [LOG] URL Tickers Type: futures @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:247
+[ 1179754ms] [LOG] First 5 tickers: [Object, Object, Object, Object, Object] @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:251
+[ 1179754ms] [LOG] INITIAL TICKERS: [Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object] @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:261
+[ 1179755ms] [LOG] [Ticker] No ticker in URL, trying default ticker @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:336
+[ 1179756ms] [LOG] Current commands category: futures @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:442
+[ 1179756ms] [LOG] Current tickers category: futures @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:443
+[ 1179756ms] [LOG] Default ticker config: {ticker: es1!, quoteType: FUTURE} @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:444
+[ 1179756ms] [LOG] Available tickers count: 79 @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:445
+[ 1179757ms] [LOG] First few tickers: [Object, Object, Object, Object, Object] @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:446
+[ 1179757ms] [LOG] [Ticker] Found potential match: {ticker: es1!, quoteType: FUTURE, exchange: undefined, tickerMatch: true, quoteTypeMatch: true} @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:460
+[ 1179758ms] [LOG] Selected ticker: {ticker: es1!, quoteType: FUTURE, shortName: E-Mini S&P 500, category: INDEXES, isGeneric: true} @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:477
+[ 1179758ms] [LOG] Ticker to match: es1! @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:478
+[ 1179763ms] [LOG] Current ticker: {ticker: gcm2026, quoteType: FUTURE, shortName: Gold Futures Jun 2026, category: COMMODITIES, isGeneric: false} @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:390
+[ 1179763ms] [LOG] Selected ticker: {ticker: es1!, quoteType: FUTURE, shortName: E-Mini S&P 500, category: INDEXES, isGeneric: true} @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:391
+[ 1179764ms] [LOG] [Ticker]: Reset isFirstLoad for new ticker: es1! @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:1314
+[ 1179764ms] [LOG] Ticker Selected: {ticker: es1!, quoteType: FUTURE, shortName: E-Mini S&P 500, category: INDEXES, isGeneric: true} @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:1320
+[ 1179767ms] [LOG] Ticker Data: {ticker: es1!, quoteType: FUTURE, shortName: E-Mini S&P 500, category: INDEXES, isGeneric: true} @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:519
+[ 1179768ms] [LOG] Ticker to get: es1! @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:520
+[ 1179769ms] [LOG] [Ticker]: Making request with auto_fallback = true , mode = eod @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:676
+[ 1179985ms] [LOG] 📁 ucCategory (oggetto): {marketing: true, functional: true, essential: true} @ :0
+[ 1179985ms] [LOG] 📄 categories (keys): [marketing, functional, essential] @ :0
+[ 1179986ms] [LOG] 🔍 hasFunctional: true @ :0
+[ 1179986ms] [LOG] 🔍 hasMarketing: true @ :0
+[ 1179986ms] [LOG] 🧱 Consent Object to push: {analytics_storage: granted, functionality_storage: granted, personalization_storage: granted} @ :1
+[ 1179986ms] [LOG] ✅ gtag consent updated! @ :1
+[ 1180570ms] [ERROR] [1/1] Failed: Net GEX The requested date (2026-04-05) is not available for data retrieval @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Commands/commandCardModule.js?ver=1774344957:193
+[ 1180758ms] [LOG] Ticker Data: {success: true, data: Object} @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:532
+[ 1180759ms] [LOG] Full Response: {success: true, data: Object} @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:554
+[ 1180760ms] [LOG] Response Data: {ticker_data: Object, meta: Object} @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:555
+[ 1180760ms] [LOG] Ticker Data: {ticker: ES1!, quoteType: FUTURE, bid: null, ask: null, shortName: E-Mini S&P 500 Futures} @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:556
+[ 1180760ms] [LOG] Meta Info: {requested_date: 2026-04-05, actual_data_date: 2026-04-02, last_eod_date: 2026-04-02, last_intraday_date: null, missing_dates: Array(24)} @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:557
+[ 1180761ms] [LOG] Current Ticker Variable: es1! @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:558
+[ 1180761ms] [LOG] Ticker Data Ticker Property: ES1! @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:559
+[ 1180765ms] [LOG] Current ticker: {ticker: es1!, quoteType: FUTURE, shortName: E-Mini S&P 500, category: INDEXES, isGeneric: true} @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:405
+[ 1180766ms] [LOG] Ticker Data: {ticker: es1!, quoteType: FUTURE, shortName: E-Mini S&P 500, category: INDEXES, isGeneric: true} @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:519
+[ 1180767ms] [LOG] Ticker to get: es1! @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:520
+[ 1180768ms] [LOG] [Ticker]: Making request with auto_fallback = true , mode = eod @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:676
+[ 1180776ms] [LOG] [Ticker]: Date adjusted from 2026-04-05 to 2026-04-02 @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:586
+[ 1180800ms] [LOG] [Ticker]: Triggered missingDatesReceived event with availability data @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:601
+[ 1180801ms] [LOG] - Missing dates count: 24 @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:602
+[ 1180801ms] [LOG] - Last EOD date: 2026-04-02 @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:603
+[ 1180801ms] [LOG] - Last intraday date: null @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:604
+[ 1180801ms] [LOG] - First date: 2025-12-07 @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:605
+[ 1180801ms] [LOG] [Ticker]: Updating UI with ticker data for: ES1! @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:612
+[ 1180826ms] [LOG] %c🧠 GTM Debug Info: color: #2196f3; font-weight: bold; @ :0
+[ 1180827ms] [LOG] 📦 GTM Container ID: GTM-599ZCR89 @ :0
+[ 1180827ms] [LOG] 🟡 GTM Container Version: 113 @ :0
+[ 1180827ms] [LOG] 🌍 GTM Environment:  @ :0
+[ 1180827ms] [LOG] ✅ GTM Loaded ✔️ @ :0
+[ 1180919ms] [ERROR] [3/3] Failed: Option Matrix The requested date (2026-04-05) is not available for data retrieval @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Commands/commandCardModule.js?ver=1774344957:193
+[ 1180922ms] [ERROR] [1/3] Failed: Net GEX Multiple Expirations The requested date (2026-04-05) is not available for data retrieval @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Commands/commandCardModule.js?ver=1774344957:193
+[ 1180924ms] [ERROR] [2/3] Failed: Key Levels The requested date (2026-04-05) is not available for data retrieval @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Commands/commandCardModule.js?ver=1774344957:193
+[ 1181197ms] [ERROR] Failed to load resource: the server responded with a status of 404 () @ https://financialmodelingprep.com/image-stock/ES1!.png:0
+[ 1181586ms] [LOG] Ticker Data: {success: true, data: Object} @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:532
+[ 1181587ms] [LOG] Full Response: {success: true, data: Object} @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:554
+[ 1181587ms] [LOG] Response Data: {ticker_data: Object, meta: Object} @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:555
+[ 1181587ms] [LOG] Ticker Data: {ticker: ES1!, quoteType: FUTURE, bid: null, ask: null, shortName: E-Mini S&P 500 Futures} @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:556
+[ 1181588ms] [LOG] Meta Info: {requested_date: 2026-04-02, actual_data_date: 2026-04-02, last_eod_date: 2026-04-02, last_intraday_date: null, missing_dates: Array(24)} @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:557
+[ 1181588ms] [LOG] Current Ticker Variable: es1! @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:558
+[ 1181588ms] [LOG] Ticker Data Ticker Property: ES1! @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:559
+[ 1181601ms] [LOG] [Ticker]: Triggered missingDatesReceived event with availability data @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:601
+[ 1181601ms] [LOG] - Missing dates count: 24 @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:602
+[ 1181602ms] [LOG] - Last EOD date: 2026-04-02 @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:603
+[ 1181602ms] [LOG] - Last intraday date: null @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:604
+[ 1181602ms] [LOG] - First date: 2025-12-07 @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:605
+[ 1181602ms] [LOG] [Ticker]: Updating UI with ticker data for: ES1! @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:612
+[ 1205415ms] [ERROR] Failed to load resource: the server responded with a status of 503 () @ https://menthorq.com/account/?action=data&type=dashboard&commands=forex/:0
+[ 2039875ms] [ERROR] Failed to load resource: the server responded with a status of 503 () @ https://menthorq.com/account/?action=data&type=dashboard&commands=futures&tickers=futures/:0
+[ 2045696ms] [ERROR] Failed to load resource: the server responded with a status of 503 () @ https://menthorq.com/account/?action=data&type=dashboard&commands=eod&tickers=commons/:0
+[ 2049287ms] [LOG] JQMIGRATE: Migrate is installed, version 3.4.1 @ https://menthorq.com/wp-includes/js/jquery/jquery-migrate.min.js?ver=3.4.1:1
+[ 2049676ms] [LOG] %c[TrackingManager GTM]%c Found 1 pending events in cookie color: #4CAF50; font-weight: bold color: inherit @ https://menthorq.com/account/?action=data&type=dashboard&commands=intraday&tickers=commons:942
+[ 2049677ms] [LOG] %c[TrackingManager GTM]%c Event #1: color: #4CAF50; font-weight: bold color: inherit {event: command_requested, properties: Object, timestamp: 1775394759} @ https://menthorq.com/account/?action=data&type=dashboard&commands=intraday&tickers=commons:964
+[ 2049678ms] [LOG] %c[TrackingManager GTM]%c All events pushed to dataLayer color: #4CAF50; font-weight: bold color: inherit @ https://menthorq.com/account/?action=data&type=dashboard&commands=intraday&tickers=commons:967
+[ 2049694ms] [LOG] GTM: Environment data pushed -  production @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/GoogleTagManager/Assets/Public/Js/gtm-tracking.js?ver=1774344957:44
+[ 2049711ms] [LOG] Container selector: #ticker-container @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:211
+[ 2049711ms] [LOG] Container found: 1 @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:212
+[ 2049711ms] [LOG] Should initialize: true @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:213
+[ 2049712ms] [LOG] URL Ticker: null @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:235
+[ 2049712ms] [LOG] URL Tickers Type: commons @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:236
+[ 2049712ms] [LOG] [Ticker] Waiting for tickers to be loaded... @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:357
+[ 2050006ms] [LOG] 📁 ucCategory (oggetto): {marketing: true, functional: true, essential: true} @ :0
+[ 2050006ms] [LOG] 📄 categories (keys): [marketing, functional, essential] @ :0
+[ 2050007ms] [LOG] 🔍 hasFunctional: true @ :0
+[ 2050007ms] [LOG] 🔍 hasMarketing: true @ :0
+[ 2050007ms] [LOG] 🧱 Consent Object to push: {analytics_storage: granted, functionality_storage: granted, personalization_storage: granted} @ :1
+[ 2050007ms] [LOG] ✅ gtag consent updated! @ :1
+[ 2050556ms] [LOG] Tickers: [Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object] @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:363
+[ 2050557ms] [LOG] Tickers received: [Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object] @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:244
+[ 2050558ms] [LOG] Tickers count: 1259 @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:245
+[ 2050558ms] [LOG] URL Ticker: null @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:246
+[ 2050558ms] [LOG] URL Tickers Type: commons @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:247
+[ 2050558ms] [LOG] First 5 tickers: [Object, Object, Object, Object, Object] @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:251
+[ 2050558ms] [LOG] INITIAL TICKERS: [Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object] @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:261
+[ 2050561ms] [LOG] [Ticker] No ticker in URL, trying default ticker @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:336
+[ 2050562ms] [LOG] Current commands category: intraday @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:442
+[ 2050563ms] [LOG] Current tickers category: commons @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:443
+[ 2050563ms] [LOG] Default ticker config: {ticker: spx, quoteType: INDEX} @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:444
+[ 2050563ms] [LOG] Available tickers count: 1259 @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:445
+[ 2050564ms] [LOG] First few tickers: [Object, Object, Object, Object, Object] @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:446
+[ 2050565ms] [LOG] [Ticker] Found potential match: {ticker: spx, quoteType: INDEX, exchange: undefined, tickerMatch: true, quoteTypeMatch: true} @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:460
+[ 2050565ms] [LOG] Selected ticker: {ticker: spx, quoteType: INDEX, shortName: S&P 500 Index} @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:477
+[ 2050566ms] [LOG] Ticker to match: spx @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:478
+[ 2050567ms] [LOG] Current ticker: {ticker: es1!, quoteType: FUTURE, shortName: E-Mini S&P 500, category: INDEXES, isGeneric: true} @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:390
+[ 2050568ms] [LOG] Selected ticker: {ticker: spx, quoteType: INDEX, shortName: S&P 500 Index} @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:391
+[ 2050569ms] [LOG] [Ticker]: Reset isFirstLoad for new ticker: spx @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:1314
+[ 2050569ms] [LOG] Ticker Selected: {ticker: spx, quoteType: INDEX, shortName: S&P 500 Index} @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:1320
+[ 2050572ms] [LOG] Ticker Data: {ticker: spx, quoteType: INDEX, shortName: S&P 500 Index} @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:519
+[ 2050572ms] [LOG] Ticker to get: spx @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:520
+[ 2050574ms] [LOG] [Ticker]: Making request with auto_fallback = true , mode = intraday @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:676
+[ 2050717ms] [ERROR] [1/1] Failed: Net GEX 0DTE The requested date (2026-04-05) is not available for data retrieval @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Commands/commandCardModule.js?ver=1774344957:193
+[ 2050794ms] [LOG] %c🧠 GTM Debug Info: color: #2196f3; font-weight: bold; @ :0
+[ 2050794ms] [LOG] 📦 GTM Container ID: GTM-599ZCR89 @ :0
+[ 2050794ms] [LOG] 🟡 GTM Container Version: 113 @ :0
+[ 2050794ms] [LOG] 🌍 GTM Environment:  @ :0
+[ 2050795ms] [LOG] ✅ GTM Loaded ✔️ @ :0
+[ 2051101ms] [ERROR] [3/5] Failed: Intraday Liquidity Summary The requested date (2026-04-05) is not available for data retrieval @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Commands/commandCardModule.js?ver=1774344957:193
+[ 2051105ms] [ERROR] [1/5] Failed: Net GEX All Expirations The requested date (2026-04-05) is not available for data retrieval @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Commands/commandCardModule.js?ver=1774344957:193
+[ 2051144ms] [ERROR] [2/5] Failed: Volume 0DTE The requested date (2026-04-05) is not available for data retrieval @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Commands/commandCardModule.js?ver=1774344957:193
+[ 2051154ms] [ERROR] [5/5] Failed: GEX Difference VS Prev. Snapshot The requested date (2026-04-05) is not available for data retrieval @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Commands/commandCardModule.js?ver=1774344957:193
+[ 2051304ms] [ERROR] [4/5] Failed: GEX Difference VS EOD The requested date (2026-04-05) is not available for data retrieval @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Commands/commandCardModule.js?ver=1774344957:193
+[ 2051652ms] [ERROR] [5/5] Failed: GEX Difference VS EOD The requested date (2026-04-05) is not available for data retrieval @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Commands/commandCardModule.js?ver=1774344957:193
+[ 2051699ms] [ERROR] [3/5] Failed: Volume 0DTE The requested date (2026-04-05) is not available for data retrieval @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Commands/commandCardModule.js?ver=1774344957:193
+[ 2051700ms] [ERROR] [1/5] Failed: Net GEX 0DTE The requested date (2026-04-05) is not available for data retrieval @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Commands/commandCardModule.js?ver=1774344957:193
+[ 2051740ms] [ERROR] [4/5] Failed: Intraday Liquidity Summary The requested date (2026-04-05) is not available for data retrieval @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Commands/commandCardModule.js?ver=1774344957:193
+[ 2051741ms] [ERROR] [2/5] Failed: Net GEX All Expirations The requested date (2026-04-05) is not available for data retrieval @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Commands/commandCardModule.js?ver=1774344957:193
+[ 2052134ms] [ERROR] [1/1] Failed: GEX Difference VS Prev. Snapshot The requested date (2026-04-05) is not available for data retrieval @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Commands/commandCardModule.js?ver=1774344957:193
+[ 2052729ms] [LOG] Ticker Data: {success: true, data: Object} @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:532
+[ 2052729ms] [LOG] Full Response: {success: true, data: Object} @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:554
+[ 2052729ms] [LOG] Response Data: {ticker_data: Object, meta: Object} @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:555
+[ 2052729ms] [LOG] Ticker Data: {ticker: SPX, quoteType: INDEX, bid: 0, ask: 0, shortName: S&P 500 INDEX} @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:556
+[ 2052730ms] [LOG] Meta Info: {requested_date: 2026-04-05, actual_data_date: 2026-04-02, last_eod_date: 2026-04-02, last_intraday_date: 2026-04-02, missing_dates: Array(41)} @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:557
+[ 2052730ms] [LOG] Current Ticker Variable: spx @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:558
+[ 2052730ms] [LOG] Ticker Data Ticker Property: SPX @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:559
+[ 2052732ms] [LOG] Current ticker: {ticker: spx, quoteType: INDEX, shortName: S&P 500 Index} @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:405
+[ 2052733ms] [LOG] Ticker Data: {ticker: spx, quoteType: INDEX, shortName: S&P 500 Index} @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:519
+[ 2052733ms] [LOG] Ticker to get: spx @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:520
+[ 2052734ms] [LOG] [Ticker]: Making request with auto_fallback = true , mode = intraday @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:676
+[ 2052738ms] [LOG] [Ticker]: Date adjusted from 2026-04-05 to 2026-04-02 @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:586
+[ 2052758ms] [LOG] [Ticker]: Triggered missingDatesReceived event with availability data @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:601
+[ 2052758ms] [LOG] - Missing dates count: 41 @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:602
+[ 2052758ms] [LOG] - Last EOD date: 2026-04-02 @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:603
+[ 2052758ms] [LOG] - Last intraday date: 2026-04-02 @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:604
+[ 2052758ms] [LOG] - First date: 2025-12-08 @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:605
+[ 2052758ms] [LOG] [Ticker]: Updating UI with ticker data for: SPX @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:612
+[ 2053722ms] [LOG] Ticker Data: {success: true, data: Object} @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:532
+[ 2053722ms] [LOG] Full Response: {success: true, data: Object} @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:554
+[ 2053723ms] [LOG] Response Data: {ticker_data: Object, meta: Object} @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:555
+[ 2053723ms] [LOG] Ticker Data: {ticker: SPX, quoteType: INDEX, bid: 0, ask: 0, shortName: S&P 500 INDEX} @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:556
+[ 2053723ms] [LOG] Meta Info: {requested_date: 2026-04-02, actual_data_date: 2026-04-02, last_eod_date: 2026-04-02, last_intraday_date: 2026-04-02, missing_dates: Array(41)} @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:557
+[ 2053723ms] [LOG] Current Ticker Variable: spx @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:558
+[ 2053723ms] [LOG] Ticker Data Ticker Property: SPX @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:559
+[ 2053733ms] [LOG] [Ticker]: Triggered missingDatesReceived event with availability data @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:601
+[ 2053733ms] [LOG] - Missing dates count: 41 @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:602
+[ 2053733ms] [LOG] - Last EOD date: 2026-04-02 @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:603
+[ 2053733ms] [LOG] - Last intraday date: 2026-04-02 @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:604
+[ 2053733ms] [LOG] - First date: 2025-12-08 @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:605
+[ 2053733ms] [LOG] [Ticker]: Updating UI with ticker data for: SPX @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:612
+[ 2056529ms] [LOG] Current ticker: {ticker: spx, quoteType: INDEX, shortName: S&P 500 Index} @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:390
+[ 2056529ms] [LOG] Selected ticker: {ticker: gld, quoteType: ETF, shortName: SPDR Gold Trust} @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:391
+[ 2056530ms] [LOG] [Ticker]: Reset isFirstLoad for new ticker: gld @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:1314
+[ 2056530ms] [LOG] Ticker Selected: {ticker: gld, quoteType: ETF, shortName: SPDR Gold Trust} @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:1320
+[ 2056533ms] [LOG] Ticker Data: {ticker: gld, quoteType: ETF, shortName: SPDR Gold Trust} @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:519
+[ 2056533ms] [LOG] Ticker to get: gld @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:520
+[ 2056534ms] [LOG] [Ticker]: Making request with auto_fallback = true , mode = intraday @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:676
+[ 2058481ms] [LOG] Ticker Data: {success: true, data: Object} @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:532
+[ 2058481ms] [LOG] Full Response: {success: true, data: Object} @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:554
+[ 2058481ms] [LOG] Response Data: {ticker_data: Object, meta: Object} @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:555
+[ 2058482ms] [LOG] Ticker Data: {ticker: GLD, quoteType: ETF, bid: 429.6, ask: 429.45, shortName: SPDR Gold Shares} @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:556
+[ 2058482ms] [LOG] Meta Info: {requested_date: 2026-04-02, actual_data_date: 2026-04-02, last_eod_date: 2026-04-02, last_intraday_date: 2026-04-02, missing_dates: Array(41)} @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:557
+[ 2058482ms] [LOG] Current Ticker Variable: gld @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:558
+[ 2058482ms] [LOG] Ticker Data Ticker Property: GLD @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:559
+[ 2058491ms] [LOG] [Ticker]: Triggered missingDatesReceived event with availability data @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:601
+[ 2058491ms] [LOG] - Missing dates count: 41 @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:602
+[ 2058491ms] [LOG] - Last EOD date: 2026-04-02 @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:603
+[ 2058491ms] [LOG] - Last intraday date: 2026-04-02 @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:604
+[ 2058491ms] [LOG] - First date: 2025-12-08 @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:605
+[ 2058491ms] [LOG] [Ticker]: Updating UI with ticker data for: GLD @ https://menthorq.com/wp-content/themes/memberpress-wp-th/modules/QData/Assets/Public/Js/Tickers/tickerModule.js?ver=1774344957:612

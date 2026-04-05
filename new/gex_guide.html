@@ -1,0 +1,1982 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GEX Levels — Interactive Visual Guide</title>
+    <style>
+        :root {
+            --bg: #0f1117;
+            --card: #181b24;
+            --border: #2a2e3a;
+            --text: #e0e0e6;
+            --muted: #8a8f9d;
+            --green: #00c853;
+            --red: #ff1744;
+            --blue: #448aff;
+            --orange: #ff9100;
+            --purple: #b388ff;
+            --yellow: #ffd600;
+            --cyan: #18ffff;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            line-height: 1.7;
+            padding: 0;
+            scroll-behavior: smooth;
+        }
+
+        /* ===== STICKY NAV ===== */
+        .sticky-nav {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            background: rgba(15,17,23,0.92);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border);
+            z-index: 1000;
+            padding: 0 24px;
+            display: flex;
+            align-items: center;
+            height: 52px;
+            transition: transform 0.3s;
+        }
+        .sticky-nav .logo {
+            font-weight: 700;
+            font-size: 0.95rem;
+            background: linear-gradient(90deg, var(--cyan), var(--blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-right: 32px;
+            white-space: nowrap;
+        }
+        .sticky-nav .nav-links {
+            display: flex;
+            gap: 4px;
+            overflow-x: auto;
+            flex: 1;
+        }
+        .sticky-nav .nav-links a {
+            color: var(--muted);
+            text-decoration: none;
+            font-size: 0.82rem;
+            padding: 6px 14px;
+            border-radius: 6px;
+            white-space: nowrap;
+            transition: all 0.2s;
+        }
+        .sticky-nav .nav-links a:hover,
+        .sticky-nav .nav-links a.active {
+            color: var(--text);
+            background: rgba(255,255,255,0.06);
+        }
+        .sticky-nav .nav-links a.active {
+            color: var(--cyan);
+            background: rgba(24,255,255,0.08);
+        }
+
+        /* ===== HERO ===== */
+        .hero {
+            background: linear-gradient(135deg, #0d1b2a 0%, #1b2838 50%, #0d1b2a 100%);
+            border-bottom: 1px solid var(--border);
+            padding: 120px 40px 80px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%; left: -50%;
+            width: 200%; height: 200%;
+            background: radial-gradient(ellipse at 30% 50%, rgba(68,138,255,0.06) 0%, transparent 60%),
+                        radial-gradient(ellipse at 70% 50%, rgba(179,136,255,0.06) 0%, transparent 60%);
+            animation: heroGlow 8s ease-in-out infinite alternate;
+        }
+        @keyframes heroGlow {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(-3%, 2%); }
+        }
+        .hero h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            background: linear-gradient(90deg, var(--cyan), var(--blue), var(--purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 16px;
+            position: relative;
+        }
+        .hero p {
+            color: var(--muted);
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto;
+            position: relative;
+        }
+        .hero .scroll-hint {
+            position: absolute;
+            bottom: 24px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bounce 2s infinite;
+            color: var(--muted);
+            font-size: 1.4rem;
+        }
+        @keyframes bounce {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(8px); }
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 40px 24px;
+        }
+
+        /* ===== SECTION ===== */
+        .section {
+            margin-bottom: 64px;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        .section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .section-label {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: var(--muted);
+            margin-bottom: 8px;
+        }
+        .section h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+        .section p {
+            color: var(--muted);
+            font-size: 1.05rem;
+            max-width: 800px;
+            margin-bottom: 20px;
+        }
+
+        /* ===== CARDS ===== */
+        .card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 32px;
+            margin-bottom: 24px;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+        .card:hover {
+            border-color: rgba(68,138,255,0.3);
+            box-shadow: 0 4px 24px rgba(0,0,0,0.3);
+        }
+        .card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 12px;
+        }
+        .card p { color: var(--muted); }
+
+        /* ===== DIAGRAM BOX ===== */
+        .diagram-box {
+            background: #111319;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 24px;
+            margin: 24px 0;
+            overflow-x: auto;
+        }
+        .diagram-box svg { display: block; margin: 0 auto; }
+
+        /* ===== TWO COLUMN ===== */
+        .two-col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+        }
+        @media (max-width: 768px) {
+            .two-col { grid-template-columns: 1fr; }
+            .hero h1 { font-size: 2rem; }
+            .scenario-grid { grid-template-columns: 1fr !important; }
+            .sticky-nav .logo { display: none; }
+        }
+
+        /* ===== BADGES ===== */
+        .badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.78rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+        .badge-green { background: rgba(0,200,83,0.15); color: var(--green); }
+        .badge-red { background: rgba(255,23,68,0.15); color: var(--red); }
+        .badge-blue { background: rgba(68,138,255,0.15); color: var(--blue); }
+        .badge-orange { background: rgba(255,145,0,0.15); color: var(--orange); }
+        .badge-purple { background: rgba(179,136,255,0.15); color: var(--purple); }
+        .badge-yellow { background: rgba(255,214,0,0.15); color: var(--yellow); }
+
+        /* ===== KEY POINTS ===== */
+        .key-point {
+            display: flex;
+            align-items: flex-start;
+            gap: 14px;
+            padding: 16px 0;
+            border-bottom: 1px solid var(--border);
+        }
+        .key-point:last-child { border-bottom: none; }
+        .key-point .icon {
+            width: 36px; height: 36px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+        .key-point h4 { margin-bottom: 4px; font-size: 1rem; }
+        .key-point p { font-size: 0.92rem; margin: 0; }
+
+        /* ===== SCENARIO GRID ===== */
+        .scenario-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 24px 0;
+        }
+        .scenario-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 24px;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+        }
+        .scenario-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+        }
+        .scenario-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 3px;
+        }
+        .scenario-card.bullish::before { background: var(--green); }
+        .scenario-card.bullish:hover { border-color: rgba(0,200,83,0.4); }
+        .scenario-card.bearish::before { background: var(--red); }
+        .scenario-card.bearish:hover { border-color: rgba(255,23,68,0.4); }
+        .scenario-card.neutral::before { background: var(--yellow); }
+        .scenario-card.neutral:hover { border-color: rgba(255,214,0,0.4); }
+        .scenario-card.danger::before { background: var(--red); }
+        .scenario-card.danger:hover { border-color: rgba(255,23,68,0.4); }
+        .scenario-card h4 { font-size: 1.05rem; margin-bottom: 8px; }
+        .scenario-card p { color: var(--muted); font-size: 0.9rem; margin: 0; }
+        .scenario-card .tag {
+            display: inline-block;
+            margin-top: 12px;
+            font-size: 0.78rem;
+            padding: 3px 10px;
+            border-radius: 4px;
+            font-weight: 600;
+        }
+        .scenario-card .expand-detail {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease, margin 0.3s;
+            margin-top: 0;
+        }
+        .scenario-card.expanded .expand-detail {
+            max-height: 300px;
+            margin-top: 14px;
+        }
+        .expand-detail ul {
+            list-style: none;
+            padding: 0;
+        }
+        .expand-detail ul li {
+            color: var(--muted);
+            font-size: 0.88rem;
+            padding: 4px 0;
+            border-bottom: 1px solid var(--border);
+        }
+        .expand-detail ul li:last-child { border-bottom: none; }
+        .expand-detail ul li span { color: var(--text); font-weight: 600; }
+
+        /* ===== ANALOGY BOX ===== */
+        .analogy {
+            background: linear-gradient(135deg, rgba(68,138,255,0.08), rgba(179,136,255,0.08));
+            border: 1px solid rgba(68,138,255,0.2);
+            border-radius: 12px;
+            padding: 24px 28px;
+            margin: 20px 0;
+        }
+        .analogy h4 { color: var(--blue); margin-bottom: 8px; font-size: 1rem; }
+        .analogy p { color: var(--muted); font-size: 0.95rem; margin: 0; }
+
+        /* ===== SUMMARY TABLE ===== */
+        .summary-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        .summary-table th, .summary-table td {
+            padding: 14px 18px;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+            font-size: 0.92rem;
+        }
+        .summary-table th {
+            color: var(--muted);
+            font-weight: 600;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .summary-table tr {
+            transition: background 0.2s;
+        }
+        .summary-table tr:hover td {
+            background: rgba(255,255,255,0.02);
+        }
+        .summary-table tr:last-child td { border-bottom: none; }
+
+        .highlight-green { color: var(--green); font-weight: 600; }
+        .highlight-red { color: var(--red); font-weight: 600; }
+        .highlight-blue { color: var(--blue); font-weight: 600; }
+        .highlight-orange { color: var(--orange); font-weight: 600; }
+        .highlight-purple { color: var(--purple); font-weight: 600; }
+        .highlight-yellow { color: var(--yellow); font-weight: 600; }
+        .highlight-cyan { color: var(--cyan); font-weight: 600; }
+
+        /* ===== INTERACTIVE SIMULATOR ===== */
+        .simulator-wrapper {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 32px;
+            margin: 24px 0;
+        }
+        .simulator-wrapper h3 {
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+        }
+        .sim-layout {
+            display: grid;
+            grid-template-columns: 1fr 340px;
+            gap: 32px;
+        }
+        @media (max-width: 900px) {
+            .sim-layout { grid-template-columns: 1fr; }
+        }
+        .sim-chart {
+            position: relative;
+            height: 440px;
+            background: #111319;
+            border-radius: 10px;
+            border: 1px solid var(--border);
+            overflow: hidden;
+        }
+        .sim-level {
+            position: absolute;
+            left: 0; right: 0;
+            height: 2px;
+            transition: top 0.3s;
+        }
+        .sim-level-label {
+            position: absolute;
+            right: 12px;
+            transform: translateY(-50%);
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 2px 8px;
+            border-radius: 4px;
+            white-space: nowrap;
+        }
+        .sim-level-price {
+            position: absolute;
+            left: 12px;
+            transform: translateY(-50%);
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--muted);
+        }
+        .sim-price-marker {
+            position: absolute;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 18px; height: 18px;
+            border-radius: 50%;
+            background: var(--cyan);
+            box-shadow: 0 0 20px rgba(24,255,255,0.5), 0 0 40px rgba(24,255,255,0.2);
+            z-index: 10;
+            transition: top 0.1s;
+            cursor: grab;
+        }
+        .sim-price-marker:active { cursor: grabbing; }
+        .sim-price-marker::after {
+            content: '';
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            width: 40px; height: 40px;
+            border-radius: 50%;
+            border: 1px solid rgba(24,255,255,0.3);
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { transform: translate(-50%,-50%) scale(1); opacity: 1; }
+            50% { transform: translate(-50%,-50%) scale(1.5); opacity: 0; }
+        }
+        .sim-price-line {
+            position: absolute;
+            left: 0; right: 0;
+            height: 1px;
+            background: var(--cyan);
+            opacity: 0.4;
+            z-index: 5;
+            transition: top 0.1s;
+        }
+        .sim-price-tag {
+            position: absolute;
+            left: 50%;
+            transform: translate(-50%, -130%);
+            background: rgba(24,255,255,0.15);
+            border: 1px solid var(--cyan);
+            color: var(--cyan);
+            padding: 3px 12px;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            z-index: 11;
+            transition: top 0.1s;
+            pointer-events: none;
+        }
+        /* Zone backgrounds */
+        .sim-zone {
+            position: absolute;
+            left: 0; right: 0;
+            transition: all 0.3s;
+            pointer-events: none;
+        }
+
+        /* Info panel */
+        .sim-info {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+        .sim-info-card {
+            background: #111319;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 18px;
+            transition: border-color 0.3s, background 0.3s;
+        }
+        .sim-info-card.active {
+            border-color: var(--cyan);
+            background: rgba(24,255,255,0.03);
+        }
+        .sim-info-card h4 {
+            font-size: 0.85rem;
+            color: var(--muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 6px;
+        }
+        .sim-info-card .value {
+            font-size: 1.4rem;
+            font-weight: 700;
+            transition: color 0.3s;
+        }
+        .sim-info-card .sub {
+            font-size: 0.82rem;
+            color: var(--muted);
+            margin-top: 4px;
+            transition: color 0.3s;
+        }
+
+        /* Volatility meter */
+        .vol-meter {
+            height: 8px;
+            background: #1a1d27;
+            border-radius: 4px;
+            margin-top: 8px;
+            overflow: hidden;
+        }
+        .vol-meter-fill {
+            height: 100%;
+            border-radius: 4px;
+            transition: width 0.4s, background 0.4s;
+        }
+
+        /* Candlestick animation */
+        .candle-container {
+            position: absolute;
+            bottom: 0; left: 60px; right: 60px;
+            height: 100%;
+            display: flex;
+            align-items: flex-end;
+            gap: 3px;
+            padding: 20px 0;
+            pointer-events: none;
+            z-index: 2;
+            opacity: 0.35;
+        }
+        .candle {
+            flex: 1;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .candle-body {
+            width: 70%;
+            min-height: 4px;
+            border-radius: 1px;
+            transition: height 0.5s, background 0.3s;
+        }
+        .candle-wick {
+            width: 1px;
+            transition: height 0.5s, background 0.3s;
+        }
+
+        /* ===== QUIZ ===== */
+        .quiz-wrapper {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 32px;
+            margin: 24px 0;
+        }
+        .quiz-wrapper h3 { margin-bottom: 8px; }
+        .quiz-wrapper .quiz-sub { color: var(--muted); font-size: 0.95rem; margin-bottom: 24px; }
+        .quiz-question {
+            display: none;
+            animation: fadeIn 0.4s ease;
+        }
+        .quiz-question.active { display: block; }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .quiz-question h4 {
+            font-size: 1.1rem;
+            margin-bottom: 16px;
+            line-height: 1.5;
+        }
+        .quiz-question .q-num {
+            color: var(--cyan);
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 6px;
+        }
+        .quiz-options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .quiz-opt {
+            background: #111319;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 14px 18px;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 0.95rem;
+            color: var(--text);
+        }
+        .quiz-opt:hover {
+            border-color: var(--blue);
+            background: rgba(68,138,255,0.05);
+        }
+        .quiz-opt.correct {
+            border-color: var(--green) !important;
+            background: rgba(0,200,83,0.1) !important;
+            color: var(--green);
+        }
+        .quiz-opt.wrong {
+            border-color: var(--red) !important;
+            background: rgba(255,23,68,0.1) !important;
+            color: var(--red);
+        }
+        .quiz-opt.disabled { pointer-events: none; }
+        .quiz-explanation {
+            margin-top: 16px;
+            padding: 16px;
+            background: rgba(68,138,255,0.05);
+            border: 1px solid rgba(68,138,255,0.15);
+            border-radius: 10px;
+            font-size: 0.9rem;
+            color: var(--muted);
+            display: none;
+        }
+        .quiz-explanation.show { display: block; animation: fadeIn 0.3s ease; }
+        .quiz-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 20px;
+        }
+        .quiz-btn {
+            background: rgba(68,138,255,0.15);
+            color: var(--blue);
+            border: 1px solid rgba(68,138,255,0.3);
+            padding: 10px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+        .quiz-btn:hover { background: rgba(68,138,255,0.25); }
+        .quiz-btn:disabled { opacity: 0.3; cursor: not-allowed; }
+        .quiz-score {
+            font-size: 0.9rem;
+            color: var(--muted);
+        }
+        .quiz-progress {
+            display: flex;
+            gap: 6px;
+            margin-bottom: 20px;
+        }
+        .quiz-dot {
+            width: 10px; height: 10px;
+            border-radius: 50%;
+            background: var(--border);
+            transition: background 0.3s;
+        }
+        .quiz-dot.done-correct { background: var(--green); }
+        .quiz-dot.done-wrong { background: var(--red); }
+        .quiz-dot.current { background: var(--cyan); box-shadow: 0 0 8px rgba(24,255,255,0.4); }
+
+        /* ===== INTERACTIVE GEX BAR CHART ===== */
+        .gex-bar-chart {
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            gap: 2px;
+            height: 260px;
+            padding: 20px 0;
+            position: relative;
+        }
+        .gex-bar-chart .zero-line {
+            position: absolute;
+            left: 0; right: 0;
+            top: 50%;
+            height: 1px;
+            background: var(--muted);
+            opacity: 0.3;
+        }
+        .gex-bar {
+            width: 22px;
+            border-radius: 3px 3px 0 0;
+            position: relative;
+            cursor: pointer;
+            transition: all 0.3s;
+            transform-origin: bottom center;
+        }
+        .gex-bar:hover {
+            filter: brightness(1.3);
+            transform: scaleX(1.3);
+        }
+        .gex-bar-neg {
+            align-self: flex-start;
+            border-radius: 0 0 3px 3px;
+            transform-origin: top center;
+        }
+        .gex-bar-tooltip {
+            display: none;
+            position: absolute;
+            bottom: calc(100% + 8px);
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 8px 12px;
+            font-size: 0.78rem;
+            white-space: nowrap;
+            z-index: 100;
+            pointer-events: none;
+        }
+        .gex-bar:hover .gex-bar-tooltip { display: block; }
+        .gex-bar-neg:hover .gex-bar-tooltip {
+            bottom: auto;
+            top: calc(100% + 8px);
+        }
+
+        /* ===== TABS ===== */
+        .tab-container { margin: 24px 0; }
+        .tab-header {
+            display: flex;
+            gap: 4px;
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 24px;
+        }
+        .tab-btn {
+            background: none;
+            border: none;
+            color: var(--muted);
+            font-size: 0.92rem;
+            padding: 12px 20px;
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+            transition: all 0.2s;
+            font-family: inherit;
+        }
+        .tab-btn:hover { color: var(--text); }
+        .tab-btn.active {
+            color: var(--cyan);
+            border-bottom-color: var(--cyan);
+        }
+        .tab-content { display: none; animation: fadeIn 0.4s ease; }
+        .tab-content.active { display: block; }
+
+        /* ===== TOOLTIP ===== */
+        .tooltip-trigger {
+            border-bottom: 1px dashed var(--muted);
+            cursor: help;
+            position: relative;
+        }
+        .tooltip-trigger .tooltip-text {
+            display: none;
+            position: absolute;
+            bottom: calc(100% + 8px);
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 12px 16px;
+            font-size: 0.82rem;
+            color: var(--muted);
+            width: 260px;
+            text-align: left;
+            z-index: 200;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+            line-height: 1.5;
+            font-weight: 400;
+        }
+        .tooltip-trigger:hover .tooltip-text { display: block; }
+
+        /* ===== FOOTER ===== */
+        .footer {
+            text-align: center;
+            padding: 40px;
+            color: var(--muted);
+            font-size: 0.85rem;
+            border-top: 1px solid var(--border);
+            margin-top: 40px;
+        }
+
+        /* ===== PROGRESS BAR ===== */
+        .reading-progress {
+            position: fixed;
+            top: 52px; left: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--cyan), var(--purple));
+            z-index: 999;
+            transition: width 0.1s;
+            width: 0;
+        }
+
+        /* ===== BACK TO TOP ===== */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: var(--card);
+            border: 1px solid var(--border);
+            color: var(--muted);
+            font-size: 1.2rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: all 0.3s;
+            z-index: 900;
+        }
+        .back-to-top.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .back-to-top:hover {
+            border-color: var(--cyan);
+            color: var(--cyan);
+        }
+    </style>
+</head>
+<body>
+
+<!-- Reading progress bar -->
+<div class="reading-progress" id="readingProgress"></div>
+
+<!-- Sticky Navigation -->
+<nav class="sticky-nav" id="stickyNav">
+    <div class="logo">GEX Guide</div>
+    <div class="nav-links">
+        <a href="#what-is-gex" data-section="what-is-gex">GEX Basics</a>
+        <a href="#gex-profile" data-section="gex-profile">GEX Profile</a>
+        <a href="#hvl" data-section="hvl">HVL</a>
+        <a href="#gex-flip" data-section="gex-flip">GEX Flip</a>
+        <a href="#call-wall" data-section="call-wall">Call Wall</a>
+        <a href="#put-wall" data-section="put-wall">Put Wall</a>
+        <a href="#simulator" data-section="simulator">Simulator</a>
+        <a href="#scenarios" data-section="scenarios">Scenarios</a>
+        <a href="#quiz" data-section="quiz">Quiz</a>
+    </div>
+</nav>
+
+<!-- Back to top -->
+<button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">&#9650;</button>
+
+<!-- ============ HERO ============ -->
+<div class="hero" id="hero">
+    <h1>GEX Levels — Interactive Guide</h1>
+    <p>Drag, click, and explore. Understand how options market makers create support, resistance, and volatility regimes through gamma exposure.</p>
+    <div class="scroll-hint">&#8964;</div>
+</div>
+
+<div class="container">
+
+    <!-- ============ SECTION 1: WHAT IS GEX ============ -->
+    <div class="section" id="what-is-gex">
+        <div class="section-label">Chapter 01</div>
+        <h2>What is GEX?</h2>
+        <p>GEX (Gamma Exposure) measures the total gamma that options
+        <span class="tooltip-trigger">market makers<span class="tooltip-text">Market makers are firms/traders that provide liquidity by always being ready to buy or sell. They hedge their risk by trading the underlying stock/index when options prices move.</span></span>
+        hold across all strike prices. It tells us how much
+        <span class="tooltip-trigger">delta-hedging<span class="tooltip-text">Delta-hedging: when market makers buy or sell the underlying asset to offset the directional risk of their options positions. This mechanical buying/selling is what creates support and resistance.</span></span>
+        dealers must do for every $1 move in the underlying asset.</p>
+
+        <div class="analogy">
+            <h4>Think of it like this...</h4>
+            <p>Imagine a ball on a curved surface. <strong>Positive gamma</strong> is like a bowl — the ball always rolls back to center (mean-reversion). <strong>Negative gamma</strong> is like a hill — any push sends the ball accelerating away (trending).</p>
+        </div>
+
+        <div class="diagram-box">
+            <svg width="900" height="380" viewBox="0 0 900 380">
+                <defs>
+                    <pattern id="grid1" width="40" height="40" patternUnits="userSpaceOnUse">
+                        <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#1e2230" stroke-width="0.5"/>
+                    </pattern>
+                </defs>
+                <rect width="900" height="380" fill="url(#grid1)"/>
+                <text x="450" y="30" text-anchor="middle" fill="#8a8f9d" font-size="14" font-weight="600">HOW DEALER HEDGING CREATES SUPPORT & RESISTANCE</text>
+
+                <!-- Left: Positive Gamma -->
+                <rect x="30" y="50" width="400" height="300" rx="8" fill="rgba(0,200,83,0.05)" stroke="rgba(0,200,83,0.2)"/>
+                <text x="230" y="78" text-anchor="middle" fill="#00c853" font-size="13" font-weight="700">POSITIVE GAMMA (Long Gamma)</text>
+                <path d="M 100,250 Q 230,150 360,250" fill="none" stroke="#00c853" stroke-width="3" stroke-linecap="round"/>
+                <!-- Animated ball in bowl -->
+                <circle cx="0" cy="0" r="10" fill="#00c853">
+                    <animateMotion dur="3s" repeatCount="indefinite" path="M 230,220 Q 280,195 310,215 Q 330,230 300,230 Q 260,235 230,220 Q 190,210 170,225 Q 160,235 190,230 Q 210,225 230,220"/>
+                </circle>
+                <text x="230" y="285" text-anchor="middle" fill="#8a8f9d" font-size="11">Price always pulled back to center</text>
+                <text x="100" y="310" fill="#e0e0e6" font-size="11">Dealers SELL into rallies</text>
+                <text x="100" y="328" fill="#e0e0e6" font-size="11">Dealers BUY into dips</text>
+                <text x="100" y="346" fill="#00c853" font-size="11" font-weight="600">= Volatility SUPPRESSED</text>
+
+                <!-- Right: Negative Gamma -->
+                <rect x="470" y="50" width="400" height="300" rx="8" fill="rgba(255,23,68,0.05)" stroke="rgba(255,23,68,0.2)"/>
+                <text x="670" y="78" text-anchor="middle" fill="#ff1744" font-size="13" font-weight="700">NEGATIVE GAMMA (Short Gamma)</text>
+                <path d="M 540,250 Q 670,140 800,250" fill="none" stroke="#ff1744" stroke-width="3" stroke-linecap="round"/>
+                <!-- Animated ball rolling off hill -->
+                <circle cx="0" cy="0" r="10" fill="#ff1744">
+                    <animateMotion dur="2.5s" repeatCount="indefinite" path="M 670,153 L 700,165 L 740,195 L 780,240 L 790,250 L 670,153"/>
+                </circle>
+                <text x="670" y="285" text-anchor="middle" fill="#8a8f9d" font-size="11">Price accelerates away from center</text>
+                <text x="540" y="310" fill="#e0e0e6" font-size="11">Dealers BUY into rallies</text>
+                <text x="540" y="328" fill="#e0e0e6" font-size="11">Dealers SELL into dips</text>
+                <text x="540" y="346" fill="#ff1744" font-size="11" font-weight="600">= Volatility AMPLIFIED</text>
+            </svg>
+        </div>
+    </div>
+
+    <!-- ============ SECTION: INTERACTIVE GEX PROFILE ============ -->
+    <div class="section" id="gex-profile">
+        <div class="section-label">Chapter 02</div>
+        <h2>Interactive GEX Profile</h2>
+        <p>Hover over the bars to see gamma exposure at each strike. Green bars = positive gamma (stabilizing). Red bars = negative gamma (destabilizing). The tallest green bar on the call side is the <strong class="highlight-green">Call Wall</strong>, and on the put side is the <strong class="highlight-red">Put Wall</strong>.</p>
+
+        <div class="diagram-box" style="padding:32px;">
+            <div style="text-align:center; margin-bottom:12px;">
+                <span class="badge badge-green" style="margin-right:8px;">Call GEX (Resistance)</span>
+                <span class="badge badge-red">Put GEX (Support)</span>
+            </div>
+            <div style="display:flex; align-items:center; justify-content:center; position:relative;">
+                <div style="position:absolute; left:0; top:50%; transform:translateY(-50%); writing-mode:vertical-rl; text-orientation:mixed; color:var(--muted); font-size:0.8rem;">Gamma Exposure ($)</div>
+                <div id="gexBarChart" class="gex-bar-chart" style="width:100%; max-width:800px;">
+                    <div class="zero-line"></div>
+                </div>
+            </div>
+            <div style="text-align:center; margin-top:8px; color:var(--muted); font-size:0.85rem;">Strike Price &rarr;</div>
+        </div>
+    </div>
+
+    <!-- ============ SECTION: HVL ============ -->
+    <div class="section" id="hvl">
+        <div class="section-label">Chapter 03</div>
+        <h2>HVL — Highest Volume Level</h2>
+        <p>The strike price with the highest options open interest and volume. It represents the point of <strong>maximum dealer exposure</strong> and acts as a gravitational center for price.</p>
+
+        <div class="analogy">
+            <h4>Analogy: The Magnet</h4>
+            <p>HVL is like a powerful magnet placed on a number line. Price (a metal ball) is constantly pulled toward it. The further price drifts, the stronger the pull. Near expiration, the magnetic force is strongest.</p>
+        </div>
+
+        <div class="diagram-box">
+            <svg width="900" height="420" viewBox="0 0 900 420">
+                <defs>
+                    <pattern id="grid2" width="40" height="40" patternUnits="userSpaceOnUse">
+                        <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#1e2230" stroke-width="0.5"/>
+                    </pattern>
+                    <linearGradient id="hvlGlow" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="0%" stop-color="rgba(255,214,0,0.3)"/>
+                        <stop offset="100%" stop-color="rgba(255,214,0,0)"/>
+                    </linearGradient>
+                </defs>
+                <rect width="900" height="420" fill="url(#grid2)"/>
+                <text x="450" y="30" text-anchor="middle" fill="#8a8f9d" font-size="14" font-weight="600">HVL — THE PRICE MAGNET</text>
+                <line x1="80" y1="60" x2="80" y2="360" stroke="#2a2e3a" stroke-width="1"/>
+                <text x="50" y="35" fill="#8a8f9d" font-size="11">PRICE</text>
+                <line x1="80" y1="360" x2="850" y2="360" stroke="#2a2e3a" stroke-width="1"/>
+                <text x="850" y="385" text-anchor="end" fill="#8a8f9d" font-size="11">TIME</text>
+
+                <rect x="80" y="195" width="770" height="30" fill="url(#hvlGlow)"/>
+                <line x1="80" y1="210" x2="850" y2="210" stroke="#ffd600" stroke-width="2" stroke-dasharray="8,4"/>
+                <rect x="820" y="197" width="40" height="26" rx="4" fill="rgba(255,214,0,0.2)" stroke="#ffd600"/>
+                <text x="840" y="215" text-anchor="middle" fill="#ffd600" font-size="11" font-weight="700">HVL</text>
+
+                <text x="60" y="115" text-anchor="end" fill="#8a8f9d" font-size="10">5820</text>
+                <text x="60" y="165" text-anchor="end" fill="#8a8f9d" font-size="10">5800</text>
+                <text x="60" y="215" text-anchor="end" fill="#ffd600" font-size="10" font-weight="600">5780</text>
+                <text x="60" y="265" text-anchor="end" fill="#8a8f9d" font-size="10">5760</text>
+                <text x="60" y="315" text-anchor="end" fill="#8a8f9d" font-size="10">5740</text>
+
+                <!-- Animated price path -->
+                <path d="M 100,180 L 140,140 L 180,110 L 210,135 L 240,170 L 270,200 L 300,215
+                         L 330,240 L 360,280 L 390,300 L 420,270 L 450,230 L 480,210
+                         L 510,195 L 540,160 L 570,140 L 600,165 L 630,195 L 660,210
+                         L 690,220 L 720,250 L 750,235 L 780,215 L 810,210"
+                      fill="none" stroke="#448aff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
+                      stroke-dasharray="1200" stroke-dashoffset="1200">
+                    <animate attributeName="stroke-dashoffset" from="1200" to="0" dur="4s" fill="freeze" begin="0s"/>
+                </path>
+
+                <!-- Pull arrows -->
+                <line x1="180" y1="120" x2="180" y2="170" stroke="rgba(255,214,0,0.5)" stroke-width="1" stroke-dasharray="3,3"/>
+                <polygon points="176,170 180,180 184,170" fill="rgba(255,214,0,0.6)"/>
+                <line x1="570" y1="150" x2="570" y2="185" stroke="rgba(255,214,0,0.5)" stroke-width="1" stroke-dasharray="3,3"/>
+                <polygon points="566,185 570,195 574,185" fill="rgba(255,214,0,0.6)"/>
+                <line x1="390" y1="290" x2="390" y2="250" stroke="rgba(255,214,0,0.5)" stroke-width="1" stroke-dasharray="3,3"/>
+                <polygon points="386,250 390,240 394,250" fill="rgba(255,214,0,0.6)"/>
+                <line x1="720" y1="245" x2="720" y2="225" stroke="rgba(255,214,0,0.5)" stroke-width="1" stroke-dasharray="3,3"/>
+                <polygon points="716,225 720,215 724,225" fill="rgba(255,214,0,0.6)"/>
+
+                <rect x="130" y="85" width="120" height="22" rx="4" fill="rgba(0,200,83,0.15)"/>
+                <text x="190" y="100" text-anchor="middle" fill="#00c853" font-size="10">Dealers sell here</text>
+                <rect x="340" y="305" width="120" height="22" rx="4" fill="rgba(0,200,83,0.15)"/>
+                <text x="400" y="320" text-anchor="middle" fill="#00c853" font-size="10">Dealers buy here</text>
+
+                <rect x="140" y="375" width="160" height="30" rx="6" fill="#181b24" stroke="#2a2e3a"/>
+                <line x1="155" y1="390" x2="180" y2="390" stroke="#448aff" stroke-width="2"/>
+                <text x="190" y="394" fill="#8a8f9d" font-size="11">Price Action</text>
+                <rect x="320" y="375" width="240" height="30" rx="6" fill="#181b24" stroke="#2a2e3a"/>
+                <line x1="335" y1="390" x2="360" y2="390" stroke="#ffd600" stroke-width="2" stroke-dasharray="6,3"/>
+                <text x="370" y="394" fill="#8a8f9d" font-size="11">HVL (Gravitational Center)</text>
+            </svg>
+        </div>
+
+        <div class="two-col">
+            <div class="card">
+                <h3 class="highlight-green">Price Above HVL</h3>
+                <div class="key-point">
+                    <div>
+                        <h4>Bullish Bias</h4>
+                        <p>HVL acts as <strong>support</strong>. Dips toward HVL tend to be bought by dealer hedging. The level below acts as a floor.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <h3 class="highlight-red">Price Below HVL</h3>
+                <div class="key-point">
+                    <div>
+                        <h4>Bearish Bias</h4>
+                        <p>HVL acts as <strong>resistance</strong>. Rallies toward HVL tend to be sold. The level above acts as a ceiling.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h3>Key Properties of HVL</h3>
+            <div class="key-point">
+                <div class="icon" style="background:rgba(255,214,0,0.15); color:#ffd600;">1</div>
+                <div>
+                    <h4>Strongest Near Expiration</h4>
+                    <p>As options expiry approaches, gamma increases sharply at the HVL strike, making the "pinning" effect most powerful on expiration day.</p>
+                </div>
+            </div>
+            <div class="key-point">
+                <div class="icon" style="background:rgba(255,214,0,0.15); color:#ffd600;">2</div>
+                <div>
+                    <h4>Dynamic — Shifts Intraday</h4>
+                    <p>New options volume can shift the HVL. Large block trades at a different strike can move the magnet mid-session.</p>
+                </div>
+            </div>
+            <div class="key-point">
+                <div class="icon" style="background:rgba(255,214,0,0.15); color:#ffd600;">3</div>
+                <div>
+                    <h4>Works Best in Positive Gamma</h4>
+                    <p>When the market is in positive gamma territory, HVL pinning is strong. In negative gamma, the magnet weakens and price can break away violently.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============ SECTION: GEX FLIP ============ -->
+    <div class="section" id="gex-flip">
+        <div class="section-label">Chapter 04</div>
+        <h2>GEX Flip — The Volatility Regime Switch</h2>
+        <p>The price level where total dealer gamma switches from positive to negative. This is arguably the <strong>single most important GEX level</strong> because it determines the entire character of the market.</p>
+
+        <div class="analogy">
+            <h4>Analogy: The Weather Line</h4>
+            <p>Imagine a line on a map. North of the line: calm, sunny weather (positive gamma). South of the line: storms and hurricanes (negative gamma). The GEX Flip IS that line.</p>
+        </div>
+
+        <div class="diagram-box">
+            <svg width="900" height="500" viewBox="0 0 900 500">
+                <defs>
+                    <pattern id="grid3" width="40" height="40" patternUnits="userSpaceOnUse">
+                        <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#1e2230" stroke-width="0.5"/>
+                    </pattern>
+                    <linearGradient id="posGamma" x1="0" y1="1" x2="0" y2="0">
+                        <stop offset="0%" stop-color="rgba(0,200,83,0)"/>
+                        <stop offset="100%" stop-color="rgba(0,200,83,0.15)"/>
+                    </linearGradient>
+                    <linearGradient id="negGamma" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="0%" stop-color="rgba(255,23,68,0)"/>
+                        <stop offset="100%" stop-color="rgba(255,23,68,0.15)"/>
+                    </linearGradient>
+                </defs>
+                <rect width="900" height="500" fill="url(#grid3)"/>
+                <text x="450" y="30" text-anchor="middle" fill="#8a8f9d" font-size="14" font-weight="600">GEX FLIP — THE TWO REGIMES</text>
+
+                <rect x="80" y="50" width="770" height="180" fill="url(#posGamma)" rx="0"/>
+                <text x="465" y="85" text-anchor="middle" fill="#00c853" font-size="18" font-weight="700" opacity="0.4">POSITIVE GAMMA ZONE</text>
+
+                <rect x="120" y="100" width="180" height="55" rx="8" fill="rgba(0,200,83,0.08)" stroke="rgba(0,200,83,0.2)"/>
+                <text x="210" y="120" text-anchor="middle" fill="#00c853" font-size="11" font-weight="600">Low Volatility</text>
+                <text x="210" y="140" text-anchor="middle" fill="#8a8f9d" font-size="10">Ranges compress</text>
+
+                <rect x="360" y="100" width="180" height="55" rx="8" fill="rgba(0,200,83,0.08)" stroke="rgba(0,200,83,0.2)"/>
+                <text x="450" y="120" text-anchor="middle" fill="#00c853" font-size="11" font-weight="600">Mean-Reverting</text>
+                <text x="450" y="140" text-anchor="middle" fill="#8a8f9d" font-size="10">Fade extremes works</text>
+
+                <rect x="600" y="100" width="180" height="55" rx="8" fill="rgba(0,200,83,0.08)" stroke="rgba(0,200,83,0.2)"/>
+                <text x="690" y="120" text-anchor="middle" fill="#00c853" font-size="11" font-weight="600">S/R Levels Hold</text>
+                <text x="690" y="140" text-anchor="middle" fill="#8a8f9d" font-size="10">Walls act as barriers</text>
+
+                <!-- GEX FLIP LINE with glow animation -->
+                <rect x="80" y="220" width="770" height="40" fill="rgba(179,136,255,0.08)"/>
+                <line x1="80" y1="240" x2="850" y2="240" stroke="#b388ff" stroke-width="3">
+                    <animate attributeName="opacity" values="0.6;1;0.6" dur="2s" repeatCount="indefinite"/>
+                </line>
+                <rect x="380" y="225" width="140" height="30" rx="6" fill="rgba(179,136,255,0.25)" stroke="#b388ff"/>
+                <text x="450" y="245" text-anchor="middle" fill="#b388ff" font-size="13" font-weight="700">GEX FLIP LINE</text>
+
+                <rect x="80" y="260" width="770" height="180" fill="url(#negGamma)" rx="0"/>
+                <text x="465" y="295" text-anchor="middle" fill="#ff1744" font-size="18" font-weight="700" opacity="0.4">NEGATIVE GAMMA ZONE</text>
+
+                <rect x="120" y="310" width="180" height="55" rx="8" fill="rgba(255,23,68,0.08)" stroke="rgba(255,23,68,0.2)"/>
+                <text x="210" y="330" text-anchor="middle" fill="#ff1744" font-size="11" font-weight="600">High Volatility</text>
+                <text x="210" y="350" text-anchor="middle" fill="#8a8f9d" font-size="10">Ranges expand fast</text>
+
+                <rect x="360" y="310" width="180" height="55" rx="8" fill="rgba(255,23,68,0.08)" stroke="rgba(255,23,68,0.2)"/>
+                <text x="450" y="330" text-anchor="middle" fill="#ff1744" font-size="11" font-weight="600">Trending / Momentum</text>
+                <text x="450" y="350" text-anchor="middle" fill="#8a8f9d" font-size="10">Breakouts follow through</text>
+
+                <rect x="600" y="310" width="180" height="55" rx="8" fill="rgba(255,23,68,0.08)" stroke="rgba(255,23,68,0.2)"/>
+                <text x="690" y="330" text-anchor="middle" fill="#ff1744" font-size="11" font-weight="600">S/R Levels Break</text>
+                <text x="690" y="350" text-anchor="middle" fill="#8a8f9d" font-size="10">Walls get sliced through</text>
+
+                <!-- Animated small moves in positive gamma -->
+                <path d="M 150,180 L 170,170 L 190,185 L 210,168 L 230,182 L 250,172 L 270,180" fill="none" stroke="#00c853" stroke-width="2" stroke-linecap="round"
+                      stroke-dasharray="200" stroke-dashoffset="200">
+                    <animate attributeName="stroke-dashoffset" from="200" to="0" dur="2s" fill="freeze"/>
+                </path>
+                <text x="220" y="205" text-anchor="middle" fill="#00c853" font-size="10">Small moves, choppy</text>
+
+                <!-- Animated big move in negative gamma -->
+                <path d="M 150,390 L 180,395 L 210,405 L 240,420 L 270,438" fill="none" stroke="#ff1744" stroke-width="2" stroke-linecap="round"
+                      stroke-dasharray="200" stroke-dashoffset="200">
+                    <animate attributeName="stroke-dashoffset" from="200" to="0" dur="2s" fill="freeze"/>
+                </path>
+                <text x="220" y="460" text-anchor="middle" fill="#ff1744" font-size="10">Big moves, trending</text>
+
+                <text x="750" y="210" text-anchor="middle" fill="#00c853" font-size="20">&#9650;</text>
+                <text x="750" y="200" text-anchor="middle" fill="#00c853" font-size="9">Safe</text>
+                <text x="750" y="280" text-anchor="middle" fill="#ff1744" font-size="20">&#9660;</text>
+                <text x="750" y="300" text-anchor="middle" fill="#ff1744" font-size="9">Danger</text>
+
+                <rect x="250" y="465" width="400" height="28" rx="6" fill="#181b24" stroke="#2a2e3a"/>
+                <text x="450" y="484" text-anchor="middle" fill="#8a8f9d" font-size="11">Price crossing this line = complete regime change</text>
+            </svg>
+        </div>
+
+        <!-- Tabbed comparison -->
+        <div class="tab-container">
+            <div class="tab-header">
+                <button class="tab-btn active" onclick="switchTab(event, 'tab-above')">Above GEX Flip</button>
+                <button class="tab-btn" onclick="switchTab(event, 'tab-below')">Below GEX Flip</button>
+                <button class="tab-btn" onclick="switchTab(event, 'tab-compare')">Side-by-Side</button>
+            </div>
+            <div class="tab-content active" id="tab-above">
+                <div class="card" style="border-left: 3px solid var(--green);">
+                    <h3 class="highlight-green">Positive Gamma Regime</h3>
+                    <div class="key-point"><div class="icon" style="background:rgba(0,200,83,0.15); color:#00c853;">&#9670;</div><div><h4>Dealer Hedging: Counter-Trend</h4><p>Market makers sell when price rises, buy when it falls. They act as shock absorbers, dampening moves.</p></div></div>
+                    <div class="key-point"><div class="icon" style="background:rgba(0,200,83,0.15); color:#00c853;">&#9670;</div><div><h4>Volatility: Compressed</h4><p>Daily ranges are tight (0.3-0.5%). VIX stays low. Intraday feels boring and choppy.</p></div></div>
+                    <div class="key-point"><div class="icon" style="background:rgba(0,200,83,0.15); color:#00c853;">&#9670;</div><div><h4>Best Strategy: Sell Premium</h4><p>Fade extremes, sell strangles/iron condors. S/R levels are respected. Mean-reversion wins.</p></div></div>
+                </div>
+            </div>
+            <div class="tab-content" id="tab-below">
+                <div class="card" style="border-left: 3px solid var(--red);">
+                    <h3 class="highlight-red">Negative Gamma Regime</h3>
+                    <div class="key-point"><div class="icon" style="background:rgba(255,23,68,0.15); color:#ff1744;">&#9670;</div><div><h4>Dealer Hedging: Pro-Trend</h4><p>Market makers buy when price rises, sell when it falls. They amplify every move like fuel on fire.</p></div></div>
+                    <div class="key-point"><div class="icon" style="background:rgba(255,23,68,0.15); color:#ff1744;">&#9670;</div><div><h4>Volatility: Expanding</h4><p>Daily ranges blow out (1-3%+). VIX spikes. Fast, directional moves dominate.</p></div></div>
+                    <div class="key-point"><div class="icon" style="background:rgba(255,23,68,0.15); color:#ff1744;">&#9670;</div><div><h4>Best Strategy: Trade Momentum</h4><p>Buy breakouts, buy puts for protection, reduce position size. S/R levels break easily.</p></div></div>
+                </div>
+            </div>
+            <div class="tab-content" id="tab-compare">
+                <div class="card">
+                    <table class="summary-table">
+                        <tr><th>Property</th><th style="color:#00c853;">Above Flip</th><th style="color:#ff1744;">Below Flip</th></tr>
+                        <tr><td>Dealer Hedging</td><td><span class="highlight-green">Counter-trend</span></td><td><span class="highlight-red">Pro-trend</span></td></tr>
+                        <tr><td>Volatility</td><td>Compressed, low VIX</td><td>Expanding, VIX spikes</td></tr>
+                        <tr><td>Daily Ranges</td><td>Tight (0.3-0.5%)</td><td>Wide (1-3%+)</td></tr>
+                        <tr><td>Strategy</td><td>Sell premium, fade</td><td>Buy premium, momentum</td></tr>
+                        <tr><td>S/R Levels</td><td>Respected</td><td>Often break</td></tr>
+                        <tr><td>Intraday Feel</td><td>Boring, choppy</td><td>Exciting, fast</td></tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============ SECTION: CALL WALL ============ -->
+    <div class="section" id="call-wall">
+        <div class="section-label">Chapter 05</div>
+        <h2>Call Wall — The Ceiling</h2>
+        <p>The strike with the <strong>largest positive call gamma</strong>. It represents the level where upward momentum stalls because dealers aggressively sell the underlying to hedge.</p>
+
+        <div class="analogy">
+            <h4>Analogy: The Glass Ceiling</h4>
+            <p>The Call Wall is like an invisible ceiling. You can jump toward it, sometimes tap it, but enormous force pushes you back. Only a massive catalyst can break through. In positive gamma, it's reinforced steel. In negative gamma, it's thin glass.</p>
+        </div>
+
+        <div class="diagram-box">
+            <svg width="900" height="420" viewBox="0 0 900 420">
+                <defs>
+                    <pattern id="grid4" width="40" height="40" patternUnits="userSpaceOnUse">
+                        <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#1e2230" stroke-width="0.5"/>
+                    </pattern>
+                </defs>
+                <rect width="900" height="420" fill="url(#grid4)"/>
+                <text x="450" y="30" text-anchor="middle" fill="#8a8f9d" font-size="14" font-weight="600">CALL WALL — RESISTANCE FROM DEALER HEDGING</text>
+
+                <line x1="80" y1="50" x2="80" y2="370" stroke="#2a2e3a" stroke-width="1"/>
+                <line x1="80" y1="370" x2="850" y2="370" stroke="#2a2e3a" stroke-width="1"/>
+
+                <rect x="80" y="95" width="770" height="30" fill="rgba(0,200,83,0.06)"/>
+                <line x1="80" y1="110" x2="850" y2="110" stroke="#00c853" stroke-width="2.5"/>
+                <rect x="800" y="97" width="55" height="26" rx="4" fill="rgba(0,200,83,0.2)" stroke="#00c853"/>
+                <text x="827" y="115" text-anchor="middle" fill="#00c853" font-size="10" font-weight="700">CALL WALL</text>
+                <text x="60" y="114" text-anchor="end" fill="#00c853" font-size="10">5850</text>
+
+                <!-- Animated rejections -->
+                <g opacity="0"><animate attributeName="opacity" values="0;1" dur="0.5s" begin="0.5s" fill="freeze"/>
+                    <g transform="translate(200, 110)">
+                        <path d="M 0,-40 L 0,-5" stroke="#448aff" stroke-width="2"/>
+                        <path d="M 0,-5 L 0,40" stroke="#ff1744" stroke-width="2"/>
+                        <circle cx="0" cy="-5" r="5" fill="#ffd600"><animate attributeName="r" values="5;8;5" dur="1s" repeatCount="indefinite"/></circle>
+                    </g>
+                    <text x="200" y="82" text-anchor="middle" fill="#8a8f9d" font-size="9">Rejection #1</text>
+                </g>
+
+                <g opacity="0"><animate attributeName="opacity" values="0;1" dur="0.5s" begin="1.5s" fill="freeze"/>
+                    <g transform="translate(400, 110)">
+                        <path d="M 0,-50 L 0,-5" stroke="#448aff" stroke-width="2"/>
+                        <path d="M 0,-5 L 0,50" stroke="#ff1744" stroke-width="2"/>
+                        <circle cx="0" cy="-5" r="5" fill="#ffd600"><animate attributeName="r" values="5;8;5" dur="1s" repeatCount="indefinite"/></circle>
+                    </g>
+                    <text x="400" y="72" text-anchor="middle" fill="#8a8f9d" font-size="9">Rejection #2</text>
+                </g>
+
+                <g opacity="0"><animate attributeName="opacity" values="0;1" dur="0.5s" begin="2.5s" fill="freeze"/>
+                    <g transform="translate(550, 110)">
+                        <path d="M 0,-30 L 0,-5" stroke="#448aff" stroke-width="2"/>
+                        <path d="M 0,-5 L 0,35" stroke="#ff1744" stroke-width="2"/>
+                        <circle cx="0" cy="-5" r="5" fill="#ffd600"><animate attributeName="r" values="5;8;5" dur="1s" repeatCount="indefinite"/></circle>
+                    </g>
+                    <text x="550" y="90" text-anchor="middle" fill="#8a8f9d" font-size="9">Rejection #3</text>
+                </g>
+
+                <!-- Animated price path -->
+                <path d="M 100,280 L 140,250 L 170,200 L 200,120 L 230,180 L 260,230 L 300,200
+                         L 340,160 L 380,120 L 400,115 L 420,150 L 460,200 L 500,180
+                         L 530,140 L 550,118 L 570,155 L 600,190 L 640,210 L 680,195
+                         L 720,175 L 760,185 L 800,195"
+                      fill="none" stroke="#448aff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
+                      stroke-dasharray="1400" stroke-dashoffset="1400">
+                    <animate attributeName="stroke-dashoffset" from="1400" to="0" dur="4s" fill="freeze"/>
+                </path>
+
+                <rect x="600" y="250" width="230" height="105" rx="8" fill="rgba(0,200,83,0.05)" stroke="rgba(0,200,83,0.2)"/>
+                <text x="715" y="272" text-anchor="middle" fill="#00c853" font-size="11" font-weight="600">What Dealers Do Here:</text>
+                <text x="620" y="295" fill="#e0e0e6" font-size="11">1. Sell underlying stock/futures</text>
+                <text x="620" y="315" fill="#e0e0e6" font-size="11">2. Creates selling pressure</text>
+                <text x="620" y="335" fill="#e0e0e6" font-size="11">3. Price gets pushed back down</text>
+
+                <rect x="120" y="250" width="300" height="105" rx="8" fill="rgba(255,145,0,0.05)" stroke="rgba(255,145,0,0.2)"/>
+                <text x="270" y="272" text-anchor="middle" fill="#ff9100" font-size="11" font-weight="600">If Call Wall BREAKS:</text>
+                <text x="140" y="295" fill="#e0e0e6" font-size="11">Dealers must buy to re-hedge</text>
+                <text x="140" y="315" fill="#e0e0e6" font-size="11">= Short squeeze / gamma squeeze</text>
+                <text x="140" y="335" fill="#ff9100" font-size="11" font-weight="600">Explosive move higher!</text>
+            </svg>
+        </div>
+    </div>
+
+    <!-- ============ SECTION: PUT WALL ============ -->
+    <div class="section" id="put-wall">
+        <div class="section-label">Chapter 06</div>
+        <h2>Put Wall — The Floor</h2>
+        <p>The strike with the <strong>largest positive put gamma</strong>. When price falls here, dealers buy the underlying to hedge, creating a bounce.</p>
+
+        <div class="analogy">
+            <h4>Analogy: The Trampoline</h4>
+            <p>The Put Wall is like a trampoline. When price falls onto it, dealer hedging pushes it back up. But if price falls with enough force (a panic), it can rip through — and then there's nothing below.</p>
+        </div>
+
+        <div class="diagram-box">
+            <svg width="900" height="420" viewBox="0 0 900 420">
+                <defs>
+                    <pattern id="grid5" width="40" height="40" patternUnits="userSpaceOnUse">
+                        <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#1e2230" stroke-width="0.5"/>
+                    </pattern>
+                </defs>
+                <rect width="900" height="420" fill="url(#grid5)"/>
+                <text x="450" y="30" text-anchor="middle" fill="#8a8f9d" font-size="14" font-weight="600">PUT WALL — SUPPORT FROM DEALER HEDGING</text>
+
+                <line x1="80" y1="50" x2="80" y2="370" stroke="#2a2e3a" stroke-width="1"/>
+                <line x1="80" y1="370" x2="850" y2="370" stroke="#2a2e3a" stroke-width="1"/>
+
+                <rect x="80" y="270" width="770" height="30" fill="rgba(255,23,68,0.06)"/>
+                <line x1="80" y1="285" x2="850" y2="285" stroke="#ff1744" stroke-width="2.5"/>
+                <rect x="800" y="272" width="55" height="26" rx="4" fill="rgba(255,23,68,0.2)" stroke="#ff1744"/>
+                <text x="827" y="290" text-anchor="middle" fill="#ff1744" font-size="10" font-weight="700">PUT WALL</text>
+                <text x="60" y="289" text-anchor="end" fill="#ff1744" font-size="10">5650</text>
+
+                <!-- Animated bounces -->
+                <g opacity="0"><animate attributeName="opacity" values="0;1" dur="0.5s" begin="0.5s" fill="freeze"/>
+                    <g transform="translate(220, 285)">
+                        <path d="M 0,40 L 0,5" stroke="#448aff" stroke-width="2"/>
+                        <path d="M 0,5 L 0,-40" stroke="#00c853" stroke-width="2"/>
+                        <circle cx="0" cy="5" r="5" fill="#ffd600"><animate attributeName="r" values="5;8;5" dur="1s" repeatCount="indefinite"/></circle>
+                    </g>
+                    <text x="220" y="338" text-anchor="middle" fill="#8a8f9d" font-size="9">Bounce #1</text>
+                </g>
+
+                <g opacity="0"><animate attributeName="opacity" values="0;1" dur="0.5s" begin="1.5s" fill="freeze"/>
+                    <g transform="translate(440, 285)">
+                        <path d="M 0,50 L 0,5" stroke="#448aff" stroke-width="2"/>
+                        <path d="M 0,5 L 0,-50" stroke="#00c853" stroke-width="2"/>
+                        <circle cx="0" cy="5" r="5" fill="#ffd600"><animate attributeName="r" values="5;8;5" dur="1s" repeatCount="indefinite"/></circle>
+                    </g>
+                    <text x="440" y="348" text-anchor="middle" fill="#8a8f9d" font-size="9">Bounce #2</text>
+                </g>
+
+                <g opacity="0"><animate attributeName="opacity" values="0;1" dur="0.5s" begin="2.5s" fill="freeze"/>
+                    <g transform="translate(620, 285)">
+                        <path d="M 0,35 L 0,5" stroke="#448aff" stroke-width="2"/>
+                        <path d="M 0,5 L 0,-35" stroke="#00c853" stroke-width="2"/>
+                        <circle cx="0" cy="5" r="5" fill="#ffd600"><animate attributeName="r" values="5;8;5" dur="1s" repeatCount="indefinite"/></circle>
+                    </g>
+                    <text x="620" y="332" text-anchor="middle" fill="#8a8f9d" font-size="9">Bounce #3</text>
+                </g>
+
+                <!-- Animated price path -->
+                <path d="M 100,120 L 140,145 L 170,190 L 200,250 L 220,280 L 240,240 L 270,180
+                         L 310,160 L 350,200 L 390,250 L 420,275 L 440,280 L 460,240
+                         L 490,195 L 530,210 L 570,250 L 600,270 L 620,280 L 640,250
+                         L 670,220 L 710,200 L 750,210 L 790,195 L 820,200"
+                      fill="none" stroke="#448aff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
+                      stroke-dasharray="1400" stroke-dashoffset="1400">
+                    <animate attributeName="stroke-dashoffset" from="1400" to="0" dur="4s" fill="freeze"/>
+                </path>
+
+                <rect x="120" y="50" width="230" height="105" rx="8" fill="rgba(255,23,68,0.05)" stroke="rgba(255,23,68,0.2)"/>
+                <text x="235" y="72" text-anchor="middle" fill="#ff1744" font-size="11" font-weight="600">What Dealers Do Here:</text>
+                <text x="140" y="95" fill="#e0e0e6" font-size="11">1. Buy underlying stock/futures</text>
+                <text x="140" y="115" fill="#e0e0e6" font-size="11">2. Creates buying pressure</text>
+                <text x="140" y="135" fill="#e0e0e6" font-size="11">3. Price bounces back up</text>
+
+                <rect x="500" y="50" width="300" height="105" rx="8" fill="rgba(255,145,0,0.05)" stroke="rgba(255,145,0,0.2)"/>
+                <text x="650" y="72" text-anchor="middle" fill="#ff9100" font-size="11" font-weight="600">If Put Wall BREAKS:</text>
+                <text x="520" y="95" fill="#e0e0e6" font-size="11">Dealers must sell to re-hedge</text>
+                <text x="520" y="115" fill="#e0e0e6" font-size="11">= Cascade selling / put squeeze</text>
+                <text x="520" y="135" fill="#ff9100" font-size="11" font-weight="600">Waterfall decline / crash risk!</text>
+            </svg>
+        </div>
+
+        <div class="card">
+            <h3>Call Wall vs Put Wall — Mirror Images</h3>
+            <table class="summary-table">
+                <tr><th>Property</th><th style="color:#00c853;">Call Wall</th><th style="color:#ff1744;">Put Wall</th></tr>
+                <tr><td>Acts as</td><td>Resistance (ceiling)</td><td>Support (floor)</td></tr>
+                <tr><td>Dealer action</td><td>Sell underlying</td><td>Buy underlying</td></tr>
+                <tr><td>Price behavior</td><td>Rejected downward</td><td>Bounced upward</td></tr>
+                <tr><td>If it breaks</td><td>Gamma squeeze UP</td><td>Cascade selling DOWN</td></tr>
+                <tr><td>What shifts it</td><td>New call buying higher</td><td>New put buying lower</td></tr>
+            </table>
+        </div>
+    </div>
+
+    <!-- ============ SECTION: INTERACTIVE SIMULATOR ============ -->
+    <div class="section" id="simulator">
+        <div class="section-label">Chapter 07</div>
+        <h2>Interactive Price Simulator</h2>
+        <p><strong>Drag the price dot up and down</strong> to see how the market regime, volatility, and trading strategy change as price moves through each GEX level in real-time.</p>
+
+        <div class="simulator-wrapper">
+            <h3>Drag Price Through the Levels</h3>
+            <div class="sim-layout">
+                <div class="sim-chart" id="simChart">
+                    <!-- Zones (filled by JS) -->
+                    <div class="sim-zone" id="zoneAboveCall" style="background:rgba(0,200,83,0.04);"></div>
+                    <div class="sim-zone" id="zoneBullish" style="background:rgba(0,200,83,0.08);"></div>
+                    <div class="sim-zone" id="zoneNeutral" style="background:rgba(255,214,0,0.05);"></div>
+                    <div class="sim-zone" id="zoneCaution" style="background:rgba(255,145,0,0.06);"></div>
+                    <div class="sim-zone" id="zoneDanger" style="background:rgba(255,23,68,0.08);"></div>
+
+                    <!-- Levels -->
+                    <div class="sim-level" id="lvlCallWall" style="background:#00c853;">
+                        <span class="sim-level-label" style="background:rgba(0,200,83,0.2); color:#00c853;">CALL WALL</span>
+                        <span class="sim-level-price">5850</span>
+                    </div>
+                    <div class="sim-level" id="lvlHVL" style="background:#ffd600; height:2px; border-style:dashed;">
+                        <span class="sim-level-label" style="background:rgba(255,214,0,0.2); color:#ffd600;">HVL</span>
+                        <span class="sim-level-price">5780</span>
+                    </div>
+                    <div class="sim-level" id="lvlFlip" style="background:#b388ff; height:3px;">
+                        <span class="sim-level-label" style="background:rgba(179,136,255,0.25); color:#b388ff;">GEX FLIP</span>
+                        <span class="sim-level-price">5720</span>
+                    </div>
+                    <div class="sim-level" id="lvlPutWall" style="background:#ff1744;">
+                        <span class="sim-level-label" style="background:rgba(255,23,68,0.2); color:#ff1744;">PUT WALL</span>
+                        <span class="sim-level-price">5650</span>
+                    </div>
+
+                    <!-- Price marker -->
+                    <div class="sim-price-line" id="simPriceLine"></div>
+                    <div class="sim-price-tag" id="simPriceTag">5790</div>
+                    <div class="sim-price-marker" id="simPriceMarker"></div>
+
+                    <!-- Candle animation container -->
+                    <div class="candle-container" id="candleContainer"></div>
+                </div>
+
+                <div class="sim-info">
+                    <div class="sim-info-card" id="infoRegime">
+                        <h4>Current Regime</h4>
+                        <div class="value" id="regimeValue">Bullish Grind</div>
+                        <div class="sub" id="regimeSub">Positive gamma, above HVL</div>
+                    </div>
+                    <div class="sim-info-card" id="infoVol">
+                        <h4>Volatility</h4>
+                        <div class="value" id="volValue" style="color:var(--green);">Low</div>
+                        <div class="vol-meter"><div class="vol-meter-fill" id="volFill" style="width:20%; background:var(--green);"></div></div>
+                        <div class="sub" id="volSub">VIX ~13 | Daily range: 0.3%</div>
+                    </div>
+                    <div class="sim-info-card" id="infoDealer">
+                        <h4>Dealer Behavior</h4>
+                        <div class="value" id="dealerValue" style="font-size:1.1rem;">Selling rallies, buying dips</div>
+                        <div class="sub" id="dealerSub">Counter-trend hedging stabilizes price</div>
+                    </div>
+                    <div class="sim-info-card" id="infoStrategy">
+                        <h4>Recommended Strategy</h4>
+                        <div class="value" id="stratValue" style="font-size:1.1rem;">Sell premium, buy dips</div>
+                        <div class="sub" id="stratSub">Iron condors, short strangles</div>
+                    </div>
+                    <div class="sim-info-card" id="infoSize">
+                        <h4>Position Sizing</h4>
+                        <div class="value" id="sizeValue" style="color:var(--green);">Full Size</div>
+                        <div class="sub" id="sizeSub">Low risk environment</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============ SECTION: SCENARIOS ============ -->
+    <div class="section" id="scenarios">
+        <div class="section-label">Chapter 08</div>
+        <h2>Trading Scenarios</h2>
+        <p>Click each scenario card to expand details with specific entry/exit rules and risk management.</p>
+
+        <div class="scenario-grid">
+            <div class="scenario-card bullish" onclick="toggleScenario(this)">
+                <span class="badge badge-green">BULLISH GRIND</span>
+                <h4 style="margin-top:12px;">Price above HVL & GEX Flip</h4>
+                <p>Dealers suppress volatility, dips get bought. "Easy mode" for bulls.</p>
+                <span class="tag" style="background:rgba(0,200,83,0.15); color:#00c853;">Click to expand strategy details</span>
+                <div class="expand-detail">
+                    <ul>
+                        <li><span>Entry:</span> Buy dips toward HVL</li>
+                        <li><span>Stop:</span> Below GEX Flip</li>
+                        <li><span>Target:</span> Call Wall</li>
+                        <li><span>Options:</span> Sell put credit spreads, short strangles</li>
+                        <li><span>Size:</span> Full position (100%)</li>
+                        <li><span>VIX env:</span> 12-16, declining</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="scenario-card neutral" onclick="toggleScenario(this)">
+                <span class="badge badge-yellow">RANGE-BOUND CHOP</span>
+                <h4 style="margin-top:12px;">Price between HVL & GEX Flip</h4>
+                <p>Still positive gamma but between levels. Expect mean-reversion and tight ranges.</p>
+                <span class="tag" style="background:rgba(255,214,0,0.15); color:#ffd600;">Click to expand strategy details</span>
+                <div class="expand-detail">
+                    <ul>
+                        <li><span>Entry:</span> Fade toward HVL from both sides</li>
+                        <li><span>Stop:</span> Break below GEX Flip</li>
+                        <li><span>Target:</span> HVL (magnet)</li>
+                        <li><span>Options:</span> Iron condors, strangles, butterflies</li>
+                        <li><span>Size:</span> 75% position</li>
+                        <li><span>VIX env:</span> 14-18, stable</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="scenario-card bearish" onclick="toggleScenario(this)">
+                <span class="badge badge-orange">VOLATILE DOWNTREND</span>
+                <h4 style="margin-top:12px;">Price below GEX Flip, above Put Wall</h4>
+                <p>Negative gamma territory. Dealers amplify moves. High VIX environment.</p>
+                <span class="tag" style="background:rgba(255,145,0,0.15); color:#ff9100;">Click to expand strategy details</span>
+                <div class="expand-detail">
+                    <ul>
+                        <li><span>Entry:</span> Short rallies toward GEX Flip</li>
+                        <li><span>Stop:</span> Reclaim above GEX Flip</li>
+                        <li><span>Target:</span> Put Wall</li>
+                        <li><span>Options:</span> Buy puts, put debit spreads</li>
+                        <li><span>Size:</span> 50% position max</li>
+                        <li><span>VIX env:</span> 20-30, rising</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="scenario-card danger" onclick="toggleScenario(this)">
+                <span class="badge badge-red">CRASH RISK</span>
+                <h4 style="margin-top:12px;">Price below Put Wall</h4>
+                <p>All support broken. Deep negative gamma. Cascading selling. VIX explosion.</p>
+                <span class="tag" style="background:rgba(255,23,68,0.15); color:#ff1744;">Click to expand strategy details</span>
+                <div class="expand-detail">
+                    <ul>
+                        <li><span>Entry:</span> DO NOT catch falling knives</li>
+                        <li><span>Stop:</span> N/A — reduce all exposure</li>
+                        <li><span>Target:</span> Next put gamma cluster below</li>
+                        <li><span>Options:</span> Long puts, VIX calls, cash</li>
+                        <li><span>Size:</span> Minimal (25% or flat)</li>
+                        <li><span>VIX env:</span> 30-50+, spiking</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============ SECTION: QUIZ ============ -->
+    <div class="section" id="quiz">
+        <div class="section-label">Chapter 09</div>
+        <h2>Test Your Knowledge</h2>
+        <p>See how well you understood the GEX levels. Click an answer to check.</p>
+
+        <div class="quiz-wrapper">
+            <h3>GEX Levels Quiz</h3>
+            <div class="quiz-sub">5 questions to test your understanding</div>
+
+            <div class="quiz-progress" id="quizProgress"></div>
+
+            <!-- Question 1 -->
+            <div class="quiz-question active" data-correct="1">
+                <div class="q-num">Question 1 of 5</div>
+                <h4>Price is at 5810, HVL is at 5780, and GEX Flip is at 5720. What is the market regime?</h4>
+                <div class="quiz-options">
+                    <div class="quiz-opt" onclick="answerQuiz(this, 0)">Negative gamma — expect high volatility</div>
+                    <div class="quiz-opt" onclick="answerQuiz(this, 1)">Positive gamma, above HVL — bullish grind with low vol</div>
+                    <div class="quiz-opt" onclick="answerQuiz(this, 2)">Below the Put Wall — crash risk</div>
+                    <div class="quiz-opt" onclick="answerQuiz(this, 3)">Range-bound chop between levels</div>
+                </div>
+                <div class="quiz-explanation">Price (5810) is above both HVL (5780) and GEX Flip (5720), putting us firmly in <strong>positive gamma with bullish bias</strong>. Dealers are suppressing volatility, and HVL acts as support below.</div>
+            </div>
+
+            <!-- Question 2 -->
+            <div class="quiz-question" data-correct="2">
+                <div class="q-num">Question 2 of 5</div>
+                <h4>The Call Wall is at 5850. Price approaches and touches 5848 three times but fails to break through. What is happening?</h4>
+                <div class="quiz-options">
+                    <div class="quiz-opt" onclick="answerQuiz(this, 0)">Random coincidence</div>
+                    <div class="quiz-opt" onclick="answerQuiz(this, 1)">Retail traders are selling at round numbers</div>
+                    <div class="quiz-opt" onclick="answerQuiz(this, 2)">Market makers are selling the underlying to delta-hedge their short call exposure, creating resistance</div>
+                    <div class="quiz-opt" onclick="answerQuiz(this, 3)">The Put Wall is pulling price down</div>
+                </div>
+                <div class="quiz-explanation">At the Call Wall, dealers who sold calls must <strong>sell the underlying</strong> to stay delta-neutral. This creates mechanical selling pressure that acts as resistance. Each approach triggers more hedging.</div>
+            </div>
+
+            <!-- Question 3 -->
+            <div class="quiz-question" data-correct="0">
+                <div class="q-num">Question 3 of 5</div>
+                <h4>Price just broke below the GEX Flip. What should you expect?</h4>
+                <div class="quiz-options">
+                    <div class="quiz-opt" onclick="answerQuiz(this, 0)">Volatility expansion — dealers now amplify moves instead of dampening them</div>
+                    <div class="quiz-opt" onclick="answerQuiz(this, 1)">Price will immediately crash to zero</div>
+                    <div class="quiz-opt" onclick="answerQuiz(this, 2)">Nothing changes — GEX Flip is just informational</div>
+                    <div class="quiz-opt" onclick="answerQuiz(this, 3)">Volatility will decrease because puts are being bought</div>
+                </div>
+                <div class="quiz-explanation">Below the GEX Flip, dealers switch from <strong>counter-trend hedging to pro-trend hedging</strong>. They now sell into drops and buy into rallies, amplifying volatility. This is the most important regime change in GEX analysis.</div>
+            </div>
+
+            <!-- Question 4 -->
+            <div class="quiz-question" data-correct="3">
+                <div class="q-num">Question 4 of 5</div>
+                <h4>If the Put Wall breaks and price crashes through it, what happens mechanically?</h4>
+                <div class="quiz-options">
+                    <div class="quiz-opt" onclick="answerQuiz(this, 0)">Dealers start buying aggressively, creating a V-shaped bounce</div>
+                    <div class="quiz-opt" onclick="answerQuiz(this, 1)">Nothing — the Put Wall was just a suggestion</div>
+                    <div class="quiz-opt" onclick="answerQuiz(this, 2)">VIX drops because fear has been resolved</div>
+                    <div class="quiz-opt" onclick="answerQuiz(this, 3)">Dealers must sell to re-hedge, creating cascading selling and accelerating the decline</div>
+                </div>
+                <div class="quiz-explanation">When the Put Wall breaks, dealers who were <strong>buying to hedge</strong> now need to sell to adjust. This creates a feedback loop of selling — the exact mechanics behind <strong>waterfall declines and flash crashes</strong>.</div>
+            </div>
+
+            <!-- Question 5 -->
+            <div class="quiz-question" data-correct="1">
+                <div class="q-num">Question 5 of 5</div>
+                <h4>HVL is at 5780. Price opens at 5760 (below HVL). What is the most likely intraday behavior?</h4>
+                <div class="quiz-options">
+                    <div class="quiz-opt" onclick="answerQuiz(this, 0)">Price will crash because it's below the magnet</div>
+                    <div class="quiz-opt" onclick="answerQuiz(this, 1)">Price will be pulled upward toward HVL at 5780, with HVL acting as resistance</div>
+                    <div class="quiz-opt" onclick="answerQuiz(this, 2)">Price will go sideways with no directional bias</div>
+                    <div class="quiz-opt" onclick="answerQuiz(this, 3)">The Call Wall will attract price upward past HVL</div>
+                </div>
+                <div class="quiz-explanation">HVL acts as a <strong>gravitational magnet</strong>. When price is below it, the pull is upward. However, since price is approaching from below, HVL initially acts as <strong>resistance</strong> — price wants to get there but may struggle to break above.</div>
+            </div>
+
+            <div class="quiz-nav">
+                <button class="quiz-btn" id="quizPrev" onclick="navigateQuiz(-1)" disabled>Previous</button>
+                <span class="quiz-score" id="quizScore"></span>
+                <button class="quiz-btn" id="quizNext" onclick="navigateQuiz(1)" disabled>Next</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============ CHEAT SHEET ============ -->
+    <div class="section" id="cheatsheet">
+        <div class="section-label">Quick Reference</div>
+        <h2>Cheat Sheet</h2>
+
+        <div class="card">
+            <table class="summary-table">
+                <tr><th>Level</th><th>What It Is</th><th>Acts As</th><th>Key Question</th></tr>
+                <tr><td><span class="highlight-green">Call Wall</span></td><td>Highest call gamma strike</td><td>Resistance / Ceiling</td><td>"Where does upside stall?"</td></tr>
+                <tr><td><span class="highlight-yellow">HVL</span></td><td>Highest volume/OI strike</td><td>Magnet / Pin</td><td>"Where is price pulled to?"</td></tr>
+                <tr><td><span class="highlight-purple">GEX Flip</span></td><td>Zero gamma crossover</td><td>Regime switch / Pivot</td><td>"Calm or volatile market?"</td></tr>
+                <tr><td><span class="highlight-red">Put Wall</span></td><td>Highest put gamma strike</td><td>Support / Floor</td><td>"Where does downside stall?"</td></tr>
+            </table>
+        </div>
+
+        <div class="analogy">
+            <h4>The One-Sentence Summary</h4>
+            <p><strong>Call Wall</strong> is your ceiling, <strong>Put Wall</strong> is your floor, <strong>HVL</strong> is where price wants to live, and <strong>GEX Flip</strong> tells you whether the ceiling and floor are made of concrete or cardboard.</p>
+        </div>
+    </div>
+
+</div>
+
+<div class="footer">
+    GEX Levels Interactive Guide &mdash; Generated for educational purposes<br/>
+    Data sources for real-time levels: SpotGamma, Menthor Q, GEX Hub, Unusual Whales
+</div>
+
+<!-- ============================================================ -->
+<!--                        JAVASCRIPT                            -->
+<!-- ============================================================ -->
+<script>
+// ===== SCROLL ANIMATIONS =====
+const sections = document.querySelectorAll('.section');
+const navLinks = document.querySelectorAll('.sticky-nav .nav-links a');
+
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            // Update active nav link
+            const id = entry.target.id;
+            navLinks.forEach(link => {
+                link.classList.toggle('active', link.getAttribute('data-section') === id);
+            });
+        }
+    });
+}, { threshold: 0.15, rootMargin: '-50px' });
+
+sections.forEach(s => observer.observe(s));
+
+// ===== READING PROGRESS =====
+window.addEventListener('scroll', () => {
+    const prog = document.getElementById('readingProgress');
+    const backBtn = document.getElementById('backToTop');
+    const scrollTop = window.scrollY;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const pct = (scrollTop / docHeight) * 100;
+    prog.style.width = pct + '%';
+    backBtn.classList.toggle('show', scrollTop > 400);
+});
+
+// ===== TABS =====
+function switchTab(e, tabId) {
+    const container = e.target.closest('.tab-container');
+    container.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    container.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+    e.target.classList.add('active');
+    document.getElementById(tabId).classList.add('active');
+}
+
+// ===== SCENARIO EXPAND =====
+function toggleScenario(card) {
+    card.classList.toggle('expanded');
+}
+
+// ===== GEX BAR CHART =====
+(function buildGexChart() {
+    const container = document.getElementById('gexBarChart');
+    const strikes = [];
+    const baseStrike = 5550;
+    for (let i = 0; i < 32; i++) strikes.push(baseStrike + i * 10);
+
+    const hvl = 5780, flip = 5720, callWall = 5850, putWall = 5650;
+    const midH = 130; // half height
+
+    strikes.forEach(s => {
+        let height, isNeg = false, label = '';
+        if (s === callWall) { height = midH; label = 'Call Wall'; }
+        else if (s === putWall) { height = midH * 0.85; isNeg = true; label = 'Put Wall'; }
+        else if (s === hvl) { height = midH * 0.9; label = 'HVL'; }
+        else if (s === flip) { height = 8; label = 'GEX Flip'; }
+        else if (s > flip) {
+            const dist = Math.abs(s - callWall);
+            height = Math.max(10, midH * Math.exp(-dist * dist / 8000));
+        } else {
+            isNeg = true;
+            const dist = Math.abs(s - putWall);
+            height = Math.max(10, midH * 0.85 * Math.exp(-dist * dist / 6000));
+        }
+
+        const bar = document.createElement('div');
+        bar.className = 'gex-bar' + (isNeg ? ' gex-bar-neg' : '');
+        const color = isNeg ? '#ff1744' : '#00c853';
+        bar.style.height = height + 'px';
+        bar.style.background = color;
+        bar.style.opacity = (s === callWall || s === putWall || s === hvl) ? '1' : '0.6';
+        if (s === callWall) bar.style.boxShadow = '0 0 12px rgba(0,200,83,0.4)';
+        if (s === putWall) bar.style.boxShadow = '0 0 12px rgba(255,23,68,0.4)';
+        if (s === hvl) bar.style.background = '#ffd600';
+
+        const tooltip = document.createElement('div');
+        tooltip.className = 'gex-bar-tooltip';
+        let tooltipContent = `<div style="font-weight:700;color:${s===hvl?'#ffd600':color}">${s}</div>`;
+        if (label) tooltipContent += `<div style="color:var(--text);font-weight:600;">${label}</div>`;
+        tooltipContent += `<div style="color:var(--muted)">GEX: ${isNeg?'-':''}$${(height * 2.1).toFixed(0)}M</div>`;
+        tooltip.innerHTML = tooltipContent;
+        bar.appendChild(tooltip);
+
+        container.appendChild(bar);
+    });
+})();
+
+// ===== INTERACTIVE SIMULATOR =====
+(function initSimulator() {
+    const chart = document.getElementById('simChart');
+    const marker = document.getElementById('simPriceMarker');
+    const priceLine = document.getElementById('simPriceLine');
+    const priceTag = document.getElementById('simPriceTag');
+    const chartH = 440;
+    const padding = 30;
+
+    // Level positions (as % of chart height)
+    const levels = {
+        callWall: { price: 5850, pct: 0.12 },
+        hvl:      { price: 5780, pct: 0.35 },
+        flip:     { price: 5720, pct: 0.52 },
+        putWall:  { price: 5650, pct: 0.72 }
+    };
+
+    // Position static level lines
+    document.getElementById('lvlCallWall').style.top = (levels.callWall.pct * chartH) + 'px';
+    document.getElementById('lvlHVL').style.top = (levels.hvl.pct * chartH) + 'px';
+    document.getElementById('lvlFlip').style.top = (levels.flip.pct * chartH) + 'px';
+    document.getElementById('lvlPutWall').style.top = (levels.putWall.pct * chartH) + 'px';
+
+    // Position zones
+    document.getElementById('zoneAboveCall').style.top = '0';
+    document.getElementById('zoneAboveCall').style.height = (levels.callWall.pct * chartH) + 'px';
+    document.getElementById('zoneBullish').style.top = (levels.callWall.pct * chartH) + 'px';
+    document.getElementById('zoneBullish').style.height = ((levels.hvl.pct - levels.callWall.pct) * chartH) + 'px';
+    document.getElementById('zoneNeutral').style.top = (levels.hvl.pct * chartH) + 'px';
+    document.getElementById('zoneNeutral').style.height = ((levels.flip.pct - levels.hvl.pct) * chartH) + 'px';
+    document.getElementById('zoneCaution').style.top = (levels.flip.pct * chartH) + 'px';
+    document.getElementById('zoneCaution').style.height = ((levels.putWall.pct - levels.flip.pct) * chartH) + 'px';
+    document.getElementById('zoneDanger').style.top = (levels.putWall.pct * chartH) + 'px';
+    document.getElementById('zoneDanger').style.height = ((1 - levels.putWall.pct) * chartH) + 'px';
+
+    // Build candles
+    const candleCont = document.getElementById('candleContainer');
+    const numCandles = 40;
+    const candles = [];
+    for (let i = 0; i < numCandles; i++) {
+        const c = document.createElement('div');
+        c.className = 'candle';
+        const wick = document.createElement('div');
+        wick.className = 'candle-wick';
+        const body = document.createElement('div');
+        body.className = 'candle-body';
+        c.appendChild(wick);
+        c.appendChild(body);
+        candleCont.appendChild(c);
+        candles.push({ wick, body });
+    }
+
+    function pctToPrice(pct) {
+        return Math.round(5900 - pct * 350);
+    }
+
+    let currentY = levels.hvl.pct * chartH;
+
+    function updateSim(y) {
+        y = Math.max(padding, Math.min(chartH - padding, y));
+        currentY = y;
+        const pct = y / chartH;
+        const price = pctToPrice(pct);
+
+        marker.style.top = y + 'px';
+        priceLine.style.top = y + 'px';
+        priceTag.style.top = y + 'px';
+        priceTag.textContent = price;
+
+        // Determine zone
+        let regime, regimeSub, vol, volPct, volColor, volSub, dealer, dealerSub, strat, stratSub, size, sizeSub, sizeColor;
+
+        if (pct <= levels.callWall.pct) {
+            regime = 'Breakout Rally'; regimeSub = 'Above Call Wall — gamma squeeze territory';
+            vol = 'Expanding UP'; volPct = 65; volColor = '#ff9100';
+            volSub = 'VIX ~18 | Squeeze dynamics';
+            dealer = 'Forced buying to re-hedge'; dealerSub = 'Dealers chase price higher — self-reinforcing';
+            strat = 'Ride the momentum'; stratSub = 'Trail stops, add on pullbacks';
+            size = '75% Size'; sizeSub = 'Momentum but extended'; sizeColor = '#ff9100';
+        } else if (pct <= levels.hvl.pct) {
+            regime = 'Bullish Grind'; regimeSub = 'Positive gamma, above HVL — ideal bull conditions';
+            vol = 'Low'; volPct = 20; volColor = '#00c853';
+            volSub = 'VIX ~13 | Daily range: 0.3%';
+            dealer = 'Selling rallies, buying dips'; dealerSub = 'Counter-trend hedging stabilizes price';
+            strat = 'Sell premium, buy dips'; stratSub = 'Iron condors, short strangles, credit spreads';
+            size = 'Full Size'; sizeSub = 'Low risk environment'; sizeColor = '#00c853';
+        } else if (pct <= levels.flip.pct) {
+            regime = 'Neutral / Chop'; regimeSub = 'Positive gamma, between HVL and Flip — range-bound';
+            vol = 'Low-Moderate'; volPct = 35; volColor = '#ffd600';
+            volSub = 'VIX ~16 | Daily range: 0.5%';
+            dealer = 'Moderate counter-trend hedging'; dealerSub = 'Still stabilizing but less conviction';
+            strat = 'Fade to HVL, sell premium'; stratSub = 'Butterflies, strangles, mean-reversion';
+            size = '75% Size'; sizeSub = 'Cautious — watch for flip break'; sizeColor = '#ffd600';
+        } else if (pct <= levels.putWall.pct) {
+            regime = 'Volatile Downtrend'; regimeSub = 'NEGATIVE gamma — dealers amplify moves!';
+            vol = 'HIGH'; volPct = 70; volColor = '#ff9100';
+            volSub = 'VIX 22-28 | Daily range: 1.5%+';
+            dealer = 'Selling into drops, buying rallies'; dealerSub = 'PRO-TREND hedging — amplifies every move';
+            strat = 'Trade momentum, buy puts'; stratSub = 'Put debit spreads, short rallies to Flip';
+            size = '50% Size'; sizeSub = 'High risk — reduce exposure'; sizeColor = '#ff9100';
+        } else {
+            regime = 'CRASH RISK'; regimeSub = 'Below Put Wall — all support broken, capitulation zone';
+            vol = 'EXTREME'; volPct = 95; volColor = '#ff1744';
+            volSub = 'VIX 30-50+ | Daily range: 3%+';
+            dealer = 'Cascading selling'; dealerSub = 'Dealers dump to re-hedge — self-reinforcing selloff';
+            strat = 'SURVIVE — hedge or go flat'; stratSub = 'Long puts, VIX calls, cash is king';
+            size = 'Minimal / Flat'; sizeSub = 'Capital preservation ONLY'; sizeColor = '#ff1744';
+        }
+
+        document.getElementById('regimeValue').textContent = regime;
+        document.getElementById('regimeValue').style.color = volColor;
+        document.getElementById('regimeSub').textContent = regimeSub;
+        document.getElementById('volValue').textContent = vol;
+        document.getElementById('volValue').style.color = volColor;
+        document.getElementById('volFill').style.width = volPct + '%';
+        document.getElementById('volFill').style.background = volColor;
+        document.getElementById('volSub').textContent = volSub;
+        document.getElementById('dealerValue').textContent = dealer;
+        document.getElementById('dealerSub').textContent = dealerSub;
+        document.getElementById('stratValue').textContent = strat;
+        document.getElementById('stratSub').textContent = stratSub;
+        document.getElementById('sizeValue').textContent = size;
+        document.getElementById('sizeValue').style.color = sizeColor;
+        document.getElementById('sizeSub').textContent = sizeSub;
+
+        // Update candles based on volatility
+        const candleVol = volPct / 100;
+        candles.forEach((c, i) => {
+            const baseH = 8 + Math.random() * 40 * candleVol;
+            const wickH = 4 + Math.random() * 20 * candleVol;
+            const isGreen = Math.random() > (0.3 + candleVol * 0.3);
+            c.body.style.height = baseH + 'px';
+            c.body.style.background = isGreen ? 'rgba(0,200,83,0.5)' : 'rgba(255,23,68,0.5)';
+            c.wick.style.height = wickH + 'px';
+            c.wick.style.background = isGreen ? 'rgba(0,200,83,0.3)' : 'rgba(255,23,68,0.3)';
+        });
+    }
+
+    // Initialize
+    updateSim(currentY);
+
+    // Drag handling
+    let dragging = false;
+
+    marker.addEventListener('mousedown', (e) => { dragging = true; e.preventDefault(); });
+    marker.addEventListener('touchstart', (e) => { dragging = true; e.preventDefault(); });
+
+    document.addEventListener('mousemove', (e) => {
+        if (!dragging) return;
+        const rect = chart.getBoundingClientRect();
+        updateSim(e.clientY - rect.top);
+    });
+    document.addEventListener('touchmove', (e) => {
+        if (!dragging) return;
+        const rect = chart.getBoundingClientRect();
+        updateSim(e.touches[0].clientY - rect.top);
+    });
+
+    document.addEventListener('mouseup', () => dragging = false);
+    document.addEventListener('touchend', () => dragging = false);
+
+    // Click on chart to jump
+    chart.addEventListener('click', (e) => {
+        if (e.target === marker) return;
+        const rect = chart.getBoundingClientRect();
+        updateSim(e.clientY - rect.top);
+    });
+})();
+
+// ===== QUIZ =====
+let currentQ = 0;
+let answers = [-1, -1, -1, -1, -1];
+const totalQ = 5;
+
+function buildProgress() {
+    const prog = document.getElementById('quizProgress');
+    prog.innerHTML = '';
+    for (let i = 0; i < totalQ; i++) {
+        const dot = document.createElement('div');
+        dot.className = 'quiz-dot';
+        if (i === currentQ) dot.classList.add('current');
+        if (answers[i] !== -1) {
+            const q = document.querySelectorAll('.quiz-question')[i];
+            const correct = parseInt(q.getAttribute('data-correct'));
+            dot.classList.add(answers[i] === correct ? 'done-correct' : 'done-wrong');
+        }
+        prog.appendChild(dot);
+    }
+}
+
+function showQuestion(idx) {
+    document.querySelectorAll('.quiz-question').forEach((q, i) => {
+        q.classList.toggle('active', i === idx);
+    });
+    currentQ = idx;
+    document.getElementById('quizPrev').disabled = idx === 0;
+    document.getElementById('quizNext').disabled = answers[idx] === -1;
+    updateScore();
+    buildProgress();
+}
+
+function answerQuiz(opt, idx) {
+    const question = opt.closest('.quiz-question');
+    const correct = parseInt(question.getAttribute('data-correct'));
+    const opts = question.querySelectorAll('.quiz-opt');
+
+    opts.forEach((o, i) => {
+        o.classList.add('disabled');
+        if (i === correct) o.classList.add('correct');
+        if (i === idx && i !== correct) o.classList.add('wrong');
+    });
+
+    answers[currentQ] = idx;
+    question.querySelector('.quiz-explanation').classList.add('show');
+    document.getElementById('quizNext').disabled = false;
+    updateScore();
+    buildProgress();
+}
+
+function navigateQuiz(dir) {
+    const next = currentQ + dir;
+    if (next >= 0 && next < totalQ) showQuestion(next);
+}
+
+function updateScore() {
+    const answered = answers.filter(a => a !== -1).length;
+    const correctCount = answers.filter((a, i) => {
+        const q = document.querySelectorAll('.quiz-question')[i];
+        return a === parseInt(q.getAttribute('data-correct'));
+    }).length;
+    const scoreEl = document.getElementById('quizScore');
+    if (answered === totalQ) {
+        scoreEl.textContent = `Score: ${correctCount}/${totalQ} (${Math.round(correctCount/totalQ*100)}%)`;
+        scoreEl.style.color = correctCount >= 4 ? 'var(--green)' : correctCount >= 2 ? 'var(--yellow)' : 'var(--red)';
+    } else {
+        scoreEl.textContent = `${answered}/${totalQ} answered`;
+    }
+}
+
+buildProgress();
+showQuestion(0);
+
+// ===== SMOOTH SCROLL FOR NAV =====
+document.querySelectorAll('.sticky-nav a, .toc a').forEach(link => {
+    link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const target = document.querySelector(link.getAttribute('href'));
+        if (target) {
+            window.scrollTo({ top: target.offsetTop - 60, behavior: 'smooth' });
+        }
+    });
+});
+</script>
+
+</body>
+</html>
