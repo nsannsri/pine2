@@ -219,9 +219,10 @@ def find_key_levels(gex_results, spot_price):
         avg_pe_iv = 0
         iv_skew = 0
 
-    if iv_skew > 3:
+    # Thresholds calibrated for Indian indices where +2 to +5 put skew is normal
+    if iv_skew > 8:
         skew_signal = "BEARISH"
-    elif iv_skew > 1:
+    elif iv_skew > 5:
         skew_signal = "MILD BEAR"
     elif iv_skew < -3:
         skew_signal = "BULLISH"
@@ -306,20 +307,14 @@ def find_key_levels(gex_results, spot_price):
     else:
         bias_score -= 1
 
-    # 7. IV Skew (puts expensive = bearish fear)
-    if iv_skew < -1:
-        bias_score += 1   # calls expensive = bullish
-    elif iv_skew > 1:
-        bias_score -= 1   # puts expensive = bearish
-
-    # Map score to bias label (max possible: +8, min: -8)
-    if bias_score >= 6:
+    # Map score to bias label (max possible: +7, min: -7)
+    if bias_score >= 5:
         bias = "STRONG BULL"
     elif bias_score >= 2:
         bias = "BULL"
     elif bias_score >= -1:
         bias = "NEUTRAL"
-    elif bias_score >= -5:
+    elif bias_score >= -4:
         bias = "BEAR"
     else:
         bias = "STRONG BEAR"
@@ -350,46 +345,43 @@ OI_HISTORY_DIR = "C:/tv/oi_history"
 
 
 def calculate_expected_move(gex_results, spot_price, expiry_str):
-    """Calculate Expected Move bands using straddle price and/or IV."""
+    """Calculate Expected Move bands using IV-based 1SD for daily and weekly windows."""
     # Find ATM strike
     atm = min(gex_results, key=lambda x: abs(x["strike"] - spot_price))
     atm_strike = atm["strike"]
 
-    # DTE
+    # DTE (for reference only)
     expiry_date = datetime.strptime(expiry_str, "%Y-%m-%d").date()
     dte = max((expiry_date - date.today()).days, 1)
 
-    # Straddle-based EM
-    ce_ltp = atm.get("ce_ltp", 0)
-    pe_ltp = atm.get("pe_ltp", 0)
-    straddle_price = ce_ltp + pe_ltp
-
-    # IV-based 1SD EM
+    # ATM IV (average of CE and PE)
     atm_iv = (atm["ce_iv"] + atm["pe_iv"]) / 2
-    one_sd_move = spot_price * (atm_iv / 100) * math.sqrt(dte / 365) if atm_iv > 0 else 0
 
-    # Prefer straddle if available, else IV
-    if straddle_price > 0:
-        em_upper = round(spot_price + straddle_price, 2)
-        em_lower = round(spot_price - straddle_price, 2)
-        em_source = "STRADDLE"
-    elif one_sd_move > 0:
-        em_upper = round(spot_price + one_sd_move, 2)
-        em_lower = round(spot_price - one_sd_move, 2)
-        em_source = "IV"
+    # Daily EM: always 1-day window regardless of expiry DTE
+    daily_1sd = spot_price * (atm_iv / 100) * math.sqrt(1 / 365) if atm_iv > 0 else 0
+    # Weekly EM: 5-day window
+    weekly_1sd = spot_price * (atm_iv / 100) * math.sqrt(5 / 365) if atm_iv > 0 else 0
+
+    if daily_1sd > 0:
+        em_upper = round(spot_price + daily_1sd, 2)
+        em_lower = round(spot_price - daily_1sd, 2)
+        em_wk_upper = round(spot_price + weekly_1sd, 2)
+        em_wk_lower = round(spot_price - weekly_1sd, 2)
     else:
         em_upper = None
         em_lower = None
-        em_source = "N/A"
+        em_wk_upper = None
+        em_wk_lower = None
 
     return {
         "em_upper": em_upper,
         "em_lower": em_lower,
-        "em_source": em_source,
-        "straddle_price": round(straddle_price, 2),
+        "em_wk_upper": em_wk_upper,
+        "em_wk_lower": em_wk_lower,
         "atm_strike": atm_strike,
         "atm_iv": round(atm_iv, 1),
-        "one_sd_move": round(one_sd_move, 2) if one_sd_move else 0,
+        "daily_1sd": round(daily_1sd, 2) if daily_1sd else 0,
+        "weekly_1sd": round(weekly_1sd, 2) if weekly_1sd else 0,
         "dte": dte,
     }
 
@@ -451,12 +443,19 @@ def track_oi_changes(symbol, expiry, gex_results):
     total_ce_chg = sum(c["ce_oi_chg"] for c in oi_changes) if oi_changes else 0
     total_pe_chg = sum(c["pe_oi_chg"] for c in oi_changes) if oi_changes else 0
 
+    if prev_oi is None:
+        direction = "N/A"
+    elif (total_ce_chg + total_pe_chg) > 0:
+        direction = "BUILDUP"
+    else:
+        direction = "UNWINDING"
+
     return {
         "oi_buildups": buildups,
         "oi_unwinds": unwinds,
         "total_ce_oi_chg": total_ce_chg,
         "total_pe_oi_chg": total_pe_chg,
-        "net_oi_chg_direction": "BUILDUP" if (total_ce_chg + total_pe_chg) > 0 else "UNWINDING",
+        "net_oi_chg_direction": direction,
         "has_prev_data": prev_oi is not None,
     }
 
@@ -525,7 +524,7 @@ def print_gex_report(symbol, spot, gex_results, call_gex, put_gex, levels, expir
     print(f"  Spot Price:              {spot:>10.2f}")
     bias = levels.get("bias", "N/A")
     bias_score = levels.get("bias_score", 0)
-    print(f"\n  BIAS: {bias} (score: {bias_score:+d}/8)")
+    print(f"\n  BIAS: {bias} (score: {bias_score:+d}/7)")
 
     # IV Skew
     iv_skew = levels.get("iv_skew", 0)
@@ -536,14 +535,14 @@ def print_gex_report(symbol, spot, gex_results, call_gex, put_gex, levels, expir
     # Expected Move
     em_upper = levels.get("em_upper")
     em_lower = levels.get("em_lower")
-    em_source = levels.get("em_source", "N/A")
     if em_upper and em_lower:
-        print(f"\n  EXPECTED MOVE ({em_source}):")
-        print(f"    Range: {em_lower:.0f} - {em_upper:.0f}")
+        print(f"\n  EXPECTED MOVE (1-day, 1SD):")
+        print(f"    Daily:  {em_lower:.0f} - {em_upper:.0f}  (±{levels.get('daily_1sd', 0):.0f})")
+        em_wk_upper = levels.get("em_wk_upper")
+        em_wk_lower = levels.get("em_wk_lower")
+        if em_wk_upper and em_wk_lower:
+            print(f"    Weekly: {em_wk_lower:.0f} - {em_wk_upper:.0f}  (±{levels.get('weekly_1sd', 0):.0f})")
         print(f"    ATM IV: {levels.get('atm_iv', 0):.1f}%  |  DTE: {levels.get('dte', 0)}")
-        straddle = levels.get("straddle_price", 0)
-        if straddle > 0:
-            print(f"    Straddle: {straddle:.2f}")
 
     # OI Change
     if levels.get("has_prev_data"):

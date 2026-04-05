@@ -55,10 +55,11 @@ def generate_combined_pine(nifty_data=None, bnf_data=None):
             "bias": levels.get("bias", "NEUTRAL"),
             "bias_score": levels.get("bias_score", 0),
             "top_nearby": get_top_nearby(data),
-            # Expected Move
+            # Expected Move (daily 1SD)
             "em_upper": levels.get("em_upper", 0) or 0,
             "em_lower": levels.get("em_lower", 0) or 0,
-            "em_source": levels.get("em_source", "N/A"),
+            "em_wk_upper": levels.get("em_wk_upper", 0) or 0,
+            "em_wk_lower": levels.get("em_wk_lower", 0) or 0,
             "atm_iv": levels.get("atm_iv", 0),
             "dte": levels.get("dte", 0),
             # IV Skew
@@ -144,6 +145,8 @@ var string N_BIAS = "{n["bias"]}"
 var int N_BIAS_SCORE = {n["bias_score"]}
 var float N_EM_UP = {n["em_upper"]:.2f}
 var float N_EM_LO = {n["em_lower"]:.2f}
+var float N_EM_WK_UP = {n["em_wk_upper"]:.2f}
+var float N_EM_WK_LO = {n["em_wk_lower"]:.2f}
 var float N_ATM_IV = {n["atm_iv"]:.1f}
 var int N_DTE = {n["dte"]}
 var float N_IV_SKEW = {n["iv_skew"]:.2f}
@@ -171,6 +174,8 @@ var string B_BIAS = "{b["bias"]}"
 var int B_BIAS_SCORE = {b["bias_score"]}
 var float B_EM_UP = {b["em_upper"]:.2f}
 var float B_EM_LO = {b["em_lower"]:.2f}
+var float B_EM_WK_UP = {b["em_wk_upper"]:.2f}
+var float B_EM_WK_LO = {b["em_wk_lower"]:.2f}
 var float B_ATM_IV = {b["atm_iv"]:.1f}
 var int B_DTE = {b["dte"]}
 var float B_IV_SKEW = {b["iv_skew"]:.2f}
@@ -222,9 +227,14 @@ if showNifty
         # EM band for NIFTY
         pine += '''    if showEM and barstate.islast and N_EM_UP > 0 and N_EM_LO > 0
         int emBar = na(sessStart) ? bar_index - 50 : sessStart
+        // Weekly EM (outer, lighter zone)
+        emWkUp = line.new(emBar, N_EM_WK_UP, bar_index + 15, N_EM_WK_UP, color=color.new(clrEM, 50), width=1, style=line.style_dotted)
+        emWkLo = line.new(emBar, N_EM_WK_LO, bar_index + 15, N_EM_WK_LO, color=color.new(clrEM, 50), width=1, style=line.style_dotted)
+        linefill.new(emWkUp, emWkLo, color=color.new(clrEM, 93))
+        // Daily EM (inner, solid zone)
         emUpLine = line.new(emBar, N_EM_UP, bar_index + 15, N_EM_UP, color=clrEM, width=widEM, style=lineStyle(styEMStr))
         emLoLine = line.new(emBar, N_EM_LO, bar_index + 15, N_EM_LO, color=clrEM, width=widEM, style=lineStyle(styEMStr))
-        linefill.new(emUpLine, emLoLine, color=color.new(clrEM, 88))
+        linefill.new(emUpLine, emLoLine, color=color.new(clrEM, 85))
         label.new(bar_index + 17, N_EM_UP, "EM+ " + str.tostring(N_EM_UP, "#"), style=label.style_label_left, color=clrEM, textcolor=color.white, size=size.small)
         label.new(bar_index + 17, N_EM_LO, "EM- " + str.tostring(N_EM_LO, "#"), style=label.style_label_left, color=clrEM, textcolor=color.white, size=size.small)
 '''
@@ -260,9 +270,14 @@ if showBNF
         # EM band for BANKNIFTY
         pine += '''    if showEM and barstate.islast and B_EM_UP > 0 and B_EM_LO > 0
         int emBar2 = na(sessStart) ? bar_index - 50 : sessStart
+        // Weekly EM (outer, lighter zone)
+        emWkUp2 = line.new(emBar2, B_EM_WK_UP, bar_index + 15, B_EM_WK_UP, color=color.new(clrEM, 60), width=1, style=line.style_dotted)
+        emWkLo2 = line.new(emBar2, B_EM_WK_LO, bar_index + 15, B_EM_WK_LO, color=color.new(clrEM, 60), width=1, style=line.style_dotted)
+        linefill.new(emWkUp2, emWkLo2, color=color.new(clrEM, 95))
+        // Daily EM (inner, solid zone)
         emUpLine2 = line.new(emBar2, B_EM_UP, bar_index + 15, B_EM_UP, color=color.new(clrEM, 30), width=widEM, style=lineStyle(styEMStr))
         emLoLine2 = line.new(emBar2, B_EM_LO, bar_index + 15, B_EM_LO, color=color.new(clrEM, 30), width=widEM, style=lineStyle(styEMStr))
-        linefill.new(emUpLine2, emLoLine2, color=color.new(clrEM, 92))
+        linefill.new(emUpLine2, emLoLine2, color=color.new(clrEM, 90))
         label.new(bar_index + 17, B_EM_UP, "BN EM+ " + str.tostring(B_EM_UP, "#"), style=label.style_label_left, color=color.new(clrEM, 30), textcolor=color.white, size=size.small)
         label.new(bar_index + 17, B_EM_LO, "BN EM- " + str.tostring(B_EM_LO, "#"), style=label.style_label_left, color=color.new(clrEM, 30), textcolor=color.white, size=size.small)
 '''
@@ -299,7 +314,7 @@ if barstate.islast and showTable
     if showNifty
         table.cell(lvlBox, 0, row, "NIFTY", text_color=color.white, text_size=size.normal, bgcolor=color.new(color.teal, 40))
         nBClr = N_BIAS == "STRONG BULL" or N_BIAS == "BULL" ? color.green : N_BIAS == "NEUTRAL" ? color.orange : color.red
-        table.cell(lvlBox, 1, row, N_BIAS + " (" + str.tostring(N_BIAS_SCORE) + "/8)", text_color=nBClr, text_size=size.normal, bgcolor=color.new(color.teal, 40))
+        table.cell(lvlBox, 1, row, N_BIAS + " (" + str.tostring(N_BIAS_SCORE) + "/7)", text_color=nBClr, text_size=size.normal, bgcolor=color.new(color.teal, 40))
         row += 1
         nGClr = N_GAMMA_COND == "POSITIVE" ? color.green : color.red
         table.cell(lvlBox, 0, row, "Gamma", text_color=color.gray, text_size=size.small)
@@ -349,7 +364,7 @@ if barstate.islast and showTable
     if showBNF
         table.cell(lvlBox, 0, row, "BANKNIFTY", text_color=color.white, text_size=size.normal, bgcolor=color.new(color.purple, 40))
         bBClr = B_BIAS == "STRONG BULL" or B_BIAS == "BULL" ? color.green : B_BIAS == "NEUTRAL" ? color.orange : color.red
-        table.cell(lvlBox, 1, row, B_BIAS + " (" + str.tostring(B_BIAS_SCORE) + "/8)", text_color=bBClr, text_size=size.normal, bgcolor=color.new(color.purple, 40))
+        table.cell(lvlBox, 1, row, B_BIAS + " (" + str.tostring(B_BIAS_SCORE) + "/7)", text_color=bBClr, text_size=size.normal, bgcolor=color.new(color.purple, 40))
         row += 1
         bGClr = B_GAMMA_COND == "POSITIVE" ? color.green : color.red
         table.cell(lvlBox, 0, row, "Gamma", text_color=color.gray, text_size=size.small)
