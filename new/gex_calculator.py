@@ -27,7 +27,61 @@ UNDERLYINGS = {
     "NIFTY": {"scrip": 13, "seg": "IDX_I", "lot": 25, "multiplier": 1},
     "BANKNIFTY": {"scrip": 25, "seg": "IDX_I", "lot": 15, "multiplier": 1},
     "FINNIFTY": {"scrip": 27, "seg": "IDX_I", "lot": 25, "multiplier": 1},
+    "GOLD": {"scrip": 459277, "seg": "MCX_COMM", "lot": 1, "multiplier": 100},  # MCX GOLD (100g per lot)
 }
+
+# XAUUSD conversion: MCX GOLD (INR/10g) -> XAUUSD (USD/oz)
+# Formula: XAUUSD = MCX_price * 31.1035 / (10 * USDINR)
+TROY_OZ_GRAMS = 31.1035
+_cached_usdinr = {"rate": 85.0, "fetched_at": None}
+
+
+def get_usdinr():
+    """Fetch live USDINR rate (cached for 4 hours)."""
+    from datetime import timezone, timedelta as td
+    now = datetime.now()
+    if _cached_usdinr["fetched_at"] and (now - _cached_usdinr["fetched_at"]).seconds < 14400:
+        return _cached_usdinr["rate"]
+    try:
+        resp = requests.get("https://open.er-api.com/v6/latest/USD", timeout=5)
+        if resp.status_code == 200:
+            rate = resp.json().get("rates", {}).get("INR", 85.0)
+            _cached_usdinr["rate"] = rate
+            _cached_usdinr["fetched_at"] = now
+            print(f"[FX] USDINR = {rate}")
+            return rate
+    except Exception as e:
+        print(f"[FX] Error fetching USDINR: {e}")
+    return _cached_usdinr["rate"]
+
+
+def mcx_to_xauusd(mcx_price, usdinr=None):
+    """Convert MCX GOLD price (INR/10g) to XAUUSD (USD/oz)."""
+    if not usdinr:
+        usdinr = get_usdinr()
+    return mcx_price * TROY_OZ_GRAMS / (10 * usdinr)
+
+
+def convert_levels_to_xauusd(levels, usdinr):
+    """Convert all MCX GOLD level prices to XAUUSD equivalents."""
+    xau = {}
+    for key in ["call_wall", "put_wall", "hvl", "peak_gamma", "max_pain",
+                 "em_upper", "em_lower", "em_wk_upper", "em_wk_lower"]:
+        val = levels.get(key)
+        if val and val > 0:
+            xau[key] = round(mcx_to_xauusd(val, usdinr), 2)
+        else:
+            xau[key] = None
+    # Local flip
+    lf = levels.get("local_flip")
+    if isinstance(lf, dict) and lf.get("strike"):
+        xau["local_flip"] = round(mcx_to_xauusd(lf["strike"], usdinr), 2)
+    elif isinstance(lf, (int, float)) and lf > 0:
+        xau["local_flip"] = round(mcx_to_xauusd(lf, usdinr), 2)
+    else:
+        xau["local_flip"] = None
+    xau["usdinr"] = usdinr
+    return xau
 
 
 def get_expiry_list(scrip, seg="IDX_I"):
@@ -656,6 +710,24 @@ def print_gex_report(symbol, spot, gex_results, call_gex, put_gex, levels, expir
     print("=" * 70)
 
 
+def print_xauusd_levels(levels):
+    """Print XAUUSD equivalent levels for GOLD."""
+    xau = levels.get("xauusd", {})
+    if not xau:
+        return
+    usdinr = xau.get("usdinr", 0)
+    print(f"\n  {'=' * 50}")
+    print(f"  XAUUSD EQUIVALENT LEVELS (USDINR: {usdinr:.2f})")
+    print(f"  {'=' * 50}")
+    for key, label in [("call_wall", "Call Wall"), ("put_wall", "Put Wall"),
+                        ("peak_gamma", "Peak Gamma"), ("max_pain", "Max Pain"),
+                        ("local_flip", "Local Flip"), ("hvl", "HVL"),
+                        ("em_upper", "EM Upper"), ("em_lower", "EM Lower")]:
+        val = xau.get(key)
+        if val:
+            print(f"  {label:<15} ${val:,.2f}")
+
+
 def get_spot_price_from_chain(option_chain_data):
     """Estimate spot price from ATM options (midpoint of highest OI CE/PE)."""
     max_oi_strike = None
@@ -745,10 +817,18 @@ def run_gex(symbol="NIFTY", expiry=None):
     oi_data = track_oi_changes(symbol, expiry, gex_results)
     levels.update(oi_data)
 
+    # XAUUSD conversion for GOLD (before print so report includes it)
+    if symbol == "GOLD":
+        usdinr = get_usdinr()
+        xau_levels = convert_levels_to_xauusd(levels, usdinr)
+        levels["xauusd"] = xau_levels
+
     # Print report
     print_gex_report(symbol, spot, gex_results, call_gex, put_gex, levels, expiry)
+    if symbol == "GOLD":
+        print_xauusd_levels(levels)
 
-    return {
+    result = {
         "symbol": symbol,
         "spot": spot,
         "expiry": expiry,
@@ -758,6 +838,67 @@ def run_gex(symbol="NIFTY", expiry=None):
         "levels": levels,
         "strikes": gex_results,
     }
+
+    if symbol == "GOLD":
+        result["xauusd"] = {
+            "spot": round(mcx_to_xauusd(spot, usdinr), 2),
+            "usdinr": usdinr,
+            "levels": xau_levels,
+        }
+
+    # Save session history for historical level tracking
+    save_session_history(result)
+
+    return result
+
+
+def save_session_history(data):
+    """Append current GEX levels to daily session history file."""
+    HIST_DIR = "C:/tv/gex_history"
+    os.makedirs(HIST_DIR, exist_ok=True)
+
+    symbol = data["symbol"]
+    today = date.today().strftime("%Y%m%d")
+    hist_file = os.path.join(HIST_DIR, f"{symbol}_{today}.json")
+
+    now = datetime.now()
+    levels = data["levels"]
+    local_flip = levels.get("local_flip", {})
+
+    entry = {
+        "time": now.strftime("%H:%M"),
+        "timestamp": now.strftime("%Y-%m-%d %H:%M:%S"),
+        "spot": data["spot"],
+        "call_wall": levels.get("call_wall", 0),
+        "put_wall": levels.get("put_wall", 0),
+        "hvl": levels.get("hvl", 0),
+        "local_flip": local_flip.get("strike", 0) if isinstance(local_flip, dict) else 0,
+        "peak_gamma": levels.get("peak_gamma", 0),
+        "max_pain": levels.get("max_pain", 0),
+        "bias": levels.get("bias", "NEUTRAL"),
+        "bias_score": levels.get("bias_score", 0),
+        "net_gex": data["net_gex"],
+    }
+
+    # Load existing history
+    history = []
+    if os.path.exists(hist_file):
+        try:
+            with open(hist_file, "r") as f:
+                history = json.load(f)
+        except (json.JSONDecodeError, IOError):
+            history = []
+
+    # Avoid duplicates (same minute)
+    if history and history[-1].get("time") == entry["time"]:
+        history[-1] = entry  # Update existing entry
+    else:
+        history.append(entry)
+
+    with open(hist_file, "w") as f:
+        json.dump(history, f, indent=2)
+
+    print(f"  Session history: {len(history)} snapshots saved to {hist_file}")
 
 
 if __name__ == "__main__":

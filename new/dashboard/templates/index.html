@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GEX Dashboard</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <script src="https://unpkg.com/lightweight-charts@4.1.0/dist/lightweight-charts.standalone.production.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.7.2/socket.io.min.js"></script>
+</head>
+<body>
+
+<!-- Header -->
+<div class="header">
+    <h1>GEX Dashboard</h1>
+    <div class="header-controls">
+        <div class="symbol-tabs">
+            <button class="symbol-tab active" data-symbol="NIFTY">NIFTY</button>
+            <button class="symbol-tab" data-symbol="BANKNIFTY">BANKNIFTY</button>
+            <button class="symbol-tab gold" data-symbol="GOLD">GOLD</button>
+        </div>
+        <div class="tf-tabs">
+            <button class="tf-tab active" data-tf="1">1m</button>
+            <button class="tf-tab" data-tf="5">5m</button>
+            <button class="tf-tab" data-tf="15">15m</button>
+        </div>
+        <div class="view-tabs">
+            <button class="view-tab active" data-view="chart">Chart</button>
+            <button class="view-tab" data-view="analytics">Analytics</button>
+        </div>
+        <input type="date" class="date-input" id="date-picker">
+        <button class="btn" id="btn-refresh" title="Manual refresh">Refresh</button>
+        <div class="status-dot" id="status-dot" title="Connection status"></div>
+        <span class="last-update" id="last-update">--</span>
+    </div>
+</div>
+
+<!-- Tab 1: Full Chart -->
+<div class="tab-content active" id="tab-chart">
+    <div class="chart-fullscreen">
+        <div class="card">
+            <div class="card-header">
+                <h3>Price Chart with GEX Levels</h3>
+                <span class="last-update" id="spot-price">--</span>
+            </div>
+            <div class="card-body" style="padding:0;">
+                <div id="price-chart"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Tab 2: Analytics -->
+<div class="tab-content" id="tab-analytics">
+    <div class="analytics-grid">
+
+        <!-- Levels + Bias row -->
+        <div class="row row-panels">
+            <div class="card">
+                <div class="card-header"><h3>Key Levels</h3></div>
+                <div class="card-body">
+                    <div class="levels-grid" id="levels-grid">
+                        <div class="level-item call-wall">
+                            <span class="label">Call Wall</span>
+                            <span class="value" id="lv-call-wall">--</span>
+                        </div>
+                        <div class="level-item put-wall">
+                            <span class="label">Put Wall</span>
+                            <span class="value" id="lv-put-wall">--</span>
+                        </div>
+                        <div class="level-item peak">
+                            <span class="label">Peak Gamma</span>
+                            <span class="value" id="lv-peak-gamma">--</span>
+                        </div>
+                        <div class="level-item max-pain">
+                            <span class="label">Max Pain</span>
+                            <span class="value" id="lv-max-pain">--</span>
+                        </div>
+                        <div class="level-item hvl">
+                            <span class="label">HVL</span>
+                            <span class="value" id="lv-hvl">--</span>
+                        </div>
+                        <div class="level-item flip">
+                            <span class="label">Local Flip</span>
+                            <span class="value" id="lv-local-flip">--</span>
+                        </div>
+                        <div class="level-item em">
+                            <span class="label">Daily EM</span>
+                            <span class="value" id="lv-em">--</span>
+                        </div>
+                        <div class="level-item em">
+                            <span class="label">ATM IV / DTE</span>
+                            <span class="value" id="lv-iv-dte">--</span>
+                        </div>
+                    </div>
+                    <!-- XAUUSD Levels (visible only for GOLD) -->
+                    <div class="xau-section" id="xau-section" style="display:none;">
+                        <div class="xau-header">XAUUSD Equivalent (USDINR: <span id="xau-usdinr">--</span>)</div>
+                        <div class="levels-grid">
+                            <div class="level-item xau">
+                                <span class="label">XAU Spot</span>
+                                <span class="value" id="xau-spot">--</span>
+                            </div>
+                            <div class="level-item xau">
+                                <span class="label">XAU Call Wall</span>
+                                <span class="value" id="xau-call-wall">--</span>
+                            </div>
+                            <div class="level-item xau">
+                                <span class="label">XAU Put Wall</span>
+                                <span class="value" id="xau-put-wall">--</span>
+                            </div>
+                            <div class="level-item xau">
+                                <span class="label">XAU Peak Gamma</span>
+                                <span class="value" id="xau-peak-gamma">--</span>
+                            </div>
+                            <div class="level-item xau">
+                                <span class="label">XAU Max Pain</span>
+                                <span class="value" id="xau-max-pain">--</span>
+                            </div>
+                            <div class="level-item xau">
+                                <span class="label">XAU Flip</span>
+                                <span class="value" id="xau-local-flip">--</span>
+                            </div>
+                            <div class="level-item xau">
+                                <span class="label">XAU EM Range</span>
+                                <span class="value" id="xau-em">--</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header"><h3>Market Regime</h3></div>
+                <div class="card-body">
+                    <div class="bias-section">
+                        <div class="bias-badge bias-NEUTRAL" id="bias-badge">NEUTRAL</div>
+                        <div class="metric-row">
+                            <span class="label">Bias Score</span>
+                            <span class="value" id="m-bias-score">--</span>
+                        </div>
+                        <div class="metric-row">
+                            <span class="label">Gamma Condition</span>
+                            <span class="value" id="m-gamma-cond">--</span>
+                        </div>
+                        <div class="metric-row">
+                            <span class="label">Gamma Tilt</span>
+                            <span class="value" id="m-gamma-tilt">--</span>
+                        </div>
+                        <div class="metric-row">
+                            <span class="label">Regime</span>
+                            <span class="value" id="m-regime">--</span>
+                        </div>
+                        <div class="metric-row">
+                            <span class="label">Net GEX</span>
+                            <span class="value" id="m-net-gex">--</span>
+                        </div>
+                        <div class="metric-row">
+                            <span class="label">IV Skew</span>
+                            <span class="value" id="m-iv-skew">--</span>
+                        </div>
+                        <div class="metric-row">
+                            <span class="label">OI Direction</span>
+                            <span class="value" id="m-oi-dir">--</span>
+                        </div>
+                        <div class="metric-row">
+                            <span class="label">CE OI Chg</span>
+                            <span class="value" id="m-ce-oi">--</span>
+                        </div>
+                        <div class="metric-row">
+                            <span class="label">PE OI Chg</span>
+                            <span class="value" id="m-pe-oi">--</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- GEX Bar Chart + Net GEX Timeline -->
+        <div class="row row-bottom">
+            <div class="card">
+                <div class="card-header"><h3>Strike-wise GEX Profile</h3></div>
+                <div class="card-body" style="padding:0;">
+                    <div id="gex-chart"></div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header"><h3>Net GEX Timeline</h3></div>
+                <div class="card-body" style="padding:0;">
+                    <div id="gex-timeline"></div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script src="/static/dashboard.js"></script>
+</body>
+</html>

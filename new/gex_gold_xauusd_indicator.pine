@@ -1,0 +1,244 @@
+// GOLD GEX Levels for XAUUSD — Auto-generated
+// MCX GOLD options GEX converted to XAUUSD via USDINR
+// Last updated: 2026-04-06 19:29
+//@version=6
+indicator("GOLD GEX Levels (XAUUSD)", overlay=true, max_lines_count=500, max_labels_count=500, max_boxes_count=500)
+
+// ===== DISPLAY TOGGLES =====
+showLevels = input.bool(true, "Show GEX Levels", group="Display")
+showTable = input.bool(true, "Show Levels Table", group="Display")
+showEM = input.bool(true, "Expected Move Zone", group="Display")
+showOI = input.bool(true, "OI Buildup Lines", group="Display")
+showHist = input.bool(true, "Level History Trail", group="Display")
+
+// ===== LEVEL STYLE INPUTS =====
+showCW = input.bool(true, "Call Wall", group="Call Wall Style")
+clrCW = input.color(#FF0000, "Color", group="Call Wall Style")
+widCW = input.int(3, "Width", minval=1, maxval=5, group="Call Wall Style")
+styCWStr = input.string("Solid", "Style", options=["Solid", "Dashed", "Dotted"], group="Call Wall Style")
+
+showPW = input.bool(true, "Put Wall", group="Put Wall Style")
+clrPW = input.color(#00FF00, "Color", group="Put Wall Style")
+widPW = input.int(3, "Width", minval=1, maxval=5, group="Put Wall Style")
+styPWStr = input.string("Solid", "Style", options=["Solid", "Dashed", "Dotted"], group="Put Wall Style")
+
+showHVL = input.bool(true, "HVL", group="HVL Style")
+clrHVL = input.color(#FF9800, "Color", group="HVL Style")
+widHVL = input.int(3, "Width", minval=1, maxval=5, group="HVL Style")
+styHVLStr = input.string("Dashed", "Style", options=["Solid", "Dashed", "Dotted"], group="HVL Style")
+
+showFLIP = input.bool(true, "Local Flip", group="Local Flip Style")
+clrFLIP = input.color(#FFEB3B, "Color", group="Local Flip Style")
+widFLIP = input.int(2, "Width", minval=1, maxval=5, group="Local Flip Style")
+styFLIPStr = input.string("Dotted", "Style", options=["Solid", "Dashed", "Dotted"], group="Local Flip Style")
+
+showPG = input.bool(true, "Peak Gamma", group="Peak Gamma Style")
+clrPG = input.color(#FF00FF, "Color", group="Peak Gamma Style")
+widPG = input.int(3, "Width", minval=1, maxval=5, group="Peak Gamma Style")
+styPGStr = input.string("Solid", "Style", options=["Solid", "Dashed", "Dotted"], group="Peak Gamma Style")
+
+showMP = input.bool(true, "Max Pain", group="Max Pain Style")
+clrMP = input.color(#00FFFF, "Color", group="Max Pain Style")
+widMP = input.int(3, "Width", minval=1, maxval=5, group="Max Pain Style")
+styMPStr = input.string("Dashed", "Style", options=["Solid", "Dashed", "Dotted"], group="Max Pain Style")
+
+clrEM = input.color(#2196F3, "Color", group="Expected Move Style")
+widEM = input.int(2, "Width", minval=1, maxval=5, group="Expected Move Style")
+styEMStr = input.string("Dashed", "Style", options=["Solid", "Dashed", "Dotted"], group="Expected Move Style")
+
+// Style converter
+lineStyle(string s) =>
+    s == "Dashed" ? line.style_dashed : s == "Dotted" ? line.style_dotted : line.style_solid
+
+var string UPDATED = "2026-04-06 19:29"
+
+// ===== GOLD GEX LEVELS (XAUUSD) =====
+G_CW = input.float(5009.91, "Call Wall", group="GOLD XAUUSD Levels")
+G_PW = input.float(4675.92, "Put Wall", group="GOLD XAUUSD Levels")
+G_HVL = input.float(6896.98, "HVL", group="GOLD XAUUSD Levels")
+G_FLIP = input.float(4921.86, "Local Flip", group="GOLD XAUUSD Levels")
+G_PG = input.float(5009.91, "Peak Gamma", group="GOLD XAUUSD Levels")
+G_MP = input.float(5009.91, "Max Pain", group="GOLD XAUUSD Levels")
+var string G_GAMMA_COND = "POSITIVE"
+var float G_GAMMA_TILT = 93.3
+var float G_NET_GEX = 1321915
+var string G_EXPIRY = "2026-04-30"
+var string G_BIAS = "STRONG BULL"
+var int G_BIAS_SCORE = 7
+var float G_EM_UP = 5042.94
+var float G_EM_LO = 4863.86
+var float G_ATM_IV = 34.5
+var int G_DTE = 24
+var float G_IV_SKEW = -12.56
+var string G_SKEW_SIG = "BULLISH"
+var string G_OI_DIR = "N/A"
+var int G_OI_CE_CHG = 0
+var int G_OI_PE_CHG = 0
+var bool G_HAS_OI = false
+var string G_REGIME = "RANGE"
+var int G_REGIME_SCORE = 3
+var float G_USDINR = 93.13
+var float G_MCX_SPOT = 148308
+
+// ===== SESSION TRACKING =====
+var int sessStart = na
+newSess = session.isfirstbar
+if newSess
+    sessStart := bar_index
+
+// Helper: draw level line + label
+drawLevel(float price, color clr, int wid, string styStr, string txt, bool show) =>
+    if show and not na(price) and price > 0 and barstate.islast
+        startBar = na(sessStart) ? bar_index - 50 : sessStart
+        l = line.new(startBar, price, bar_index + 15, price, color=clr, width=wid, style=lineStyle(styStr), extend=extend.none)
+        label.new(bar_index + 17, price, txt, style=label.style_label_left, color=clr, textcolor=color.white, size=size.small)
+
+// ===== DRAW LEVELS =====
+if showLevels
+    drawLevel(G_CW, clrCW, widCW, styCWStr, "Call Wall $" + str.tostring(G_CW, "#.##"), showCW)
+    drawLevel(G_PW, clrPW, widPW, styPWStr, "Put Wall $" + str.tostring(G_PW, "#.##"), showPW)
+    drawLevel(G_HVL, clrHVL, widHVL, styHVLStr, "HVL $" + str.tostring(G_HVL, "#.##"), showHVL)
+    drawLevel(G_FLIP, clrFLIP, widFLIP, styFLIPStr, "Flip $" + str.tostring(G_FLIP, "#.##"), showFLIP)
+    drawLevel(G_PG, clrPG, widPG, styPGStr, "Peak Gamma $" + str.tostring(G_PG, "#.##"), showPG)
+    drawLevel(G_MP, clrMP, widMP, styMPStr, "Max Pain $" + str.tostring(G_MP, "#.##"), showMP)
+    if barstate.islast
+        int sBar = na(sessStart) ? bar_index - 50 : sessStart
+        line.new(sBar, 4842.92, bar_index + 10, 4842.92, color=color.new(#FFD700, 40), width=1, style=line.style_dotted)
+        label.new(sBar - 2, 4842.92, "$4843 (-1.1M)", style=label.style_label_right, color=color.new(color.gray, 70), textcolor=color.white, size=size.small)
+        line.new(sBar, 5009.91, bar_index + 10, 5009.91, color=color.new(#FFD700, 40), width=1, style=line.style_dotted)
+        label.new(sBar - 2, 5009.91, "$5010 (844.6K)", style=label.style_label_right, color=color.new(color.gray, 70), textcolor=color.white, size=size.small)
+        line.new(sBar, 4943.12, bar_index + 10, 4943.12, color=color.new(#FFD700, 40), width=1, style=line.style_dotted)
+        label.new(sBar - 2, 4943.12, "$4943 (46.2K)", style=label.style_label_right, color=color.new(color.gray, 70), textcolor=color.white, size=size.small)
+        line.new(sBar, 4876.32, bar_index + 10, 4876.32, color=color.new(#FFD700, 40), width=1, style=line.style_dotted)
+        label.new(sBar - 2, 4876.32, "$4876 (-30.8K)", style=label.style_label_right, color=color.new(color.gray, 70), textcolor=color.white, size=size.small)
+        line.new(sBar, 5076.71, bar_index + 10, 5076.71, color=color.new(#FFD700, 40), width=1, style=line.style_dotted)
+        label.new(sBar - 2, 5076.71, "$5077 (26.4K)", style=label.style_label_right, color=color.new(color.gray, 70), textcolor=color.white, size=size.small)
+
+    if showEM and barstate.islast and G_EM_UP > 0 and G_EM_LO > 0
+        int emBar = na(sessStart) ? bar_index - 50 : sessStart
+        emUpLine = line.new(emBar, G_EM_UP, bar_index + 15, G_EM_UP, color=clrEM, width=widEM, style=lineStyle(styEMStr))
+        emLoLine = line.new(emBar, G_EM_LO, bar_index + 15, G_EM_LO, color=clrEM, width=widEM, style=lineStyle(styEMStr))
+        linefill.new(emUpLine, emLoLine, color=color.new(clrEM, 85))
+        label.new(bar_index + 17, G_EM_UP, "EM+ $" + str.tostring(G_EM_UP, "#.##"), style=label.style_label_left, color=clrEM, textcolor=color.white, size=size.small)
+        label.new(bar_index + 17, G_EM_LO, "EM- $" + str.tostring(G_EM_LO, "#.##"), style=label.style_label_left, color=clrEM, textcolor=color.white, size=size.small)
+
+// ===== GOLD LEVEL HISTORY (18 snapshots) =====
+if showHist and barstate.islast
+    int ghBar = na(sessStart) ? bar_index - 50 : sessStart
+    int ghSpan = bar_index - ghBar
+    line.new(ghBar + math.round(ghSpan * 0.0000), 5343.91, ghBar + math.round(ghSpan * 0.0588), 5343.91, color=color.new(clrCW, 60), width=1, style=line.style_dotted)
+    line.new(ghBar + math.round(ghSpan * 0.0588), 5343.91, ghBar + math.round(ghSpan * 0.1176), 5343.91, color=color.new(clrCW, 60), width=1, style=line.style_dotted)
+    line.new(ghBar + math.round(ghSpan * 0.1176), 5343.91, ghBar + math.round(ghSpan * 0.1765), 5343.91, color=color.new(clrCW, 60), width=1, style=line.style_dotted)
+    line.new(ghBar + math.round(ghSpan * 0.1765), 5343.91, ghBar + math.round(ghSpan * 0.2353), 5343.91, color=color.new(clrCW, 60), width=1, style=line.style_dotted)
+    line.new(ghBar + math.round(ghSpan * 0.2353), 5343.91, ghBar + math.round(ghSpan * 0.2941), 5343.91, color=color.new(clrCW, 60), width=1, style=line.style_dotted)
+    line.new(ghBar + math.round(ghSpan * 0.2941), 5343.91, ghBar + math.round(ghSpan * 0.3529), 5343.91, color=color.new(clrCW, 60), width=1, style=line.style_dotted)
+    line.new(ghBar + math.round(ghSpan * 0.3529), 5343.91, ghBar + math.round(ghSpan * 0.4118), 5343.91, color=color.new(clrCW, 60), width=1, style=line.style_dotted)
+    line.new(ghBar + math.round(ghSpan * 0.4118), 5343.91, ghBar + math.round(ghSpan * 0.4706), 5343.91, color=color.new(clrCW, 60), width=1, style=line.style_dotted)
+    line.new(ghBar + math.round(ghSpan * 0.4706), 5343.91, ghBar + math.round(ghSpan * 0.5294), 5343.91, color=color.new(clrCW, 60), width=1, style=line.style_dotted)
+    line.new(ghBar + math.round(ghSpan * 0.5294), 5343.91, ghBar + math.round(ghSpan * 0.5882), 5343.91, color=color.new(clrCW, 60), width=1, style=line.style_dotted)
+    line.new(ghBar + math.round(ghSpan * 0.5882), 5343.91, ghBar + math.round(ghSpan * 0.6471), 5343.91, color=color.new(clrCW, 60), width=1, style=line.style_dotted)
+    line.new(ghBar + math.round(ghSpan * 0.6471), 5343.91, ghBar + math.round(ghSpan * 0.6471), 5009.91, color=color.new(clrCW, 60), width=1, style=line.style_dotted)
+    line.new(ghBar + math.round(ghSpan * 0.6471), 5009.91, ghBar + math.round(ghSpan * 0.7059), 5009.91, color=color.new(clrCW, 60), width=1, style=line.style_dotted)
+    line.new(ghBar + math.round(ghSpan * 0.7059), 5009.91, ghBar + math.round(ghSpan * 0.7647), 5009.91, color=color.new(clrCW, 60), width=1, style=line.style_dotted)
+    line.new(ghBar + math.round(ghSpan * 0.7647), 5009.91, ghBar + math.round(ghSpan * 0.8235), 5009.91, color=color.new(clrCW, 60), width=1, style=line.style_dotted)
+    line.new(ghBar + math.round(ghSpan * 0.8235), 5009.91, ghBar + math.round(ghSpan * 0.8824), 5009.91, color=color.new(clrCW, 60), width=1, style=line.style_dotted)
+    line.new(ghBar + math.round(ghSpan * 0.8824), 5009.91, ghBar + math.round(ghSpan * 0.9412), 5009.91, color=color.new(clrCW, 60), width=1, style=line.style_dotted)
+    line.new(ghBar + math.round(ghSpan * 0.9412), 5009.91, ghBar + math.round(ghSpan * 1.0000), 5009.91, color=color.new(clrCW, 60), width=1, style=line.style_dotted)
+    line.new(ghBar + math.round(ghSpan * 0.0000), 4842.92, ghBar + math.round(ghSpan * 0.0588), 4842.92, color=color.new(clrPW, 60), width=1, style=line.style_dotted)
+    line.new(ghBar + math.round(ghSpan * 0.0588), 4842.92, ghBar + math.round(ghSpan * 0.1176), 4842.92, color=color.new(clrPW, 60), width=1, style=line.style_dotted)
+    line.new(ghBar + math.round(ghSpan * 0.1176), 4842.92, ghBar + math.round(ghSpan * 0.1765), 4842.92, color=color.new(clrPW, 60), width=1, style=line.style_dotted)
+    line.new(ghBar + math.round(ghSpan * 0.1765), 4842.92, ghBar + math.round(ghSpan * 0.2353), 4842.92, color=color.new(clrPW, 60), width=1, style=line.style_dotted)
+    line.new(ghBar + math.round(ghSpan * 0.2353), 4842.92, ghBar + math.round(ghSpan * 0.2941), 4842.92, color=color.new(clrPW, 60), width=1, style=line.style_dotted)
+    line.new(ghBar + math.round(ghSpan * 0.2941), 4842.92, ghBar + math.round(ghSpan * 0.3529), 4842.92, color=color.new(clrPW, 60), width=1, style=line.style_dotted)
+    line.new(ghBar + math.round(ghSpan * 0.3529), 4842.92, ghBar + math.round(ghSpan * 0.4118), 4842.92, color=color.new(clrPW, 60), width=1, style=line.style_dotted)
+    line.new(ghBar + math.round(ghSpan * 0.4118), 4842.92, ghBar + math.round(ghSpan * 0.4706), 4842.92, color=color.new(clrPW, 60), width=1, style=line.style_dotted)
+    line.new(ghBar + math.round(ghSpan * 0.4706), 4842.92, ghBar + math.round(ghSpan * 0.5294), 4842.92, color=color.new(clrPW, 60), width=1, style=line.style_dotted)
+    line.new(ghBar + math.round(ghSpan * 0.5294), 4842.92, ghBar + math.round(ghSpan * 0.5882), 4842.92, color=color.new(clrPW, 60), width=1, style=line.style_dotted)
+    line.new(ghBar + math.round(ghSpan * 0.5882), 4842.92, ghBar + math.round(ghSpan * 0.6471), 4842.92, color=color.new(clrPW, 60), width=1, style=line.style_dotted)
+    line.new(ghBar + math.round(ghSpan * 0.6471), 4842.92, ghBar + math.round(ghSpan * 0.7059), 4842.92, color=color.new(clrPW, 60), width=1, style=line.style_dotted)
+    line.new(ghBar + math.round(ghSpan * 0.7059), 4842.92, ghBar + math.round(ghSpan * 0.7647), 4842.92, color=color.new(clrPW, 60), width=1, style=line.style_dotted)
+    line.new(ghBar + math.round(ghSpan * 0.7647), 4842.92, ghBar + math.round(ghSpan * 0.8235), 4842.92, color=color.new(clrPW, 60), width=1, style=line.style_dotted)
+    line.new(ghBar + math.round(ghSpan * 0.8235), 4842.92, ghBar + math.round(ghSpan * 0.8824), 4842.92, color=color.new(clrPW, 60), width=1, style=line.style_dotted)
+    line.new(ghBar + math.round(ghSpan * 0.8824), 4842.92, ghBar + math.round(ghSpan * 0.9412), 4842.92, color=color.new(clrPW, 60), width=1, style=line.style_dotted)
+    line.new(ghBar + math.round(ghSpan * 0.9412), 4842.92, ghBar + math.round(ghSpan * 0.9412), 4675.92, color=color.new(clrPW, 60), width=1, style=line.style_dotted)
+    line.new(ghBar + math.round(ghSpan * 0.9412), 4675.92, ghBar + math.round(ghSpan * 1.0000), 4675.92, color=color.new(clrPW, 60), width=1, style=line.style_dotted)
+
+// ===== LEVELS TABLE =====
+var table lvlBox = table.new(position.top_right, 2, 18, bgcolor=color.new(color.black, 10), border_width=1, border_color=color.new(color.gray, 50))
+
+if barstate.islast and showTable
+    int row = 0
+    table.cell(lvlBox, 0, row, "GOLD GEX (XAUUSD)", text_color=#FFD700, text_size=size.normal, bgcolor=color.new(#FFD700, 80))
+    table.cell(lvlBox, 1, row, UPDATED, text_color=color.gray, text_size=size.small, bgcolor=color.new(#FFD700, 80))
+    row += 1
+
+    gBClr = G_BIAS == "STRONG BULL" or G_BIAS == "BULL" ? color.green : G_BIAS == "NEUTRAL" ? color.orange : color.red
+    table.cell(lvlBox, 0, row, "BIAS", text_color=color.gray, text_size=size.small)
+    table.cell(lvlBox, 1, row, G_BIAS + " (" + str.tostring(G_BIAS_SCORE) + "/7)", text_color=gBClr, text_size=size.normal)
+    row += 1
+
+    gGClr = G_GAMMA_COND == "POSITIVE" ? color.green : color.red
+    table.cell(lvlBox, 0, row, "Gamma", text_color=color.gray, text_size=size.small)
+    table.cell(lvlBox, 1, row, G_GAMMA_COND + " | " + str.tostring(G_GAMMA_TILT, "#.#") + "% Bull", text_color=gGClr, text_size=size.small)
+    row += 1
+
+    table.cell(lvlBox, 0, row, "Call Wall", text_color=color.gray, text_size=size.small)
+    table.cell(lvlBox, 1, row, "$" + str.tostring(G_CW, "#.##"), text_color=clrCW, text_size=size.normal)
+    row += 1
+
+    table.cell(lvlBox, 0, row, "Put Wall", text_color=color.gray, text_size=size.small)
+    table.cell(lvlBox, 1, row, "$" + str.tostring(G_PW, "#.##"), text_color=clrPW, text_size=size.normal)
+    row += 1
+
+    table.cell(lvlBox, 0, row, "HVL", text_color=color.gray, text_size=size.small)
+    table.cell(lvlBox, 1, row, "$" + str.tostring(G_HVL, "#.##"), text_color=clrHVL, text_size=size.normal)
+    row += 1
+
+    table.cell(lvlBox, 0, row, "Local Flip", text_color=color.gray, text_size=size.small)
+    table.cell(lvlBox, 1, row, "$" + str.tostring(G_FLIP, "#.##"), text_color=clrFLIP, text_size=size.normal)
+    row += 1
+
+    table.cell(lvlBox, 0, row, "Peak Gamma", text_color=color.gray, text_size=size.small)
+    table.cell(lvlBox, 1, row, "$" + str.tostring(G_PG, "#.##"), text_color=clrPG, text_size=size.normal)
+    row += 1
+
+    table.cell(lvlBox, 0, row, "Max Pain", text_color=color.gray, text_size=size.small)
+    table.cell(lvlBox, 1, row, "$" + str.tostring(G_MP, "#.##"), text_color=clrMP, text_size=size.normal)
+    row += 1
+
+    table.cell(lvlBox, 0, row, "Net GEX", text_color=color.gray, text_size=size.small)
+    table.cell(lvlBox, 1, row, "1.3M", text_color=G_NET_GEX > 0 ? color.green : color.red, text_size=size.normal)
+    row += 1
+
+    table.cell(lvlBox, 0, row, "Exp Move", text_color=color.gray, text_size=size.small)
+    table.cell(lvlBox, 1, row, "$" + str.tostring(G_EM_LO, "#.##") + " - $" + str.tostring(G_EM_UP, "#.##"), text_color=clrEM, text_size=size.normal)
+    row += 1
+
+    table.cell(lvlBox, 0, row, "ATM IV / DTE", text_color=color.gray, text_size=size.small)
+    table.cell(lvlBox, 1, row, str.tostring(G_ATM_IV, "#.#") + "% / " + str.tostring(G_DTE) + "d", text_color=color.white, text_size=size.small)
+    row += 1
+
+    gSkClr = G_IV_SKEW > 1 ? color.red : G_IV_SKEW < -1 ? color.green : color.orange
+    table.cell(lvlBox, 0, row, "IV Skew", text_color=color.gray, text_size=size.small)
+    table.cell(lvlBox, 1, row, str.tostring(G_IV_SKEW, "#.##") + " " + G_SKEW_SIG, text_color=gSkClr, text_size=size.small)
+    row += 1
+
+    table.cell(lvlBox, 0, row, "OI Chg", text_color=color.gray, text_size=size.small)
+    table.cell(lvlBox, 1, row, G_HAS_OI ? G_OI_DIR : "No prev data", text_color=G_OI_DIR == "BUILDUP" ? color.green : color.red, text_size=size.small)
+    row += 1
+
+    table.cell(lvlBox, 0, row, "USDINR", text_color=color.gray, text_size=size.small)
+    table.cell(lvlBox, 1, row, str.tostring(G_USDINR, "#.##"), text_color=#FFD700, text_size=size.small)
+    row += 1
+
+    table.cell(lvlBox, 0, row, "MCX Spot", text_color=color.gray, text_size=size.small)
+    table.cell(lvlBox, 1, row, str.tostring(G_MCX_SPOT, "#"), text_color=#FFD700, text_size=size.small)
+    row += 1
+
+    gRClr = G_REGIME == "RANGE" ? color.blue : G_REGIME == "TREND" ? color.orange : color.gray
+    table.cell(lvlBox, 0, row, "Regime", text_color=color.gray, text_size=size.small)
+    table.cell(lvlBox, 1, row, G_REGIME, text_color=gRClr, text_size=size.normal)
+    row += 1
+
+    table.cell(lvlBox, 0, row, "Expiry", text_color=color.gray, text_size=size.small)
+    table.cell(lvlBox, 1, row, G_EXPIRY, text_color=color.white, text_size=size.small)

@@ -17,7 +17,54 @@ import os
 import json
 import time
 import logging
+import sqlite3
+import shutil
+import tempfile
+import requests
 from datetime import datetime
+
+# Published script name on TradingView to republish after push
+PUBLISH_SCRIPT_NAME = "GEX Levels"
+
+
+def republish_to_tv(pine_source):
+    """Republish pine_source to the TradingView public script."""
+    cookie_path = r'C:\Users\teju\AppData\Roaming\TradingView\Network\Cookies'
+    tmp = tempfile.mktemp(suffix='.db')
+    shutil.copy2(cookie_path, tmp)
+    try:
+        conn = sqlite3.connect(tmp)
+        cur = conn.cursor()
+        cur.execute("SELECT name, value FROM cookies WHERE host_key LIKE '%tradingview%' AND name IN ('sessionid', 'sessionid_sign')")
+        cookies = dict(cur.fetchall())
+        conn.close()
+    finally:
+        os.unlink(tmp)
+
+    headers = {
+        'cookie': '; '.join(f'{k}={v}' for k, v in cookies.items()),
+        'origin': 'https://in.tradingview.com',
+        'referer': 'https://in.tradingview.com/',
+        'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
+    }
+
+    # Get published script list and find our script's PUB ID
+    r = requests.get('https://pine-facade.tradingview.com/pine-facade/list?filter=published', headers=headers, timeout=10)
+    r.raise_for_status()
+    scripts = {s['scriptName']: s['scriptIdPart'] for s in r.json()}
+    pub_id = scripts.get(PUBLISH_SCRIPT_NAME)
+    if not pub_id:
+        log.warning(f"[PUBLISH] '{PUBLISH_SCRIPT_NAME}' not found in published scripts")
+        return False
+
+    url = f'https://pine-facade.tradingview.com/pine-facade/publish/next/{requests.utils.quote(pub_id, safe="")}'
+    r = requests.post(url, data={'source': pine_source}, headers=headers, timeout=15)
+    if r.status_code == 200:
+        log.info(f"[PUBLISH] '{PUBLISH_SCRIPT_NAME}' republished OK")
+        return True
+    else:
+        log.error(f"[PUBLISH] Failed HTTP {r.status_code}: {r.text[:200]}")
+        return False
 
 # ---------------------------------------------------------------------------
 # Logging setup
@@ -526,8 +573,15 @@ def main():
 
         log.info(f"Pine file loaded: {len(pine_source.splitlines())} lines, {len(pine_source)} chars")
 
-        # Step 3: Push to TradingView
+        # Step 3: Push to TradingView (inject into Monaco editor)
         success = push_pine_to_tv(pine_source)
+
+        # Step 4: Republish public script
+        if success:
+            try:
+                republish_to_tv(pine_source)
+            except Exception as e:
+                log.error(f"[PUBLISH] Error: {e}")
 
         elapsed = time.time() - start
         if success:

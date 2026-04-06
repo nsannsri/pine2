@@ -11,15 +11,18 @@ Dhan API  -->  gex_calculator.py  -->  gex_tv_push.py  -->  .pine files
                                                                  |
                                                             gex_push.py
                                                                  |
-                                                        TradingView Desktop
-                                                         (via Chrome DevTools)
+                                                   +-------------+-------------+
+                                                   |                           |
+                                          TradingView Desktop         pine-facade API
+                                           (Monaco editor,            (republish public
+                                            via Chrome DevTools)       "GEX Levels" script)
 ```
 
 | File | Purpose |
 |------|---------|
 | `gex_calculator.py` | Fetches option chain from Dhan API, calculates GEX, Expected Move, IV Skew, OI changes |
 | `gex_tv_push.py` | Generates Pine Script indicator code from calculator output |
-| `gex_push.py` | Pushes the generated Pine Script to TradingView Desktop via CDP (Chrome DevTools Protocol) |
+| `gex_push.py` | Pushes Pine Script via CDP + republishes the public TradingView script |
 | `.env` | Dhan API credentials |
 
 ---
@@ -56,7 +59,7 @@ pip install requests python-dotenv websocket-client
 
 | Package | Purpose |
 |---------|---------|
-| `requests` | HTTP calls to Dhan API |
+| `requests` | HTTP calls to Dhan API + TradingView republish API |
 | `python-dotenv` | Loads `.env` file for API credentials |
 | `websocket-client` | CDP WebSocket connection to TradingView |
 
@@ -140,8 +143,8 @@ The first run will:
 - Fetch NIFTY & BANKNIFTY option chain data from Dhan
 - Calculate GEX levels, Expected Move, IV Skew, OI changes
 - Generate the Pine Script indicator
-- Push it to TradingView and compile it
-- Save the indicator as "GEX Levels" in TradingView
+- Push it to TradingView and compile it via CDP
+- **Republish the public "GEX Levels" script** on TradingView automatically
 
 **Expected output:**
 
@@ -159,6 +162,7 @@ The first run will:
 [INFO] Opening Pine Editor panel...
 [INFO] Injecting Pine Script (298 lines)...
 [INFO] Compiled clean - 0 errors
+[INFO] [PUBLISH] 'GEX Levels' republished OK
 [INFO] DONE - pushed in 15.2s
 ```
 
@@ -350,6 +354,14 @@ If you see origin-related errors, make sure TradingView is launched with:
 --remote-debugging-port=9222 --remote-allow-origins=*
 ```
 
+### "[PUBLISH] Failed HTTP 4xx"
+
+Your TradingView session has expired. Log in to TradingView Desktop again — the cookie is refreshed automatically on next run.
+
+### "[PUBLISH] 'GEX Levels' not found in published scripts"
+
+The published script name in `gex_push.py` doesn't match. Check `PUBLISH_SCRIPT_NAME` at the top of the file and update it to match the exact name of your published script.
+
 ### OI Change shows "No prev data"
 
 Normal on first run. OI snapshots are saved to `C:\tv\oi_history\`. Run again the next day to see day-over-day changes.
@@ -360,13 +372,31 @@ Normal on first run. OI snapshots are saved to `C:\tv\oi_history\`. Run again th
 
 ```
 C:\tv\
-  gex_calculator.py          # Core GEX calculation engine
-  gex_tv_push.py             # Pine Script generator
-  gex_push.py                # CDP push script (run this)
-  .env                       # Dhan API credentials
+  gex_calculator.py           # Core GEX calculation engine
+  gex_tv_push.py              # Pine Script generator
+  gex_push.py                 # CDP push + auto-republish script (run this)
+  republish.py                # Standalone republish utility (optional)
+  capture_publish.js          # Dev tool: capture TradingView network requests
+  .env                        # Dhan API credentials
   gex_combined_indicator.pine # Generated Pine (NIFTY + BANKNIFTY)
   gex_nifty_indicator.pine    # Generated Pine (NIFTY only)
   gex_banknifty_indicator.pine# Generated Pine (BANKNIFTY only)
   oi_history/                 # Daily OI snapshots for change tracking
   logs/                       # Daily log files
+```
+
+---
+
+## How Auto-Republish Works
+
+`gex_push.py` republishes the public TradingView script automatically after each push — no browser interaction needed.
+
+**How:**
+- Reads the `sessionid` cookie directly from TradingView Desktop's local cookie store (`AppData\Roaming\TradingView\Network\Cookies`)
+- Calls TradingView's internal API: `POST pine-facade.tradingview.com/pine-facade/publish/next/{PUB_ID}`
+- The published script name is configured via `PUBLISH_SCRIPT_NAME` at the top of `gex_push.py`
+
+**To change which script gets republished**, edit this line in `gex_push.py`:
+```python
+PUBLISH_SCRIPT_NAME = "GEX Levels"
 ```

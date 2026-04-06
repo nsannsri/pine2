@@ -69,7 +69,9 @@
       "mcp__tradingview__chart_manage_indicator",
       "mcp__tradingview__pine_compile",
       "Bash(ls C:/tv/*.json)",
-      "Bash(ls C:/tv/*.pine)"
+      "Bash(ls C:/tv/*.pine)",
+      "mcp__tradingview__tv_launch",
+      "Bash(node:*)"
     ]
   }
 }
