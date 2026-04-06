@@ -62,11 +62,12 @@ def republish_to_tv(pine_source):
 
     url = f'https://pine-facade.tradingview.com/pine-facade/publish/next/{requests.utils.quote(pub_id, safe="")}'
     r = requests.post(url, data={'source': pine_source}, headers=headers, timeout=15)
+    log.info(f"[PUBLISH] HTTP {r.status_code} response: {r.text[:300]}")
     if r.status_code == 200:
         log.info(f"[PUBLISH] '{PUBLISH_SCRIPT_NAME}' republished OK")
         return True
     else:
-        log.error(f"[PUBLISH] Failed HTTP {r.status_code}: {r.text[:200]}")
+        log.error(f"[PUBLISH] Failed HTTP {r.status_code}: {r.text[:300]}")
         return False
 
 # ---------------------------------------------------------------------------
