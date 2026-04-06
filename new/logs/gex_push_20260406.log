@@ -1,0 +1,574 @@
+2026-04-06 08:14:29,623 [INFO] ============================================================
+2026-04-06 08:14:29,623 [INFO]   GEX Push - 2026-04-06 08:14:29
+2026-04-06 08:14:29,623 [INFO] ============================================================
+2026-04-06 08:14:29,623 [INFO] Running gex_tv_push.py to fetch data and generate Pine...
+2026-04-06 08:14:35,915 [INFO]   ==================================================
+2026-04-06 08:14:35,915 [INFO]   ==================================================
+2026-04-06 08:14:35,915 [INFO]   Spot price: 22644.65
+2026-04-06 08:14:35,915 [INFO]   ======================================================================
+2026-04-06 08:14:35,926 [INFO]   GEX REPORT - NIFTY | Spot: 22644.65 | Expiry: 2026-04-07
+2026-04-06 08:14:35,926 [INFO]   ======================================================================
+2026-04-06 08:14:35,926 [INFO]   Call Wall (Resistance):       23000
+2026-04-06 08:14:35,926 [INFO]   Put Wall (Support):           22600
+2026-04-06 08:14:35,928 [INFO]   Peak Gamma (Magnet):          22600
+2026-04-06 08:14:35,928 [INFO]   Max Pain (Expiry Pin):        22700
+2026-04-06 08:14:35,928 [INFO]   BIAS: BULL (score: +4/7)
+2026-04-06 08:14:35,928 [INFO]   EXPECTED MOVE (1-day, 1SD):
+2026-04-06 08:14:35,928 [INFO]   Daily:  22226 - 23064  (±419)
+2026-04-06 08:14:35,928 [INFO]   OI CHANGE: BUILDUP
+2026-04-06 08:14:35,928 [INFO]   ======================================================================
+2026-04-06 08:14:35,928 [INFO]   Spot price: 51597.05
+2026-04-06 08:14:35,928 [INFO]   ======================================================================
+2026-04-06 08:14:35,928 [INFO]   GEX REPORT - BANKNIFTY | Spot: 51597.05 | Expiry: 2026-04-28
+2026-04-06 08:14:35,928 [INFO]   ======================================================================
+2026-04-06 08:14:35,928 [INFO]   Call Wall (Resistance):       55000
+2026-04-06 08:14:35,928 [INFO]   Put Wall (Support):           52000
+2026-04-06 08:14:35,928 [INFO]   Peak Gamma (Magnet):          52000
+2026-04-06 08:14:35,928 [INFO]   Max Pain (Expiry Pin):        53900
+2026-04-06 08:14:35,928 [INFO]   BIAS: BULL (score: +3/7)
+2026-04-06 08:14:35,928 [INFO]   EXPECTED MOVE (1-day, 1SD):
+2026-04-06 08:14:35,928 [INFO]   Daily:  50736 - 52459  (±862)
+2026-04-06 08:14:35,928 [INFO]   OI CHANGE: BUILDUP
+2026-04-06 08:14:35,929 [INFO]   ======================================================================
+2026-04-06 08:14:35,948 [INFO] Pine file loaded: 298 lines, 21791 chars
+2026-04-06 08:14:36,201 [INFO] Connecting to CDP on port 9222...
+2026-04-06 08:14:38,276 [INFO] Found TradingView tab: https://in.tradingview.com/chart/QBtPHOpr/
+2026-04-06 08:14:38,278 [DEBUG] WebSocket URL: ws://localhost:9222/devtools/page/C094AC7EF1C794BAA1A5D0ECD56778F3
+2026-04-06 08:15:00,438 [INFO] ============================================================
+2026-04-06 08:15:00,438 [INFO]   GEX Push - 2026-04-06 08:15:00
+2026-04-06 08:15:00,438 [INFO] ============================================================
+2026-04-06 08:15:00,439 [INFO] Pine file loaded: 298 lines, 21791 chars
+2026-04-06 08:15:00,531 [INFO] Connecting to CDP on port 9222...
+2026-04-06 08:15:02,590 [INFO] Found TradingView tab: https://in.tradingview.com/chart/QBtPHOpr/
+2026-04-06 08:15:02,598 [DEBUG] WebSocket URL: ws://localhost:9222/devtools/page/C094AC7EF1C794BAA1A5D0ECD56778F3
+2026-04-06 08:15:23,975 [INFO] ============================================================
+2026-04-06 08:15:23,975 [INFO]   GEX Push - 2026-04-06 08:15:23
+2026-04-06 08:15:23,975 [INFO] ============================================================
+2026-04-06 08:15:23,976 [INFO] Pine file loaded: 298 lines, 21791 chars
+2026-04-06 08:15:24,056 [INFO] Connecting to CDP on port 9222...
+2026-04-06 08:15:26,126 [INFO] Found TradingView tab: https://in.tradingview.com/chart/QBtPHOpr/
+2026-04-06 08:15:26,126 [DEBUG] WebSocket URL: ws://localhost:9222/devtools/page/C094AC7EF1C794BAA1A5D0ECD56778F3
+2026-04-06 08:15:28,218 [INFO] CDP WebSocket connected
+2026-04-06 08:15:28,223 [INFO] Opening Pine Editor panel...
+2026-04-06 08:15:28,225 [INFO]   Editor: OK:api
+2026-04-06 08:15:29,226 [INFO] Checking Monaco editor availability...
+2026-04-06 08:15:29,255 [INFO]   Monaco ready (attempt 1)
+2026-04-06 08:15:29,256 [INFO] Injecting Pine Script (298 lines)...
+2026-04-06 08:15:29,273 [INFO]   Result: OK:299
+2026-04-06 08:15:29,774 [INFO] Compiling...
+2026-04-06 08:15:29,836 [INFO]   Button clicked: Pine Save
+2026-04-06 08:15:29,836 [INFO] Waiting for compilation (3s)...
+2026-04-06 08:15:32,839 [INFO] Compiled clean - 0 errors
+2026-04-06 08:15:32,840 [INFO] DONE - pushed in 8.9s
+2026-04-06 08:15:37,820 [INFO] ============================================================
+2026-04-06 08:15:37,820 [INFO]   GEX Push - 2026-04-06 08:15:37
+2026-04-06 08:15:37,820 [INFO] ============================================================
+2026-04-06 08:15:37,821 [INFO] Running gex_tv_push.py to fetch data and generate Pine...
+2026-04-06 08:15:44,041 [INFO]   ==================================================
+2026-04-06 08:15:44,041 [INFO]   ==================================================
+2026-04-06 08:15:44,042 [INFO]   Spot price: 22638.85
+2026-04-06 08:15:44,042 [INFO]   ======================================================================
+2026-04-06 08:15:44,079 [INFO]   GEX REPORT - NIFTY | Spot: 22638.85 | Expiry: 2026-04-07
+2026-04-06 08:15:44,079 [INFO]   ======================================================================
+2026-04-06 08:15:44,079 [INFO]   Call Wall (Resistance):       23000
+2026-04-06 08:15:44,079 [INFO]   Put Wall (Support):           22600
+2026-04-06 08:15:44,080 [INFO]   Peak Gamma (Magnet):          22600
+2026-04-06 08:15:44,080 [INFO]   Max Pain (Expiry Pin):        22700
+2026-04-06 08:15:44,080 [INFO]   BIAS: BULL (score: +4/7)
+2026-04-06 08:15:44,080 [INFO]   EXPECTED MOVE (1-day, 1SD):
+2026-04-06 08:15:44,080 [INFO]   Daily:  22219 - 23059  (±420)
+2026-04-06 08:15:44,080 [INFO]   OI CHANGE: BUILDUP
+2026-04-06 08:15:44,080 [INFO]   ======================================================================
+2026-04-06 08:15:44,080 [INFO]   Spot price: 51590
+2026-04-06 08:15:44,081 [INFO]   ======================================================================
+2026-04-06 08:15:44,081 [INFO]   GEX REPORT - BANKNIFTY | Spot: 51590.00 | Expiry: 2026-04-28
+2026-04-06 08:15:44,081 [INFO]   ======================================================================
+2026-04-06 08:15:44,081 [INFO]   Call Wall (Resistance):       55000
+2026-04-06 08:15:44,081 [INFO]   Put Wall (Support):           52000
+2026-04-06 08:15:44,081 [INFO]   Peak Gamma (Magnet):          52000
+2026-04-06 08:15:44,081 [INFO]   Max Pain (Expiry Pin):        53900
+2026-04-06 08:15:44,081 [INFO]   BIAS: BULL (score: +3/7)
+2026-04-06 08:15:44,081 [INFO]   EXPECTED MOVE (1-day, 1SD):
+2026-04-06 08:15:44,081 [INFO]   Daily:  50728 - 52452  (±862)
+2026-04-06 08:15:44,082 [INFO]   OI CHANGE: BUILDUP
+2026-04-06 08:15:44,082 [INFO]   ======================================================================
+2026-04-06 08:15:44,119 [INFO] Pine file loaded: 298 lines, 21791 chars
+2026-04-06 08:15:44,216 [INFO] Connecting to CDP on port 9222...
+2026-04-06 08:15:46,302 [INFO] Found TradingView tab: https://in.tradingview.com/chart/QBtPHOpr/
+2026-04-06 08:15:46,302 [DEBUG] WebSocket URL: ws://localhost:9222/devtools/page/C094AC7EF1C794BAA1A5D0ECD56778F3
+2026-04-06 08:15:48,374 [INFO] CDP WebSocket connected
+2026-04-06 08:15:48,379 [INFO] Opening Pine Editor panel...
+2026-04-06 08:15:48,381 [INFO]   Editor: OK:api
+2026-04-06 08:15:49,382 [INFO] Checking Monaco editor availability...
+2026-04-06 08:15:49,384 [INFO]   Monaco ready (attempt 1)
+2026-04-06 08:15:49,385 [INFO] Injecting Pine Script (298 lines)...
+2026-04-06 08:15:49,420 [INFO]   Result: OK:299
+2026-04-06 08:15:49,922 [INFO] Compiling...
+2026-04-06 08:15:49,975 [INFO]   Button clicked: Pine Save
+2026-04-06 08:15:49,976 [INFO] Waiting for compilation (3s)...
+2026-04-06 08:15:52,978 [INFO] Compiled clean - 0 errors
+2026-04-06 08:15:52,979 [INFO] DONE - pushed in 15.2s
+2026-04-06 08:21:40,811 [INFO] ============================================================
+2026-04-06 08:21:40,811 [INFO]   GEX Push - 2026-04-06 08:21:40
+2026-04-06 08:21:40,813 [INFO] ============================================================
+2026-04-06 08:21:40,813 [INFO] Running gex_tv_push.py to fetch data and generate Pine...
+2026-04-06 08:21:47,126 [INFO]   ==================================================
+2026-04-06 08:21:47,128 [INFO]   ==================================================
+2026-04-06 08:21:47,128 [INFO]   Spot price: 22669.2
+2026-04-06 08:21:47,128 [INFO]   ======================================================================
+2026-04-06 08:21:47,128 [INFO]   GEX REPORT - NIFTY | Spot: 22669.20 | Expiry: 2026-04-07
+2026-04-06 08:21:47,129 [INFO]   ======================================================================
+2026-04-06 08:21:47,129 [INFO]   Call Wall (Resistance):       23000
+2026-04-06 08:21:47,129 [INFO]   Put Wall (Support):           22600
+2026-04-06 08:21:47,129 [INFO]   Peak Gamma (Magnet):          22600
+2026-04-06 08:21:47,129 [INFO]   Max Pain (Expiry Pin):        22700
+2026-04-06 08:21:47,129 [INFO]   BIAS: BULL (score: +4/7)
+2026-04-06 08:21:47,129 [INFO]   EXPECTED MOVE (1-day, 1SD):
+2026-04-06 08:21:47,130 [INFO]   Daily:  22246 - 23092  (±423)
+2026-04-06 08:21:47,130 [INFO]   OI CHANGE: BUILDUP
+2026-04-06 08:21:47,130 [INFO]   ======================================================================
+2026-04-06 08:21:47,130 [INFO]   Spot price: 51668.55
+2026-04-06 08:21:47,131 [INFO]   ======================================================================
+2026-04-06 08:21:47,131 [INFO]   GEX REPORT - BANKNIFTY | Spot: 51668.55 | Expiry: 2026-04-28
+2026-04-06 08:21:47,131 [INFO]   ======================================================================
+2026-04-06 08:21:47,131 [INFO]   Call Wall (Resistance):       55000
+2026-04-06 08:21:47,131 [INFO]   Put Wall (Support):           52000
+2026-04-06 08:21:47,131 [INFO]   Peak Gamma (Magnet):          52000
+2026-04-06 08:21:47,131 [INFO]   Max Pain (Expiry Pin):        53900
+2026-04-06 08:21:47,131 [INFO]   BIAS: BULL (score: +3/7)
+2026-04-06 08:21:47,133 [INFO]   EXPECTED MOVE (1-day, 1SD):
+2026-04-06 08:21:47,133 [INFO]   Daily:  50813 - 52524  (±856)
+2026-04-06 08:21:47,133 [INFO]   OI CHANGE: BUILDUP
+2026-04-06 08:21:47,133 [INFO]   ======================================================================
+2026-04-06 08:21:47,152 [INFO] Pine file loaded: 298 lines, 21791 chars
+2026-04-06 08:21:47,237 [INFO] Connecting to CDP on port 9222...
+2026-04-06 08:21:49,296 [INFO] Found TradingView tab: https://in.tradingview.com/chart/QBtPHOpr/
+2026-04-06 08:21:49,298 [DEBUG] WebSocket URL: ws://localhost:9222/devtools/page/C094AC7EF1C794BAA1A5D0ECD56778F3
+2026-04-06 08:21:51,343 [INFO] CDP WebSocket connected
+2026-04-06 08:21:51,353 [INFO] Opening Pine Editor panel...
+2026-04-06 08:21:51,358 [INFO]   Editor: OK:api
+2026-04-06 08:21:52,359 [INFO] Checking Monaco editor availability...
+2026-04-06 08:21:52,366 [DEBUG]   Attempt 1: not ready, waiting...
+2026-04-06 08:21:52,873 [DEBUG]   Attempt 2: not ready, waiting...
+2026-04-06 08:21:53,380 [DEBUG]   Attempt 3: not ready, waiting...
+2026-04-06 08:21:53,883 [DEBUG]   Attempt 4: not ready, waiting...
+2026-04-06 08:21:54,390 [DEBUG]   Attempt 5: not ready, waiting...
+2026-04-06 08:21:54,895 [DEBUG]   Attempt 6: not ready, waiting...
+2026-04-06 08:21:55,398 [DEBUG]   Attempt 7: not ready, waiting...
+2026-04-06 08:21:55,904 [DEBUG]   Attempt 8: not ready, waiting...
+2026-04-06 08:21:56,411 [DEBUG]   Attempt 9: not ready, waiting...
+2026-04-06 08:21:56,918 [DEBUG]   Attempt 10: not ready, waiting...
+2026-04-06 08:21:57,420 [ERROR] Monaco editor not found after 10 attempts
+2026-04-06 08:21:57,421 [ERROR] FAILED after 16.6s
+2026-04-06 08:22:27,489 [INFO] ============================================================
+2026-04-06 08:22:27,489 [INFO]   GEX Push - 2026-04-06 08:22:27
+2026-04-06 08:22:27,490 [INFO] ============================================================
+2026-04-06 08:22:27,490 [INFO] Running gex_tv_push.py to fetch data and generate Pine...
+2026-04-06 08:22:33,971 [INFO]   ==================================================
+2026-04-06 08:22:33,971 [INFO]   ==================================================
+2026-04-06 08:22:33,971 [INFO]   Spot price: 22674.15
+2026-04-06 08:22:33,972 [INFO]   ======================================================================
+2026-04-06 08:22:33,972 [INFO]   GEX REPORT - NIFTY | Spot: 22674.15 | Expiry: 2026-04-07
+2026-04-06 08:22:33,972 [INFO]   ======================================================================
+2026-04-06 08:22:33,972 [INFO]   Call Wall (Resistance):       23000
+2026-04-06 08:22:33,972 [INFO]   Put Wall (Support):           22600
+2026-04-06 08:22:33,972 [INFO]   Peak Gamma (Magnet):          22600
+2026-04-06 08:22:33,973 [INFO]   Max Pain (Expiry Pin):        22700
+2026-04-06 08:22:33,973 [INFO]   BIAS: BULL (score: +4/7)
+2026-04-06 08:22:33,973 [INFO]   EXPECTED MOVE (1-day, 1SD):
+2026-04-06 08:22:33,973 [INFO]   Daily:  22250 - 23098  (±424)
+2026-04-06 08:22:33,973 [INFO]   OI CHANGE: BUILDUP
+2026-04-06 08:22:33,973 [INFO]   ======================================================================
+2026-04-06 08:22:33,974 [INFO]   Spot price: 51671.9
+2026-04-06 08:22:33,974 [INFO]   ======================================================================
+2026-04-06 08:22:33,974 [INFO]   GEX REPORT - BANKNIFTY | Spot: 51671.90 | Expiry: 2026-04-28
+2026-04-06 08:22:33,974 [INFO]   ======================================================================
+2026-04-06 08:22:33,974 [INFO]   Call Wall (Resistance):       55000
+2026-04-06 08:22:33,974 [INFO]   Put Wall (Support):           52000
+2026-04-06 08:22:33,976 [INFO]   Peak Gamma (Magnet):          52000
+2026-04-06 08:22:33,976 [INFO]   Max Pain (Expiry Pin):        53900
+2026-04-06 08:22:33,976 [INFO]   BIAS: BULL (score: +3/7)
+2026-04-06 08:22:33,976 [INFO]   EXPECTED MOVE (1-day, 1SD):
+2026-04-06 08:22:33,976 [INFO]   Daily:  50812 - 52531  (±860)
+2026-04-06 08:22:33,976 [INFO]   OI CHANGE: BUILDUP
+2026-04-06 08:22:33,976 [INFO]   ======================================================================
+2026-04-06 08:22:33,994 [INFO] Pine file loaded: 298 lines, 21791 chars
+2026-04-06 08:22:34,086 [INFO] Connecting to CDP on port 9222...
+2026-04-06 08:22:36,153 [INFO] Found TradingView tab: https://in.tradingview.com/chart/QBtPHOpr/
+2026-04-06 08:22:36,154 [DEBUG] WebSocket URL: ws://localhost:9222/devtools/page/C094AC7EF1C794BAA1A5D0ECD56778F3
+2026-04-06 08:22:38,222 [INFO] CDP WebSocket connected
+2026-04-06 08:22:38,225 [INFO] Opening Pine Editor panel...
+2026-04-06 08:22:38,227 [INFO]   Editor: OK:api
+2026-04-06 08:22:39,228 [INFO] Checking Monaco editor availability...
+2026-04-06 08:22:39,262 [INFO]   Monaco ready (attempt 1)
+2026-04-06 08:22:39,263 [INFO] Injecting Pine Script (298 lines)...
+2026-04-06 08:22:39,280 [INFO]   Result: OK:299
+2026-04-06 08:22:39,780 [INFO] Compiling...
+2026-04-06 08:22:39,841 [INFO]   Button clicked: Pine Save
+2026-04-06 08:22:39,842 [INFO] Waiting for compilation (3s)...
+2026-04-06 08:22:42,844 [INFO] Compiled clean - 0 errors
+2026-04-06 08:22:42,845 [INFO] DONE - pushed in 15.4s
+2026-04-06 08:24:25,232 [INFO] ============================================================
+2026-04-06 08:24:25,232 [INFO]   GEX Push - 2026-04-06 08:24:25
+2026-04-06 08:24:25,233 [INFO] ============================================================
+2026-04-06 08:24:25,233 [INFO] Running gex_tv_push.py to fetch data and generate Pine...
+2026-04-06 08:24:31,667 [INFO]   ==================================================
+2026-04-06 08:24:31,667 [INFO]   ==================================================
+2026-04-06 08:24:31,667 [INFO]   Spot price: 22666.55
+2026-04-06 08:24:31,668 [INFO]   ======================================================================
+2026-04-06 08:24:31,668 [INFO]   GEX REPORT - NIFTY | Spot: 22666.55 | Expiry: 2026-04-07
+2026-04-06 08:24:31,668 [INFO]   ======================================================================
+2026-04-06 08:24:31,668 [INFO]   Call Wall (Resistance):       23000
+2026-04-06 08:24:31,668 [INFO]   Put Wall (Support):           22600
+2026-04-06 08:24:31,669 [INFO]   Peak Gamma (Magnet):          22600
+2026-04-06 08:24:31,669 [INFO]   Max Pain (Expiry Pin):        22700
+2026-04-06 08:24:31,669 [INFO]   BIAS: BULL (score: +4/7)
+2026-04-06 08:24:31,669 [INFO]   EXPECTED MOVE (1-day, 1SD):
+2026-04-06 08:24:31,669 [INFO]   Daily:  22241 - 23092  (±425)
+2026-04-06 08:24:31,670 [INFO]   OI CHANGE: BUILDUP
+2026-04-06 08:24:31,670 [INFO]   ======================================================================
+2026-04-06 08:24:31,670 [INFO]   Spot price: 51657.55
+2026-04-06 08:24:31,670 [INFO]   ======================================================================
+2026-04-06 08:24:31,670 [INFO]   GEX REPORT - BANKNIFTY | Spot: 51657.55 | Expiry: 2026-04-28
+2026-04-06 08:24:31,670 [INFO]   ======================================================================
+2026-04-06 08:24:31,671 [INFO]   Call Wall (Resistance):       55000
+2026-04-06 08:24:31,671 [INFO]   Put Wall (Support):           52000
+2026-04-06 08:24:31,671 [INFO]   Peak Gamma (Magnet):          52000
+2026-04-06 08:24:31,671 [INFO]   Max Pain (Expiry Pin):        53900
+2026-04-06 08:24:31,671 [INFO]   BIAS: BULL (score: +3/7)
+2026-04-06 08:24:31,671 [INFO]   EXPECTED MOVE (1-day, 1SD):
+2026-04-06 08:24:31,671 [INFO]   Daily:  50804 - 52511  (±854)
+2026-04-06 08:24:31,673 [INFO]   OI CHANGE: BUILDUP
+2026-04-06 08:24:31,673 [INFO]   ======================================================================
+2026-04-06 08:24:31,689 [INFO] Pine file loaded: 298 lines, 21791 chars
+2026-04-06 08:24:31,775 [INFO] Connecting to CDP on port 9222...
+2026-04-06 08:24:33,852 [INFO] Found TradingView tab: https://in.tradingview.com/chart/QBtPHOpr/
+2026-04-06 08:24:33,853 [DEBUG] WebSocket URL: ws://localhost:9222/devtools/page/C094AC7EF1C794BAA1A5D0ECD56778F3
+2026-04-06 08:24:35,926 [INFO] CDP WebSocket connected
+2026-04-06 08:24:35,936 [INFO] Opening Pine Editor panel...
+2026-04-06 08:24:35,942 [INFO]   Editor: OK:api
+2026-04-06 08:24:37,944 [INFO] Checking Monaco editor availability...
+2026-04-06 08:24:37,952 [DEBUG]   Attempt 1: not ready, waiting...
+2026-04-06 08:24:38,459 [DEBUG]   Attempt 2: not ready, waiting...
+2026-04-06 08:24:38,966 [DEBUG]   Attempt 3: not ready, waiting...
+2026-04-06 08:24:39,474 [DEBUG]   Attempt 4: not ready, waiting...
+2026-04-06 08:24:39,980 [DEBUG]   Attempt 5: not ready, waiting...
+2026-04-06 08:24:40,485 [DEBUG]   Attempt 6: not ready, waiting...
+2026-04-06 08:24:40,992 [DEBUG]   Attempt 7: not ready, waiting...
+2026-04-06 08:24:41,500 [DEBUG]   Attempt 8: not ready, waiting...
+2026-04-06 08:24:42,007 [DEBUG]   Attempt 9: not ready, waiting...
+2026-04-06 08:24:42,514 [DEBUG]   Attempt 10: not ready, waiting...
+2026-04-06 08:24:43,020 [DEBUG]   Attempt 11: not ready, waiting...
+2026-04-06 08:24:43,527 [DEBUG]   Attempt 12: not ready, waiting...
+2026-04-06 08:24:44,030 [DEBUG]   Attempt 13: not ready, waiting...
+2026-04-06 08:24:44,534 [DEBUG]   Attempt 14: not ready, waiting...
+2026-04-06 08:24:45,043 [DEBUG]   Attempt 15: not ready, waiting...
+2026-04-06 08:24:45,546 [DEBUG]   Attempt 16: not ready, waiting...
+2026-04-06 08:24:46,052 [DEBUG]   Attempt 17: not ready, waiting...
+2026-04-06 08:24:46,558 [DEBUG]   Attempt 18: not ready, waiting...
+2026-04-06 08:24:47,063 [DEBUG]   Attempt 19: not ready, waiting...
+2026-04-06 08:24:47,568 [DEBUG]   Attempt 20: not ready, waiting...
+2026-04-06 08:24:48,075 [DEBUG]   Attempt 21: not ready, waiting...
+2026-04-06 08:24:48,582 [DEBUG]   Attempt 22: not ready, waiting...
+2026-04-06 08:24:49,088 [DEBUG]   Attempt 23: not ready, waiting...
+2026-04-06 08:24:49,611 [DEBUG]   Attempt 24: not ready, waiting...
+2026-04-06 08:24:50,118 [DEBUG]   Attempt 25: not ready, waiting...
+2026-04-06 08:24:50,623 [DEBUG]   Attempt 26: not ready, waiting...
+2026-04-06 08:24:51,140 [DEBUG]   Attempt 27: not ready, waiting...
+2026-04-06 08:24:51,646 [DEBUG]   Attempt 28: not ready, waiting...
+2026-04-06 08:24:52,153 [DEBUG]   Attempt 29: not ready, waiting...
+2026-04-06 08:24:52,656 [DEBUG]   Attempt 30: not ready, waiting...
+2026-04-06 08:24:53,158 [ERROR] Monaco editor not found after 30 attempts (15s)
+2026-04-06 08:24:53,158 [ERROR] FAILED after 27.9s
+2026-04-06 08:26:14,868 [INFO] ============================================================
+2026-04-06 08:26:14,868 [INFO]   GEX Push - 2026-04-06 08:26:14
+2026-04-06 08:26:14,868 [INFO] ============================================================
+2026-04-06 08:26:14,869 [INFO] Pine file loaded: 298 lines, 21791 chars
+2026-04-06 08:26:14,949 [INFO] Connecting to CDP on port 9222...
+2026-04-06 08:26:17,038 [INFO] Found TradingView tab: https://in.tradingview.com/chart/QBtPHOpr/
+2026-04-06 08:26:17,039 [DEBUG] WebSocket URL: ws://localhost:9222/devtools/page/C094AC7EF1C794BAA1A5D0ECD56778F3
+2026-04-06 08:26:19,126 [INFO] CDP WebSocket connected
+2026-04-06 08:26:19,134 [INFO] Opening Pine Editor panel...
+2026-04-06 08:26:19,138 [INFO]   Editor: OK:api
+2026-04-06 08:26:20,140 [INFO] Checking Monaco editor availability...
+2026-04-06 08:26:20,146 [DEBUG]   Attempt 1: not ready, waiting...
+2026-04-06 08:26:20,650 [DEBUG]   Attempt 2: not ready, waiting...
+2026-04-06 08:26:21,153 [DEBUG]   Attempt 3: not ready, waiting...
+2026-04-06 08:26:21,656 [DEBUG]   Attempt 4: not ready, waiting...
+2026-04-06 08:26:22,162 [DEBUG]   Attempt 5: not ready, waiting...
+2026-04-06 08:26:22,666 [DEBUG]   Attempt 6: not ready, waiting...
+2026-04-06 08:26:23,166 [INFO]   Monaco not ready - loading saved script to initialize editor...
+2026-04-06 08:26:23,949 [INFO]   Load script: OK:loaded_no_monaco
+2026-04-06 08:26:25,954 [DEBUG]   Retry 1: not ready, waiting...
+2026-04-06 08:26:26,461 [DEBUG]   Retry 2: not ready, waiting...
+2026-04-06 08:26:26,966 [DEBUG]   Retry 3: not ready, waiting...
+2026-04-06 08:26:27,469 [DEBUG]   Retry 4: not ready, waiting...
+2026-04-06 08:26:27,977 [DEBUG]   Retry 5: not ready, waiting...
+2026-04-06 08:26:28,480 [DEBUG]   Retry 6: not ready, waiting...
+2026-04-06 08:26:29,033 [DEBUG]   Retry 7: not ready, waiting...
+2026-04-06 08:26:29,537 [DEBUG]   Retry 8: not ready, waiting...
+2026-04-06 08:26:30,043 [DEBUG]   Retry 9: not ready, waiting...
+2026-04-06 08:26:30,546 [DEBUG]   Retry 10: not ready, waiting...
+2026-04-06 08:26:31,050 [DEBUG]   Retry 11: not ready, waiting...
+2026-04-06 08:26:31,553 [DEBUG]   Retry 12: not ready, waiting...
+2026-04-06 08:26:32,058 [DEBUG]   Retry 13: not ready, waiting...
+2026-04-06 08:26:32,560 [DEBUG]   Retry 14: not ready, waiting...
+2026-04-06 08:26:33,065 [DEBUG]   Retry 15: not ready, waiting...
+2026-04-06 08:26:33,569 [DEBUG]   Retry 16: not ready, waiting...
+2026-04-06 08:26:34,073 [DEBUG]   Retry 17: not ready, waiting...
+2026-04-06 08:26:34,576 [DEBUG]   Retry 18: not ready, waiting...
+2026-04-06 08:26:35,080 [DEBUG]   Retry 19: not ready, waiting...
+2026-04-06 08:26:35,589 [DEBUG]   Retry 20: not ready, waiting...
+2026-04-06 08:26:36,090 [INFO]   Trying 'New indicator' fallback...
+2026-04-06 08:26:44,133 [ERROR] Monaco editor not found after all attempts
+2026-04-06 08:26:44,134 [ERROR] FAILED after 29.3s
+2026-04-06 08:27:09,935 [INFO] ============================================================
+2026-04-06 08:27:09,935 [INFO]   GEX Push - 2026-04-06 08:27:09
+2026-04-06 08:27:09,935 [INFO] ============================================================
+2026-04-06 08:27:09,935 [INFO] Pine file loaded: 298 lines, 21791 chars
+2026-04-06 08:27:10,012 [INFO] Connecting to CDP on port 9222...
+2026-04-06 08:27:12,098 [INFO] Found TradingView tab: https://in.tradingview.com/chart/QBtPHOpr/
+2026-04-06 08:27:12,099 [DEBUG] WebSocket URL: ws://localhost:9222/devtools/page/C094AC7EF1C794BAA1A5D0ECD56778F3
+2026-04-06 08:27:14,158 [INFO] CDP WebSocket connected
+2026-04-06 08:27:14,170 [INFO] Opening Pine Editor panel...
+2026-04-06 08:27:14,172 [INFO]   Editor: OK:api
+2026-04-06 08:27:15,180 [INFO]   DOM diagnostic: {"monaco":0,"pine_monaco":0,"pine_container":1,"editor_tabs":0,"bottom_panel":7,"monaco_classes":[]}
+2026-04-06 08:27:15,181 [INFO] Checking Monaco editor availability...
+2026-04-06 08:27:15,185 [DEBUG]   Attempt 1: not ready, waiting...
+2026-04-06 08:27:15,689 [DEBUG]   Attempt 2: not ready, waiting...
+2026-04-06 08:27:16,197 [DEBUG]   Attempt 3: not ready, waiting...
+2026-04-06 08:27:16,701 [DEBUG]   Attempt 4: not ready, waiting...
+2026-04-06 08:27:17,204 [DEBUG]   Attempt 5: not ready, waiting...
+2026-04-06 08:27:17,706 [DEBUG]   Attempt 6: not ready, waiting...
+2026-04-06 08:27:18,207 [INFO]   Monaco not ready - loading saved script to initialize editor...
+2026-04-06 08:27:18,671 [INFO]   Load script: OK:loaded_no_monaco
+2026-04-06 08:27:20,676 [DEBUG]   Retry 1: not ready, waiting...
+2026-04-06 08:27:21,184 [DEBUG]   Retry 2: not ready, waiting...
+2026-04-06 08:27:21,688 [DEBUG]   Retry 3: not ready, waiting...
+2026-04-06 08:27:22,195 [DEBUG]   Retry 4: not ready, waiting...
+2026-04-06 08:27:22,699 [DEBUG]   Retry 5: not ready, waiting...
+2026-04-06 08:27:23,201 [DEBUG]   Retry 6: not ready, waiting...
+2026-04-06 08:27:23,704 [DEBUG]   Retry 7: not ready, waiting...
+2026-04-06 08:27:24,207 [DEBUG]   Retry 8: not ready, waiting...
+2026-04-06 08:27:24,709 [DEBUG]   Retry 9: not ready, waiting...
+2026-04-06 08:27:25,212 [DEBUG]   Retry 10: not ready, waiting...
+2026-04-06 08:27:25,715 [DEBUG]   Retry 11: not ready, waiting...
+2026-04-06 08:27:26,218 [DEBUG]   Retry 12: not ready, waiting...
+2026-04-06 08:27:26,720 [DEBUG]   Retry 13: not ready, waiting...
+2026-04-06 08:27:27,223 [DEBUG]   Retry 14: not ready, waiting...
+2026-04-06 08:27:27,726 [DEBUG]   Retry 15: not ready, waiting...
+2026-04-06 08:27:28,229 [DEBUG]   Retry 16: not ready, waiting...
+2026-04-06 08:27:28,731 [DEBUG]   Retry 17: not ready, waiting...
+2026-04-06 08:27:29,234 [DEBUG]   Retry 18: not ready, waiting...
+2026-04-06 08:27:29,739 [DEBUG]   Retry 19: not ready, waiting...
+2026-04-06 08:27:30,244 [DEBUG]   Retry 20: not ready, waiting...
+2026-04-06 08:27:30,745 [INFO]   Trying 'New indicator' fallback...
+2026-04-06 08:27:38,790 [ERROR] Monaco editor not found after all attempts
+2026-04-06 08:27:38,792 [ERROR] FAILED after 28.9s
+2026-04-06 08:28:32,563 [INFO] ============================================================
+2026-04-06 08:28:32,564 [INFO]   GEX Push - 2026-04-06 08:28:32
+2026-04-06 08:28:32,564 [INFO] ============================================================
+2026-04-06 08:28:32,564 [INFO] Pine file loaded: 298 lines, 21791 chars
+2026-04-06 08:28:32,645 [INFO] Connecting to CDP on port 9222...
+2026-04-06 08:28:34,709 [INFO] Found TradingView tab: https://in.tradingview.com/chart/QBtPHOpr/
+2026-04-06 08:28:34,709 [DEBUG] WebSocket URL: ws://localhost:9222/devtools/page/C094AC7EF1C794BAA1A5D0ECD56778F3
+2026-04-06 08:28:36,799 [INFO] CDP WebSocket connected
+2026-04-06 08:28:36,803 [INFO] Opening Pine Editor panel...
+2026-04-06 08:28:36,805 [INFO]   Editor panel: OK:api
+2026-04-06 08:28:37,807 [INFO]   Looking for Open/New buttons to initialize Monaco...
+2026-04-06 08:28:38,077 [INFO]   Button: clicked:pine-dialog
+2026-04-06 08:28:38,077 [INFO]   Waiting for Monaco editor...
+2026-04-06 08:28:38,242 [INFO]   Monaco ready (attempt 1)
+2026-04-06 08:28:38,243 [INFO] Injecting Pine Script (298 lines)...
+2026-04-06 08:28:38,360 [INFO]   Result: OK:299
+2026-04-06 08:28:38,861 [INFO] Compiling...
+2026-04-06 08:28:38,912 [INFO]   Button clicked: Pine Save
+2026-04-06 08:28:38,912 [INFO] Waiting for compilation (3s)...
+2026-04-06 08:28:41,916 [INFO] Compiled clean - 0 errors
+2026-04-06 08:28:41,917 [INFO] DONE - pushed in 9.4s
+2026-04-06 08:28:48,783 [INFO] ============================================================
+2026-04-06 08:28:48,783 [INFO]   GEX Push - 2026-04-06 08:28:48
+2026-04-06 08:28:48,784 [INFO] ============================================================
+2026-04-06 08:28:48,784 [INFO] Pine file loaded: 298 lines, 21791 chars
+2026-04-06 08:28:48,868 [INFO] Connecting to CDP on port 9222...
+2026-04-06 08:28:50,949 [INFO] Found TradingView tab: https://in.tradingview.com/chart/QBtPHOpr/
+2026-04-06 08:28:50,949 [DEBUG] WebSocket URL: ws://localhost:9222/devtools/page/C094AC7EF1C794BAA1A5D0ECD56778F3
+2026-04-06 08:28:53,016 [INFO] CDP WebSocket connected
+2026-04-06 08:28:53,019 [INFO] Opening Pine Editor panel...
+2026-04-06 08:28:53,036 [INFO]   Monaco already ready
+2026-04-06 08:28:53,036 [INFO] Injecting Pine Script (298 lines)...
+2026-04-06 08:28:53,069 [INFO]   Result: OK:299
+2026-04-06 08:28:53,571 [INFO] Compiling...
+2026-04-06 08:28:53,574 [INFO]   Button clicked: Pine Save
+2026-04-06 08:28:53,574 [INFO] Waiting for compilation (3s)...
+2026-04-06 08:28:56,576 [INFO] Compiled clean - 0 errors
+2026-04-06 08:28:56,576 [INFO] DONE - pushed in 7.8s
+2026-04-06 08:29:32,408 [INFO] ============================================================
+2026-04-06 08:29:32,408 [INFO]   GEX Push - 2026-04-06 08:29:32
+2026-04-06 08:29:32,408 [INFO] ============================================================
+2026-04-06 08:29:32,409 [INFO] Running gex_tv_push.py to fetch data and generate Pine...
+2026-04-06 08:29:38,706 [INFO]   ==================================================
+2026-04-06 08:29:38,708 [INFO]   ==================================================
+2026-04-06 08:29:38,708 [INFO]   Spot price: 22672.4
+2026-04-06 08:29:38,708 [INFO]   ======================================================================
+2026-04-06 08:29:38,708 [INFO]   GEX REPORT - NIFTY | Spot: 22672.40 | Expiry: 2026-04-07
+2026-04-06 08:29:38,708 [INFO]   ======================================================================
+2026-04-06 08:29:38,709 [INFO]   Call Wall (Resistance):       23000
+2026-04-06 08:29:38,709 [INFO]   Put Wall (Support):           22600
+2026-04-06 08:29:38,709 [INFO]   Peak Gamma (Magnet):          22700
+2026-04-06 08:29:38,709 [INFO]   Max Pain (Expiry Pin):        22700
+2026-04-06 08:29:38,709 [INFO]   BIAS: STRONG BULL (score: +6/7)
+2026-04-06 08:29:38,709 [INFO]   EXPECTED MOVE (1-day, 1SD):
+2026-04-06 08:29:38,710 [INFO]   Daily:  22247 - 23098  (±426)
+2026-04-06 08:29:38,710 [INFO]   OI CHANGE: BUILDUP
+2026-04-06 08:29:38,710 [INFO]   ======================================================================
+2026-04-06 08:29:38,711 [INFO]   Spot price: 51657.85
+2026-04-06 08:29:38,711 [INFO]   ======================================================================
+2026-04-06 08:29:38,711 [INFO]   GEX REPORT - BANKNIFTY | Spot: 51657.85 | Expiry: 2026-04-28
+2026-04-06 08:29:38,711 [INFO]   ======================================================================
+2026-04-06 08:29:38,711 [INFO]   Call Wall (Resistance):       55000
+2026-04-06 08:29:38,711 [INFO]   Put Wall (Support):           52000
+2026-04-06 08:29:38,711 [INFO]   Peak Gamma (Magnet):          52000
+2026-04-06 08:29:38,711 [INFO]   Max Pain (Expiry Pin):        53900
+2026-04-06 08:29:38,712 [INFO]   BIAS: BULL (score: +3/7)
+2026-04-06 08:29:38,712 [INFO]   EXPECTED MOVE (1-day, 1SD):
+2026-04-06 08:29:38,712 [INFO]   Daily:  50798 - 52517  (±860)
+2026-04-06 08:29:38,712 [INFO]   OI CHANGE: BUILDUP
+2026-04-06 08:29:38,712 [INFO]   ======================================================================
+2026-04-06 08:29:38,728 [INFO] Pine file loaded: 298 lines, 21796 chars
+2026-04-06 08:29:38,818 [INFO] Connecting to CDP on port 9222...
+2026-04-06 08:29:40,912 [INFO] Found TradingView tab: https://in.tradingview.com/chart/QBtPHOpr/
+2026-04-06 08:29:40,914 [DEBUG] WebSocket URL: ws://localhost:9222/devtools/page/C094AC7EF1C794BAA1A5D0ECD56778F3
+2026-04-06 08:29:42,979 [INFO] CDP WebSocket connected
+2026-04-06 08:29:42,989 [INFO] Opening Pine Editor panel...
+2026-04-06 08:29:42,998 [INFO]   Editor panel: OK:api
+2026-04-06 08:29:44,000 [INFO]   Looking for Open/New buttons to initialize Monaco...
+2026-04-06 08:29:44,267 [INFO]   Button: clicked:pine-dialog
+2026-04-06 08:29:44,267 [INFO]   Waiting for Monaco editor...
+2026-04-06 08:29:44,377 [INFO]   Monaco ready (attempt 1)
+2026-04-06 08:29:44,378 [INFO] Injecting Pine Script (298 lines)...
+2026-04-06 08:29:44,477 [INFO]   Result: OK:299
+2026-04-06 08:29:44,984 [INFO] Compiling...
+2026-04-06 08:29:45,038 [INFO]   Button clicked: Pine Save
+2026-04-06 08:29:45,038 [INFO] Waiting for compilation (3s)...
+2026-04-06 08:29:48,042 [INFO] Compiled clean - 0 errors
+2026-04-06 08:29:48,042 [INFO] DONE - pushed in 15.6s
+2026-04-06 08:39:23,234 [INFO] ============================================================
+2026-04-06 08:39:23,234 [INFO]   GEX Push - 2026-04-06 08:39:23
+2026-04-06 08:39:23,234 [INFO] ============================================================
+2026-04-06 08:39:23,234 [INFO] Running gex_tv_push.py to fetch data and generate Pine...
+2026-04-06 08:39:25,505 [ERROR] gex_tv_push.py failed:
+Traceback (most recent call last):
+  File "C:\tv\gex_tv_push.py", line 489, in <module>
+    main()
+  File "C:\tv\gex_tv_push.py", line 453, in main
+    nifty_data = run_gex("NIFTY")
+                 ^^^^^^^^^^^^^^^^
+  File "C:\tv\gex_calculator.py", line 736, in run_gex
+    levels = find_key_levels(gex_results, spot)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\tv\gex_calculator.py", line 340, in find_key_levels
+    pc_ratio = abs(total_put_gex / total_call_gex) if total_call_gex != 0 else 1
+                                                      ^^^^^^^^^^^^^^
+NameError: name 'total_call_gex' is not defined
+
+2026-04-06 08:40:05,053 [INFO] ============================================================
+2026-04-06 08:40:05,054 [INFO]   GEX Push - 2026-04-06 08:40:05
+2026-04-06 08:40:05,054 [INFO] ============================================================
+2026-04-06 08:40:05,054 [INFO] Running gex_tv_push.py to fetch data and generate Pine...
+2026-04-06 08:40:11,261 [INFO]   ==================================================
+2026-04-06 08:40:11,261 [INFO]   ==================================================
+2026-04-06 08:40:11,261 [INFO]   Spot price: 22669.15
+2026-04-06 08:40:11,261 [INFO]   ======================================================================
+2026-04-06 08:40:11,272 [INFO]   GEX REPORT - NIFTY | Spot: 22669.15 | Expiry: 2026-04-07
+2026-04-06 08:40:11,272 [INFO]   ======================================================================
+2026-04-06 08:40:11,272 [INFO]   Call Wall (Resistance):       23000
+2026-04-06 08:40:11,272 [INFO]   Put Wall (Support):           22600
+2026-04-06 08:40:11,272 [INFO]   Peak Gamma (Magnet):          22700
+2026-04-06 08:40:11,272 [INFO]   Max Pain (Expiry Pin):        22700
+2026-04-06 08:40:11,272 [INFO]   BIAS: STRONG BULL (score: +6/7)
+2026-04-06 08:40:11,272 [INFO]   EXPECTED MOVE (1-day, 1SD):
+2026-04-06 08:40:11,272 [INFO]   Daily:  22239 - 23099  (±430)
+2026-04-06 08:40:11,273 [INFO]   OI CHANGE: BUILDUP
+2026-04-06 08:40:11,273 [INFO]   ======================================================================
+2026-04-06 08:40:11,273 [INFO]   Spot price: 51670.3
+2026-04-06 08:40:11,273 [INFO]   ======================================================================
+2026-04-06 08:40:11,273 [INFO]   GEX REPORT - BANKNIFTY | Spot: 51670.30 | Expiry: 2026-04-28
+2026-04-06 08:40:11,273 [INFO]   ======================================================================
+2026-04-06 08:40:11,273 [INFO]   Call Wall (Resistance):       55000
+2026-04-06 08:40:11,273 [INFO]   Put Wall (Support):           52000
+2026-04-06 08:40:11,273 [INFO]   Peak Gamma (Magnet):          52000
+2026-04-06 08:40:11,274 [INFO]   Max Pain (Expiry Pin):        54000
+2026-04-06 08:40:11,274 [INFO]   BIAS: BULL (score: +3/7)
+2026-04-06 08:40:11,274 [INFO]   EXPECTED MOVE (1-day, 1SD):
+2026-04-06 08:40:11,274 [INFO]   Daily:  50806 - 52534  (±864)
+2026-04-06 08:40:11,274 [INFO]   OI CHANGE: BUILDUP
+2026-04-06 08:40:11,274 [INFO]   ======================================================================
+2026-04-06 08:40:11,296 [INFO] Pine file loaded: 310 lines, 22588 chars
+2026-04-06 08:40:11,383 [INFO] Connecting to CDP on port 9222...
+2026-04-06 08:40:13,454 [INFO] Found TradingView tab: https://in.tradingview.com/chart/QBtPHOpr/
+2026-04-06 08:40:13,454 [DEBUG] WebSocket URL: ws://localhost:9222/devtools/page/C094AC7EF1C794BAA1A5D0ECD56778F3
+2026-04-06 08:40:15,546 [INFO] CDP WebSocket connected
+2026-04-06 08:40:15,554 [INFO] Opening Pine Editor panel...
+2026-04-06 08:40:15,565 [INFO]   Editor panel: OK:api
+2026-04-06 08:40:16,566 [INFO]   Looking for Open/New buttons to initialize Monaco...
+2026-04-06 08:40:16,824 [INFO]   Button: clicked:pine-dialog
+2026-04-06 08:40:16,824 [INFO]   Waiting for Monaco editor...
+2026-04-06 08:40:16,985 [INFO]   Monaco ready (attempt 1)
+2026-04-06 08:40:16,985 [INFO] Injecting Pine Script (310 lines)...
+2026-04-06 08:40:17,100 [INFO]   Result: OK:311
+2026-04-06 08:40:17,602 [INFO] Compiling...
+2026-04-06 08:40:17,656 [INFO]   Button clicked: Pine Save
+2026-04-06 08:40:17,656 [INFO] Waiting for compilation (3s)...
+2026-04-06 08:40:20,660 [INFO] Compiled clean - 0 errors
+2026-04-06 08:40:20,660 [INFO] DONE - pushed in 15.6s
+2026-04-06 08:51:16,646 [INFO] ============================================================
+2026-04-06 08:51:16,646 [INFO]   GEX Push - 2026-04-06 08:51:16
+2026-04-06 08:51:16,647 [INFO] ============================================================
+2026-04-06 08:51:16,647 [INFO] Running gex_tv_push.py to fetch data and generate Pine...
+2026-04-06 08:51:22,935 [INFO]   ==================================================
+2026-04-06 08:51:22,935 [INFO]   ==================================================
+2026-04-06 08:51:22,935 [INFO]   Spot price: 22713
+2026-04-06 08:51:22,935 [INFO]   ======================================================================
+2026-04-06 08:51:22,936 [INFO]   GEX REPORT - NIFTY | Spot: 22713.00 | Expiry: 2026-04-07
+2026-04-06 08:51:22,936 [INFO]   ======================================================================
+2026-04-06 08:51:22,936 [INFO]   Call Wall (Resistance):       23000
+2026-04-06 08:51:22,936 [INFO]   Put Wall (Support):           22600
+2026-04-06 08:51:22,936 [INFO]   Peak Gamma (Magnet):          22700
+2026-04-06 08:51:22,936 [INFO]   Max Pain (Expiry Pin):        22700
+2026-04-06 08:51:22,936 [INFO]   BIAS: BULL (score: +2/7)
+2026-04-06 08:51:22,936 [INFO]   EXPECTED MOVE (1-day, 1SD):
+2026-04-06 08:51:22,936 [INFO]   Daily:  22287 - 23139  (±426)
+2026-04-06 08:51:22,936 [INFO]   OI CHANGE: BUILDUP
+2026-04-06 08:51:22,936 [INFO]   ======================================================================
+2026-04-06 08:51:22,936 [INFO]   Spot price: 51789
+2026-04-06 08:51:22,936 [INFO]   ======================================================================
+2026-04-06 08:51:22,936 [INFO]   GEX REPORT - BANKNIFTY | Spot: 51789.00 | Expiry: 2026-04-28
+2026-04-06 08:51:22,936 [INFO]   ======================================================================
+2026-04-06 08:51:22,936 [INFO]   Call Wall (Resistance):       55000
+2026-04-06 08:51:22,936 [INFO]   Put Wall (Support):           52000
+2026-04-06 08:51:22,938 [INFO]   Peak Gamma (Magnet):          52000
+2026-04-06 08:51:22,938 [INFO]   Max Pain (Expiry Pin):        54000
+2026-04-06 08:51:22,938 [INFO]   BIAS: BULL (score: +3/7)
+2026-04-06 08:51:22,938 [INFO]   EXPECTED MOVE (1-day, 1SD):
+2026-04-06 08:51:22,938 [INFO]   Daily:  50927 - 52651  (±862)
+2026-04-06 08:51:22,938 [INFO]   OI CHANGE: BUILDUP
+2026-04-06 08:51:22,938 [INFO]   ======================================================================
+2026-04-06 08:51:22,959 [INFO] Pine file loaded: 312 lines, 22845 chars
+2026-04-06 08:51:23,046 [INFO] Connecting to CDP on port 9222...
+2026-04-06 08:51:25,116 [INFO] Found TradingView tab: https://in.tradingview.com/chart/QBtPHOpr/
+2026-04-06 08:51:25,116 [DEBUG] WebSocket URL: ws://localhost:9222/devtools/page/C094AC7EF1C794BAA1A5D0ECD56778F3
+2026-04-06 08:51:27,171 [INFO] CDP WebSocket connected
+2026-04-06 08:51:27,174 [INFO] Opening Pine Editor panel...
+2026-04-06 08:51:27,178 [INFO]   Editor panel: OK:api
+2026-04-06 08:51:28,179 [INFO]   Looking for Open/New buttons to initialize Monaco...
+2026-04-06 08:51:28,430 [INFO]   Button: clicked:pine-dialog
+2026-04-06 08:51:28,430 [INFO]   Waiting for Monaco editor...
+2026-04-06 08:51:28,576 [INFO]   Monaco ready (attempt 1)
+2026-04-06 08:51:28,577 [INFO] Injecting Pine Script (312 lines)...
+2026-04-06 08:51:28,680 [INFO]   Result: OK:313
+2026-04-06 08:51:29,182 [INFO] Compiling...
+2026-04-06 08:51:29,237 [INFO]   Button clicked: Pine Save
+2026-04-06 08:51:29,238 [INFO] Waiting for compilation (3s)...
+2026-04-06 08:51:32,242 [INFO] Compiled clean - 0 errors
+2026-04-06 08:51:32,243 [INFO] DONE - pushed in 15.6s

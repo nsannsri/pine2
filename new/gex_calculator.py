@@ -319,6 +319,58 @@ def find_key_levels(gex_results, spot_price):
     else:
         bias = "STRONG BEAR"
 
+    # ========== Regime Detection (Trending vs Range-bound) ==========
+    # 5 signals: majority wins
+    regime_score = 0  # positive = range, negative = trending
+
+    # 1. Gamma condition: POSITIVE = range, NEGATIVE = trending
+    if gamma_condition == "POSITIVE":
+        regime_score += 1
+    else:
+        regime_score -= 1
+
+    # 2. Spot between walls = range, outside = trending
+    if put_wall and call_wall:
+        if put_wall["strike"] <= spot_price <= call_wall["strike"]:
+            regime_score += 1
+        else:
+            regime_score -= 1
+
+    # 3. P/C GEX ratio: 0.7-1.3 = balanced (range), extreme = trending
+    total_call = sum(r["ce_gex"] for r in gex_results)
+    total_put = abs(sum(r["pe_gex"] for r in gex_results))
+    pc_ratio = total_put / total_call if total_call > 0 else 1
+    if 0.7 <= pc_ratio <= 1.3:
+        regime_score += 1
+    else:
+        regime_score -= 1
+
+    # 4. Gamma tilt: 30-70% = balanced (range), extreme = trending
+    if 30 <= gamma_tilt <= 70:
+        regime_score += 1
+    else:
+        regime_score -= 1
+
+    # 5. Net GEX: large positive = strong dealer dampening (range)
+    net_gex_total = sum(r["net_gex"] for r in gex_results)
+    # Normalize: if net GEX is positive and > 5% of total call GEX, strong dampening
+    if total_call > 0 and net_gex_total > 0:
+        gex_strength = net_gex_total / total_call
+        if gex_strength > 0.05:  # >5% = meaningful positive net
+            regime_score += 1
+        else:
+            regime_score -= 1
+    else:
+        regime_score -= 1
+
+    # Map regime score: 3-5 = RANGE, -3 to -5 = TREND, else = MIXED
+    if regime_score >= 3:
+        regime = "RANGE"
+    elif regime_score <= -3:
+        regime = "TREND"
+    else:
+        regime = "MIXED"
+
     return {
         "hvl": round(hvl, 2) if hvl else None,
         "call_wall": call_wall["strike"],
@@ -338,6 +390,8 @@ def find_key_levels(gex_results, spot_price):
         "avg_ce_iv": round(avg_ce_iv, 2),
         "avg_pe_iv": round(avg_pe_iv, 2),
         "skew_signal": skew_signal,
+        "regime": regime,
+        "regime_score": regime_score,
     }
 
 
@@ -525,6 +579,15 @@ def print_gex_report(symbol, spot, gex_results, call_gex, put_gex, levels, expir
     bias = levels.get("bias", "N/A")
     bias_score = levels.get("bias_score", 0)
     print(f"\n  BIAS: {bias} (score: {bias_score:+d}/7)")
+    regime = levels.get("regime", "MIXED")
+    regime_score = levels.get("regime_score", 0)
+    print(f"  Regime: {regime} (score: {regime_score:+d}/5)")
+    if regime == "RANGE":
+        print("  >> Expect: Range-bound, mean reversion, sell extremes")
+    elif regime == "TREND":
+        print("  >> Expect: Directional moves, breakouts, follow momentum")
+    else:
+        print("  >> Expect: Mixed conditions, wait for clarity")
 
     # IV Skew
     iv_skew = levels.get("iv_skew", 0)

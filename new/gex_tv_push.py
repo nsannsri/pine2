@@ -71,6 +71,9 @@ def generate_combined_pine(nifty_data=None, bnf_data=None):
             "total_pe_oi_chg": levels.get("total_pe_oi_chg", 0),
             "net_oi_chg_direction": levels.get("net_oi_chg_direction", "N/A"),
             "has_prev_data": levels.get("has_prev_data", False),
+            # Regime
+            "regime": levels.get("regime", "MIXED"),
+            "regime_score": levels.get("regime_score", 0),
         }
 
     def get_top_nearby(data):
@@ -155,6 +158,8 @@ var string N_OI_DIR = "{n["net_oi_chg_direction"]}"
 var int N_OI_CE_CHG = {n["total_ce_oi_chg"]}
 var int N_OI_PE_CHG = {n["total_pe_oi_chg"]}
 var bool N_HAS_OI = {"true" if n["has_prev_data"] else "false"}
+var string N_REGIME = "{n["regime"]}"
+var int N_REGIME_SCORE = {n["regime_score"]}
 '''
 
     if b:
@@ -184,6 +189,8 @@ var string B_OI_DIR = "{b["net_oi_chg_direction"]}"
 var int B_OI_CE_CHG = {b["total_ce_oi_chg"]}
 var int B_OI_PE_CHG = {b["total_pe_oi_chg"]}
 var bool B_HAS_OI = {"true" if b["has_prev_data"] else "false"}
+var string B_REGIME = "{b["regime"]}"
+var int B_REGIME_SCORE = {b["regime_score"]}
 '''
 
     # Session detection + line drawing using hline-like approach with session bars
@@ -294,9 +301,9 @@ if showBNF
     # Table
     n_rows = 2
     if n:
-        n_rows += 15
+        n_rows += 16  # 15 + regime row
     if b:
-        n_rows += 15
+        n_rows += 16  # 15 + regime row
 
     pine += f'''
 // ===== LEVELS TEXT BOX =====
@@ -357,6 +364,11 @@ if barstate.islast and showTable
         table.cell(lvlBox, 0, row, "OI Chg", text_color=color.gray, text_size=size.small)
         table.cell(lvlBox, 1, row, N_HAS_OI ? N_OI_DIR : "No prev data", text_color=N_OI_DIR == "BUILDUP" ? color.green : color.red, text_size=size.small)
         row += 1
+        nRClr = N_REGIME == "RANGE" ? color.blue : N_REGIME == "TREND" ? color.orange : color.gray
+        nRText = N_REGIME == "RANGE" ? N_REGIME + " " + str.tostring(N_PW, "#") + "-" + str.tostring(N_CW, "#") : N_REGIME == "TREND" ? N_REGIME + " (follow momentum)" : N_REGIME
+        table.cell(lvlBox, 0, row, "Regime", text_color=color.gray, text_size=size.small)
+        table.cell(lvlBox, 1, row, nRText, text_color=nRClr, text_size=size.normal)
+        row += 1
 '''
 
     if b:
@@ -406,6 +418,11 @@ if barstate.islast and showTable
         row += 1
         table.cell(lvlBox, 0, row, "OI Chg", text_color=color.gray, text_size=size.small)
         table.cell(lvlBox, 1, row, B_HAS_OI ? B_OI_DIR : "No prev data", text_color=B_OI_DIR == "BUILDUP" ? color.green : color.red, text_size=size.small)
+        row += 1
+        bRClr = B_REGIME == "RANGE" ? color.blue : B_REGIME == "TREND" ? color.orange : color.gray
+        bRText = B_REGIME == "RANGE" ? B_REGIME + " " + str.tostring(B_PW, "#") + "-" + str.tostring(B_CW, "#") : B_REGIME == "TREND" ? B_REGIME + " (follow momentum)" : B_REGIME
+        table.cell(lvlBox, 0, row, "Regime", text_color=color.gray, text_size=size.small)
+        table.cell(lvlBox, 1, row, bRText, text_color=bRClr, text_size=size.normal)
         row += 1
 '''
 
