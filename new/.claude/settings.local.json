@@ -71,7 +71,11 @@
       "Bash(ls C:/tv/*.json)",
       "Bash(ls C:/tv/*.pine)",
       "mcp__tradingview__tv_launch",
-      "Bash(node:*)"
+      "Bash(node:*)",
+      "Bash(grep -n \"teju\\\\|C:/tv\\\\|C:\\\\\\\\\\\\\\\\tv\\\\|C:\\\\\\\\\\\\\\\\Users\" C:/tv/gex_push.py)",
+      "Bash(grep -n \"teju\\\\|C:/tv\\\\|C:\\\\\\\\\\\\\\\\tv\\\\|C:\\\\\\\\\\\\\\\\Users\" C:/tv/gex_tv_push.py)",
+      "Bash(grep -n \"teju\\\\|C:/tv\\\\|C:\\\\\\\\\\\\\\\\tv\\\\|C:\\\\\\\\\\\\\\\\Users\" C:/tv/gex_calculator.py)",
+      "Bash(grep:*)"
     ]
   }
 }

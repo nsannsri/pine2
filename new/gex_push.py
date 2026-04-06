@@ -23,13 +23,16 @@ import tempfile
 import requests
 from datetime import datetime
 
+# Base directory = folder where this script lives (works on any machine)
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
 # Published script name on TradingView to republish after push
 PUBLISH_SCRIPT_NAME = "GEX Levels"
 
 
 def republish_to_tv(pine_source):
     """Republish pine_source to the TradingView public script."""
-    cookie_path = r'C:\Users\teju\AppData\Roaming\TradingView\Network\Cookies'
+    cookie_path = os.path.join(os.environ.get('APPDATA', os.path.expanduser('~')), 'TradingView', 'Network', 'Cookies')
     tmp = tempfile.mktemp(suffix='.db')
     shutil.copy2(cookie_path, tmp)
     try:
@@ -69,7 +72,7 @@ def republish_to_tv(pine_source):
 # ---------------------------------------------------------------------------
 # Logging setup
 # ---------------------------------------------------------------------------
-LOG_DIR = "C:/tv/logs"
+LOG_DIR = os.path.join(BASE_DIR, "logs")
 os.makedirs(LOG_DIR, exist_ok=True)
 
 log_file = os.path.join(LOG_DIR, f"gex_push_{datetime.now().strftime('%Y%m%d')}.log")
@@ -88,7 +91,7 @@ log = logging.getLogger("gex_push")
 # CDP (Chrome DevTools Protocol) helpers
 # ---------------------------------------------------------------------------
 CDP_PORT = 9222
-PINE_FILE = "C:/tv/gex_combined_indicator.pine"
+PINE_FILE = os.path.join(BASE_DIR, "gex_combined_indicator.pine")
 
 # JS: Find Monaco editor instance via React fiber tree
 FIND_MONACO_JS = r"""
@@ -543,8 +546,8 @@ def main():
             log.info("Running gex_tv_push.py to fetch data and generate Pine...")
             import subprocess
             proc = subprocess.run(
-                [sys.executable, "C:/tv/gex_tv_push.py"],
-                capture_output=True, text=True, cwd="C:/tv"
+                [sys.executable, os.path.join(BASE_DIR, "gex_tv_push.py")],
+                capture_output=True, text=True, cwd=BASE_DIR
             )
             if proc.returncode != 0:
                 log.error(f"gex_tv_push.py failed:\n{proc.stderr}")

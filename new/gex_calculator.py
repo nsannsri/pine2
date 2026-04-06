@@ -10,6 +10,8 @@ import math
 from datetime import datetime, date, timedelta
 from dotenv import load_dotenv
 
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
 load_dotenv()
 
 CLIENT_ID = os.getenv("DHAN_CLIENT_ID")
@@ -449,7 +451,7 @@ def find_key_levels(gex_results, spot_price):
     }
 
 
-OI_HISTORY_DIR = "C:/tv/oi_history"
+OI_HISTORY_DIR = os.path.join(BASE_DIR, "oi_history")
 
 
 def calculate_expected_move(gex_results, spot_price, expiry_str):
@@ -854,7 +856,7 @@ def run_gex(symbol="NIFTY", expiry=None):
 
 def save_session_history(data):
     """Append current GEX levels to daily session history file."""
-    HIST_DIR = "C:/tv/gex_history"
+    HIST_DIR = os.path.join(BASE_DIR, "gex_history")
     os.makedirs(HIST_DIR, exist_ok=True)
 
     symbol = data["symbol"]

@@ -21,6 +21,8 @@ import requests
 from datetime import datetime, date
 from gex_calculator import run_gex, UNDERLYINGS
 
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
 
 # Maps push symbol → published script name on TradingView
 PUBLISH_MAP = {
@@ -33,7 +35,7 @@ _tv_session = {}   # cache: {headers, scripts}
 
 def _get_tv_headers():
     """Read sessionid from TradingView's local cookie store."""
-    cookie_path = r'C:\Users\teju\AppData\Roaming\TradingView\Network\Cookies'
+    cookie_path = os.path.join(os.environ.get('APPDATA', os.path.expanduser('~')), 'TradingView', 'Network', 'Cookies')
     tmp = tempfile.mktemp(suffix='.db')
     shutil.copy2(cookie_path, tmp)
     try:
@@ -158,7 +160,7 @@ def generate_combined_pine(nifty_data=None, bnf_data=None):
 
     def load_session_history(symbol):
         """Load today's session history for a symbol."""
-        hist_dir = "C:/tv/gex_history"
+        hist_dir = os.path.join(BASE_DIR, "gex_history")
         today = date.today().strftime("%Y%m%d")
         hist_file = os.path.join(hist_dir, f"{symbol}_{today}.json")
         if not os.path.exists(hist_file):
@@ -940,7 +942,7 @@ if barstate.islast and showTable
 
 def push_to_tradingview(pine_code, symbol="combined"):
     """Save Pine Script to file and republish to TradingView."""
-    filename = f"C:/tv/gex_{symbol.lower()}_indicator.pine"
+    filename = os.path.join(BASE_DIR, f"gex_{symbol.lower()}_indicator.pine")
     with open(filename, "w") as f:
         f.write(pine_code)
     print(f"Pine Script saved to {filename}")
