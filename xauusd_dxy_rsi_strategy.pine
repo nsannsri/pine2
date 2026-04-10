@@ -1,0 +1,42 @@
+//@version=5
+strategy("XAUUSD RSI + DXY RSI Strategy", overlay=true, default_qty_type=strategy.percent_of_equity, default_qty_value=10)
+
+// ── Inputs ──────────────────────────────────────────────────────────────────
+rsiLen     = input.int(14, "RSI Length")
+rsiSrc     = input.source(close, "RSI Source")
+buyRsiMin  = input.int(65, "XAUUSD RSI Buy Level  (>)")
+sellRsiMax = input.int(40, "XAUUSD RSI Sell Level (<)")
+dxyBuyMax  = input.int(40, "DXY RSI Buy Level     (<)")
+dxySellMin = input.int(40, "DXY RSI Sell Level    (>)")
+
+// ── Data ─────────────────────────────────────────────────────────────────────
+// XAUUSD RSI (chart must be on XAUUSD)
+xauRsi = ta.rsi(rsiSrc, rsiLen)
+
+// DXY RSI via security call
+dxyClose = request.security("TVC:DXY", timeframe.period, close)
+dxyRsi   = ta.rsi(dxyClose, rsiLen)
+
+// ── Conditions ───────────────────────────────────────────────────────────────
+buyCondition  = xauRsi > buyRsiMin  and dxyRsi < dxyBuyMax
+sellCondition = xauRsi < sellRsiMax and dxyRsi > dxySellMin
+
+// ── Strategy Entries ─────────────────────────────────────────────────────────
+if buyCondition
+    strategy.entry("Buy", strategy.long)
+
+if sellCondition
+    strategy.entry("Sell", strategy.short)
+
+// ── Plots ────────────────────────────────────────────────────────────────────
+plotshape(buyCondition,  title="Buy Signal",  style=shape.triangleup,   location=location.belowbar, color=color.green, size=size.small, text="BUY")
+plotshape(sellCondition, title="Sell Signal", style=shape.triangledown, location=location.abovebar, color=color.red,   size=size.small, text="SELL")
+
+// ── Info Table ───────────────────────────────────────────────────────────────
+var table t = table.new(position.top_right, 2, 3, border_width=1)
+table.cell(t, 0, 0, "XAUUSD RSI", bgcolor=color.gray,  text_color=color.white)
+table.cell(t, 1, 0, str.tostring(math.round(xauRsi, 2)), bgcolor=xauRsi > buyRsiMin ? color.green : xauRsi < sellRsiMax ? color.red : color.gray, text_color=color.white)
+table.cell(t, 0, 1, "DXY RSI",    bgcolor=color.gray,  text_color=color.white)
+table.cell(t, 1, 1, str.tostring(math.round(dxyRsi, 2)), bgcolor=dxyRsi < dxyBuyMax ? color.green : dxyRsi > dxySellMin ? color.red : color.gray, text_color=color.white)
+table.cell(t, 0, 2, "Signal",     bgcolor=color.gray,  text_color=color.white)
+table.cell(t, 1, 2, buyCondition ? "BUY" : sellCondition ? "SELL" : "FLAT", bgcolor=buyCondition ? color.green : sellCondition ? color.red : color.gray, text_color=color.white)

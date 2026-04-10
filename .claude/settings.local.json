@@ -26,7 +26,10 @@
       "Bash(node ~/tradingview-mcp-jackson/src/server.js --version)",
       "Bash(node -e \"require\\('/c/Users/teju/tradingview-mcp-jackson/src/server.js'\\)\")",
       "Bash(where TradingView)",
-      "Read(//c/Users/teju/AppData/Local/**)"
+      "Read(//c/Users/teju/AppData/Local/**)",
+      "mcp__tradingview__pine_new",
+      "mcp__tradingview__tv_launch",
+      "mcp__tradingview__tv_health_check"
     ]
   }
 }
