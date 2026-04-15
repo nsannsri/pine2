@@ -1,0 +1,177 @@
+//@version=6
+indicator('BB Volume Flow [Footprint]', overlay=true, max_labels_count=500, scale=scale.right)
+
+// ─── INPUTS ───────────────────────────────────────────────────────────────────
+src    = input.source(close, 'Source')
+length = input.int(55, 'BB Length', minval=1)
+mult   = input.float(1.0, 'Std Dev Multiplier', minval=0.1, step=0.1)
+
+color col_up = input(#17dfad, '+',        group='Color', inline='c')
+color col_dn = input(#dd326b, '−',        group='Color', inline='c')
+bool  shadow = input.bool(true, 'Shadow', group='Color', inline='c')
+
+// ─── ACTUAL FOOTPRINT VOLUMES ─────────────────────────────────────────────────
+// Real aggressive buy (ask lifted) and sell (bid hit) volumes per bar
+tpr = input.int(100, 'Ticks Per Row', minval=1, group='Footprint')
+vap = input.float(70.0, 'Value Area %', minval=1, maxval=100, group='Footprint')
+
+footprint fp = request.footprint(tpr, vap)
+
+bar_buy  = not na(fp) ? fp.buy_volume()  : 0.0
+bar_sell = not na(fp) ? fp.sell_volume() : 0.0
+
+// ─── BOLLINGER BANDS ──────────────────────────────────────────────────────────
+basis = ta.sma(src, length)
+dev   = mult * ta.stdev(src, length)
+upper = basis + dev
+lower = basis - dev
+
+// ─── BREAKOUT STATE ───────────────────────────────────────────────────────────
+long_cond  = src > upper
+short_cond = src < lower
+
+L1 = nz(ta.barssince(long_cond),  999)
+S1 = nz(ta.barssince(short_cond), 999)
+
+is_long  = L1 < S1
+is_short = S1 < L1
+
+long_signal  = is_long  and not is_long[1]
+short_signal = is_short and not is_short[1]
+
+// ─── ZONE VOLUME ACCUMULATION (resets on each new breakout) ───────────────────
+var float buy_vol  = 0.0
+var float sell_vol = 0.0
+
+if long_signal or short_signal
+    buy_vol  := 0.0
+    sell_vol := 0.0
+
+if not (long_signal or short_signal)
+    buy_vol  := buy_vol  + bar_buy
+    sell_vol := sell_vol + bar_sell
+
+avg_vol   = (buy_vol + sell_vol) / 2.0
+raw_delta = avg_vol != 0.0 ? (buy_vol - sell_vol) / avg_vol * 100.0 : 0.0
+delta_str = str.tostring(math.round(raw_delta, 2)) + '%'
+
+// ─── SESSION VOLUME (resets each day) ─────────────────────────────────────────
+var float session_buy  = 0.0
+var float session_sell = 0.0
+
+is_new_day = dayofmonth != dayofmonth[1]
+
+if is_new_day
+    session_buy  := 0.0
+    session_sell := 0.0
+
+session_buy  := session_buy  + bar_buy
+session_sell := session_sell + bar_sell
+
+session_avg_vol   = (session_buy + session_sell) / 2.0
+session_raw_delta = session_avg_vol != 0.0 ? (session_buy - session_sell) / session_avg_vol * 100.0 : 0.0
+session_delta_str = str.tostring(math.round(session_raw_delta, 2)) + '%'
+session_delta_col = session_raw_delta >= 0 ? col_up : col_dn
+
+// ─── LAST 3 CANDLES DELTA (real footprint) ────────────────────────────────────
+recent_buy  = bar_buy  + nz(bar_buy[1])  + nz(bar_buy[2])
+recent_sell = bar_sell + nz(bar_sell[1]) + nz(bar_sell[2])
+
+recent_avg_vol   = (recent_buy + recent_sell) / 2.0
+recent_raw_delta = recent_avg_vol != 0.0 ? (recent_buy - recent_sell) / recent_avg_vol * 100.0 : 0.0
+recent_delta_str = str.tostring(math.round(recent_raw_delta, 2)) + '%'
+recent_delta_col = recent_raw_delta >= 0 ? col_up : col_dn
+
+// ─── CUMULATIVE DELTA (footprint) ─────────────────────────────────────────────
+// Shows net aggression over the entire zone: positive = buyers dominated
+zone_delta     = buy_vol  - sell_vol
+zone_delta_col = zone_delta >= 0 ? col_up : col_dn
+
+// ─── LABEL + TABLE ────────────────────────────────────────────────────────────
+var table delta_table = na
+var label lbl_vol     = na
+var label lbl_star    = na
+
+label_y     = is_long ? lower : upper
+label_style = is_long ? label.style_label_upper_left : label.style_label_lower_left
+trend_color = is_long ? col_up : col_dn
+
+if barstate.islast
+    label.delete(lbl_vol)
+    label.delete(lbl_star)
+
+    lbl_vol  := label.new(
+         bar_index, label_y,
+         'Buy: '   + str.tostring(buy_vol,  format.volume) +
+         '\nSell: ' + str.tostring(sell_vol, format.volume) +
+         '\nDelta: ' + delta_str,
+         color=color.new(trend_color, 90),
+         style=label_style,
+         textcolor=chart.fg_color)
+
+    lbl_star := label.new(
+         bar_index, label_y,
+         text='✪',
+         color=color.new(color.black, 99),
+         textcolor=trend_color,
+         style=label.style_label_center,
+         size=size.large)
+
+    table.delete(delta_table)
+    delta_table := table.new(
+         position.top_center, 3, 6,
+         bgcolor=color.new(color.black, 80),
+         border_width=1,  border_color=color.new(chart.fg_color, 70),
+         frame_width=1,   frame_color=color.new(chart.fg_color, 60))
+
+    // Row 0: headers
+    table.cell(delta_table, 0, 0, '',               text_size=size.normal, bgcolor=color.new(color.black, 60))
+    table.cell(delta_table, 1, 0, 'Session',         text_color=chart.fg_color, text_size=size.normal, bgcolor=color.new(color.black, 60), text_halign=text.align_center)
+    table.cell(delta_table, 2, 0, 'Last 3 Candles',  text_color=chart.fg_color, text_size=size.normal, bgcolor=color.new(color.black, 60), text_halign=text.align_center)
+
+    // Row 1: title
+    table.cell(delta_table, 0, 1, 'Volume Delta ⚡',  text_color=chart.fg_color, text_size=size.normal, text_halign=text.align_center)
+    table.cell(delta_table, 1, 1, '', text_size=size.normal)
+    table.cell(delta_table, 2, 1, '', text_size=size.normal)
+    table.merge_cells(delta_table, 0, 1, 2, 1)
+
+    // Row 2: Buy
+    table.cell(delta_table, 0, 2, '▲ Buy',                                    text_color=col_up, text_size=size.normal, text_halign=text.align_left)
+    table.cell(delta_table, 1, 2, str.tostring(session_buy,  format.volume),   text_color=col_up, text_size=size.normal, text_halign=text.align_right)
+    table.cell(delta_table, 2, 2, str.tostring(recent_buy,   format.volume),   text_color=col_up, text_size=size.normal, text_halign=text.align_right)
+
+    // Row 3: Sell
+    table.cell(delta_table, 0, 3, '▼ Sell',                                   text_color=col_dn, text_size=size.normal, text_halign=text.align_left)
+    table.cell(delta_table, 1, 3, str.tostring(session_sell, format.volume),   text_color=col_dn, text_size=size.normal, text_halign=text.align_right)
+    table.cell(delta_table, 2, 3, str.tostring(recent_sell,  format.volume),   text_color=col_dn, text_size=size.normal, text_halign=text.align_right)
+
+    // Row 4: Delta %
+    table.cell(delta_table, 0, 4, 'Δ Delta',         text_color=chart.fg_color,    text_size=size.normal, text_halign=text.align_left)
+    table.cell(delta_table, 1, 4, session_delta_str,  text_color=session_delta_col, text_size=size.normal, text_halign=text.align_right)
+    table.cell(delta_table, 2, 4, recent_delta_str,   text_color=recent_delta_col,  text_size=size.normal, text_halign=text.align_right)
+
+    // Row 5: Zone net delta (footprint exclusive insight)
+    table.cell(delta_table, 0, 5, '⚡ Zone Net',                                                  text_color=chart.fg_color, text_size=size.normal, text_halign=text.align_left)
+    table.cell(delta_table, 1, 5, str.tostring(zone_delta, format.volume),  text_color=zone_delta_col, text_size=size.normal, text_halign=text.align_right)
+    table.cell(delta_table, 2, 5, '',                                                              text_size=size.normal)
+    table.merge_cells(delta_table, 1, 5, 2, 5)
+
+// ─── PLOTS ────────────────────────────────────────────────────────────────────
+p_basis = plot(basis, color=is_long ? col_up : is_short ? col_dn : na, linewidth=2, title='Basis')
+p_upper = plot(upper, color=color.new(col_dn, 60), title='Upper Band')
+p_lower = plot(lower, color=color.new(col_up, 60), title='Lower Band')
+
+fill(p_basis, p_upper, color=color.new(col_dn, shadow ? 85 : 100))
+fill(p_basis, p_lower, color=color.new(col_up, shadow ? 85 : 100))
+
+// ─── BREAKOUT SHAPES ──────────────────────────────────────────────────────────
+plotshape(long_signal  ? lower : na, title='Long Signal',  style=shape.labelup,   location=location.absolute, color=color.new(col_up, 50), text='▲', textcolor=chart.fg_color)
+plotshape(short_signal ? upper : na, title='Short Signal', style=shape.labeldown, location=location.absolute, color=color.new(col_dn, 50), text='▼', textcolor=chart.fg_color)
+
+// ─── BAR COLOR ────────────────────────────────────────────────────────────────
+bc = src > upper ? color.new(#8ceb07, 0) : src < lower ? color.new(#ff0000, 0) : src > basis ? color.green : src < basis ? color.red : na
+barcolor(bc, title='Bar Color')
+
+// ─── ALERTS ───────────────────────────────────────────────────────────────────
+alertcondition(long_signal,  'BB Long',  'BB Volume Flow Long @ {{close}}')
+alertcondition(short_signal, 'BB Short', 'BB Volume Flow Short @ {{close}}')

@@ -1,0 +1,162 @@
+//@version=5
+indicator('Triple Confluence Signal', overlay=true, max_labels_count=500)
+
+// ═══════════════════════════════════════════════════════════════════
+// TABLE SETTINGS
+// ═══════════════════════════════════════════════════════════════════
+string tbl_pos_input = input.string('Top Right', 'Table Position', options=['Top Left', 'Top Center', 'Top Right', 'Middle Left', 'Middle Center', 'Middle Right', 'Bottom Left', 'Bottom Center', 'Bottom Right'], group='Table Settings')
+
+f_pos(string s) =>
+    switch s
+        'Top Left'      => position.top_left
+        'Top Center'    => position.top_center
+        'Top Right'     => position.top_right
+        'Middle Left'   => position.middle_left
+        'Middle Center' => position.middle_center
+        'Middle Right'  => position.middle_right
+        'Bottom Left'   => position.bottom_left
+        'Bottom Center' => position.bottom_center
+        =>                 position.bottom_right
+
+// ═══════════════════════════════════════════════════════════════════
+// ─── 1. BB VOLUME FLOW — signal only ───────────────────────────────
+// ═══════════════════════════════════════════════════════════════════
+color col_up = input(#17dfad, '+', group='Colors', inline='c')
+color col_dn = input(#dd326b, '-', group='Colors', inline='c')
+
+bb_src    = input.source(close, 'Source',                  group='BB Settings')
+bb_length = input.int(55, 'BB Length', minval=1,           group='BB Settings')
+bb_mult   = input.float(1.0, 'Std Dev Mult', minval=0.1, step=0.1, group='BB Settings')
+
+bb_basis = ta.sma(bb_src, bb_length)
+bb_dev   = bb_mult * ta.stdev(bb_src, bb_length)
+bb_upper = bb_basis + bb_dev
+bb_lower = bb_basis - bb_dev
+
+bb_L1 = nz(ta.barssince(bb_src > bb_upper), 999)
+bb_S1 = nz(ta.barssince(bb_src < bb_lower), 999)
+
+bb_is_long  = bb_L1 < bb_S1
+bb_is_short = bb_S1 < bb_L1
+
+bb_long_signal  = bb_is_long  and not bb_is_long[1]
+bb_short_signal = bb_is_short and not bb_is_short[1]
+
+// ═══════════════════════════════════════════════════════════════════
+// ─── 2. RSI MOMENTUM TREND — signal only ───────────────────────────
+// ═══════════════════════════════════════════════════════════════════
+var bool rsi_positive = false
+var bool rsi_negative = false
+
+int rsi_len  = input(14, 'RSI Length',     group='RSI Settings')
+int rsi_pmom = input(65, 'Positive Above', group='RSI Settings')
+int rsi_nmom = input(32, 'Negative Below', group='RSI Settings')
+
+rsi_val   = ta.rsi(close, rsi_len)
+rsi_p_mom = rsi_val[1] < rsi_pmom and rsi_val > rsi_pmom and rsi_val > rsi_nmom and ta.change(ta.ema(close, 5)) > 0
+rsi_n_mom = rsi_val < rsi_nmom and ta.change(ta.ema(close, 5)) < 0
+
+if rsi_p_mom
+    rsi_positive := true
+    rsi_negative := false
+
+if rsi_n_mom
+    rsi_positive := false
+    rsi_negative := true
+
+rsi_pcondition = rsi_positive and not rsi_positive[1]
+rsi_ncondition = rsi_negative and not rsi_negative[1]
+
+// ═══════════════════════════════════════════════════════════════════
+// ─── 3. ALPHA TREND — signal only ──────────────────────────────────
+// ═══════════════════════════════════════════════════════════════════
+var bool at_is_bull = false
+var bool at_is_bear = false
+
+at_coeff  = input.float(1, 'Multiplier', step=0.1, group='AlphaTrend Settings')
+at_period = input(14, 'Period',                    group='AlphaTrend Settings')
+at_src    = input(close, 'Source',                 group='AlphaTrend Settings')
+at_no_vol = input(false, 'No Volume Data',         group='AlphaTrend Settings')
+
+at_ATR   = ta.sma(ta.tr, at_period)
+at_upT   = low  - at_ATR * at_coeff
+at_downT = high + at_ATR * at_coeff
+
+AlphaTrend = 0.0
+AlphaTrend := (at_no_vol ? ta.rsi(at_src, at_period) >= 50 : ta.mfi(hlc3, at_period) >= 50) ? (at_upT < nz(AlphaTrend[1]) ? nz(AlphaTrend[1]) : at_upT) : (at_downT > nz(AlphaTrend[1]) ? nz(AlphaTrend[1]) : at_downT)
+
+at_buy_cross  = ta.crossover( AlphaTrend, AlphaTrend[2])
+at_sell_cross = ta.crossunder(AlphaTrend, AlphaTrend[2])
+
+if at_buy_cross
+    at_is_bull := true
+    at_is_bear := false
+
+if at_sell_cross
+    at_is_bull := false
+    at_is_bear := true
+
+at_K1 = ta.barssince(at_buy_cross)
+at_K2 = ta.barssince(at_sell_cross)
+at_O1 = ta.barssince(at_buy_cross[1])
+at_O2 = ta.barssince(at_sell_cross[1])
+
+at_buy_sig  = at_buy_cross  and at_O1 > at_K2
+at_sell_sig = at_sell_cross and at_O2 > at_K1
+
+// ═══════════════════════════════════════════════════════════════════
+// ─── COMBINED SIGNAL ───────────────────────────────────────────────
+// ═══════════════════════════════════════════════════════════════════
+all_buy  = bb_is_long  and rsi_positive and at_is_bull
+all_sell = bb_is_short and rsi_negative and at_is_bear
+
+all_buy_trigger  = all_buy  and not all_buy[1]
+all_sell_trigger = all_sell and not all_sell[1]
+
+// ═══════════════════════════════════════════════════════════════════
+// ─── SIGNAL TABLE ──────────────────────────────────────────────────
+// ═══════════════════════════════════════════════════════════════════
+var table sig_table = na
+
+bb_txt  = bb_is_long   ? 'BUY'  : bb_is_short  ? 'SELL' : 'NEUTRAL'
+rsi_txt = rsi_positive ? 'BUY'  : rsi_negative ? 'SELL' : 'NEUTRAL'
+at_txt  = at_is_bull   ? 'BUY'  : at_is_bear   ? 'SELL' : 'NEUTRAL'
+
+bb_tcol  = bb_is_long   ? col_up                 : bb_is_short  ? col_dn                 : color.gray
+rsi_tcol = rsi_positive ? color.rgb(76, 175, 79) : rsi_negative ? color.rgb(255, 82, 82) : color.gray
+at_tcol  = at_is_bull   ? color.new(#00E60F, 0)  : at_is_bear   ? color.new(#80000B, 0)  : color.gray
+
+overall_txt = all_buy ? 'ALL BUY' : all_sell ? 'ALL SELL' : 'MIXED'
+overall_col = all_buy ? col_up    : all_sell ? col_dn      : color.gray
+overall_bg  = all_buy ? color.new(col_up, 55) : all_sell ? color.new(col_dn, 55) : color.new(color.gray, 80)
+
+if barstate.islast
+    table.delete(sig_table)
+    sig_table := table.new(f_pos(tbl_pos_input), 2, 5, bgcolor=color.new(color.black, 70), border_width=1, border_color=color.new(color.white, 50), frame_width=2, frame_color=color.new(color.white, 40))
+
+    table.cell(sig_table, 0, 0, 'Indicator',    text_color=color.white,  text_size=size.normal, bgcolor=color.new(color.black, 40), text_halign=text.align_center)
+    table.cell(sig_table, 1, 0, 'Signal',        text_color=color.white,  text_size=size.normal, bgcolor=color.new(color.black, 40), text_halign=text.align_center)
+
+    table.cell(sig_table, 0, 1, 'BB Vol Flow',  text_color=color.white,  text_size=size.normal, text_halign=text.align_left)
+    table.cell(sig_table, 1, 1, bb_txt,          text_color=bb_tcol,      text_size=size.normal, text_halign=text.align_center)
+
+    table.cell(sig_table, 0, 2, 'RSI Momentum', text_color=color.white,  text_size=size.normal, text_halign=text.align_left)
+    table.cell(sig_table, 1, 2, rsi_txt,         text_color=rsi_tcol,     text_size=size.normal, text_halign=text.align_center)
+
+    table.cell(sig_table, 0, 3, 'AlphaTrend',   text_color=color.white,  text_size=size.normal, text_halign=text.align_left)
+    table.cell(sig_table, 1, 3, at_txt,          text_color=at_tcol,      text_size=size.normal, text_halign=text.align_center)
+
+    table.cell(sig_table, 0, 4, 'COMBINED',     text_color=color.white,  text_size=size.large,  bgcolor=overall_bg, text_halign=text.align_center)
+    table.cell(sig_table, 1, 4, overall_txt,    text_color=overall_col,  text_size=size.large,  bgcolor=overall_bg, text_halign=text.align_center)
+
+// ═══════════════════════════════════════════════════════════════════
+// ─── ALERTS ────────────────────────────────────────────────────────
+// ═══════════════════════════════════════════════════════════════════
+alertcondition(all_buy_trigger,  'ALL BUY  - Triple Confluence', 'ALL 3 BUY: BB + RSI + AlphaTrend aligned LONG @ {{close}}')
+alertcondition(all_sell_trigger, 'ALL SELL - Triple Confluence', 'ALL 3 SELL: BB + RSI + AlphaTrend aligned SHORT @ {{close}}')
+alertcondition(bb_long_signal,   'BB Long',        'BB Volume Flow LONG @ {{close}}')
+alertcondition(bb_short_signal,  'BB Short',       'BB Volume Flow SHORT @ {{close}}')
+alertcondition(rsi_pcondition,   'RSI Positive',   'RSI Momentum POSITIVE @ {{close}}')
+alertcondition(rsi_ncondition,   'RSI Negative',   'RSI Momentum NEGATIVE @ {{close}}')
+alertcondition(at_buy_sig,       'AlphaTrend BUY', 'AlphaTrend BUY @ {{close}}')
+alertcondition(at_sell_sig,      'AlphaTrend SELL','AlphaTrend SELL @ {{close}}')
