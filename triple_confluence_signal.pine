@@ -19,13 +19,16 @@ f_pos(string s) =>
         =>                 position.bottom_right
 
 // ═══════════════════════════════════════════════════════════════════
-// ─── 1. BB VOLUME FLOW — signal only ───────────────────────────────
+// COLORS
 // ═══════════════════════════════════════════════════════════════════
 color col_up = input(#17dfad, '+', group='Colors', inline='c')
 color col_dn = input(#dd326b, '-', group='Colors', inline='c')
 
-bb_src    = input.source(close, 'Source',                  group='BB Settings')
-bb_length = input.int(55, 'BB Length', minval=1,           group='BB Settings')
+// ═══════════════════════════════════════════════════════════════════
+// ─── 1. BB VOLUME FLOW — signal only ───────────────────────────────
+// ═══════════════════════════════════════════════════════════════════
+bb_src    = input.source(close, 'Source',                       group='BB Settings')
+bb_length = input.int(55, 'BB Length', minval=1,                group='BB Settings')
 bb_mult   = input.float(1.0, 'Std Dev Mult', minval=0.1, step=0.1, group='BB Settings')
 
 bb_basis = ta.sma(bb_src, bb_length)
@@ -105,10 +108,35 @@ at_buy_sig  = at_buy_cross  and at_O1 > at_K2
 at_sell_sig = at_sell_cross and at_O2 > at_K1
 
 // ═══════════════════════════════════════════════════════════════════
+// ─── 4. DXY RSI ────────────────────────────────────────────────────
+// ═══════════════════════════════════════════════════════════════════
+int   dxy_rsi_len  = input(14, 'DXY RSI Length',      group='DXY Settings')
+float dxy_buy_lvl  = input.float(45, 'Buy when RSI <', step=1, group='DXY Settings')
+float dxy_sell_lvl = input.float(55, 'Sell when RSI >', step=1, group='DXY Settings')
+
+dxy_rsi    = request.security('TVC:DXY', timeframe.period, ta.rsi(close, dxy_rsi_len))
+dxy_is_buy  = dxy_rsi < dxy_buy_lvl
+dxy_is_sell = dxy_rsi > dxy_sell_lvl
+
+// ═══════════════════════════════════════════════════════════════════
+// ─── 5. DI+ / DI- ──────────────────────────────────────────────────
+// ═══════════════════════════════════════════════════════════════════
+int   di_len        = input(14,   'DI Length',         group='DI Settings')
+float di_buy_plus   = input.float(25, 'Buy: DI+ >',  step=1, group='DI Settings')
+float di_buy_minus  = input.float(15, 'Buy: DI- <',  step=1, group='DI Settings')
+float di_sell_minus = input.float(25, 'Sell: DI- >', step=1, group='DI Settings')
+float di_sell_plus  = input.float(15, 'Sell: DI+ <', step=1, group='DI Settings')
+
+[di_plus, di_minus, _] = ta.dmi(di_len, di_len)
+
+di_is_buy  = di_plus  > di_buy_plus  and di_minus < di_buy_minus
+di_is_sell = di_minus > di_sell_minus and di_plus  < di_sell_plus
+
+// ═══════════════════════════════════════════════════════════════════
 // ─── COMBINED SIGNAL ───────────────────────────────────────────────
 // ═══════════════════════════════════════════════════════════════════
-all_buy  = bb_is_long  and rsi_positive and at_is_bull
-all_sell = bb_is_short and rsi_negative and at_is_bear
+all_buy  = bb_is_long  and rsi_positive and at_is_bull and dxy_is_buy  and di_is_buy
+all_sell = bb_is_short and rsi_negative and at_is_bear and dxy_is_sell and di_is_sell
 
 all_buy_trigger  = all_buy  and not all_buy[1]
 all_sell_trigger = all_sell and not all_sell[1]
@@ -121,10 +149,17 @@ var table sig_table = na
 bb_txt  = bb_is_long   ? 'BUY'  : bb_is_short  ? 'SELL' : 'NEUTRAL'
 rsi_txt = rsi_positive ? 'BUY'  : rsi_negative ? 'SELL' : 'NEUTRAL'
 at_txt  = at_is_bull   ? 'BUY'  : at_is_bear   ? 'SELL' : 'NEUTRAL'
+dxy_txt = dxy_is_buy   ? 'BUY'  : dxy_is_sell  ? 'SELL' : 'NEUTRAL'
+di_txt  = di_is_buy    ? 'BUY'  : di_is_sell   ? 'SELL' : 'NEUTRAL'
+
+dxy_sub = '(RSI ' + str.tostring(math.round(dxy_rsi, 1)) + ')'
+di_sub  = '(D+ ' + str.tostring(math.round(di_plus, 1)) + '  D- ' + str.tostring(math.round(di_minus, 1)) + ')'
 
 bb_tcol  = bb_is_long   ? col_up                 : bb_is_short  ? col_dn                 : color.gray
 rsi_tcol = rsi_positive ? color.rgb(76, 175, 79) : rsi_negative ? color.rgb(255, 82, 82) : color.gray
 at_tcol  = at_is_bull   ? color.new(#00E60F, 0)  : at_is_bear   ? color.new(#80000B, 0)  : color.gray
+dxy_tcol = dxy_is_buy   ? col_up                 : dxy_is_sell  ? col_dn                 : color.gray
+di_tcol  = di_is_buy    ? col_up                 : di_is_sell   ? col_dn                 : color.gray
 
 overall_txt = all_buy ? 'ALL BUY' : all_sell ? 'ALL SELL' : 'MIXED'
 overall_col = all_buy ? col_up    : all_sell ? col_dn      : color.gray
@@ -132,28 +167,48 @@ overall_bg  = all_buy ? color.new(col_up, 55) : all_sell ? color.new(col_dn, 55)
 
 if barstate.islast
     table.delete(sig_table)
-    sig_table := table.new(f_pos(tbl_pos_input), 2, 5, bgcolor=color.new(color.black, 70), border_width=1, border_color=color.new(color.white, 50), frame_width=2, frame_color=color.new(color.white, 40))
+    sig_table := table.new(f_pos(tbl_pos_input), 3, 7, bgcolor=color.new(color.black, 70), border_width=1, border_color=color.new(color.white, 50), frame_width=2, frame_color=color.new(color.white, 40))
 
-    table.cell(sig_table, 0, 0, 'Indicator',    text_color=color.white,  text_size=size.normal, bgcolor=color.new(color.black, 40), text_halign=text.align_center)
-    table.cell(sig_table, 1, 0, 'Signal',        text_color=color.white,  text_size=size.normal, bgcolor=color.new(color.black, 40), text_halign=text.align_center)
+    // Header
+    table.cell(sig_table, 0, 0, 'Indicator',    text_color=color.white, text_size=size.normal, bgcolor=color.new(color.black, 40), text_halign=text.align_center)
+    table.cell(sig_table, 1, 0, 'Signal',        text_color=color.white, text_size=size.normal, bgcolor=color.new(color.black, 40), text_halign=text.align_center)
+    table.cell(sig_table, 2, 0, 'Value',         text_color=color.white, text_size=size.normal, bgcolor=color.new(color.black, 40), text_halign=text.align_center)
 
-    table.cell(sig_table, 0, 1, 'BB Vol Flow',  text_color=color.white,  text_size=size.normal, text_halign=text.align_left)
-    table.cell(sig_table, 1, 1, bb_txt,          text_color=bb_tcol,      text_size=size.normal, text_halign=text.align_center)
+    // Row 1 — BB
+    table.cell(sig_table, 0, 1, 'BB Vol Flow',  text_color=color.white, text_size=size.normal, text_halign=text.align_left)
+    table.cell(sig_table, 1, 1, bb_txt,          text_color=bb_tcol,     text_size=size.normal, text_halign=text.align_center)
+    table.cell(sig_table, 2, 1, '',              text_color=color.gray,  text_size=size.small,  text_halign=text.align_center)
 
-    table.cell(sig_table, 0, 2, 'RSI Momentum', text_color=color.white,  text_size=size.normal, text_halign=text.align_left)
-    table.cell(sig_table, 1, 2, rsi_txt,         text_color=rsi_tcol,     text_size=size.normal, text_halign=text.align_center)
+    // Row 2 — RSI Momentum
+    table.cell(sig_table, 0, 2, 'RSI Momentum', text_color=color.white, text_size=size.normal, text_halign=text.align_left)
+    table.cell(sig_table, 1, 2, rsi_txt,         text_color=rsi_tcol,    text_size=size.normal, text_halign=text.align_center)
+    table.cell(sig_table, 2, 2, str.tostring(math.round(rsi_val, 1)), text_color=color.gray, text_size=size.small, text_halign=text.align_center)
 
-    table.cell(sig_table, 0, 3, 'AlphaTrend',   text_color=color.white,  text_size=size.normal, text_halign=text.align_left)
-    table.cell(sig_table, 1, 3, at_txt,          text_color=at_tcol,      text_size=size.normal, text_halign=text.align_center)
+    // Row 3 — AlphaTrend
+    table.cell(sig_table, 0, 3, 'AlphaTrend',   text_color=color.white, text_size=size.normal, text_halign=text.align_left)
+    table.cell(sig_table, 1, 3, at_txt,          text_color=at_tcol,     text_size=size.normal, text_halign=text.align_center)
+    table.cell(sig_table, 2, 3, '',              text_color=color.gray,  text_size=size.small,  text_halign=text.align_center)
 
-    table.cell(sig_table, 0, 4, 'COMBINED',     text_color=color.white,  text_size=size.large,  bgcolor=overall_bg, text_halign=text.align_center)
-    table.cell(sig_table, 1, 4, overall_txt,    text_color=overall_col,  text_size=size.large,  bgcolor=overall_bg, text_halign=text.align_center)
+    // Row 4 — DXY RSI
+    table.cell(sig_table, 0, 4, 'DXY RSI',      text_color=color.white, text_size=size.normal, text_halign=text.align_left)
+    table.cell(sig_table, 1, 4, dxy_txt,         text_color=dxy_tcol,    text_size=size.normal, text_halign=text.align_center)
+    table.cell(sig_table, 2, 4, dxy_sub,         text_color=color.gray,  text_size=size.small,  text_halign=text.align_center)
+
+    // Row 5 — DI+ / DI-
+    table.cell(sig_table, 0, 5, 'DI+ / DI-',    text_color=color.white, text_size=size.normal, text_halign=text.align_left)
+    table.cell(sig_table, 1, 5, di_txt,          text_color=di_tcol,     text_size=size.normal, text_halign=text.align_center)
+    table.cell(sig_table, 2, 5, di_sub,          text_color=color.gray,  text_size=size.small,  text_halign=text.align_center)
+
+    // Row 6 — Combined
+    table.cell(sig_table, 0, 6, 'COMBINED',      text_color=color.white, text_size=size.large,  bgcolor=overall_bg, text_halign=text.align_center)
+    table.cell(sig_table, 1, 6, overall_txt,     text_color=overall_col, text_size=size.large,  bgcolor=overall_bg, text_halign=text.align_center)
+    table.cell(sig_table, 2, 6, '',              text_color=color.white, text_size=size.large,  bgcolor=overall_bg, text_halign=text.align_center)
 
 // ═══════════════════════════════════════════════════════════════════
 // ─── ALERTS ────────────────────────────────────────────────────────
 // ═══════════════════════════════════════════════════════════════════
-alertcondition(all_buy_trigger,  'ALL BUY  - Triple Confluence', 'ALL 3 BUY: BB + RSI + AlphaTrend aligned LONG @ {{close}}')
-alertcondition(all_sell_trigger, 'ALL SELL - Triple Confluence', 'ALL 3 SELL: BB + RSI + AlphaTrend aligned SHORT @ {{close}}')
+alertcondition(all_buy_trigger,  'ALL BUY  - 5 Confluences', 'ALL 5 BUY: BB + RSI + AT + DXY + DI aligned LONG @ {{close}}')
+alertcondition(all_sell_trigger, 'ALL SELL - 5 Confluences', 'ALL 5 SELL: BB + RSI + AT + DXY + DI aligned SHORT @ {{close}}')
 alertcondition(bb_long_signal,   'BB Long',        'BB Volume Flow LONG @ {{close}}')
 alertcondition(bb_short_signal,  'BB Short',       'BB Volume Flow SHORT @ {{close}}')
 alertcondition(rsi_pcondition,   'RSI Positive',   'RSI Momentum POSITIVE @ {{close}}')
