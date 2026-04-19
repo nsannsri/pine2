@@ -1,0 +1,273 @@
+//@version=6
+indicator('Session Volume Profile [Footprint]', 'Session VP [FP]', overlay=true, max_boxes_count=500, max_lines_count=500, max_labels_count=500)
+
+// ─── INPUTS ───────────────────────────────────────────────────────────────────
+rows       = input.int(30, 'Profile Rows',    minval=5, maxval=200, group='Profile')
+width_pct  = input.float(20.0, 'Width % of Session', minval=5, maxval=100, step=5, group='Profile', tooltip='Max horizontal length of the widest row, as % of session bars')
+value_area = input.float(70.0, 'Value Area %', minval=10, maxval=100, group='Profile')
+side       = input.string('Right', 'Profile Side', options=['Left', 'Right'], group='Profile', tooltip='Left = drawn left of session start; Right = drawn right of the latest bar')
+offset     = input.int(5, 'Offset from Candles (bars)', minval=0, maxval=500, group='Profile', tooltip='Gap between candles and the profile, in bars. Increase to push the profile further into empty space so it stops overlapping price.')
+
+bool show_split = input.bool(true,  'Split Buy / Sell',     group='Display')
+bool show_pct   = input.bool(true,  'Show Buy % & Sell %',  group='Display', tooltip='Row-level Buy%/Sell% text (value-area rows only)')
+bool show_poc   = input.bool(true,  'Show POC',             group='Display')
+bool show_va    = input.bool(true,  'Show Value Area',      group='Display')
+bool show_stats = input.bool(true,  'Show Stats Label',     group='Display')
+
+font_size = input.string('Normal', 'Font Size', options=['Small', 'Normal', 'Large', 'Huge'], group='Display')
+size_val  = font_size == 'Small' ? size.small : font_size == 'Normal' ? size.normal : font_size == 'Large' ? size.large : size.huge
+
+color col_buy    = input.color(color.new(#17dfad, 30), 'Buy',        group='Colors', inline='c1')
+color col_sell   = input.color(color.new(#dd326b, 30), 'Sell',       group='Colors', inline='c1')
+color col_total  = input.color(color.new(#4a90e2, 50), 'Total',      group='Colors', tooltip='Used when Split Buy/Sell is off')
+color col_poc    = input.color(color.yellow,            'POC',       group='Colors')
+color col_va_hi  = input.color(color.new(color.blue, 0),'VAH',       group='Colors')
+color col_va_lo  = input.color(color.new(color.blue, 0),'VAL',       group='Colors')
+
+// ─── FOOTPRINT ────────────────────────────────────────────────────────────────
+tpr = input.int(100, 'Ticks Per Row', minval=1, group='Footprint')
+vap = input.float(70.0, 'FP Value Area %', minval=1, maxval=100, group='Footprint')
+footprint fp = request.footprint(tpr, vap)
+
+// ─── SESSION STATE ────────────────────────────────────────────────────────────
+var float session_high = na
+var float session_low  = na
+var int   session_start_bar = na
+
+// Per-bar storage — memory-bounded, rebinned accurately at render time
+var array<float> bar_low   = array.new<float>()
+var array<float> bar_high  = array.new<float>()
+var array<float> bar_buy   = array.new<float>()
+var array<float> bar_sell  = array.new<float>()
+var array<float> bar_vol   = array.new<float>()  // used only when fp unavailable
+
+var int last_stored_bar = -1
+
+is_new_day = dayofmonth != dayofmonth[1]
+
+if is_new_day
+    session_high := high
+    session_low  := low
+    session_start_bar := bar_index
+    array.clear(bar_low)
+    array.clear(bar_high)
+    array.clear(bar_buy)
+    array.clear(bar_sell)
+    array.clear(bar_vol)
+else
+    session_high := math.max(nz(session_high, high), high)
+    session_low  := math.min(nz(session_low,  low),  low)
+
+// Store one entry per historical bar (skip currently-forming last bar)
+if bar_index != last_stored_bar and not barstate.islast
+    if not na(fp)
+        b_tot = fp.buy_volume()
+        s_tot = fp.sell_volume()
+        if b_tot > 0 or s_tot > 0
+            array.push(bar_low,  low)
+            array.push(bar_high, high)
+            array.push(bar_buy,  b_tot)
+            array.push(bar_sell, s_tot)
+    else if nz(volume) > 0
+        array.push(bar_low,  low)
+        array.push(bar_high, high)
+        array.push(bar_buy,  0.0)
+        array.push(bar_sell, 0.0)
+        array.push(bar_vol,  volume)
+    last_stored_bar := bar_index
+
+// ─── RENDER ───────────────────────────────────────────────────────────────────
+var array<box>   profile_boxes  = array.new<box>()
+var array<label> profile_labels = array.new<label>()
+var array<label> stats_labels   = array.new<label>()
+var line poc_line = na
+var line vah_line = na
+var line val_line = na
+
+clear_all() =>
+    while array.size(profile_boxes) > 0
+        box.delete(array.pop(profile_boxes))
+    while array.size(profile_labels) > 0
+        label.delete(array.pop(profile_labels))
+    while array.size(stats_labels) > 0
+        label.delete(array.pop(stats_labels))
+    line.delete(poc_line)
+    line.delete(vah_line)
+    line.delete(val_line)
+
+// Distribute one bar's volume (price range [lo, hi]) across session bins using overlap math
+distribute_bar(array<float> buy_b, array<float> sell_b, array<float> vol_b, float b_lo, float b_hi, float b_buy, float b_sell, float b_vol, float bin_h, float s_low, float s_high) =>
+    c_up = math.min(s_high, b_hi)
+    c_dn = math.max(s_low,  b_lo)
+    if c_up > c_dn and bin_h > 0
+        lo_idx = math.max(0,        int(math.floor((c_dn - s_low) / bin_h)))
+        hi_idx = math.min(rows - 1, int(math.floor((c_up - s_low) / bin_h)))
+        if hi_idx > lo_idx
+            span = c_up - c_dn
+            for idx = lo_idx to hi_idx
+                bin_lo = s_low + idx * bin_h
+                bin_hi = bin_lo + bin_h
+                ov = math.max(0.0, math.min(bin_hi, c_up) - math.max(bin_lo, c_dn))
+                if ov > 0 and span > 0
+                    frac = ov / span
+                    array.set(buy_b,  idx, array.get(buy_b,  idx) + b_buy  * frac)
+                    array.set(sell_b, idx, array.get(sell_b, idx) + b_sell * frac)
+                    array.set(vol_b,  idx, array.get(vol_b,  idx) + b_vol  * frac)
+        else
+            array.set(buy_b,  lo_idx, array.get(buy_b,  lo_idx) + b_buy)
+            array.set(sell_b, lo_idx, array.get(sell_b, lo_idx) + b_sell)
+            array.set(vol_b,  lo_idx, array.get(vol_b,  lo_idx) + b_vol)
+
+if barstate.islast and not na(session_high) and not na(session_low) and session_high > session_low
+    clear_all()
+
+    bin_h = (session_high - session_low) / rows
+
+    // Fresh per-render bins
+    buy_b  = array.new<float>(rows, 0.0)
+    sell_b = array.new<float>(rows, 0.0)
+    vol_b  = array.new<float>(rows, 0.0)
+
+    // Distribute all stored historical bars into current session bins
+    n_bars = array.size(bar_low)
+    if n_bars > 0
+        for k = 0 to n_bars - 1
+            bb = array.get(bar_buy,  k)
+            bs = array.get(bar_sell, k)
+            bv = bb + bs
+            if bv == 0
+                bv := array.size(bar_vol) > k ? array.get(bar_vol, k) : 0.0
+            distribute_bar(buy_b, sell_b, vol_b, array.get(bar_low, k), array.get(bar_high, k), bb, bs, bv, bin_h, session_low, session_high)
+
+    // Include the currently-forming last bar
+    if not na(fp)
+        b_tot = fp.buy_volume()
+        s_tot = fp.sell_volume()
+        if (b_tot > 0 or s_tot > 0) and high > low
+            distribute_bar(buy_b, sell_b, vol_b, low, high, b_tot, s_tot, b_tot + s_tot, bin_h, session_low, session_high)
+    else if nz(volume) > 0 and high > low
+        distribute_bar(buy_b, sell_b, vol_b, low, high, 0.0, 0.0, volume, bin_h, session_low, session_high)
+
+    // Totals + POC
+    float max_total  = 0.0
+    float total_vol  = 0.0
+    float total_buy  = 0.0
+    float total_sell = 0.0
+    int   poc_idx    = 0
+    for i = 0 to rows - 1
+        v = array.get(vol_b, i)
+        total_vol  += v
+        total_buy  += array.get(buy_b,  i)
+        total_sell += array.get(sell_b, i)
+        if v > max_total
+            max_total := v
+            poc_idx := i
+
+    bool has_bs = (total_buy + total_sell) > 0
+
+    // Value Area bounds
+    int va_lo = poc_idx
+    int va_hi = poc_idx
+    if max_total > 0
+        target = total_vol * value_area / 100.0
+        acc    = array.get(vol_b, poc_idx)
+        while acc < target and (va_lo > 0 or va_hi < rows - 1)
+            up_vol   = va_hi < rows - 1 ? array.get(vol_b, va_hi + 1) : -1.0
+            down_vol = va_lo > 0        ? array.get(vol_b, va_lo - 1) : -1.0
+            if up_vol >= down_vol and va_hi < rows - 1
+                va_hi += 1
+                acc += up_vol
+            else if va_lo > 0
+                va_lo -= 1
+                acc += down_vol
+            else
+                break
+
+    // Geometry — profile sits in empty space outside the candles
+    session_bars = math.max(1, bar_index - nz(session_start_bar, bar_index))
+    max_width    = math.max(5, math.round(session_bars * width_pct / 100.0))
+    half         = bin_h * 0.45
+    bool is_left = side == 'Left'
+    anchor_x = is_left ? nz(session_start_bar, bar_index) - offset : bar_index + offset
+    far_edge = is_left ? anchor_x - max_width : anchor_x + max_width
+
+    // Draw rows
+    for i = 0 to rows - 1
+        v = array.get(vol_b, i)
+        if v > 0 and max_total > 0
+            width = math.max(1, math.round(max_width * v / max_total))
+            y_mid = session_low + (i + 0.5) * bin_h
+            y_top = y_mid + half
+            y_bot = y_mid - half
+
+            if show_split and has_bs
+                b = array.get(buy_b, i)
+                bw = math.round(width * (b / v))
+                sw = width - bw
+                if is_left
+                    if bw > 0
+                        array.push(profile_boxes, box.new(anchor_x - bw, y_top, anchor_x, y_bot, border_color=na, bgcolor=col_buy))
+                    if sw > 0
+                        array.push(profile_boxes, box.new(anchor_x - bw - sw, y_top, anchor_x - bw, y_bot, border_color=na, bgcolor=col_sell))
+                else
+                    if bw > 0
+                        array.push(profile_boxes, box.new(anchor_x, y_top, anchor_x + bw, y_bot, border_color=na, bgcolor=col_buy))
+                    if sw > 0
+                        array.push(profile_boxes, box.new(anchor_x + bw, y_top, anchor_x + bw + sw, y_bot, border_color=na, bgcolor=col_sell))
+            else
+                if is_left
+                    array.push(profile_boxes, box.new(anchor_x - width, y_top, anchor_x, y_bot, border_color=na, bgcolor=col_total))
+                else
+                    array.push(profile_boxes, box.new(anchor_x, y_top, anchor_x + width, y_bot, border_color=na, bgcolor=col_total))
+
+            // Buy % / Sell % text on value-area rows
+            if show_pct and has_bs and i >= va_lo and i <= va_hi
+                b = array.get(buy_b, i)
+                buy_pct  = v > 0 ? b / v * 100.0 : 0.0
+                sell_pct = 100.0 - buy_pct
+                pct_col  = buy_pct >= 50 ? col_buy : col_sell
+                pct_txt  = 'B ' + str.tostring(math.round(buy_pct, 0)) + '%  S ' + str.tostring(math.round(sell_pct, 0)) + '%'
+                txt_x    = is_left ? anchor_x - width - 1 : anchor_x + width + 1
+                lbl_sty  = is_left ? label.style_label_right : label.style_label_left
+                array.push(profile_labels, label.new(txt_x, y_mid, pct_txt, style=lbl_sty, color=color.new(color.black, 100), textcolor=pct_col, size=size_val))
+
+    // POC line
+    if show_poc and max_total > 0
+        poc_price = session_low + (poc_idx + 0.5) * bin_h
+        poc_x1 = is_left ? far_edge : nz(session_start_bar, bar_index - 1)
+        poc_x2 = is_left ? bar_index : far_edge
+        poc_line := line.new(poc_x1, poc_price, poc_x2, poc_price, color=col_poc, width=2, style=line.style_solid)
+
+    // VAH / VAL lines
+    if show_va and max_total > 0
+        vah = session_low + (va_hi + 1) * bin_h
+        val = session_low + va_lo * bin_h
+        va_x1 = is_left ? far_edge : nz(session_start_bar, bar_index - 1)
+        va_x2 = is_left ? bar_index : far_edge
+        vah_line := line.new(va_x1, vah, va_x2, vah, color=col_va_hi, width=1, style=line.style_dashed)
+        val_line := line.new(va_x1, val, va_x2, val, color=col_va_lo, width=1, style=line.style_dashed)
+
+    // Stats label
+    if show_stats and max_total > 0
+        total_agg = total_buy + total_sell
+        buy_pct   = total_agg > 0 ? total_buy  / total_agg * 100.0 : 0.0
+        sell_pct  = total_agg > 0 ? total_sell / total_agg * 100.0 : 0.0
+        delta     = total_buy - total_sell
+        delta_pct = total_agg > 0 ? delta / (total_agg / 2.0) * 100.0 : 0.0
+        poc_price = session_low + (poc_idx + 0.5) * bin_h
+        poc_v     = array.get(vol_b,  poc_idx)
+        poc_b     = array.get(buy_b,  poc_idx)
+        poc_bpct  = poc_v > 0 ? poc_b / poc_v * 100.0 : 0.0
+        txt = '◆ Session Profile\n' +
+              'Total: '  + str.tostring(total_vol, format.volume) + '\n' +
+              (has_bs ? 'Buy:  '  + str.tostring(total_buy,  format.volume) + '  (' + str.tostring(math.round(buy_pct, 1)) + '%)\n' : '') +
+              (has_bs ? 'Sell: '  + str.tostring(total_sell, format.volume) + '  (' + str.tostring(math.round(sell_pct, 1)) + '%)\n' : '') +
+              (has_bs ? 'Δ: '     + str.tostring(math.round(delta_pct, 2)) + '%\n' : '') +
+              'POC: '    + str.tostring(poc_price, format.mintick) +
+              (has_bs ? '  (B ' + str.tostring(math.round(poc_bpct, 0)) + '%)' : '')
+        stats_x = is_left ? far_edge : anchor_x
+        stats_style = is_left ? label.style_label_lower_left : label.style_label_lower_right
+        array.push(stats_labels, label.new(stats_x, session_high, txt, style=stats_style, color=color.new(color.black, 80), textcolor=chart.fg_color, size=size_val))
+
+// ─── ALERTS ───────────────────────────────────────────────────────────────────
+alertcondition(is_new_day, 'New Session', 'Session volume profile reset')

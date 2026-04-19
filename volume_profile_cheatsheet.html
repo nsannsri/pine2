@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Session Volume Profile — Trading Cheat Sheet</title>
+<style>
+  @page { size: A4; margin: 12mm; }
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0; padding: 0;
+    font-family: -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+    color: #1a1a2e;
+    background: #fff;
+    font-size: 10.5pt;
+    line-height: 1.35;
+  }
+  .sheet {
+    max-width: 190mm;
+    margin: 0 auto;
+    padding: 6mm 8mm;
+  }
+  h1 {
+    font-size: 16pt;
+    margin: 0 0 3px;
+    color: #0a1f44;
+    letter-spacing: 0.3px;
+  }
+  .subtitle {
+    font-size: 9pt;
+    color: #5a6783;
+    margin: 0 0 10px;
+    border-bottom: 2px solid #0a1f44;
+    padding-bottom: 6px;
+  }
+  h2 {
+    font-size: 11pt;
+    margin: 10px 0 5px;
+    color: #fff;
+    background: linear-gradient(90deg, #0a1f44, #1a4d8f);
+    padding: 4px 9px;
+    border-radius: 3px;
+    letter-spacing: 0.5px;
+  }
+  .grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 6px;
+  }
+  .grid-3 {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 10px;
+  }
+  .box {
+    border: 1px solid #d0d7e2;
+    border-radius: 4px;
+    padding: 7px 9px;
+    background: #fafbfd;
+    font-size: 9.5pt;
+  }
+  .box h3 {
+    margin: 0 0 4px;
+    font-size: 10pt;
+    color: #0a1f44;
+    display: flex; align-items: center; gap: 6px;
+  }
+  .box h3 .dot {
+    width: 9px; height: 9px; border-radius: 50%;
+    display: inline-block;
+  }
+  .poc .dot { background: #f5c518; }
+  .vah .dot { background: #1e6fd9; }
+  .val .dot { background: #1e6fd9; }
+  .buy .dot { background: #17dfad; }
+  .sell .dot { background: #dd326b; }
+  ul { margin: 3px 0 3px 14px; padding: 0; }
+  li { margin: 2px 0; }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 9pt;
+    margin: 4px 0 8px;
+  }
+  th {
+    background: #0a1f44;
+    color: #fff;
+    text-align: left;
+    padding: 5px 7px;
+    font-weight: 600;
+  }
+  td {
+    padding: 5px 7px;
+    border-bottom: 1px solid #e4e8ef;
+    vertical-align: top;
+  }
+  tr:nth-child(even) td { background: #f5f7fb; }
+  .good { color: #17a57a; font-weight: 600; }
+  .bad { color: #c51e4a; font-weight: 600; }
+  .tag {
+    display: inline-block;
+    padding: 1px 7px;
+    border-radius: 10px;
+    font-size: 8.5pt;
+    font-weight: 600;
+  }
+  .tag-buy { background: #d4f8ec; color: #0a7b5a; }
+  .tag-sell { background: #fbdce6; color: #9f1d42; }
+  .tag-neutral { background: #dbe4f2; color: #0a1f44; }
+
+  .checklist {
+    background: #fffde8;
+    border-left: 4px solid #f5c518;
+    padding: 6px 10px;
+    border-radius: 0 3px 3px 0;
+    font-size: 9.5pt;
+  }
+  .checklist h3 { margin: 0 0 4px; font-size: 10pt; color: #0a1f44; }
+  .checklist ol { margin: 3px 0 3px 18px; padding: 0; }
+  .donts {
+    background: #fef1f3;
+    border-left: 4px solid #dd326b;
+    padding: 6px 10px;
+    border-radius: 0 3px 3px 0;
+    font-size: 9.5pt;
+  }
+  .donts h3 { margin: 0 0 4px; font-size: 10pt; color: #9f1d42; }
+
+  .workflow {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 8px;
+    margin: 5px 0;
+  }
+  .step {
+    background: #eef3fb;
+    border-top: 3px solid #1a4d8f;
+    padding: 7px 9px;
+    border-radius: 0 0 4px 4px;
+    font-size: 9.5pt;
+  }
+  .step .num { font-size: 14pt; font-weight: 700; color: #1a4d8f; }
+  .step strong { color: #0a1f44; display: block; margin: 2px 0; }
+
+  .footer {
+    margin-top: 8px;
+    padding-top: 5px;
+    border-top: 1px solid #d0d7e2;
+    text-align: center;
+    font-size: 8pt;
+    color: #5a6783;
+  }
+
+  @media print {
+    body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .no-print { display: none; }
+  }
+</style>
+</head>
+<body>
+<div class="sheet">
+
+  <h1>Session Volume Profile — Trading Cheat Sheet</h1>
+  <div class="subtitle">Footprint buy/sell · POC · VAH · VAL · Confluence</div>
+
+  <h2>Key Levels — Know What You're Looking At</h2>
+  <div class="grid-3">
+    <div class="box poc">
+      <h3><span class="dot"></span>POC · Point of Control</h3>
+      Price with the <b>most volume</b>. Acts as a magnet — price keeps returning. Strong support from above, resistance from below.
+    </div>
+    <div class="box vah">
+      <h3><span class="dot"></span>VAH · Value Area High</h3>
+      Upper bound of where <b>70% of volume</b> traded. Resistance when inside the area, support when above.
+    </div>
+    <div class="box val">
+      <h3><span class="dot"></span>VAL · Value Area Low</h3>
+      Lower bound of the value area. Support when inside, resistance when below.
+    </div>
+  </div>
+
+  <h2>Common Setups</h2>
+  <table>
+    <thead>
+      <tr><th>Setup</th><th>Where</th><th>Vertical Volume</th><th>Buy% / Sell%</th><th>Action</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><b>Breakout (legit)</b></td>
+        <td>Close outside VAH / VAL</td>
+        <td><span class="good">Spike</span> on breakout bar</td>
+        <td class="good">&gt; 60% in breakout direction</td>
+        <td><span class="tag tag-buy">Trade it</span> Value area flips to S/R</td>
+      </tr>
+      <tr>
+        <td><b>Breakout (fakeout)</b></td>
+        <td>Close outside VAH / VAL</td>
+        <td><span class="bad">Low / avg</span> volume</td>
+        <td class="bad">&lt; 55% aggression</td>
+        <td><span class="tag tag-sell">Fade or skip</span></td>
+      </tr>
+      <tr>
+        <td><b>POC reversion</b></td>
+        <td>Price far from POC</td>
+        <td>Any</td>
+        <td>Check at POC row</td>
+        <td><span class="tag tag-neutral">Mean-reversion</span> back to POC</td>
+      </tr>
+      <tr>
+        <td><b>Rejection at VAH</b></td>
+        <td>Price tagging VAH</td>
+        <td><span class="good">Above-avg</span> + rejection wick</td>
+        <td class="bad">Sell% &gt; 60%</td>
+        <td><span class="tag tag-sell">Short</span> target POC / VAL</td>
+      </tr>
+      <tr>
+        <td><b>Bounce at VAL</b></td>
+        <td>Price tagging VAL</td>
+        <td><span class="good">Above-avg</span> + rejection wick</td>
+        <td class="good">Buy% &gt; 60%</td>
+        <td><span class="tag tag-buy">Long</span> target POC / VAH</td>
+      </tr>
+      <tr>
+        <td><b>Trend continuation</b></td>
+        <td>Price holding above VAH / below VAL</td>
+        <td><span class="good">Sustained</span></td>
+        <td>Aligned with trend direction</td>
+        <td><span class="tag tag-neutral">Stay with trend</span></td>
+      </tr>
+      <tr>
+        <td><b>Absorption / Reversal</b></td>
+        <td>Price makes new low / high</td>
+        <td><span class="good">Climactic spike</span></td>
+        <td class="good">Opposite bias (buy% high at new low)</td>
+        <td><span class="tag tag-neutral">Possible reversal</span></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>Full Workflow — Every Trade</h2>
+  <div class="workflow">
+    <div class="step">
+      <div class="num">1.</div>
+      <strong>WHERE · Horizontal Profile</strong>
+      POC / VAH / VAL — is price at a key level?
+    </div>
+    <div class="step">
+      <div class="num">2.</div>
+      <strong>WHEN · Vertical Volume</strong>
+      Is there a real volume spike, or weak participation?
+    </div>
+    <div class="step">
+      <div class="num">3.</div>
+      <strong>WHO · Buy% / Sell%</strong>
+      Who is in control at that row — aggressive buyers or sellers?
+    </div>
+  </div>
+
+  <div class="grid-2">
+    <div class="checklist">
+      <h3>✓ Pre-Entry Checklist</h3>
+      <ol>
+        <li>Where am I relative to POC / VAH / VAL?</li>
+        <li>Buy%/Sell% at this row — dominant side?</li>
+        <li>Vertical volume — spike or flat?</li>
+        <li>Virgin level or retested?</li>
+        <li>Aligned with HTF trend / BB / EMAs?</li>
+      </ol>
+      <div style="margin-top:5px;"><b>3+ aligned → take it. 1-2 → pass.</b></div>
+    </div>
+    <div class="donts">
+      <h3>✗ Don'ts</h3>
+      <ul>
+        <li>Don't trade the first 30-60 min (profile too thin)</li>
+        <li>Don't fade a breakout with high aggression + volume</li>
+        <li>Don't ignore HTF trend — profile works best with bias</li>
+        <li>Don't chase moves already past VAH/VAL without a pullback</li>
+        <li>Don't trust POC on day 1 — it evolves, peaks mid-session</li>
+      </ul>
+    </div>
+  </div>
+
+  <h2>Quick Reference — What Each Reading Means</h2>
+  <table>
+    <thead><tr><th>Observation</th><th>Interpretation</th></tr></thead>
+    <tbody>
+      <tr><td>Price inside Value Area, range-bound</td><td>Balanced day — fade extremes, trade back to POC</td></tr>
+      <tr><td>Price breaks VAH with Buy% &gt; 60% + volume spike</td><td><b class="good">Bullish trend day</b> — long on pullbacks to VAH</td></tr>
+      <tr><td>Price breaks VAL with Sell% &gt; 60% + volume spike</td><td><b class="bad">Bearish trend day</b> — short on pullbacks to VAL</td></tr>
+      <tr><td>Price returns to POC after trend</td><td>Magnet effect — look for bounce / rejection</td></tr>
+      <tr><td>POC shifts higher during session</td><td>Buyers accumulating — bullish bias strengthening</td></tr>
+      <tr><td>POC shifts lower during session</td><td>Sellers in control — bearish bias</td></tr>
+      <tr><td>Narrow Value Area, low volume</td><td>Compression — breakout likely, wait for confirmation</td></tr>
+      <tr><td>Wide Value Area, high volume</td><td>Volatile day — trade key levels only, avoid chop</td></tr>
+    </tbody>
+  </table>
+
+  <div class="footer">
+    Session Volume Profile [Footprint] · POC = magnet · Value Area = fair range · Always confirm with vertical volume + buy/sell aggression
+  </div>
+
+</div>
+</body>
+</html>
