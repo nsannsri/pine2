@@ -1,0 +1,131 @@
+//@version=5
+indicator("San - XAUUSD Scalper [ADX28 + RSI]", overlay=true)
+
+// ─────────────────────────────────────────────
+//  INPUTS
+// ─────────────────────────────────────────────
+
+grp1 = "ADX / DI"
+adx_len = input.int(28, title="ADX Length", group=grp1, minval=1)
+di_thr  = input.float(25.0, title="DI+/DI- Threshold", group=grp1, minval=0)
+
+grp2 = "RSI"
+rsi_len     = input.int(14, title="RSI Length", group=grp2, minval=1)
+rsi_buy_lv  = input.float(60.0, title="RSI Buy Level (>)",  group=grp2)
+rsi_sell_lv = input.float(40.0, title="RSI Sell Level (<)", group=grp2)
+
+grp2b = "RSI Higher Filter"
+use_rsi_hi    = input.bool(false, title="Enable RSI (higher) filter", group=grp2b)
+rsi_hi_len    = input.int(123, title="RSI (higher) Length", group=grp2b, minval=1)
+rsi_hi_buy_lv  = input.float(51.0, title="RSI (higher) Buy Level (>)",  group=grp2b)
+rsi_hi_sell_lv = input.float(49.0, title="RSI (higher) Sell Level (<)", group=grp2b)
+
+grp3 = "Confirmation Filter"
+use_confirm = input.bool(true, title="Enable Confirmation Filter", group=grp3)
+confirm_n   = input.int(3,    title="Confirmation Window (candles)", group=grp3, minval=1, maxval=20)
+
+// ─────────────────────────────────────────────
+//  CALCULATIONS
+// ─────────────────────────────────────────────
+
+[di_plus, di_minus, adx_val] = ta.dmi(adx_len, adx_len)
+rsi_val    = ta.rsi(close, rsi_len)
+rsi_hi_val = ta.rsi(close, rsi_hi_len)
+
+rsi_hi_buy_ok  = not use_rsi_hi or rsi_hi_val > rsi_hi_buy_lv
+rsi_hi_sell_ok = not use_rsi_hi or rsi_hi_val < rsi_hi_sell_lv
+
+raw_buy  = di_plus  > di_thr and rsi_val > rsi_buy_lv  and rsi_hi_buy_ok
+raw_sell = di_minus > di_thr and rsi_val < rsi_sell_lv and rsi_hi_sell_ok
+
+// ─────────────────────────────────────────────
+//  ALTERNATION — after a BUY, only a SELL can fire next (and vice versa)
+// ─────────────────────────────────────────────
+
+var int last = 0
+
+buy_signal  = raw_buy  and last != 1
+sell_signal = raw_sell and last != -1
+
+if buy_signal
+    last := 1
+else if sell_signal
+    last := -1
+
+// ─────────────────────────────────────────────
+//  CONFIRMATION FILTER
+//  BUY  confirmed: within N candles after signal, a candle closes above signal-high AND is green (close > open)
+//  SELL confirmed: within N candles after signal, a candle closes below signal-low  AND is red  (close < open)
+//  If no confirmation within N candles, the signal is discarded.
+// ─────────────────────────────────────────────
+
+var float pending_buy_high  = na
+var float pending_sell_low  = na
+var int   buy_bars_elapsed  = 0
+var int   sell_bars_elapsed = 0
+
+var bool confirmed_buy  = false
+var bool confirmed_sell = false
+
+// Reset confirmation flags each bar
+confirmed_buy  := false
+confirmed_sell := false
+
+// Check pending buy confirmation on bars AFTER the signal candle
+if not na(pending_buy_high) and not buy_signal
+    buy_bars_elapsed += 1
+    if close > pending_buy_high and close > open
+        confirmed_buy    := true
+        pending_buy_high := na
+        buy_bars_elapsed := 0
+    else if buy_bars_elapsed >= confirm_n
+        pending_buy_high := na   // window expired, discard signal
+        buy_bars_elapsed := 0
+
+// Check pending sell confirmation on bars AFTER the signal candle
+if not na(pending_sell_low) and not sell_signal
+    sell_bars_elapsed += 1
+    if close < pending_sell_low and close < open
+        confirmed_sell    := true
+        pending_sell_low  := na
+        sell_bars_elapsed := 0
+    else if sell_bars_elapsed >= confirm_n
+        pending_sell_low  := na  // window expired, discard signal
+        sell_bars_elapsed := 0
+
+// Register new pending signals (cancels any opposite pending)
+if buy_signal
+    pending_buy_high  := high
+    buy_bars_elapsed  := 0
+    pending_sell_low  := na      // cancel opposite pending
+    sell_bars_elapsed := 0
+
+if sell_signal
+    pending_sell_low  := low
+    sell_bars_elapsed := 0
+    pending_buy_high  := na      // cancel opposite pending
+    buy_bars_elapsed  := 0
+
+// Final output: use confirmed when filter is on, raw otherwise
+final_buy  = use_confirm ? confirmed_buy  : buy_signal
+final_sell = use_confirm ? confirmed_sell : sell_signal
+
+// ─────────────────────────────────────────────
+//  PLOTS
+// ─────────────────────────────────────────────
+
+// Raw signal markers (small, faded) — visible only when confirmation filter is enabled
+plotshape(use_confirm and buy_signal,  title="BUY (pending)",  location=location.belowbar, style=shape.triangleup,   color=color.new(color.green, 60), size=size.tiny)
+plotshape(use_confirm and sell_signal, title="SELL (pending)", location=location.abovebar, style=shape.triangledown, color=color.new(color.red,   60), size=size.tiny)
+
+// Confirmed / final signals
+plotshape(final_buy,  title="BUY",  location=location.belowbar, style=shape.labelup,   color=color.new(color.green, 0), textcolor=color.white, text="BUY",  size=size.small)
+plotshape(final_sell, title="SELL", location=location.abovebar, style=shape.labeldown, color=color.new(color.red,   0), textcolor=color.white, text="SELL", size=size.small)
+
+// ─────────────────────────────────────────────
+//  ALERTS
+// ─────────────────────────────────────────────
+
+alertcondition(final_buy,  title="BUY",  message="BUY XAUUSD @ {{close}} | {{ticker}} {{interval}}")
+alertcondition(final_sell, title="SELL", message="SELL XAUUSD @ {{close}} | {{ticker}} {{interval}}")
+alertcondition(final_buy or final_sell, title="Any Signal", message="XAUUSD signal on {{ticker}} {{interval}} @ {{close}}")

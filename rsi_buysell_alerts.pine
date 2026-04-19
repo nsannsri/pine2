@@ -1,0 +1,41 @@
+//@version=5
+indicator("RSI Buy/Sell Signals", shorttitle="RSI B/S", overlay=true)
+
+src        = input.source(close,  "Source")
+buy_level  = input.float(50.0, "Buy Threshold (all RSI >)",  minval=1, maxval=99)
+sell_level = input.float(50.0, "Sell Threshold (all RSI <)", minval=1, maxval=99)
+
+rsi3   = ta.rsi(src, 3)
+rsi7   = ta.rsi(src, 7)
+rsi14  = ta.rsi(src, 14)
+rsi28  = ta.rsi(src, 28)
+rsi50  = ta.rsi(src, 50)
+rsi100 = ta.rsi(src, 100)
+rsi150 = ta.rsi(src, 150)
+rsi200 = ta.rsi(src, 200)
+rsi250 = ta.rsi(src, 250)
+
+all_above = rsi3 > buy_level  and rsi7 > buy_level  and rsi14 > buy_level  and
+             rsi28 > buy_level  and rsi50 > buy_level  and rsi100 > buy_level and
+             rsi150 > buy_level and rsi200 > buy_level and rsi250 > buy_level
+
+all_below = rsi3 < sell_level and rsi7 < sell_level and rsi14 < sell_level and
+             rsi28 < sell_level and rsi50 < sell_level and rsi100 < sell_level and
+             rsi150 < sell_level and rsi200 < sell_level and rsi250 < sell_level
+
+// Alternate signals: buy -> sell -> buy -> sell
+var int  last_signal = 0  // 0=none, 1=buy, -1=sell
+
+buy_signal  = all_above and last_signal != 1
+sell_signal = all_below and last_signal != -1
+
+if buy_signal
+    last_signal := 1
+if sell_signal
+    last_signal := -1
+
+plotshape(buy_signal,  title="Buy",  location=location.belowbar, style=shape.labelup,   color=color.green, textcolor=color.white, text="B", size=size.small)
+plotshape(sell_signal, title="Sell", location=location.abovebar, style=shape.labeldown, color=color.red,   textcolor=color.white, text="S", size=size.small)
+
+alertcondition(buy_signal,  title="RSI Buy",  message="RSI Buy — all RSI above threshold")
+alertcondition(sell_signal, title="RSI Sell", message="RSI Sell — all RSI below threshold")
